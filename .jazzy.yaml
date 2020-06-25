@@ -1,0 +1,14 @@
+author: Flávio Caetano (@fjcaetano)
+author_url: https://github.com/fjcaetano
+github_url: https://github.com/fjcaetano/HCaptcha
+
+readme: README.md
+
+module: HCaptcha
+xcodebuild_arguments: 
+  - -workspace
+  - Example/HCaptcha.xcworkspace
+  - -scheme
+  - HCaptcha-Example
+  - -configuration
+  - Release

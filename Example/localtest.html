@@ -1,0 +1,85 @@
+<!-- used for quick debugging to e.g. identify correct DIV element -->
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- use explicit host to run successfully on localhost -->
+    <script src="https://assets.hcaptcha.com/captcha/v1/91b662f/hcaptcha.min.js?onload=onloadCallback&render=explicit&host=ios-sdk.test.com" async defer></script>
+
+    <script type="text/javascript">
+      const post = function(value) {
+        try {
+          window.webkit.messageHandlers.hcaptcha.postMessage(value);
+        } catch (e) {
+          console.log("no postMessage");          
+        }
+      };
+
+      const execute = function() {
+        console.log("challenge executing");
+
+        try {
+          hcaptcha.execute();
+          post({ action: "showHCaptcha" });
+          console.log("showing challenge");
+        } catch (e) {
+          console.log("failed to show challenge");
+          post({ error: 27 });
+        }
+      };
+
+      const reset = function() {
+        console.log("challenge resetting");
+        hcaptcha.reset();
+        post({ action: "didLoad" });
+      };
+
+      const onPass = function(token) {
+        console.log("challenge got token");
+        console.log(token);
+        post({ token });
+      };
+
+      const expiredCallback = function() {
+        console.log("expired challenge");
+        post({ error: 28 });
+      };
+
+      const errorCallback = function() {
+        console.log("challenge error: probably rate limit exceeded");
+        post({ error: 29 });
+      };
+
+      const closeCallback = function() {
+        console.log("challenge closed by user");
+        // TODO: add type 30 for this case
+        post({ error: 29 });
+      };
+
+      var onloadCallback = function() {
+        try {
+          console.log("challenge onload starting");
+          hcaptcha.render("submit", {
+            // insert your own sitekey here
+            sitekey: "13257c82-e129-4f09-a733-2a7cb3102832",
+            size: "invisible",
+            "callback": onPass,
+            "close-callback": closeCallback,
+            "expired-callback": expiredCallback,
+            "error-callback": errorCallback
+          });
+
+          // have loaded by this point; render is sync.
+          post({ action: "didLoad" });
+        } catch (e) {
+          console.log("challenge failed to render");
+          post({ error: 27 });
+        }
+      };
+    </script>
+  </head>
+  <body id="body">
+    <div id="submit">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,146 @@
+fastlane_version "2.126"
+
+default_platform :ios
+
+platform :ios do
+  skip_docs
+
+  devices = ["iPhone X (~> 12)"]
+  # devices << "iPhone X (~> 11)" if !Helper.is_ci?
+  # devices << "iPhone 7 (~> 10)" if !Helper.is_ci?
+  # devices << "iPhone 6s (~> 9)" if !Helper.is_ci?
+
+  desc "Runs the following lanes:\n- test\n- pod_lint\n- carthage_lint"
+  lane :ci do
+    test
+    pod_lint
+    carthage_lint
+  end
+
+  desc "Runs all the tests"
+  lane :test do
+    cocoapods(
+      podfile: "Example/Podfile",
+      try_repo_update_on_error: true,
+    )
+
+    swiftlint(
+      executable: "Example/Pods/Swiftlint/swiftlint",
+      strict: true,
+      reporter: "emoji",
+    )
+
+    # The problem lies in the fact (or rather: serious bug in xcodebuild) that
+    # the timeout for connecting to the XCTest server starts at the moment you
+    # issue the command xcodebuild. The timeout is 120 seconds, so if your
+    # compilation + startup of the simulator takes longer than 2 minutes
+    # xcodebuild will give this "Canceling tests due to timeout" error.
+    # https://stackoverflow.com/questions/37922146/xctests-failing-on-physical-device-canceling-tests-due-to-timeout/40790171#40790171
+    scan(
+      build_for_testing: true,
+      devices: self.select_similar_simulator(devices),
+      scheme: "HCaptcha-Example",
+      workspace: "Example/HCaptcha.xcworkspace",
+      code_coverage: true,
+    )
+
+    scan(
+      test_without_building: true,
+      devices: self.select_similar_simulator(devices),
+      scheme: "HCaptcha-Example",
+      workspace: "Example/HCaptcha.xcworkspace",
+      code_coverage: true,
+    )
+
+    codecov(
+      project_name: 'HCaptcha',
+      use_xcodeplist: true,
+    )
+
+    unless Helper.is_ci?
+      puts "Running UI Tests"
+      scan(
+        test_without_building: true,
+        devices: self.select_similar_simulator(devices),
+        scheme: "HCaptcha_UITests",
+        workspace: "Example/HCaptcha.xcworkspace",
+        code_coverage: true,
+      )
+
+      puts "Not CI: Skipping coverage files upload"
+    end
+  end
+
+  desc "Lint Cocoapods Lib"
+  lane :pod_lint do
+    pod_lib_lint
+  end
+
+  desc "Lint Carthage lib"
+  lane :carthage_lint do
+    carthage(
+      command: "update",
+      platform: "iOS",
+      cache_builds: true,
+    )
+
+    carthage(
+      command: "build",
+      platform: "iOS",
+      cache_builds: true,
+      no_skip_current: true,
+    )
+  end
+
+  desc "Deploy a new version to Github and Cocoapods"
+  lane :release do
+    # Checking files
+    tag = last_git_tag
+
+    changelog_contents = File.read '../CHANGELOG.md'
+    if !changelog_contents.include? tag
+      UI.user_error! "CHANGELOG hasn't been updated"
+    end
+
+    if version_get_podspec != tag
+      UI.user_error! "Podspec version different than tag name"
+    end
+
+    carthage(
+      command: "archive",
+    )
+
+    pod_push(
+      path: "HCaptcha.podspec",
+      verbose: true,
+    )
+
+    prev_tag = sh "git describe --abbrev=0 --tags `git rev-list --tags --skip=1  --max-count=1`"
+    changelog = changelog_from_git_commits(
+      between: [tag, prev_tag.strip],
+      pretty: "- %s"
+    )
+
+    set_github_release(
+      repository_name: "fjcaetano/HCaptcha",
+      tag_name: tag,
+      name: tag,
+      upload_assets: ["HCaptcha.framework.zip"],
+      description: changelog,
+    )
+  end
+
+  # Private
+
+  def select_similar_simulator(args)
+    args.map { |device_string|
+      pieces = device_string.split(' (')
+      FastlaneCore::Simulator.all
+        .select { |s| s.name == pieces.first }
+        .sort_by { |s| Gem::Version.create(s.os_version) }
+        .detect { |s| Gem::Requirement.new(pieces[1].tr('()', '')).satisfied_by?(Gem::Version.create(s.os_version)) }
+    }
+    .compact
+    .map { |s| "#{s.name} (#{s.ios_version})"}
+  end
+end

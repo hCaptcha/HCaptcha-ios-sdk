@@ -1,0 +1,470 @@
+./Cartfile.resolved
+./codecov.yml
+./HCaptcha.podspec
+./.DS_Store
+./LICENSE
+./CHANGELOG.md
+./.swiftlint.yml
+./HCaptcha-Carthage/HCaptcha-Carthage.h
+./HCaptcha-Carthage/Info.plist
+./HCaptcha/Classes/HCaptchaResult.swift
+./HCaptcha/Classes/HCaptcha.swift
+./HCaptcha/Classes/DispatchQueue+Throttle.swift
+./HCaptcha/Classes/String+Dict.swift
+./HCaptcha/Classes/HCaptchaError.swift
+./HCaptcha/Classes/HCaptchaWebViewManager.swift
+./HCaptcha/Classes/Rx/HCaptcha+Rx.swift
+./HCaptcha/Classes/HCaptchaDecoder.swift
+./HCaptcha/Assets/hcaptcha.html
+./Example/.DS_Store
+./Example/HCaptcha/ViewController.swift
+./Example/HCaptcha/.swiftlint.yml
+./Example/HCaptcha/Base.lproj/LaunchScreen.xib
+./Example/HCaptcha/Base.lproj/Main.storyboard
+./Example/HCaptcha/Images.xcassets/AppIcon.appiconset/Contents.json
+./Example/HCaptcha/AppDelegate.swift
+./Example/HCaptcha/Info.plist
+./Example/HCaptcha_UITests/.swiftlint.yml
+./Example/HCaptcha_UITests/HCaptcha_UITests.swift
+./Example/HCaptcha_UITests/Info.plist
+./Example/HCaptcha_Tests/Core/HCaptcha_Endpoint__Tests.swift
+./Example/HCaptcha_Tests/Core/HCaptchaResult__Tests.swift
+./Example/HCaptcha_Tests/Core/HCaptcha__Tests.swift
+./Example/HCaptcha_Tests/Core/DispatchQueue__Tests.swift
+./Example/HCaptcha_Tests/Core/HCaptchaWebViewManager__Tests.swift
+./Example/HCaptcha_Tests/Core/HCaptchaDecoder__Tests.swift
+./Example/HCaptcha_Tests/RxSwift/HCaptcha+Rx__Tests.swift
+./Example/HCaptcha_Tests/.swiftlint.yml
+./Example/HCaptcha_Tests/mock.html
+./Example/HCaptcha_Tests/Helpers/Result+Helpers.swift
+./Example/HCaptcha_Tests/Helpers/HCaptchaError+Equatable.swift
+./Example/HCaptcha_Tests/Helpers/HCaptchaDecoder+Helper.swift
+./Example/HCaptcha_Tests/Helpers/HCaptchaWebViewManager+Helpers.swift
+./Example/HCaptcha_Tests/Info.plist
+./Example/localtest.html
+./Example/Pods/RxCocoa/RxCocoa/macOS/NSView+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/macOS/NSButton+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/macOS/NSTextView+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/macOS/NSTextField+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/macOS/NSControl+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/macOS/NSSlider+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/macOS/NSImageView+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/ControlEvent.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/ControlProperty.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/Driver/Driver+Subscription.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/Driver/BehaviorRelay+Driver.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/Driver/ObservableConvertibleType+Driver.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/Driver/Driver.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/Driver/ControlEvent+Driver.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/Driver/ControlProperty+Driver.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/SharedSequence/SharedSequence.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/SharedSequence/SharedSequence+Operators+arity.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/SharedSequence/SchedulerType+SharedSequence.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/SharedSequence/SharedSequence+Operators.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/SharedSequence/ObservableConvertibleType+SharedSequence.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/Signal/ObservableConvertibleType+Signal.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/Signal/PublishRelay+Signal.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/Signal/Signal+Subscription.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/Signal/ControlEvent+Signal.swift
+./Example/Pods/RxCocoa/RxCocoa/Traits/Signal/Signal.swift
+./Example/Pods/RxCocoa/RxCocoa/Runtime/_RXDelegateProxy.m
+./Example/Pods/RxCocoa/RxCocoa/Runtime/_RXObjCRuntime.m
+./Example/Pods/RxCocoa/RxCocoa/Runtime/_RX.m
+./Example/Pods/RxCocoa/RxCocoa/Runtime/include/_RXKVOObserver.h
+./Example/Pods/RxCocoa/RxCocoa/Runtime/include/_RXObjCRuntime.h
+./Example/Pods/RxCocoa/RxCocoa/Runtime/include/_RXDelegateProxy.h
+./Example/Pods/RxCocoa/RxCocoa/Runtime/include/_RX.h
+./Example/Pods/RxCocoa/RxCocoa/Runtime/include/RxCocoaRuntime.h
+./Example/Pods/RxCocoa/RxCocoa/Runtime/_RXKVOObserver.m
+./Example/Pods/RxCocoa/RxCocoa/Foundation/NSObject+Rx+KVORepresentable.swift
+./Example/Pods/RxCocoa/RxCocoa/Foundation/Logging.swift
+./Example/Pods/RxCocoa/RxCocoa/Foundation/KVORepresentable.swift
+./Example/Pods/RxCocoa/RxCocoa/Foundation/NSObject+Rx+RawRepresentable.swift
+./Example/Pods/RxCocoa/RxCocoa/Foundation/NotificationCenter+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/Foundation/KVORepresentable+CoreGraphics.swift
+./Example/Pods/RxCocoa/RxCocoa/Foundation/KVORepresentable+Swift.swift
+./Example/Pods/RxCocoa/RxCocoa/Foundation/NSObject+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/Foundation/URLSession+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/RxCocoa.h
+./Example/Pods/RxCocoa/RxCocoa/iOS/DataSources/RxPickerViewAdapter.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/DataSources/RxCollectionViewReactiveArrayDataSource.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/DataSources/RxTableViewReactiveArrayDataSource.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIDatePicker+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIScrollView+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIApplication+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UISegmentedControl+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UITextView+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIRefreshControl+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIImageView+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UILabel+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UITabBarItem+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/NSTextStorage+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIProgressView+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UITabBarController+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIWebView+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UITextField+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UISearchBar+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIAlertAction+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UISlider+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIPickerView+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIView+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIButton+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UISearchController+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UITabBar+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UISwitch+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIPageControl+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIViewController+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UICollectionView+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIActivityIndicatorView+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UITableView+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxTableViewDataSourcePrefetchingProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxPickerViewDelegateProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxTableViewDelegateProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxNavigationControllerDelegateProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxSearchControllerDelegateProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxTabBarControllerDelegateProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxCollectionViewDataSourcePrefetchingProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxCollectionViewDelegateProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxScrollViewDelegateProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxPickerViewDataSourceProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxTableViewDataSourceProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxSearchBarDelegateProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxCollectionViewDataSourceProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxWebViewDelegateProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxTextViewDelegateProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxTextStorageDelegateProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Proxies/RxTabBarDelegateProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Events/ItemEvents.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIGestureRecognizer+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIStepper+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Protocols/RxPickerViewDataSourceType.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Protocols/RxCollectionViewDataSourceType.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/Protocols/RxTableViewDataSourceType.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UINavigationController+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIControl+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UIBarButtonItem+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/iOS/UINavigationItem+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/Common/KeyPathBinder.swift
+./Example/Pods/RxCocoa/RxCocoa/Common/NSLayoutConstraint+Rx.swift
+./Example/Pods/RxCocoa/RxCocoa/Common/DelegateProxy.swift
+./Example/Pods/RxCocoa/RxCocoa/Common/RxCocoaObjCRuntimeError+Extensions.swift
+./Example/Pods/RxCocoa/RxCocoa/Common/Binder.swift
+./Example/Pods/RxCocoa/RxCocoa/Common/TextInput.swift
+./Example/Pods/RxCocoa/RxCocoa/Common/SectionedViewDataSourceType.swift
+./Example/Pods/RxCocoa/RxCocoa/Common/ControlTarget.swift
+./Example/Pods/RxCocoa/RxCocoa/Common/Observable+Bind.swift
+./Example/Pods/RxCocoa/RxCocoa/Common/RxTarget.swift
+./Example/Pods/RxCocoa/RxCocoa/Common/DelegateProxyType.swift
+./Example/Pods/RxCocoa/RxCocoa/Deprecated.swift
+./Example/Pods/RxCocoa/RxCocoa/RxCocoa.swift
+./Example/Pods/RxCocoa/LICENSE.md
+./Example/Pods/RxCocoa/Platform/Platform.Darwin.swift
+./Example/Pods/RxCocoa/Platform/DispatchQueue+Extensions.swift
+./Example/Pods/RxCocoa/Platform/DataStructures/Bag.swift
+./Example/Pods/RxCocoa/Platform/DataStructures/PriorityQueue.swift
+./Example/Pods/RxCocoa/Platform/DataStructures/Queue.swift
+./Example/Pods/RxCocoa/Platform/DataStructures/InfiniteSequence.swift
+./Example/Pods/RxCocoa/Platform/Platform.Linux.swift
+./Example/Pods/RxCocoa/Platform/RecursiveLock.swift
+./Example/Pods/RxCocoa/README.md
+./Example/Pods/Pods.xcodeproj/project.pbxproj
+./Example/Pods/Pods.xcodeproj/xcuserdata/eli.xcuserdatad/xcschemes/SwiftLint.xcscheme
+./Example/Pods/Pods.xcodeproj/xcuserdata/eli.xcuserdatad/xcschemes/Pods-HCaptcha_Tests.xcscheme
+./Example/Pods/Pods.xcodeproj/xcuserdata/eli.xcuserdatad/xcschemes/RxRelay.xcscheme
+./Example/Pods/Pods.xcodeproj/xcuserdata/eli.xcuserdatad/xcschemes/RxBlocking.xcscheme
+./Example/Pods/Pods.xcodeproj/xcuserdata/eli.xcuserdatad/xcschemes/RxCocoa.xcscheme
+./Example/Pods/Pods.xcodeproj/xcuserdata/eli.xcuserdatad/xcschemes/AppSwizzle.xcscheme
+./Example/Pods/Pods.xcodeproj/xcuserdata/eli.xcuserdatad/xcschemes/RxSwift.xcscheme
+./Example/Pods/Pods.xcodeproj/xcuserdata/eli.xcuserdatad/xcschemes/xcschememanagement.plist
+./Example/Pods/Pods.xcodeproj/xcuserdata/eli.xcuserdatad/xcschemes/Pods-HCaptcha_UITests.xcscheme
+./Example/Pods/Pods.xcodeproj/xcuserdata/eli.xcuserdatad/xcschemes/HCaptcha-HCaptcha.xcscheme
+./Example/Pods/Pods.xcodeproj/xcuserdata/eli.xcuserdatad/xcschemes/Pods-HCaptcha_Example.xcscheme
+./Example/Pods/Pods.xcodeproj/xcuserdata/eli.xcuserdatad/xcschemes/HCaptcha.xcscheme
+./Example/Pods/AppSwizzle/LICENSE
+./Example/Pods/AppSwizzle/AppSwizzle/Classes/AppSwizzle.swift
+./Example/Pods/AppSwizzle/README.md
+./Example/Pods/RxSwift/LICENSE.md
+./Example/Pods/RxSwift/RxSwift/Cancelable.swift
+./Example/Pods/RxSwift/RxSwift/GroupedObservable.swift
+./Example/Pods/RxSwift/RxSwift/RxMutableBox.swift
+./Example/Pods/RxSwift/RxSwift/Event.swift
+./Example/Pods/RxSwift/RxSwift/Traits/Completable+AndThen.swift
+./Example/Pods/RxSwift/RxSwift/Traits/Completable.swift
+./Example/Pods/RxSwift/RxSwift/Traits/Single.swift
+./Example/Pods/RxSwift/RxSwift/Traits/PrimitiveSequence.swift
+./Example/Pods/RxSwift/RxSwift/Traits/Maybe.swift
+./Example/Pods/RxSwift/RxSwift/Traits/ObservableType+PrimitiveSequence.swift
+./Example/Pods/RxSwift/RxSwift/Traits/PrimitiveSequence+Zip+arity.swift
+./Example/Pods/RxSwift/RxSwift/AnyObserver.swift
+./Example/Pods/RxSwift/RxSwift/Disposables/DisposeBase.swift
+./Example/Pods/RxSwift/RxSwift/Disposables/DisposeBag.swift
+./Example/Pods/RxSwift/RxSwift/Disposables/ScheduledDisposable.swift
+./Example/Pods/RxSwift/RxSwift/Disposables/NopDisposable.swift
+./Example/Pods/RxSwift/RxSwift/Disposables/SubscriptionDisposable.swift
+./Example/Pods/RxSwift/RxSwift/Disposables/RefCountDisposable.swift
+./Example/Pods/RxSwift/RxSwift/Disposables/CompositeDisposable.swift
+./Example/Pods/RxSwift/RxSwift/Disposables/SingleAssignmentDisposable.swift
+./Example/Pods/RxSwift/RxSwift/Disposables/SerialDisposable.swift
+./Example/Pods/RxSwift/RxSwift/Disposables/BinaryDisposable.swift
+./Example/Pods/RxSwift/RxSwift/Disposables/AnonymousDisposable.swift
+./Example/Pods/RxSwift/RxSwift/Disposables/BooleanDisposable.swift
+./Example/Pods/RxSwift/RxSwift/Disposables/Disposables.swift
+./Example/Pods/RxSwift/RxSwift/Observables/AsMaybe.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Timeout.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Never.swift
+./Example/Pods/RxSwift/RxSwift/Observables/RetryWhen.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Do.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Deferred.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Buffer.swift
+./Example/Pods/RxSwift/RxSwift/Observables/SubscribeOn.swift
+./Example/Pods/RxSwift/RxSwift/Observables/DefaultIfEmpty.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Using.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Delay.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Producer.swift
+./Example/Pods/RxSwift/RxSwift/Observables/GroupBy.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Concat.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Take.swift
+./Example/Pods/RxSwift/RxSwift/Observables/TakeWhile.swift
+./Example/Pods/RxSwift/RxSwift/Observables/TakeLast.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Error.swift
+./Example/Pods/RxSwift/RxSwift/Observables/CombineLatest.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Sample.swift
+./Example/Pods/RxSwift/RxSwift/Observables/AsSingle.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Empty.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Enumerated.swift
+./Example/Pods/RxSwift/RxSwift/Observables/DistinctUntilChanged.swift
+./Example/Pods/RxSwift/RxSwift/Observables/First.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Timer.swift
+./Example/Pods/RxSwift/RxSwift/Observables/AddRef.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Sequence.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Sink.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Throttle.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Range.swift
+./Example/Pods/RxSwift/RxSwift/Observables/CompactMap.swift
+./Example/Pods/RxSwift/RxSwift/Observables/WithLatestFrom.swift
+./Example/Pods/RxSwift/RxSwift/Observables/ObserveOn.swift
+./Example/Pods/RxSwift/RxSwift/Observables/CombineLatest+Collection.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Multicast.swift
+./Example/Pods/RxSwift/RxSwift/Observables/SkipWhile.swift
+./Example/Pods/RxSwift/RxSwift/Observables/DelaySubscription.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Repeat.swift
+./Example/Pods/RxSwift/RxSwift/Observables/ToArray.swift
+./Example/Pods/RxSwift/RxSwift/Observables/TakeUntil.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Switch.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Window.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Debounce.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Dematerialize.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Zip+Collection.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Catch.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Filter.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Amb.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Reduce.swift
+./Example/Pods/RxSwift/RxSwift/Observables/CombineLatest+arity.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Zip.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Debug.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Merge.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Skip.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Map.swift
+./Example/Pods/RxSwift/RxSwift/Observables/SkipUntil.swift
+./Example/Pods/RxSwift/RxSwift/Observables/StartWith.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Just.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Optional.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Generate.swift
+./Example/Pods/RxSwift/RxSwift/Observables/ShareReplayScope.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Scan.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Zip+arity.swift
+./Example/Pods/RxSwift/RxSwift/Observables/SwitchIfEmpty.swift
+./Example/Pods/RxSwift/RxSwift/Observables/ElementAt.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Create.swift
+./Example/Pods/RxSwift/RxSwift/Observables/Materialize.swift
+./Example/Pods/RxSwift/RxSwift/Observables/SingleAsync.swift
+./Example/Pods/RxSwift/RxSwift/Disposable.swift
+./Example/Pods/RxSwift/RxSwift/SwiftSupport/SwiftSupport.swift
+./Example/Pods/RxSwift/RxSwift/ObservableType+Extensions.swift
+./Example/Pods/RxSwift/RxSwift/Extensions/Bag+Rx.swift
+./Example/Pods/RxSwift/RxSwift/Extensions/String+Rx.swift
+./Example/Pods/RxSwift/RxSwift/ObserverType.swift
+./Example/Pods/RxSwift/RxSwift/Concurrency/LockOwnerType.swift
+./Example/Pods/RxSwift/RxSwift/Concurrency/SynchronizedDisposeType.swift
+./Example/Pods/RxSwift/RxSwift/Concurrency/SynchronizedOnType.swift
+./Example/Pods/RxSwift/RxSwift/Concurrency/Lock.swift
+./Example/Pods/RxSwift/RxSwift/Concurrency/AsyncLock.swift
+./Example/Pods/RxSwift/RxSwift/Concurrency/SynchronizedUnsubscribeType.swift
+./Example/Pods/RxSwift/RxSwift/Reactive.swift
+./Example/Pods/RxSwift/RxSwift/Date+Dispatch.swift
+./Example/Pods/RxSwift/RxSwift/Deprecated.swift
+./Example/Pods/RxSwift/RxSwift/Subjects/SubjectType.swift
+./Example/Pods/RxSwift/RxSwift/Subjects/BehaviorSubject.swift
+./Example/Pods/RxSwift/RxSwift/Subjects/AsyncSubject.swift
+./Example/Pods/RxSwift/RxSwift/Subjects/ReplaySubject.swift
+./Example/Pods/RxSwift/RxSwift/Subjects/PublishSubject.swift
+./Example/Pods/RxSwift/RxSwift/ObservableConvertibleType.swift
+./Example/Pods/RxSwift/RxSwift/Observable.swift
+./Example/Pods/RxSwift/RxSwift/SchedulerType.swift
+./Example/Pods/RxSwift/RxSwift/ConnectableObservableType.swift
+./Example/Pods/RxSwift/RxSwift/ObservableType.swift
+./Example/Pods/RxSwift/RxSwift/Errors.swift
+./Example/Pods/RxSwift/RxSwift/Rx.swift
+./Example/Pods/RxSwift/RxSwift/Observers/ObserverBase.swift
+./Example/Pods/RxSwift/RxSwift/Observers/TailRecursiveSink.swift
+./Example/Pods/RxSwift/RxSwift/Observers/AnonymousObserver.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/RecursiveScheduler.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/OperationQueueScheduler.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/VirtualTimeScheduler.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/SchedulerServices+Emulation.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/CurrentThreadScheduler.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/MainScheduler.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/ConcurrentDispatchQueueScheduler.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/Internal/ScheduledItem.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/Internal/InvocableType.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/Internal/InvocableScheduledItem.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/Internal/DispatchQueueConfiguration.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/Internal/ScheduledItemType.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/ConcurrentMainScheduler.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/SerialDispatchQueueScheduler.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/HistoricalScheduler.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/VirtualTimeConverterType.swift
+./Example/Pods/RxSwift/RxSwift/Schedulers/HistoricalSchedulerTimeConverter.swift
+./Example/Pods/RxSwift/RxSwift/ImmediateSchedulerType.swift
+./Example/Pods/RxSwift/Platform/Platform.Darwin.swift
+./Example/Pods/RxSwift/Platform/DispatchQueue+Extensions.swift
+./Example/Pods/RxSwift/Platform/AtomicInt.swift
+./Example/Pods/RxSwift/Platform/DataStructures/Bag.swift
+./Example/Pods/RxSwift/Platform/DataStructures/PriorityQueue.swift
+./Example/Pods/RxSwift/Platform/DataStructures/Queue.swift
+./Example/Pods/RxSwift/Platform/DataStructures/InfiniteSequence.swift
+./Example/Pods/RxSwift/Platform/Platform.Linux.swift
+./Example/Pods/RxSwift/Platform/RecursiveLock.swift
+./Example/Pods/RxSwift/README.md
+./Example/Pods/Target Support Files/RxCocoa/RxCocoa-umbrella.h
+./Example/Pods/Target Support Files/RxCocoa/RxCocoa.debug.xcconfig
+./Example/Pods/Target Support Files/RxCocoa/RxCocoa-prefix.pch
+./Example/Pods/Target Support Files/RxCocoa/RxCocoa-dummy.m
+./Example/Pods/Target Support Files/RxCocoa/RxCocoa.release.xcconfig
+./Example/Pods/Target Support Files/RxCocoa/RxCocoa-Info.plist
+./Example/Pods/Target Support Files/RxCocoa/RxCocoa.modulemap
+./Example/Pods/Target Support Files/Pods-HCaptcha_Tests/Pods-HCaptcha_Tests-Info.plist
+./Example/Pods/Target Support Files/Pods-HCaptcha_Tests/Pods-HCaptcha_Tests-acknowledgements.plist
+./Example/Pods/Target Support Files/Pods-HCaptcha_Tests/Pods-HCaptcha_Tests-dummy.m
+./Example/Pods/Target Support Files/Pods-HCaptcha_Tests/Pods-HCaptcha_Tests.modulemap
+./Example/Pods/Target Support Files/Pods-HCaptcha_Tests/Pods-HCaptcha_Tests-frameworks.sh
+./Example/Pods/Target Support Files/Pods-HCaptcha_Tests/Pods-HCaptcha_Tests.release.xcconfig
+./Example/Pods/Target Support Files/Pods-HCaptcha_Tests/Pods-HCaptcha_Tests.debug.xcconfig
+./Example/Pods/Target Support Files/Pods-HCaptcha_Tests/Pods-HCaptcha_Tests-acknowledgements.markdown
+./Example/Pods/Target Support Files/Pods-HCaptcha_Tests/Pods-HCaptcha_Tests-umbrella.h
+./Example/Pods/Target Support Files/AppSwizzle/AppSwizzle-prefix.pch
+./Example/Pods/Target Support Files/AppSwizzle/AppSwizzle.modulemap
+./Example/Pods/Target Support Files/AppSwizzle/AppSwizzle-dummy.m
+./Example/Pods/Target Support Files/AppSwizzle/AppSwizzle-umbrella.h
+./Example/Pods/Target Support Files/AppSwizzle/AppSwizzle-Info.plist
+./Example/Pods/Target Support Files/AppSwizzle/AppSwizzle.release.xcconfig
+./Example/Pods/Target Support Files/AppSwizzle/AppSwizzle.debug.xcconfig
+./Example/Pods/Target Support Files/RxSwift/RxSwift-prefix.pch
+./Example/Pods/Target Support Files/RxSwift/RxSwift-dummy.m
+./Example/Pods/Target Support Files/RxSwift/RxSwift.debug.xcconfig
+./Example/Pods/Target Support Files/RxSwift/RxSwift-umbrella.h
+./Example/Pods/Target Support Files/RxSwift/RxSwift.release.xcconfig
+./Example/Pods/Target Support Files/RxSwift/RxSwift-Info.plist
+./Example/Pods/Target Support Files/RxSwift/RxSwift.modulemap
+./Example/Pods/Target Support Files/HCaptcha/HCaptcha-dummy.m
+./Example/Pods/Target Support Files/HCaptcha/HCaptcha.release.xcconfig
+./Example/Pods/Target Support Files/HCaptcha/HCaptcha-Info.plist
+./Example/Pods/Target Support Files/HCaptcha/HCaptcha.modulemap
+./Example/Pods/Target Support Files/HCaptcha/HCaptcha.debug.xcconfig
+./Example/Pods/Target Support Files/HCaptcha/HCaptcha-umbrella.h
+./Example/Pods/Target Support Files/HCaptcha/ResourceBundle-HCaptcha-HCaptcha-Info.plist
+./Example/Pods/Target Support Files/HCaptcha/HCaptcha-prefix.pch
+./Example/Pods/Target Support Files/RxRelay/RxRelay.debug.xcconfig
+./Example/Pods/Target Support Files/RxRelay/RxRelay-prefix.pch
+./Example/Pods/Target Support Files/RxRelay/RxRelay.modulemap
+./Example/Pods/Target Support Files/RxRelay/RxRelay-umbrella.h
+./Example/Pods/Target Support Files/RxRelay/RxRelay-dummy.m
+./Example/Pods/Target Support Files/RxRelay/RxRelay.release.xcconfig
+./Example/Pods/Target Support Files/RxRelay/RxRelay-Info.plist
+./Example/Pods/Target Support Files/Pods-HCaptcha_UITests/Pods-HCaptcha_UITests-Info.plist
+./Example/Pods/Target Support Files/Pods-HCaptcha_UITests/Pods-HCaptcha_UITests-dummy.m
+./Example/Pods/Target Support Files/Pods-HCaptcha_UITests/Pods-HCaptcha_UITests-acknowledgements.markdown
+./Example/Pods/Target Support Files/Pods-HCaptcha_UITests/Pods-HCaptcha_UITests.release.xcconfig
+./Example/Pods/Target Support Files/Pods-HCaptcha_UITests/Pods-HCaptcha_UITests.modulemap
+./Example/Pods/Target Support Files/Pods-HCaptcha_UITests/Pods-HCaptcha_UITests.debug.xcconfig
+./Example/Pods/Target Support Files/Pods-HCaptcha_UITests/Pods-HCaptcha_UITests-umbrella.h
+./Example/Pods/Target Support Files/Pods-HCaptcha_UITests/Pods-HCaptcha_UITests-acknowledgements.plist
+./Example/Pods/Target Support Files/Pods-HCaptcha_Example/Pods-HCaptcha_Example.modulemap
+./Example/Pods/Target Support Files/Pods-HCaptcha_Example/Pods-HCaptcha_Example-umbrella.h
+./Example/Pods/Target Support Files/Pods-HCaptcha_Example/Pods-HCaptcha_Example.debug.xcconfig
+./Example/Pods/Target Support Files/Pods-HCaptcha_Example/Pods-HCaptcha_Example-acknowledgements.markdown
+./Example/Pods/Target Support Files/Pods-HCaptcha_Example/Pods-HCaptcha_Example-dummy.m
+./Example/Pods/Target Support Files/Pods-HCaptcha_Example/Pods-HCaptcha_Example-acknowledgements.plist
+./Example/Pods/Target Support Files/Pods-HCaptcha_Example/Pods-HCaptcha_Example-frameworks.sh
+./Example/Pods/Target Support Files/Pods-HCaptcha_Example/Pods-HCaptcha_Example-Info.plist
+./Example/Pods/Target Support Files/Pods-HCaptcha_Example/Pods-HCaptcha_Example.release.xcconfig
+./Example/Pods/Target Support Files/SwiftLint/SwiftLint.debug.xcconfig
+./Example/Pods/Target Support Files/SwiftLint/SwiftLint.release.xcconfig
+./Example/Pods/Target Support Files/RxBlocking/RxBlocking-Info.plist
+./Example/Pods/Target Support Files/RxBlocking/RxBlocking.release.xcconfig
+./Example/Pods/Target Support Files/RxBlocking/RxBlocking.debug.xcconfig
+./Example/Pods/Target Support Files/RxBlocking/RxBlocking-umbrella.h
+./Example/Pods/Target Support Files/RxBlocking/RxBlocking-dummy.m
+./Example/Pods/Target Support Files/RxBlocking/RxBlocking-prefix.pch
+./Example/Pods/Target Support Files/RxBlocking/RxBlocking.modulemap
+./Example/Pods/Manifest.lock
+./Example/Pods/RxRelay/LICENSE.md
+./Example/Pods/RxRelay/RxRelay/PublishRelay.swift
+./Example/Pods/RxRelay/RxRelay/Observable+Bind.swift
+./Example/Pods/RxRelay/RxRelay/Utils.swift
+./Example/Pods/RxRelay/RxRelay/BehaviorRelay.swift
+./Example/Pods/RxRelay/README.md
+./Example/Pods/Local Podspecs/HCaptcha.podspec.json
+./Example/Pods/SwiftLint/LICENSE
+./Example/Pods/SwiftLint/swiftlint
+./Example/Pods/RxBlocking/LICENSE.md
+./Example/Pods/RxBlocking/Platform/Platform.Darwin.swift
+./Example/Pods/RxBlocking/Platform/DispatchQueue+Extensions.swift
+./Example/Pods/RxBlocking/Platform/AtomicInt.swift
+./Example/Pods/RxBlocking/Platform/DataStructures/Bag.swift
+./Example/Pods/RxBlocking/Platform/DataStructures/PriorityQueue.swift
+./Example/Pods/RxBlocking/Platform/DataStructures/Queue.swift
+./Example/Pods/RxBlocking/Platform/DataStructures/InfiniteSequence.swift
+./Example/Pods/RxBlocking/Platform/Platform.Linux.swift
+./Example/Pods/RxBlocking/Platform/RecursiveLock.swift
+./Example/Pods/RxBlocking/README.md
+./Example/Pods/RxBlocking/RxBlocking/BlockingObservable.swift
+./Example/Pods/RxBlocking/RxBlocking/ObservableConvertibleType+Blocking.swift
+./Example/Pods/RxBlocking/RxBlocking/RunLoopLock.swift
+./Example/Pods/RxBlocking/RxBlocking/Resources.swift
+./Example/Pods/RxBlocking/RxBlocking/BlockingObservable+Operators.swift
+./Example/HCaptcha.xcworkspace/contents.xcworkspacedata
+./Example/HCaptcha.xcworkspace/xcuserdata/eli.xcuserdatad/UserInterfaceState.xcuserstate
+./Example/HCaptcha.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+./Example/Podfile
+./Example/HCaptcha.xcodeproj/project.pbxproj
+./Example/HCaptcha.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+./Example/HCaptcha.xcodeproj/xcshareddata/xcschemes/HCaptcha-Example.xcscheme
+./Example/HCaptcha.xcodeproj/xcshareddata/xcschemes/HCaptcha_UITests.xcscheme
+./Example/Podfile.lock
+./Cartfile
+./pre-push.sh
+./HCaptcha-Carthage.xcodeproj/project.pbxproj
+./HCaptcha-Carthage.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+./HCaptcha-Carthage.xcodeproj/project.xcworkspace/xcuserdata/eli.xcuserdatad/UserInterfaceState.xcuserstate
+./HCaptcha-Carthage.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+./HCaptcha-Carthage.xcodeproj/xcshareddata/xcschemes/HCaptcha/RxSwift.xcscheme
+./HCaptcha-Carthage.xcodeproj/xcshareddata/xcschemes/HCaptcha_RxSwift.xcscheme
+./HCaptcha-Carthage.xcodeproj/xcshareddata/xcschemes/HCaptcha.xcscheme
+./FL
+./r
+./HCaptcha_RxSwift/HCaptcha_RxSwift.h
+./HCaptcha_RxSwift/Info.plist
+./.gitmodules
+./example.gif
+./.jazzy.yaml
+./README.md
+./.gitignore
+./fastlane/Fastfile
+./.github/ISSUE_TEMPLATE/bug_report.md
+./Gemfile
+./Gemfile.lock
+./.travis.yml
+./e
+./example-v2-key.png
+./example2.gif

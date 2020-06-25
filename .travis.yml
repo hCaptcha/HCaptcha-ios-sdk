@@ -1,0 +1,18 @@
+osx_image: xcode10.2
+language: objective-c
+
+cache:
+  cocoapods: true
+  directories:
+    - Carthage
+
+script:
+  - bundle exec fastlane ci
+
+deploy:
+  - provider: script
+    script: bundle exec fastlane release
+    skip_cleanup: true
+    on:
+      repo: fjcaetano/HCaptcha
+      tags: true

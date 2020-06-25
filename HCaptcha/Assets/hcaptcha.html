@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="${endpoint}"></script>
+    <script type="text/javascript">
+      const post = function(value) {
+        window.webkit.messageHandlers.hcaptcha.postMessage(value);
+      };
+
+      console.log = function(message) {
+        post({ log: message });
+      };
+
+      const execute = function() {
+        console.log("challenge executing");
+
+        try {
+          hcaptcha.execute();
+          post({ action: "showHCaptcha" });
+          console.log("showing challenge");
+        } catch (e) {
+          console.log("failed to show challenge");
+          post({ error: 27 });
+        }
+      };
+
+      const reset = function() {
+        console.log("challenge resetting");
+        hcaptcha.reset();
+        post({ action: "didLoad" });
+      };
+
+      const onPass = function(token) {
+        console.log("challenge got token");
+        console.log(token);
+        post({ token });
+      };
+
+      const expiredCallback = function() {
+        console.log("expired challenge");
+        post({ error: 28 });
+      };
+
+      const errorCallback = function() {
+        console.log("challenge error: probably rate limit exceeded");
+        post({ error: 29 });
+      };
+
+      const closeCallback = function() {
+        console.log("challenge closed by user");
+        post({ error: 30 });
+      };
+
+      var onloadCallback = function() {
+        try {
+          console.log("challenge onload starting");
+          hcaptcha.render("submit", {
+            sitekey: "${apiKey}",
+            size: "invisible",
+            "callback": onPass,
+            "close-callback": closeCallback,
+            "expired-callback": expiredCallback,
+            "error-callback": errorCallback
+          });
+
+          // have loaded by this point; render is sync.
+          post({ action: "didLoad" });
+        } catch (e) {
+          console.log("challenge failed to render");
+          post({ error: 27 });
+        }
+      };
+    </script>
+  </head>
+  <body id="body">
+    <div id="submit">
+    </div>
+  </body>
+</html>
