@@ -6,17 +6,17 @@ Pod::Spec.new do |s|
   s.swift_version    = '5.0'
   
   s.description      = <<-DESC
-Add Google's [Invisible HCaptcha](https://developers.google.com/hcaptcha/docs/invisible) to your project. This library
+Add [hCaptcha](https://hcaptcha.com) to your project. This library
 automatically handles HCaptcha's events and retrieves the validation token or notifies you to present the challenge if
 invisibility is not possible.
                        DESC
 
-  s.homepage          = 'https://github.com/fjcaetano/HCaptcha'
+  s.homepage          = 'https://github.com/hCaptcha/ios-SDK-HCaptcha'
   s.license           = { :type => 'MIT', :file => 'LICENSE' }
-  s.author            = { 'Flávio Caetano' => 'flavio@vieiracaetano.com' }
-  s.source            = { :git => 'https://github.com/fjcaetano/HCaptcha.git', :tag => s.version.to_s }
-  s.social_media_url  = 'https://twitter.com/flavio_caetano'
-  s.documentation_url = 'http://fjcaetano.github.io/HCaptcha'
+  s.author            = { 'hCaptcha Team' => 'support@hcaptcha.com' }
+  s.source            = { :git => 'https://github.com/hCaptcha/ios-SDK-HCaptcha.git', :tag => s.version.to_s }
+  s.social_media_url  = 'https://twitter.com/hCaptcha'
+  s.documentation_url = 'https://github.com/hCaptcha/ios-SDK-HCaptcha'
 
   s.ios.deployment_target = '8.0'
   s.default_subspecs = 'Core'

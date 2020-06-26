@@ -12,7 +12,7 @@ import XCTest
 class HCaptcha_Endpoint__Tests: XCTestCase {
 
     private let endpoint = HCaptcha.Endpoint.default
-    private let endpointURL = "https://www.google.com/hcaptcha/api.js?onload=onloadCallback&render=explicit"
+    private let endpointURL = "https://hcaptcha.com/1/api.js?onload=onloadCallback&render=explicit"
 
     // MARK: - Locale
 

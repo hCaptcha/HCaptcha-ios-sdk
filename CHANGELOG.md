@@ -1,6 +1,7 @@
-# 1.6.0
+# 1.5.1
 
 - Feature: userClosed error type added
+- Docs: explain host override, alternate endpoint use
 
 # 1.5.0
 

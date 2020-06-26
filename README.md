@@ -1,11 +1,8 @@
 # HCaptcha
 
-[![Build Status](https://travis-ci.org/hCaptcha/HCaptcha.svg?branch=master)](https://travis-ci.org/hCaptcha/HCaptcha)
-[![codecov](https://codecov.io/gh/hCaptcha/HCaptcha/branch/master/graph/badge.svg)](https://codecov.io/gh/hCaptcha/HCaptcha)
-[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/hCaptcha/HCaptcha/pulls)
+[![Build Status](https://travis-ci.org/hCaptcha/ios-SDK-HCaptcha.svg?branch=master)](https://travis-ci.org/hCaptcha/ios-SDK-HCaptcha)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-orange.svg)](https://github.com/Carthage/Carthage)
 [![Version](https://img.shields.io/cocoapods/v/HCaptcha.svg?style=flat)](http://cocoapods.org/pods/HCaptcha)
-[![License](https://img.shields.io/cocoapods/l/HCaptcha.svg?style=flat)](http://cocoapods.org/pods/HCaptcha)
 [![Platform](https://img.shields.io/cocoapods/p/HCaptcha.svg?style=flat)](http://cocoapods.org/pods/HCaptcha)
 
 -----
@@ -21,7 +18,10 @@ To properly secure your application, you will still need to send the token recei
 
 ## Installation
 
-HCaptcha is available through [CocoaPods](http://cocoapods.org) and [Carthage](https://github.com/Carthage/Carthage).
+HCaptcha may eventually be available through [CocoaPods](http://cocoapods.org) and [Carthage](https://github.com/Carthage/Carthage).
+
+It is currently packaged for both.
+
 To install it, simply add the following line to your dependencies file:
 
 #### Cocoapods
@@ -83,6 +83,23 @@ hcaptcha.rx.validate(on: view)
     })
 ```
 
+#### Setting the host override
+
+Since this SDK uses a local HTML file, you will want to set a host override for better tracking and enforcement of siteverify parameters.
+
+In HCaptcha/Classes/HCaptcha.swift, change:
+
+``` swift
+let jsargs = "?onload=onloadCallback&render=explicit&host=ios-sdk.hcaptcha.com"
+```
+
+to:
+
+``` swift
+let jsargs = "?onload=onloadCallback&render=explicit&host=ios-sdk.YOUR-DOMAIN.com"
+```
+
+
 #### Alternate endpoint
 
 If you are an Enterprise user with first-party hosting access, you will need to set your own endpoint.
@@ -97,12 +114,7 @@ public enum Endpoint {
 let hcaptcha = try? HCaptcha(endpoint: .alternate) // Defaults to `default` when unset
 ```
 
-## Help Wanted
-
-Do you love hCaptcha and work actively on apps that use it? We'd love if you could help us keep improving it!
-Feel free to message us or to start contributing right away!
-
-## [Full Documentation](http://hCaptcha.github.io/HCaptcha)
+after setting your URI in HCaptcha/Classes/HCaptcha.swift: `altjsurl` variable.
 
 ## License
 

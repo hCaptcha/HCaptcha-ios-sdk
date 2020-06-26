@@ -21,7 +21,7 @@ internal class HCaptchaWebViewManager {
     fileprivate struct Constants {
         static let ExecuteJSCommand = "execute();"
         static let ResetCommand = "reset();"
-        static let BotUserAgent = "Googlebot/2.1"
+        static let BotUserAgent = "bot/2.1"
     }
 
 #if DEBUG
@@ -96,8 +96,8 @@ internal class HCaptchaWebViewManager {
     /**
      - parameters:
          - html: The HTML string to be loaded onto the webview
-         - apiKey: The Google's HCaptcha API Key
-         - baseURL: The URL configured with the API Key
+         - apiKey: The hCaptcha sitekey
+         - baseURL: The URL configured with the sitekey
          - endpoint: The JS API endpoint to be loaded onto the HTML file.
      */
     init(html: String, apiKey: String, baseURL: URL, endpoint: String) {

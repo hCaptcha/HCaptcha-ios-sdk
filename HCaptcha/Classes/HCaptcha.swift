@@ -22,26 +22,24 @@ public class HCaptcha {
 
     /// The JS API endpoint to be loaded onto the HTML file.
     public enum Endpoint {
-        /** Google's default endpoint. Points to
-         https://www.google.com/hcaptcha/api.js
+        /** hCaptcha default endpoint. Points to
+         https://hcaptcha.com/1/api.js
          */
         case `default`
 
-        /// Alternate endpoint. Points to https://www.hcaptcha.net/hcaptcha/api.js
+        /// Alternate endpoint. Points to your first-party api.js location
         case alternate
 
         internal func getURL(locale: Locale?) -> String {
             let localeAppendix = locale.map { "&hl=\($0.identifier)" } ?? ""
-            let jsurl = "https://assets.hcaptcha.com/captcha/v1/91b662f/hcaptcha.min.js"
+            let jsurl = "https://hcaptcha.com/1/api.js"
+            let altjsurl = "https://hcaptcha.com/1/api.js"
             let jsargs = "?onload=onloadCallback&render=explicit&host=ios-sdk.hcaptcha.com"
             switch self {
             case .default:
-            /// https://assets.hcaptcha.com/captcha/v1/f5b2990/hcaptcha.min.js with host
-            /// https://hcaptcha.com/1/api.js normal.
                 return jsurl + jsargs + localeAppendix
             case .alternate:
-                return "https://www.hcaptcha.net/hcaptcha/api.js?onload=onloadCallback&render=explicit"
-                    + localeAppendix
+                return altjsurl + jsargs + localeAppendix
             }
         }
     }
@@ -119,8 +117,6 @@ public class HCaptcha {
 
      Both `apiKey` and `baseURL` may be nil, in which case the lib will look for entries of `HCaptchaKey` and
      `HCaptchaDomain`, respectively, in the project's Info.plist
-
-     A key may be aquired here: https://www.google.com/hcaptcha/admin#list
 
      - Throws: `HCaptchaError.htmlLoadError`: if is unable to load the HTML embedded in the bundle.
      - Throws: `HCaptchaError.apiKeyNotFound`: if an `apiKey` is not provided and can't find one in the project's

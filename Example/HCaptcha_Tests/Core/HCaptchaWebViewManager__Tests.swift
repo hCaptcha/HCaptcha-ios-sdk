@@ -392,7 +392,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         // Set True
         manager.forceVisibleChallenge = true
-        XCTAssertEqual(manager.webView.customUserAgent, "Googlebot/2.1")
+        XCTAssertEqual(manager.webView.customUserAgent, "bot/2.1")
 
         // Set False
         manager.forceVisibleChallenge = false
