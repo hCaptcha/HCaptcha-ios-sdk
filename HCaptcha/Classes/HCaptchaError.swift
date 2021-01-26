@@ -56,12 +56,10 @@ public enum HCaptchaError: Error, CustomStringConvertible {
             return "Unexpected message from javascript"
 
         case .failedSetup:
-            // swiftlint:disable line_length
             return """
             ⚠️ WARNING! HCaptcha wasn't successfully configured. Please double check your HCaptchaKey and HCaptchaDomain.
             Also check that you're using HCaptcha's **SITE KEY** for client side integration.
             """
-            // swiftlint:enable line_length
 
         case .responseExpired:
             return "Response expired and need to re-verify"
