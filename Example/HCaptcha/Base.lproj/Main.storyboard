@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,8 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RDW-bD-rSo">
-                                <rect key="frame" x="50" y="450" width="275" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RDW-bD-rSo">
+                                <rect key="frame" x="50" y="363.5" width="275" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Bt8-Ou-ht2"/>
                                 </constraints>
@@ -32,17 +30,17 @@
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="jHc-GP-v1Z">
-                                <rect key="frame" x="177" y="323" width="20" height="20"/>
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                             </activityIndicatorView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o6f-cL-1PF">
-                                <rect key="frame" x="20" y="247" width="335" height="173"/>
+                                <rect key="frame" x="20" y="333.5" width="335" height="0.0"/>
                                 <accessibility key="accessibilityConfiguration" identifier="resultLabel"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="X8E-G9-9IV">
-                                <rect key="frame" x="71" y="568" width="233" height="29"/>
+                                <rect key="frame" x="65" y="484.5" width="245" height="32"/>
                                 <segments>
                                     <segment title="Default Endpoint"/>
                                     <segment title="Alternate"/>
@@ -52,16 +50,16 @@
                                 </connections>
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uyt-0M-CR7">
-                                <rect key="frame" x="77" y="616" width="221" height="31"/>
+                                <rect key="frame" x="77.5" y="616" width="220" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Force visible captcha" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awK-8H-OCQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="162" height="31"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="161" height="31"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mGh-Ox-cFf">
-                                        <rect key="frame" x="172" y="0.0" width="51" height="31"/>
+                                        <rect key="frame" x="171" y="0.0" width="51" height="31"/>
                                         <accessibility key="accessibilityConfiguration" identifier="Switch"/>
                                     </switch>
                                 </subviews>
@@ -77,7 +75,7 @@
                                 </constraints>
                             </view>
                             <segmentedControl clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kq2-ci-l1u">
-                                <rect key="frame" x="114" y="520" width="147" height="29"/>
+                                <rect key="frame" x="108" y="433.5" width="159" height="32"/>
                                 <segments>
                                     <segment title="Nil Locale"/>
                                     <segment title="Chinese"/>
@@ -105,6 +103,11 @@
                             <constraint firstItem="Uyt-0M-CR7" firstAttribute="top" secondItem="X8E-G9-9IV" secondAttribute="bottom" constant="20" id="nIE-QT-RpQ"/>
                             <constraint firstItem="Uyt-0M-CR7" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="qfG-68-ySO"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Uyt-0M-CR7"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="endpointSegmentedControl" destination="X8E-G9-9IV" id="jAb-fU-Yu5"/>

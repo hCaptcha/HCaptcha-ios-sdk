@@ -1,3 +1,8 @@
+# 1.5.2
+
+- Example: cosmetic updates to Example app to handle long passcodes
+- Docs: add troubleshooting section
+
 # 1.5.1
 
 - Feature: userClosed error type added
