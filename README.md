@@ -126,6 +126,8 @@ HCaptcha is available under the MIT license. See the LICENSE file for more info.
 Q. I'm getting a "Could not load embedded HTML" exception. What does it mean?
 A. Most likely you have not included an asset in your build. Please double-check this, and see the example app for more details.
 
+Q. I'm getting "xcconfig: unable to open file" after upgrading the SDK. (Or changing SDK and running Example app.)
+A: In your app or the Example app dir, run `pod deintegrate && pod install` to refresh paths.
 
 ## Inspiration
 
