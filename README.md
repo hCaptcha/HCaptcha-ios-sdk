@@ -120,7 +120,14 @@ after setting your URI in HCaptcha/Classes/HCaptcha.swift: `altjsurl` variable.
 
 HCaptcha is available under the MIT license. See the LICENSE file for more info.
 
+
+## Troubleshooting
+
+Q. I'm getting a "Could not load embedded HTML" exception. What does it mean?
+A. Most likely you have not included an asset in your build. Please double-check this, and see the example app for more details.
+
+
 ## Inspiration
 
-Originally built on fjcaetano's  ReCaptcha IOS SDK, licensed under MIT.
+Originally forked from fjcaetano's ReCaptcha IOS SDK, licensed under MIT.
 
