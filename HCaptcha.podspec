@@ -11,12 +11,12 @@ automatically handles HCaptcha's events and retrieves the validation token or no
 invisibility is not possible.
                        DESC
 
-  s.homepage          = 'https://github.com/hCaptcha/ios-SDK-HCaptcha'
+  s.homepage          = 'https://github.com/hCaptcha/HCaptcha-ios-sdk
   s.license           = { :type => 'MIT', :file => 'LICENSE' }
   s.author            = { 'hCaptcha Team' => 'support@hcaptcha.com' }
-  s.source            = { :git => 'https://github.com/hCaptcha/ios-SDK-HCaptcha.git', :tag => s.version.to_s }
+  s.source            = { :git => 'https://github.com/hCaptcha/HCaptcha-ios-sdk.git', :tag => s.version.to_s }
   s.social_media_url  = 'https://twitter.com/hCaptcha'
-  s.documentation_url = 'https://github.com/hCaptcha/ios-SDK-HCaptcha'
+  s.documentation_url = 'https://github.com/hCaptcha/HCaptcha-ios-sdk'
 
   s.ios.deployment_target = '8.0'
   s.default_subspecs = 'Core'
