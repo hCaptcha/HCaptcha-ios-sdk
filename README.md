@@ -1,6 +1,6 @@
 # HCaptcha
 
-[![Build Status](https://travis-ci.org/hCaptcha/ios-SDK-HCaptcha.svg?branch=master)](https://travis-ci.org/hCaptcha/ios-SDK-HCaptcha)
+[![Build Status](https://travis-ci.org/hCaptcha/HCaptcha-ios-sdk.svg?branch=master)](https://travis-ci.org/hCaptcha/HCaptcha-ios-sdk)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-orange.svg)](https://github.com/Carthage/Carthage)
 [![Version](https://img.shields.io/cocoapods/v/HCaptcha.svg?style=flat)](http://cocoapods.org/pods/HCaptcha)
 [![Platform](https://img.shields.io/cocoapods/p/HCaptcha.svg?style=flat)](http://cocoapods.org/pods/HCaptcha)
