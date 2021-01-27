@@ -122,7 +122,7 @@ platform :ios do
     )
 
     set_github_release(
-      repository_name: "fjcaetano/HCaptcha",
+      repository_name: "hCaptcha/HCaptcha-ios-sdk",
       tag_name: tag,
       name: tag,
       upload_assets: ["HCaptcha.framework.zip"],
