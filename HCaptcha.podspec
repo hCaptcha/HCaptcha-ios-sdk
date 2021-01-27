@@ -11,7 +11,7 @@ automatically handles HCaptcha's events and retrieves the validation token or no
 invisibility is not possible.
                        DESC
 
-  s.homepage          = 'https://github.com/hCaptcha/HCaptcha-ios-sdk
+  s.homepage          = 'https://github.com/hCaptcha/HCaptcha-ios-sdk'
   s.license           = { :type => 'MIT', :file => 'LICENSE' }
   s.author            = { 'hCaptcha Team' => 'support@hcaptcha.com' }
   s.source            = { :git => 'https://github.com/hCaptcha/HCaptcha-ios-sdk.git', :tag => s.version.to_s }
