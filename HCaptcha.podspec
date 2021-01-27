@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'HCaptcha'
-  s.version          = '1.5.2'
+  s.version          = '1.6.0'
   s.summary          = 'HCaptcha for iOS'
   s.swift_version    = '5.0'
   
@@ -11,7 +11,7 @@ automatically handles HCaptcha's events and retrieves the validation token or no
 invisibility is not possible.
                        DESC
 
-  s.homepage          = 'https://github.com/hCaptcha/HCaptcha-ios-sdk
+  s.homepage          = 'https://github.com/hCaptcha/HCaptcha-ios-sdk'
   s.license           = { :type => 'MIT', :file => 'LICENSE' }
   s.author            = { 'hCaptcha Team' => 'support@hcaptcha.com' }
   s.source            = { :git => 'https://github.com/hCaptcha/HCaptcha-ios-sdk.git', :tag => s.version.to_s }
@@ -33,6 +33,6 @@ invisibility is not possible.
   s.subspec 'RxSwift' do |rx|
     rx.source_files = 'HCaptcha/Classes/Rx/**/*'
     rx.dependency 'HCaptcha/Core'
-    rx.dependency 'RxSwift', '~> 5.0'
+    rx.dependency 'RxSwift', '~> 6.0'
   end
 end

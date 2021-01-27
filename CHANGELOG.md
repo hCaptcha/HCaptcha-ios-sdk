@@ -1,3 +1,7 @@
+# 1.6.0
+
+- RxSwift 6.0
+
 # 1.5.2
 
 - Example: cosmetic updates to Example app to handle long passcodes
