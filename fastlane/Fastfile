@@ -52,10 +52,10 @@ platform :ios do
       code_coverage: true,
     )
 
-    codecov(
-      project_name: 'HCaptcha',
-      use_xcodeplist: true,
-    )
+    #codecov(
+    #  project_name: 'HCaptcha',
+    #  use_xcodeplist: true,
+    #)
 
     unless Helper.is_ci?
       puts "Running UI Tests"
