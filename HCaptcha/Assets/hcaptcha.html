@@ -56,7 +56,7 @@
           console.log("challenge onload starting");
           hcaptcha.render("submit", {
             sitekey: "${apiKey}",
-            size: "invisible",
+            size: "${size}",
             "callback": onPass,
             "close-callback": closeCallback,
             "expired-callback": expiredCallback,
