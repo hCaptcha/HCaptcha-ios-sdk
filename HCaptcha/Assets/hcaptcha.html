@@ -96,6 +96,15 @@
           post({ error: 29 });
         }
       };
+        
+      document.body.onclick = function () {
+          if (window.hcaptcha) {
+              window.hcaptcha.close();
+          } else {
+              post({ error: 30 });
+          }
+      };
+        
     </script>
   </head>
   <body>
