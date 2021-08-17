@@ -24,11 +24,27 @@ extension HCaptchaWebViewManager {
         shouldFail: Bool = false,
         size: Size = .invisible
     ) {
+        let html = String(format: HCaptchaWebViewManager.unformattedHTML,
+                          arguments: [
+                            "message": messageBody,
+                            "shouldFail": shouldFail.description
+                          ])
+
+        self.init(
+            html: html,
+            apiKey: apiKey,
+            endpoint: endpoint,
+            size: size
+        )
+    }
+
+    convenience init(
+        html: String,
+        apiKey: String? = nil,
+        endpoint: String? = nil,
+        size: Size = .invisible
+    ) {
         let localhost = URL(string: "http://localhost")!
-        let html = String(format: HCaptchaWebViewManager.unformattedHTML, arguments: [
-            "message": messageBody,
-            "shouldFail": shouldFail.description
-        ])
 
         self.init(
             html: html,
