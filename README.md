@@ -121,15 +121,11 @@ after setting your URI in HCaptcha/Classes/HCaptcha.swift: `altjsurl` variable.
 
 This iOS SDK assumes by default that you want an "invisible" checkbox, i.e. that triggering the hCaptcha flow from within your app should either return a token or show the user a challenge directly.
 
-If you instead want the classic "normal" checkbox behavior of showing a checkbox to tick and then either closing or showing a challenge, please make these two changes in [./HCaptcha/Assets/hcaptcha.html](https://github.com/hCaptcha/HCaptcha-ios-sdk/blob/master/HCaptcha/Assets/hcaptcha.html):
+If you instead want the classic "normal" or "compact" checkbox behavior of showing a checkbox to tick and then either closing or showing a challenge, you can pass `size` to HCaptcha initializer.
 
-1. in the `execute` function:
-
-- comment out `hcaptcha.execute()`
-
-2. in `onloadCallback`:
-
-- change `size: "invisible"` to `size: "normal"` or `size: "compact"`
+```
+let hcaptcha = try? HCaptcha(size: .compact)
+```
 
 And you will now get the desired behavior.
 

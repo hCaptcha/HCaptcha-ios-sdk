@@ -15,7 +15,9 @@
         console.log("challenge executing");
 
         try {
-          hcaptcha.execute();
+          if ("${size}" === 'invisible') {
+            hcaptcha.execute();
+          }
           post({ action: "showHCaptcha" });
           console.log("showing challenge");
         } catch (e) {
@@ -56,7 +58,7 @@
           console.log("challenge onload starting");
           hcaptcha.render("submit", {
             sitekey: "${apiKey}",
-            size: "invisible",
+            size: "${size}",
             "callback": onPass,
             "close-callback": closeCallback,
             "expired-callback": expiredCallback,
