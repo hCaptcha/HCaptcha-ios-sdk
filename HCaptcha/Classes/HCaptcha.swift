@@ -52,7 +52,7 @@ public class HCaptcha {
 
         /// The API key that will be sent to the HCaptcha API
         let apiKey: String
-        
+
         /// Size of visible area
         let size: Size
 
@@ -85,7 +85,11 @@ public class HCaptcha {
          Info.plist.
          - Throws: Rethrows any exceptions thrown by `String(contentsOfFile:)`
          */
-        public init(apiKey: String?, infoPlistKey: String?, baseURL: URL?, infoPlistURL: URL?, size: Size = .invisible) throws {
+        public init(apiKey: String?,
+                    infoPlistKey: String?,
+                    baseURL: URL?,
+                    infoPlistURL: URL?,
+                    size: Size) throws {
             guard let filePath = Config.bundle.path(forResource: "hcaptcha", ofType: "html") else {
                 throw HCaptchaError.htmlLoadError
             }
@@ -134,14 +138,18 @@ public class HCaptcha {
         baseURL: URL? = nil,
         endpoint: Endpoint = .default,
         locale: Locale? = nil,
-        size: Size
+        size: Size = .invisible
     ) throws {
         let infoDict = Bundle.main.infoDictionary
 
         let plistApiKey = infoDict?[Constants.InfoDictKeys.APIKey] as? String
         let plistDomain = (infoDict?[Constants.InfoDictKeys.Domain] as? String).flatMap(URL.init(string:))
 
-        let config = try Config(apiKey: apiKey, infoPlistKey: plistApiKey, baseURL: baseURL, infoPlistURL: plistDomain, size: size)
+        let config = try Config(apiKey: apiKey,
+                                infoPlistKey: plistApiKey,
+                                baseURL: baseURL,
+                                infoPlistURL: plistDomain,
+                                size: size)
 
         self.init(manager: HCaptchaWebViewManager(
             html: config.html,
