@@ -22,7 +22,7 @@
           console.log("showing challenge");
         } catch (e) {
           console.log("failed to show challenge");
-          post({ error: 27 });
+          post({ error: 29 });
         }
       };
 
@@ -40,12 +40,12 @@
 
       const expiredCallback = function() {
         console.log("expired challenge");
-        post({ error: 28 });
+        post({ error: 15 });
       };
 
       const errorCallback = function() {
         console.log("challenge error: probably rate limit exceeded");
-        post({ error: 29 });
+        post({ error: 31 });
       };
 
       const closeCallback = function() {
@@ -70,7 +70,7 @@
           post({ action: "didLoad" });
         } catch (e) {
           console.log("challenge failed to render");
-          post({ error: 27 });
+          post({ error: 29 });
         }
       };
     </script>
