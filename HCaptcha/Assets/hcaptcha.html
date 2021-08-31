@@ -1,6 +1,29 @@
 <html>
   <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            display: table;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+        #hcaptcha-container {
+            margin-top: 5px;
+            display: table-cell;
+            vertical-align: middle;
+        }
+        /* overwrite hCaptcha iframe overlay which adds a #FFF background with opacity 0.05 */
+        div > div:nth-child(2) {
+            opacity: 0 !important;
+        }
+    </style>
+    
     <script src="${endpoint}"></script>
     <script type="text/javascript">
       const post = function(value) {
@@ -73,6 +96,15 @@
           post({ error: 29 });
         }
       };
+        
+      document.body.onclick = function () {
+          if (window.hcaptcha) {
+              window.hcaptcha.close();
+          } else {
+              post({ error: 30 });
+          }
+      };
+        
     </script>
   </head>
   <body>

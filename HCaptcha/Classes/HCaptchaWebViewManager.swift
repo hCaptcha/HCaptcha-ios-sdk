@@ -193,13 +193,7 @@ fileprivate extension HCaptchaWebViewManager {
             completion?(.token(token))
 
         case .error(let error):
-            if shouldResetOnError, let view = webView.superview {
-                reset()
-                validate(on: view)
-            }
-            else {
-                completion?(.error(error))
-            }
+            handle(error: error)
 
         case .showHCaptcha:
             DispatchQueue.once(token: configureWebViewDispatchToken) { [weak self] in
@@ -217,6 +211,21 @@ fileprivate extension HCaptchaWebViewManager {
             #if DEBUG
                 print("[JS LOG]:", message)
             #endif
+        }
+    }
+    
+    private func handle(error: HCaptchaError) {
+        if case HCaptchaError.userClosed = error {
+            completion?(.error(error))
+            return
+        }
+        
+        if shouldResetOnError, let view = webView.superview {
+            reset()
+            validate(on: view)
+        }
+        else {
+            completion?(.error(error))
         }
     }
 
