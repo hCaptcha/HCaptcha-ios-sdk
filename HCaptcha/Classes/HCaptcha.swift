@@ -6,9 +6,8 @@
 //  Copyright © 2018 HCaptcha. All rights reserved.
 //
 
-import Foundation
 import WebKit
-
+import UIKit
 
 /**
 */

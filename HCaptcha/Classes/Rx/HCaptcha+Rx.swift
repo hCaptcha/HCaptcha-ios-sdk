@@ -8,6 +8,7 @@
 
 import RxSwift
 import UIKit
+import HCaptcha
 
 /// Makes HCaptcha compatible with RxSwift extensions
 extension HCaptcha: ReactiveCompatible {}
