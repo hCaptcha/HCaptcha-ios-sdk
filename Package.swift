@@ -28,7 +28,7 @@ let package = Package(
             path: "HCaptcha",
             exclude: ["Classes/Rx", "Example"],
             resources: [
-                .copy("Assets/hcaptcha.html")
+                .process("Assets/hcaptcha.html")
             ]
         ),
         .target(
