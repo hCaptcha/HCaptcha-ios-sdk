@@ -60,6 +60,7 @@ override func viewDidLoad() {
 func validate() {
     hcaptcha?.validate(on: view) { [weak self] (result: HCaptchaResult) in
         print(try? result.dematerialize())
+        self?.hcaptcha?.hideWebView()
     }
 }
 ```
