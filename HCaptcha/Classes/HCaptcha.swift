@@ -6,9 +6,8 @@
 //  Copyright © 2018 HCaptcha. All rights reserved.
 //
 
-import Foundation
 import WebKit
-
+import UIKit
 
 /**
 */
@@ -61,14 +60,18 @@ public class HCaptcha {
 
         /// The Bundle that holds HCaptcha's assets
         private static let bundle: Bundle = {
+            #if SWIFT_PACKAGE
+            return Bundle.module
+            #else
             let bundle = Bundle(for: HCaptcha.self)
             guard let cocoapodsBundle = bundle
-                .path(forResource: "HCaptcha", ofType: "bundle")
-                .flatMap(Bundle.init(path:)) else {
-                    return bundle
+                    .path(forResource: "HCaptcha", ofType: "bundle")
+                    .flatMap(Bundle.init(path:)) else {
+                return bundle
             }
-
+            
             return cocoapodsBundle
+            #endif
         }()
 
         /**
