@@ -192,7 +192,16 @@ public class HCaptcha {
     public func stop() {
         manager.stop()
     }
+    
+    /// Hides the webview
+    public func hideWebView() {
+        manager.hide()
+    }
 
+    /// Shows the webview
+    public func showWebView() {
+        manager.show()
+    }
 
     /**
      - parameter configure: A closure that receives an instance of `WKWebView` for configuration.
