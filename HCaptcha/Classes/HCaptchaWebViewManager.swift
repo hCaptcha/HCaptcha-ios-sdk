@@ -149,6 +149,16 @@ internal class HCaptchaWebViewManager {
     func stop() {
         webView.stopLoading()
     }
+    
+    /// Shows the webView
+    func show() {
+        webView.isHidden = false
+    }
+
+    /// Hides the webView
+    func hide() {
+        webView.isHidden = true
+    }
 
     /**
      Resets the HCaptcha.
