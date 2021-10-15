@@ -7,7 +7,7 @@ cache:
     - Carthage
 
 script:
-  - travis_wait bundle exec fastlane ci
+  - travis_wait 40 bundle exec fastlane ci
 
 deploy:
   - provider: script
