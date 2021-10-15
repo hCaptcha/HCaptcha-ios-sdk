@@ -73,7 +73,7 @@ platform :ios do
 
   desc "Lint Cocoapods Lib"
   lane :pod_lint do
-    pod_lib_lint
+    pod_lib_lint(allow_warnings: true)
   end
 
   desc "Lint Carthage lib"
