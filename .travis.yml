@@ -1,4 +1,4 @@
-osx_image: xcode10.2
+osx_image: xcode12.5
 language: objective-c
 before_install:
   - brew update
@@ -10,7 +10,7 @@ cache:
     - Carthage
 
 script:
-  - travis_wait 40 bundle exec fastlane ci
+  - bundle exec fastlane ci
 
 deploy:
   - provider: script
