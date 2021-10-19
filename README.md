@@ -1,6 +1,6 @@
 # HCaptcha
 
-[![Build Status](https://travis-ci.org/hCaptcha/HCaptcha-ios-sdk.svg?branch=master)](https://travis-ci.org/hCaptcha/HCaptcha-ios-sdk)
+<!-- [![Build Status](https://travis-ci.org/hCaptcha/HCaptcha-ios-sdk.svg?branch=master)](https://travis-ci.org/hCaptcha/HCaptcha-ios-sdk) -->
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-orange.svg)](https://github.com/Carthage/Carthage)
 [![Version](https://img.shields.io/cocoapods/v/HCaptcha.svg?style=flat)](http://cocoapods.org/pods/HCaptcha)
 [![Platform](https://img.shields.io/cocoapods/p/HCaptcha.svg?style=flat)](http://cocoapods.org/pods/HCaptcha)
@@ -115,6 +115,20 @@ let hcaptcha = try? HCaptcha(endpoint: .alternate) // Defaults to `default` when
 ```
 
 after setting your URI in HCaptcha/Classes/HCaptcha.swift: `altjsurl` variable.
+
+
+### Enabling the visible checkbox flow
+
+This iOS SDK assumes by default that you want an "invisible" checkbox, i.e. that triggering the hCaptcha flow from within your app should either return a token or show the user a challenge directly.
+
+If you instead want the classic "normal" or "compact" checkbox behavior of showing a checkbox to tick and then either closing or showing a challenge, you can pass `size` to HCaptcha initializer.
+
+```
+let hcaptcha = try? HCaptcha(size: .compact)
+```
+
+And you will now get the desired behavior.
+
 
 ## License
 

@@ -6,9 +6,8 @@
 //  Copyright © 2018 HCaptcha. All rights reserved.
 //
 
-import Foundation
 import WebKit
-
+import UIKit
 
 /**
 */
@@ -53,19 +52,26 @@ public class HCaptcha {
         /// The API key that will be sent to the HCaptcha API
         let apiKey: String
 
+        /// Size of visible area
+        let size: Size
+
         /// The base url to be used to resolve relative URLs in the webview
         let baseURL: URL
 
         /// The Bundle that holds HCaptcha's assets
         private static let bundle: Bundle = {
+            #if SWIFT_PACKAGE
+            return Bundle.module
+            #else
             let bundle = Bundle(for: HCaptcha.self)
             guard let cocoapodsBundle = bundle
-                .path(forResource: "HCaptcha", ofType: "bundle")
-                .flatMap(Bundle.init(path:)) else {
-                    return bundle
+                    .path(forResource: "HCaptcha", ofType: "bundle")
+                    .flatMap(Bundle.init(path:)) else {
+                return bundle
             }
-
+            
             return cocoapodsBundle
+            #endif
         }()
 
         /**
@@ -82,7 +88,11 @@ public class HCaptcha {
          Info.plist.
          - Throws: Rethrows any exceptions thrown by `String(contentsOfFile:)`
          */
-        public init(apiKey: String?, infoPlistKey: String?, baseURL: URL?, infoPlistURL: URL?) throws {
+        public init(apiKey: String?,
+                    infoPlistKey: String?,
+                    baseURL: URL?,
+                    infoPlistURL: URL?,
+                    size: Size) throws {
             guard let filePath = Config.bundle.path(forResource: "hcaptcha", ofType: "html") else {
                 throw HCaptchaError.htmlLoadError
             }
@@ -99,6 +109,7 @@ public class HCaptcha {
 
             self.html = rawHTML
             self.apiKey = apiKey
+            self.size = size
             self.baseURL = Config.fixSchemeIfNeeded(for: domain)
         }
     }
@@ -129,20 +140,26 @@ public class HCaptcha {
         apiKey: String? = nil,
         baseURL: URL? = nil,
         endpoint: Endpoint = .default,
-        locale: Locale? = nil
+        locale: Locale? = nil,
+        size: Size = .invisible
     ) throws {
         let infoDict = Bundle.main.infoDictionary
 
         let plistApiKey = infoDict?[Constants.InfoDictKeys.APIKey] as? String
         let plistDomain = (infoDict?[Constants.InfoDictKeys.Domain] as? String).flatMap(URL.init(string:))
 
-        let config = try Config(apiKey: apiKey, infoPlistKey: plistApiKey, baseURL: baseURL, infoPlistURL: plistDomain)
+        let config = try Config(apiKey: apiKey,
+                                infoPlistKey: plistApiKey,
+                                baseURL: baseURL,
+                                infoPlistURL: plistDomain,
+                                size: size)
 
         self.init(manager: HCaptchaWebViewManager(
             html: config.html,
             apiKey: config.apiKey,
             baseURL: config.baseURL,
-            endpoint: endpoint.getURL(locale: locale)
+            endpoint: endpoint.getURL(locale: locale),
+            size: config.size
         ))
     }
 
@@ -258,4 +275,10 @@ private extension HCaptcha.Config {
 
         return url
     }
+}
+
+public enum Size: String {
+    case invisible
+    case compact
+    case normal
 }
