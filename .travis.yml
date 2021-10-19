@@ -1,5 +1,8 @@
-osx_image: xcode10.2
+osx_image: xcode12.5
 language: objective-c
+before_install:
+  - brew update
+  - brew outdated carthage || brew upgrade carthage
 
 cache:
   cocoapods: true
