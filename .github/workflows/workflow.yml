@@ -34,5 +34,15 @@ jobs:
         run: |
           brew upgrade carthage
 
+      - name: Setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.2
+          bundler-cache: true
+
+      - name: Install Pods
+        run: |
+          pod install
+
       - name: Run tests
         run: bundle exec fastlane ci
