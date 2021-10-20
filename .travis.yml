@@ -17,5 +17,5 @@ deploy:
     script: bundle exec fastlane release
     skip_cleanup: true
     on:
-      repo: fjcaetano/HCaptcha
+      repo: hCaptcha/HCaptcha-ios-sdk
       tags: true
