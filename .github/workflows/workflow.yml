@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-        with:
-          submodules: recursive
 
       - name: Use Xcode 12.4
         run: sudo xcode-select -switch /Applications/Xcode_12.4.app
