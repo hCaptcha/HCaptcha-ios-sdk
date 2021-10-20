@@ -1,0 +1,36 @@
+name: Tests
+on: [push]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+		- name: Checkout
+	  uses: actions/checkout@v2
+		- name: Carthage cache
+	  uses: actions/cache@v1
+	    id: carthage-cache
+	    with:
+	      path: Carthage
+	      key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+	  - name: Carthage cache run or restore
+	    if: steps.carthage-cache.outputs.cache-hit != 'true'
+	    run: |
+	      carthage bootstrap --no-use-binaries --platform iOS --cache-builds
+	  - name: CocoaPods cache run or restore
+		- uses: actions/cache@v1
+		  with:
+		    path: Pods
+		    key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+		    restore-keys: |
+		      ${{ runner.os }}-pods-
+    - name: Run tests
+      run: bundle exec fastlane ci
+
+
+
+
+		- name: Bundle Install
+		        run: bundle install --deployment
+		- name: Cocoapods
+		        run: bundle exec pod install
