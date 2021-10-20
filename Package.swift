@@ -35,7 +35,7 @@ let package = Package(
             name: "HCaptcha_RxSwift",
             dependencies: [
                 "HCaptcha",
-                .product(name: "RxSwift", package: "RxSwift"),
+                .product(name: "RxSwift", package: "RxSwift")
             ],
             path: "HCaptcha/Classes/Rx"
         )

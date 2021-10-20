@@ -69,7 +69,7 @@ public class HCaptcha {
                     .flatMap(Bundle.init(path:)) else {
                 return bundle
             }
-            
+
             return cocoapodsBundle
             #endif
         }()
