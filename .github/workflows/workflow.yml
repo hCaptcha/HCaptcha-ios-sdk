@@ -1,28 +1,40 @@
-name: Tests
-on: [push]
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+      - main
+      - disable_uitests_codecov
+  workflow_dispatch:
+  repository_dispatch:
 
 jobs:
-  build:
-    runs-on: macos-latest
+  test_macOS:
+    name: Test macOS project
+    runs-on: macOS-latest
+
     steps:
-  	- name: Checkout
-  	  uses: actions/checkout@v2
-  	- name: Carthage cache
-      uses: actions/cache@v1
-      id: carthage-cache
-      with:
-        path: Carthage
-        key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
-    - name: Carthage cache run or restore
-      if: steps.carthage-cache.outputs.cache-hit != 'true'
-      run: |
-        carthage bootstrap --no-use-binaries --platform iOS --cache-builds
-    - name: CocoaPods cache run or restore
-  	- uses: actions/cache@v1
-  	  with:
-  	    path: Pods
-  	    key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-  	    restore-keys: |
-  	      ${{ runner.os }}-pods-
-    - name: Run tests
-      run: bundle exec fastlane ci
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Use Xcode 12.4
+        run: sudo xcode-select -switch /Applications/Xcode_12.4.app
+
+      - name: "Cache dependencies"
+        uses: actions/cache@v2
+        with:
+          path: Carthage/build
+          key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-carthage-
+            ${{ runner.os }}-
+
+      - name: Prepare tools
+        run: |
+          brew upgrade carthage
+
+      - name: Run tests
+        run: bundle exec fastlane ci
