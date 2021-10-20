@@ -40,9 +40,5 @@ jobs:
           ruby-version: 2.7.2
           bundler-cache: true
 
-      - name: Install Pods
-        run: |
-          pod install
-
       - name: Run tests
         run: bundle exec fastlane ci
