@@ -213,13 +213,13 @@ fileprivate extension HCaptchaWebViewManager {
             #endif
         }
     }
-    
+
     private func handle(error: HCaptchaError) {
         if case HCaptchaError.userClosed = error {
             completion?(.error(error))
             return
         }
-        
+
         if shouldResetOnError, let view = webView.superview {
             reset()
             validate(on: view)

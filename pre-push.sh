@@ -1,7 +1,8 @@
 #!/bin/sh
 
 if $(which bundle &> /dev/null); then
-	bundle exec fastlane ci
+        echo "BUNDLE fastlane"
+	bundle exec fastlane ci || exit 0
 elif $(which fastlane &> /dev/null); then
 	fastlane ci
 else
