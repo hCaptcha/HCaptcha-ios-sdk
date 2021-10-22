@@ -11,7 +11,6 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-
 class ViewController: UIViewController {
     private struct Constants {
         static let webViewTag = 123
