@@ -1,4 +1,4 @@
-fastlane_version "2.126"
+fastlane_version "2.196"
 
 default_platform :ios
 
@@ -52,10 +52,10 @@ platform :ios do
       code_coverage: true,
     )
 
-    codecov(
-      project_name: 'HCaptcha',
-      use_xcodeplist: true,
-    )
+    #codecov(
+    #  project_name: 'HCaptcha',
+    #  use_xcodeplist: true,
+    #)
 
     unless Helper.is_ci?
       puts "Running UI Tests"
@@ -73,36 +73,25 @@ platform :ios do
 
   desc "Lint Cocoapods Lib"
   lane :pod_lint do
-    pod_lib_lint(
-      allow_warnings: true, # Temporarily necessary while this issue isn't fixed: https://github.com/CocoaPods/CocoaPods/issues/10291
-    )
+    pod_lib_lint(allow_warnings: true)
   end
 
   desc "Lint Carthage lib"
   lane :carthage_lint do
-    # This is a temporary fix while Carthage is broken with Xcode 12
-    # https://github.com/Carthage/Carthage/issues/3019#issuecomment-665136323
-    #
-    # The default Fastlane action can be used when a new Carthage version with a fix has been released
-    # and the ./carthage.sh script can be removed
-    Dir.chdir("..") do
-      sh("./carthage.sh", "update", "--platform", "iOS", "--cache-builds")
+    carthage(
+      command: "update",
+      platform: "iOS",
+      cache_builds: true,
+      use_xcframeworks: true
+    )
 
-      sh("./carthage.sh", "build", "--no-skip-current", "--platform", "iOS", "--cache-builds")
-    end
-
-    # carthage(
-    #   command: "update",
-    #   platform: "iOS",
-    #   cache_builds: true,
-    # )
-
-    # carthage(
-    #   command: "build",
-    #   platform: "iOS",
-    #   cache_builds: true,
-    #   no_skip_current: true,
-    # )
+    carthage(
+      command: "build",
+      platform: "iOS",
+      cache_builds: true,
+      no_skip_current: false,
+      use_xcframeworks: true
+    )
   end
 
   desc "Deploy a new version to Github and Cocoapods"
@@ -119,18 +108,9 @@ platform :ios do
       UI.user_error! "Podspec version different than tag name"
     end
 
-    # This is a temporary fix while Carthage is broken with Xcode 12
-    # https://github.com/Carthage/Carthage/issues/3019#issuecomment-665136323
-    #
-    # The default Fastlane action can be used when a new Carthage version with a fix has been released
-    # and the ./carthage.sh script can be removed
-    Dir.chdir("..") do
-      sh("./carthage.sh", "archive")
-    end
-
-    # carthage(
-    #   command: "archive",
-    # )
+    carthage(
+      command: "archive",
+    )
 
     pod_push(
       path: "HCaptcha.podspec",

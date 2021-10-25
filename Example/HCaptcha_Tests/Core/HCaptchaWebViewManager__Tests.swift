@@ -406,7 +406,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         let manager = HCaptchaWebViewManager()
 
-        /// Should call closure immediately since it's already loaded
+        // // Should call closure immediately since it's already loaded
         manager.onDidFinishLoading = {
             manager.onDidFinishLoading = exp.fulfill
         }

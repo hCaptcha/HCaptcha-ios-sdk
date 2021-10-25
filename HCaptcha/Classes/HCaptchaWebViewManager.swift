@@ -100,13 +100,16 @@ internal class HCaptchaWebViewManager {
          - baseURL: The URL configured with the sitekey
          - endpoint: The JS API endpoint to be loaded onto the HTML file.
      */
-    init(html: String, apiKey: String, baseURL: URL, endpoint: String) {
+    init(html: String, apiKey: String, baseURL: URL, endpoint: String, size: Size) {
         self.endpoint = endpoint
         self.decoder = HCaptchaDecoder { [weak self] result in
             self?.handle(result: result)
         }
 
-        let formattedHTML = String(format: html, arguments: ["apiKey": apiKey, "endpoint": endpoint])
+        let formattedHTML = String(format: html,
+                                   arguments: ["apiKey": apiKey,
+                                               "endpoint": endpoint,
+                                               "size": size.rawValue])
 
         if let window = UIApplication.shared.keyWindow {
             setupWebview(on: window, html: formattedHTML, url: baseURL)
@@ -190,13 +193,7 @@ fileprivate extension HCaptchaWebViewManager {
             completion?(.token(token))
 
         case .error(let error):
-            if shouldResetOnError, let view = webView.superview {
-                reset()
-                validate(on: view)
-            }
-            else {
-                completion?(.error(error))
-            }
+            handle(error: error)
 
         case .showHCaptcha:
             DispatchQueue.once(token: configureWebViewDispatchToken) { [weak self] in
@@ -214,6 +211,21 @@ fileprivate extension HCaptchaWebViewManager {
             #if DEBUG
                 print("[JS LOG]:", message)
             #endif
+        }
+    }
+
+    private func handle(error: HCaptchaError) {
+        if case HCaptchaError.userClosed = error {
+            completion?(.error(error))
+            return
+        }
+
+        if shouldResetOnError, let view = webView.superview {
+            reset()
+            validate(on: view)
+        }
+        else {
+            completion?(.error(error))
         }
     }
 

@@ -1,0 +1,44 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+      - main
+      - disable_uitests_codecov
+  workflow_dispatch:
+  repository_dispatch:
+
+jobs:
+  test_macOS:
+    name: Test HCaptcha
+    runs-on: macOS-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Use Xcode 12.4
+        run: sudo xcode-select -switch /Applications/Xcode_12.4.app
+
+      - name: "Cache dependencies"
+        uses: actions/cache@v2
+        with:
+          path: Carthage/build
+          key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-carthage-
+            ${{ runner.os }}-
+
+      - name: Prepare tools
+        run: |
+          brew upgrade carthage
+
+      - name: Setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.2
+          bundler-cache: true
+
+      - name: Run tests
+        run: bundle exec fastlane ci
