@@ -33,6 +33,6 @@ invisibility is not possible.
   s.subspec 'RxSwift' do |rx|
     rx.source_files = 'HCaptcha/Classes/Rx/**/*'
     rx.dependency 'HCaptcha/Core'
-    rx.dependency 'RxSwift', '~> 6.0'
+    rx.dependency 'RxSwift', '~> 6.2.0'
   end
 end
