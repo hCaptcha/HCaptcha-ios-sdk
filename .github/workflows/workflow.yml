@@ -1,6 +1,6 @@
 name: Build
 
-on: [push, pull_request, workflow_dispatchi, repository_dispatch]
+on: [push, pull_request, workflow_dispatch, repository_dispatch]
 
 jobs:
   test_macOS:
