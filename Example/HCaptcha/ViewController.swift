@@ -11,7 +11,6 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-
 class ViewController: UIViewController {
     private struct Constants {
         static let webViewTag = 123
@@ -66,7 +65,7 @@ class ViewController: UIViewController {
             .disposed(by: disposeBag)
 
         let validate = hcaptcha.rx.validate(on: view, resetOnError: false)
-            .catchError { error in
+            .catch { error in
                 return .just("Error \(error)")
             }
             .debug("validate")
@@ -83,7 +82,7 @@ class ViewController: UIViewController {
 
         let isEnabled = isLoading
             .map { !$0 }
-            .catchErrorJustReturn(false)
+            .catchAndReturn(false)
             .share(replay: 1)
 
         isEnabled

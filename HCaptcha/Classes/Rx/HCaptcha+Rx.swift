@@ -40,7 +40,7 @@ public extension Reactive where Base: HCaptcha {
                     single(.success(token))
 
                 case .error(let error):
-                    single(.error(error))
+                    single(.failure(error))
                 }
             }
 

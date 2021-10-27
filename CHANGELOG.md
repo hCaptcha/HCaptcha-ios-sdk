@@ -1,3 +1,7 @@
+# 1.6.0
+
+- RxSwift 6.2.0
+
 # 1.5.3
 
 - Feature: pass desired checkbox-mode to hCaptcha initializer

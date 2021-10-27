@@ -1,0 +1,7 @@
+excluded:
+  - Pods
+  - HCaptcha_Tests
+  - HCaptcha_UITests
+
+disabled_rules:
+  - explicit_top_level_acl
