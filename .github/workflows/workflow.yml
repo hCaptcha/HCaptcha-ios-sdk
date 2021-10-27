@@ -1,13 +1,6 @@
 name: Build
 
-on:
-  push:
-    branches:
-      - master
-      - main
-      - disable_uitests_codecov
-  workflow_dispatch:
-  repository_dispatch:
+on: [push, pull_request, workflow_dispatchi, repository_dispatch]
 
 jobs:
   test_macOS:
