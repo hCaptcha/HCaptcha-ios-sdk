@@ -45,9 +45,9 @@ The hCaptcha keys can be specified as Info.plist keys or can be passed as parame
 
 For the Info.plist configuration, add `HCaptchaKey` and `HCaptchaDomain` (with a protocol ex. http:// or https://) to your Info.plist
 
-`HCaptchaKey` is your hCaptcha sitekey.
-`HCaptchaDomain` should be a string like `https://www.your.com`
-`baseURL` should match `HCaptchaDomain` if specified; it controls the URI used to initialize the hCaptcha session. Example: `https://www.your.com`
+- `HCaptchaKey` is your hCaptcha sitekey.
+- `HCaptchaDomain` should be a string like `https://www.your.com`
+- `baseURL` should match `HCaptchaDomain` if specified; it controls the URI used to initialize the hCaptcha session. Example: `https://www.your.com`
 
 With these values set, run:
 
