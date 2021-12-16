@@ -121,6 +121,12 @@ class ViewController: UIViewController {
             webview.frame = self?.view.bounds ?? CGRect.zero
             webview.tag = Constants.webViewTag
 
+            // could use this option if using an enterprise passive sitekey:
+            // webview.isHidden = true
+            // seems to prevent flickering on latest iOS 15.2
+            webview.isOpaque = false
+            webview.backgroundColor = UIColor.clear
+            webview.scrollView.backgroundColor = UIColor.clear
             // For testing purposes
             // If the webview requires presentation, this should work as a way of detecting the webview in UI tests
             self?.view.viewWithTag(Constants.testLabelTag)?.removeFromSuperview()
