@@ -58,6 +58,9 @@ public class HCaptcha {
         /// The base url to be used to resolve relative URLs in the webview
         let baseURL: URL
 
+        /// Custom supplied challenge data
+        let rqdata: String?
+
         /// The Bundle that holds HCaptcha's assets
         private static let bundle: Bundle = {
             #if SWIFT_PACKAGE
@@ -92,7 +95,8 @@ public class HCaptcha {
                     infoPlistKey: String?,
                     baseURL: URL?,
                     infoPlistURL: URL?,
-                    size: Size) throws {
+                    size: Size,
+                    rqdata: String?) throws {
             guard let filePath = Config.bundle.path(forResource: "hcaptcha", ofType: "html") else {
                 throw HCaptchaError.htmlLoadError
             }
@@ -111,6 +115,7 @@ public class HCaptcha {
             self.apiKey = apiKey
             self.size = size
             self.baseURL = Config.fixSchemeIfNeeded(for: domain)
+            self.rqdata = rqdata
         }
     }
 
@@ -141,7 +146,8 @@ public class HCaptcha {
         baseURL: URL? = nil,
         endpoint: Endpoint = .default,
         locale: Locale? = nil,
-        size: Size = .invisible
+        size: Size = .invisible,
+        rqdata: String? = nil
     ) throws {
         let infoDict = Bundle.main.infoDictionary
 
@@ -152,14 +158,16 @@ public class HCaptcha {
                                 infoPlistKey: plistApiKey,
                                 baseURL: baseURL,
                                 infoPlistURL: plistDomain,
-                                size: size)
+                                size: size,
+                                rqdata: rqdata)
 
         self.init(manager: HCaptchaWebViewManager(
             html: config.html,
             apiKey: config.apiKey,
             baseURL: config.baseURL,
             endpoint: endpoint.getURL(locale: locale),
-            size: config.size
+            size: config.size,
+            rqdata: config.rqdata
         ))
     }
 

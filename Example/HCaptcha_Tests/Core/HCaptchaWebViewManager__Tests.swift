@@ -238,6 +238,28 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         waitForExpectations(timeout: 10)
     }
 
+    func test__Configure_Web_View__Handle_rqdata_Without_JS_Error() {
+        let exp0 = expectation(description: "configure webview")
+        let exp1 = expectation(description: "execute JS complete")
+
+        // Configure WebView
+        let manager = HCaptchaWebViewManager(messageBody: "{action: \"showHCaptcha\"}",
+                                             rqdata: "some rqdata")
+        manager.configureWebView { _ in
+            manager.webView.evaluateJavaScript("execute();") {
+                XCTAssertNil($1)
+                exp1.fulfill()
+            }
+            exp0.fulfill()
+        }
+
+        manager.validate(on: presenterView) { _ in
+            XCTFail("should not call completion")
+        }
+
+        waitForExpectations(timeout: 10)
+    }
+
     // MARK: Stop
 
     func test__Stop() {

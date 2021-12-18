@@ -30,6 +30,15 @@
         window.webkit.messageHandlers.hcaptcha.postMessage(value);
       };
 
+      const getExecuteOpts = function() {
+        let opts;
+        const rqdata = "${rqdata}";
+        if (rqdata) {
+          opts = {rqdata};
+        }
+        return opts;
+      }
+
       console.log = function(message) {
         post({ log: message });
       };
@@ -39,7 +48,7 @@
 
         try {
           if ("${size}" === 'invisible') {
-            hcaptcha.execute();
+            hcaptcha.execute(getExecuteOpts());
           }
           post({ action: "showHCaptcha" });
           console.log("showing challenge");

@@ -18,6 +18,7 @@ extension HCaptcha.Config {
                       infoPlistKey: infoPlistKey,
                       baseURL: baseURL,
                       infoPlistURL: infoPlistURL,
-                      size: .invisible)
+                      size: .invisible,
+                      rqdata: nil)
     }
 }

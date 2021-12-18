@@ -22,7 +22,8 @@ extension HCaptchaWebViewManager {
         apiKey: String? = nil,
         endpoint: String? = nil,
         shouldFail: Bool = false,
-        size: Size = .invisible
+        size: Size = .invisible,
+        rqdata: String? = nil
     ) {
         let html = String(format: HCaptchaWebViewManager.unformattedHTML,
                           arguments: [
@@ -34,7 +35,8 @@ extension HCaptchaWebViewManager {
             html: html,
             apiKey: apiKey,
             endpoint: endpoint,
-            size: size
+            size: size,
+            rqdata: rqdata
         )
     }
 
@@ -42,7 +44,8 @@ extension HCaptchaWebViewManager {
         html: String,
         apiKey: String? = nil,
         endpoint: String? = nil,
-        size: Size = .invisible
+        size: Size = .invisible,
+        rqdata: String? = nil
     ) {
         let localhost = URL(string: "http://localhost")!
 
@@ -51,7 +54,8 @@ extension HCaptchaWebViewManager {
             apiKey: apiKey ?? String(arc4random()),
             baseURL: localhost,
             endpoint: endpoint ?? localhost.absoluteString,
-            size: size
+            size: size,
+            rqdata: rqdata
         )
     }
 

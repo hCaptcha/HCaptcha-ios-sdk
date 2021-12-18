@@ -5,6 +5,7 @@
       var key = "${apiKey}";
       var endpoint = "${endpoint}";
       var shouldFail = ${shouldFail};
+      let rqdata = "${rqdata}";
 
       var post = function(value) {
           window.webkit.messageHandlers.hcaptcha.postMessage(value);
@@ -13,8 +14,10 @@
       var execute = function() {
           if (shouldFail) {
               post("error");
-          }
-          else {
+          } else {
+              if (rqdata) {
+                  post({"log": rqdata});
+              }
               post(${message});
           }
       };
