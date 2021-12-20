@@ -102,15 +102,15 @@ internal class HCaptchaWebViewManager {
          - size: Size of visible area
          - rqdata: Custom supplied challenge data
      */
-    init(html: String, apiKey: String, baseURL: URL, endpoint: String,
+    init(html: String, apiKey: String, baseURL: URL, endpoint: URL,
          size: Size, rqdata: String?) {
-        self.endpoint = endpoint
+        self.endpoint = endpoint.absoluteString
         self.decoder = HCaptchaDecoder { [weak self] result in
             self?.handle(result: result)
         }
 
         let formattedHTML = String(format: html, arguments: ["apiKey": apiKey,
-                                                             "endpoint": endpoint,
+                                                             "endpoint": self.endpoint,
                                                              "size": size.rawValue,
                                                              "rqdata": rqdata ?? ""])
 

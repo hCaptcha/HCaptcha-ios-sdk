@@ -309,7 +309,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
     func test__Endpoint_Setup() {
         let exp = expectation(description: "setup endpoint")
-        let endpoint = HCaptcha.Endpoint.alternate.getURL(locale: nil)
+        let endpoint = URL(string: "https://some.endpoint")!
         var result: HCaptchaResult?
 
         let manager = HCaptchaWebViewManager(messageBody: "{token: endpoint}", endpoint: endpoint)
@@ -326,7 +326,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         XCTAssertNotNil(result)
         XCTAssertNil(result?.error)
-        XCTAssertEqual(result?.token, endpoint)
+        XCTAssertEqual(result?.token, endpoint.absoluteString)
     }
 
     // MARK: Reset
