@@ -11,14 +11,14 @@ import HCaptcha
 
 class HCaptcha__Config__Tests: XCTestCase {
     private let expected = "https://hcaptcha.com/1/api.js?onload=onloadCallback&render=explicit"
-        + "&recaptchacompat=off&host=ios-sdk.hcaptcha.com&sentry=false&endpoint=https%3A%2F%2Fhcaptcha.com"
-        + "&assethost=https%3A%2F%2Fassets.hcaptcha.com&imghost=https%3A%2F%2Fimgs.hcaptcha.com"
-        + "&reportapi=https%3A%2F%2Faccounts.hcaptcha.com"
+        + "&recaptchacompat=off&host=some-api-key.ios-sdk.hcaptcha.com&sentry=false"
+        + "&endpoint=https%3A%2F%2Fhcaptcha.com&assethost=https%3A%2F%2Fassets.hcaptcha.com"
+        + "&imghost=https%3A%2F%2Fimgs.hcaptcha.com&reportapi=https%3A%2F%2Faccounts.hcaptcha.com"
 
     var config: HCaptcha.Config?
 
     override func setUpWithError() throws {
-        self.config = try? HCaptcha.Config(apiKey: "",
+        self.config = try? HCaptcha.Config(apiKey: "some-api-key",
                                            infoPlistKey: nil,
                                            baseURL: URL(string: "https://localhost")!,
                                            infoPlistURL: nil,
