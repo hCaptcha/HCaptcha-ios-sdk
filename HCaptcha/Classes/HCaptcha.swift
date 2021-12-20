@@ -318,6 +318,7 @@ extension HCaptcha.Config {
         var queryItems = [
             URLQueryItem(name: "onload", value: "onloadCallback"),
             URLQueryItem(name: "render", value: "explicit"),
+            URLQueryItem(name: "recaptchacompat", value: "off"),
             URLQueryItem(name: "host", value: "ios-sdk.hcaptcha.com"),
             URLQueryItem(name: "sentry", value: String(sentry)),
             URLQueryItem(name: "endpoint", value: endpoint.absoluteString),

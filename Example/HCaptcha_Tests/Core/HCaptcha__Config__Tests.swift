@@ -11,7 +11,7 @@ import HCaptcha
 
 class HCaptcha__Config__Tests: XCTestCase {
     private let expected = "https://hcaptcha.com/1/api.js?onload=onloadCallback&render=explicit"
-        + "&host=ios-sdk.hcaptcha.com&sentry=false&endpoint=https%3A%2F%2Fhcaptcha.com"
+        + "&recaptchacompat=off&host=ios-sdk.hcaptcha.com&sentry=false&endpoint=https%3A%2F%2Fhcaptcha.com"
         + "&assethost=https%3A%2F%2Fassets.hcaptcha.com&imghost=https%3A%2F%2Fimgs.hcaptcha.com"
         + "&reportapi=https%3A%2F%2Faccounts.hcaptcha.com"
 
