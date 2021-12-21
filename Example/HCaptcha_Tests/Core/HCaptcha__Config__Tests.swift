@@ -10,10 +10,10 @@
 import XCTest
 
 class HCaptcha__Config__Tests: XCTestCase {
-    private let expected = "https://hcaptcha.com/1/api.js?onload=onloadCallback&render=explicit"
-        + "&recaptchacompat=off&host=some-api-key.ios-sdk.hcaptcha.com&sentry=false"
-        + "&endpoint=https%3A%2F%2Fhcaptcha.com&assethost=https%3A%2F%2Fassets.hcaptcha.com"
-        + "&imghost=https%3A%2F%2Fimgs.hcaptcha.com&reportapi=https%3A%2F%2Faccounts.hcaptcha.com"
+    private let expected = "https://hcaptcha.com/1/api.js?onload=onloadCallback&render=explicit&recaptchacompat=off"
+        + "&host=some-api-key.ios-sdk.hcaptcha.com&sentry=false&endpoint=https%3A%2F%2Fapi.hcaptcha.com"
+        + "&assethost=https%3A%2F%2Fnewassets.hcaptcha.com&imghost=https%3A%2F%2Fimgs.hcaptcha.com"
+        + "&reportapi=https%3A%2F%2Faccounts.hcaptcha.com"
 
     var config: HCaptcha.Config?
 

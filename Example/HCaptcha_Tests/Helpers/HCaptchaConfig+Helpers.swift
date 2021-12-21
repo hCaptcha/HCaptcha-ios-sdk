@@ -19,13 +19,13 @@ extension HCaptcha.Config {
                       infoPlistKey: infoPlistKey,
                       baseURL: baseURL,
                       infoPlistURL: infoPlistURL,
+                      jsSrc: URL(string: "https://hcaptcha.com/1/api.js")!,
                       size: .invisible,
                       rqdata: nil,
                       sentry: false,
-                      apiEndpoint: URL(string: "https://hcaptcha.com/1/api.js")!,
-                      endpoint: URL(string: "https://hcaptcha.com")!,
+                      endpoint: URL(string: "https://api.hcaptcha.com")!,
                       reportapi: URL(string: "https://accounts.hcaptcha.com")!,
-                      assethost: URL(string: "https://assets.hcaptcha.com")!,
+                      assethost: URL(string: "https://newassets.hcaptcha.com")!,
                       imghost: URL(string: "https://imgs.hcaptcha.com")!,
                       host: host)
     }
