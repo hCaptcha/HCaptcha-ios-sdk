@@ -134,7 +134,7 @@ More params like:
 
 Can be passed via `HCaptcha(...)`
 
-Checout documentation in docs and https://docs.hcaptcha.com/api for more details
+Please see the [hCaptcha Enterprise documentation](https://docs.hcaptcha.com/enterprise/) for more details.
 
 ### Enabling the visible checkbox flow
 
