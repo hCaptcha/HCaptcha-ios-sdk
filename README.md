@@ -93,16 +93,16 @@ hcaptcha.rx.validate(on: view)
 
 Since this SDK uses a local HTML file, you will want to set a host override for better tracking and enforcement of siteverify parameters.
 
-In HCaptcha/Classes/HCaptcha.swift, change:
+You can achieve this by passing extra param `host`:
 
 ``` swift
-let jsargs = "?onload=onloadCallback&render=explicit&host=ios-sdk.hcaptcha.com"
-```
+let hcaptcha = try? HCaptcha(
+    ...
+    host: "custom-host",
+    ...
+)
 
-to:
-
-``` swift
-let jsargs = "?onload=onloadCallback&render=explicit&host=ios-sdk.YOUR-DOMAIN.com"
+...
 ```
 
 
@@ -113,15 +113,28 @@ If you are an Enterprise user with first-party hosting access, you will need to 
 You can then enable it in your code:
 
 ``` swift
-public enum Endpoint {
-    case default, alternate
-}
+let hcaptcha = try? HCaptcha(
+    ...
+    endpointApi: URL("https://custom.api.endpoint")!,
+    endpoint: URL("https://custom.endpoint")!,
+    ...
+)
 
-let hcaptcha = try? HCaptcha(endpoint: .alternate) // Defaults to `default` when unset
+...
 ```
 
-after setting your URI in HCaptcha/Classes/HCaptcha.swift: `altjsurl` variable.
+#### More params for Enterprise
 
+More params like:
+ - `sentry`
+ - `rqdata`
+ - `reportapi`
+ - `assethost`
+ - `imghost`
+
+Can be passed via `HCaptcha(...)`
+
+Checout documentation in docs and https://docs.hcaptcha.com/api for more details
 
 ### Enabling the visible checkbox flow
 
