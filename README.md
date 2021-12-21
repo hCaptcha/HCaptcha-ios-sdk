@@ -115,7 +115,6 @@ You can then enable it in your code:
 ``` swift
 let hcaptcha = try? HCaptcha(
     ...
-    jsSrc: URL("https://js.hcaptcha.com/1/api.js")!,
     endpoint: URL("https://custom.endpoint")!,
     ...
 )
