@@ -19,30 +19,6 @@ public class HCaptcha {
         }
     }
 
-    /// The JS API endpoint to be loaded onto the HTML file.
-    public enum Endpoint {
-        /** hCaptcha default endpoint. Points to
-         https://hcaptcha.com/1/api.js
-         */
-        case `default`
-
-        /// Alternate endpoint. Points to your first-party api.js location
-        case alternate
-
-        internal func getURL(locale: Locale?) -> String {
-            let localeAppendix = locale.map { "&hl=\($0.identifier)" } ?? ""
-            let jsurl = "https://hcaptcha.com/1/api.js"
-            let altjsurl = "https://hcaptcha.com/1/api.js"
-            let jsargs = "?onload=onloadCallback&render=explicit&host=ios-sdk.hcaptcha.com"
-            switch self {
-            case .default:
-                return jsurl + jsargs + localeAppendix
-            case .alternate:
-                return altjsurl + jsargs + localeAppendix
-            }
-        }
-    }
-
     /** Internal data model for CI in unit tests
      */
     struct Config {
@@ -57,6 +33,35 @@ public class HCaptcha {
 
         /// The base url to be used to resolve relative URLs in the webview
         let baseURL: URL
+
+        /// The url of api.js
+        /// Default: https://hcaptcha.com/1/api.js
+        let jsSrc: URL
+
+        /// Custom supplied challenge data
+        let rqdata: String?
+
+        /// Enable / Disable sentry error reporting.
+        let sentry: Bool?
+
+        /// Point hCaptcha JS Ajax Requests to alternative API Endpoint.
+        /// Default: https://hcaptcha.com
+        let endpoint: URL?
+
+        /// Point hCaptcha Bug Reporting Request to alternative API Endpoint.
+        /// Default: https://accounts.hcaptcha.com
+        let reportapi: URL?
+
+        /// Points loaded hCaptcha assets to a user defined asset location, used for proxies.
+        /// Default: https://assets.hcaptcha.com
+        let assethost: URL?
+
+        /// Points loaded hCaptcha challenge images to a user defined image location, used for proxies.
+        /// Default: https://imgs.hcaptcha.com
+        let imghost: URL?
+
+        /// SDK's host identifier. nil value means that it will be generated
+        let host: String?
 
         /// The Bundle that holds HCaptcha's assets
         private static let bundle: Bundle = {
@@ -92,7 +97,15 @@ public class HCaptcha {
                     infoPlistKey: String?,
                     baseURL: URL?,
                     infoPlistURL: URL?,
-                    size: Size) throws {
+                    jsSrc: URL,
+                    size: Size,
+                    rqdata: String?,
+                    sentry: Bool?,
+                    endpoint: URL?,
+                    reportapi: URL?,
+                    assethost: URL?,
+                    imghost: URL?,
+                    host: String?) throws {
             guard let filePath = Config.bundle.path(forResource: "hcaptcha", ofType: "html") else {
                 throw HCaptchaError.htmlLoadError
             }
@@ -111,6 +124,14 @@ public class HCaptcha {
             self.apiKey = apiKey
             self.size = size
             self.baseURL = Config.fixSchemeIfNeeded(for: domain)
+            self.jsSrc = jsSrc
+            self.rqdata = rqdata
+            self.sentry = sentry
+            self.endpoint = endpoint
+            self.reportapi = reportapi
+            self.assethost = assethost
+            self.imghost = imghost
+            self.host = host
         }
     }
 
@@ -139,9 +160,16 @@ public class HCaptcha {
     public convenience init(
         apiKey: String? = nil,
         baseURL: URL? = nil,
-        endpoint: Endpoint = .default,
         locale: Locale? = nil,
-        size: Size = .invisible
+        size: Size = .invisible,
+        jsSrc: URL = URL(string: "https://js.hcaptcha.com/1/api.js")!,
+        rqdata: String? = nil,
+        sentry: Bool = false,
+        endpoint: URL? = nil,
+        reportapi: URL? = nil,
+        assethost: URL? = nil,
+        imghost: URL? = nil,
+        host: String? = nil
     ) throws {
         let infoDict = Bundle.main.infoDictionary
 
@@ -152,14 +180,23 @@ public class HCaptcha {
                                 infoPlistKey: plistApiKey,
                                 baseURL: baseURL,
                                 infoPlistURL: plistDomain,
-                                size: size)
+                                jsSrc: jsSrc,
+                                size: size,
+                                rqdata: rqdata,
+                                sentry: sentry,
+                                endpoint: endpoint,
+                                reportapi: reportapi,
+                                assethost: assethost,
+                                imghost: imghost,
+                                host: host)
 
         self.init(manager: HCaptchaWebViewManager(
             html: config.html,
             apiKey: config.apiKey,
             baseURL: config.baseURL,
-            endpoint: endpoint.getURL(locale: locale),
-            size: config.size
+            endpoint: config.getEndpointURL(locale: locale),
+            size: config.size,
+            rqdata: config.rqdata
         ))
     }
 
@@ -274,6 +311,50 @@ private extension HCaptcha.Config {
         }
 
         return url
+    }
+}
+
+extension HCaptcha.Config {
+
+    /**
+     The JS API endpoint to be loaded onto the HTML file.
+     - parameter url: The URL to be fixed
+     */
+    public func getEndpointURL(locale: Locale? = nil) -> URL {
+        var result = URLComponents(url: jsSrc, resolvingAgainstBaseURL: false)!
+        var queryItems = [
+            URLQueryItem(name: "onload", value: "onloadCallback"),
+            URLQueryItem(name: "render", value: "explicit"),
+            URLQueryItem(name: "recaptchacompat", value: "off"),
+            URLQueryItem(name: "host", value: host ?? "\(apiKey).ios-sdk.hcaptcha.com")
+        ]
+
+        if let sentry = sentry {
+            queryItems.append(URLQueryItem(name: "sentry", value: String(sentry)))
+        }
+        if let url = endpoint {
+            queryItems.append(URLQueryItem(name: "endpoint", value: url.absoluteString))
+        }
+        if let url = assethost {
+            queryItems.append(URLQueryItem(name: "assethost", value: url.absoluteString))
+        }
+        if let url = imghost {
+            queryItems.append(URLQueryItem(name: "imghost", value: url.absoluteString))
+        }
+        if let url = reportapi {
+            queryItems.append(URLQueryItem(name: "reportapi", value: url.absoluteString))
+        }
+        if let locale = locale {
+            queryItems.append(URLQueryItem(name: "hl", value: locale.identifier))
+        }
+
+        result.percentEncodedQuery = queryItems.map {
+            $0.name +
+            "=" +
+            $0.value!.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed)!
+        }.joined(separator: "&")
+
+        return result.url!
     }
 }
 

@@ -21,27 +21,14 @@ class ViewController: UIViewController {
     private var disposeBag = DisposeBag()
 
     private var locale: Locale?
-    private var endpoint = HCaptcha.Endpoint.default
 
     @IBOutlet private weak var label: UILabel!
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
     @IBOutlet private weak var localeSegmentedControl: UISegmentedControl!
-    @IBOutlet private weak var endpointSegmentedControl: UISegmentedControl!
     @IBOutlet private weak var visibleChallengeSwitch: UISwitch!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupHCaptcha()
-    }
-
-    @IBAction func didPressEndpointSegmentedControl(_ sender: UISegmentedControl) {
-        label.text = ""
-        switch sender.selectedSegmentIndex {
-        case 0: endpoint = .default
-        case 1: endpoint = .alternate
-        default: assertionFailure("invalid index")
-        }
-
         setupHCaptcha()
     }
 
@@ -89,10 +76,6 @@ class ViewController: UIViewController {
             .bind(to: button.rx.isEnabled)
             .disposed(by: disposeBag)
 
-        isEnabled
-            .bind(to: endpointSegmentedControl.rx.isEnabled)
-            .disposed(by: disposeBag)
-
         validate
             .map { [weak self] _ in
                 self?.view.viewWithTag(Constants.webViewTag)
@@ -115,7 +98,7 @@ class ViewController: UIViewController {
 
     private func setupHCaptcha() {
         // swiftlint:disable:next force_try
-        hcaptcha = try! HCaptcha(endpoint: endpoint, locale: locale)
+        hcaptcha = try! HCaptcha(locale: locale)
 
         hcaptcha.configureWebView { [weak self] webview in
             webview.frame = self?.view.bounds ?? CGRect.zero

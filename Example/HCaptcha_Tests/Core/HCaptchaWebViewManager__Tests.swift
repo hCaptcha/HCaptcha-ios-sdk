@@ -238,6 +238,28 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         waitForExpectations(timeout: 10)
     }
 
+    func test__Configure_Web_View__Handle_rqdata_Without_JS_Error() {
+        let exp0 = expectation(description: "configure webview")
+        let exp1 = expectation(description: "execute JS complete")
+
+        // Configure WebView
+        let manager = HCaptchaWebViewManager(messageBody: "{action: \"showHCaptcha\"}",
+                                             rqdata: "some rqdata")
+        manager.configureWebView { _ in
+            manager.webView.evaluateJavaScript("execute();") {
+                XCTAssertNil($1)
+                exp1.fulfill()
+            }
+            exp0.fulfill()
+        }
+
+        manager.validate(on: presenterView) { _ in
+            XCTFail("should not call completion")
+        }
+
+        waitForExpectations(timeout: 10)
+    }
+
     // MARK: Stop
 
     func test__Stop() {
@@ -287,7 +309,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
     func test__Endpoint_Setup() {
         let exp = expectation(description: "setup endpoint")
-        let endpoint = HCaptcha.Endpoint.alternate.getURL(locale: nil)
+        let endpoint = URL(string: "https://some.endpoint")!
         var result: HCaptchaResult?
 
         let manager = HCaptchaWebViewManager(messageBody: "{token: endpoint}", endpoint: endpoint)
@@ -304,7 +326,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         XCTAssertNotNil(result)
         XCTAssertNil(result?.error)
-        XCTAssertEqual(result?.token, endpoint)
+        XCTAssertEqual(result?.token, endpoint.absoluteString)
     }
 
     // MARK: Reset

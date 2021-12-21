@@ -99,17 +99,20 @@ internal class HCaptchaWebViewManager {
          - apiKey: The hCaptcha sitekey
          - baseURL: The URL configured with the sitekey
          - endpoint: The JS API endpoint to be loaded onto the HTML file.
+         - size: Size of visible area
+         - rqdata: Custom supplied challenge data
      */
-    init(html: String, apiKey: String, baseURL: URL, endpoint: String, size: Size) {
-        self.endpoint = endpoint
+    init(html: String, apiKey: String, baseURL: URL, endpoint: URL,
+         size: Size, rqdata: String?) {
+        self.endpoint = endpoint.absoluteString
         self.decoder = HCaptchaDecoder { [weak self] result in
             self?.handle(result: result)
         }
 
-        let formattedHTML = String(format: html,
-                                   arguments: ["apiKey": apiKey,
-                                               "endpoint": endpoint,
-                                               "size": size.rawValue])
+        let formattedHTML = String(format: html, arguments: ["apiKey": apiKey,
+                                                             "endpoint": self.endpoint,
+                                                             "size": size.rawValue,
+                                                             "rqdata": rqdata ?? ""])
 
         if let window = UIApplication.shared.keyWindow {
             setupWebview(on: window, html: formattedHTML, url: baseURL)

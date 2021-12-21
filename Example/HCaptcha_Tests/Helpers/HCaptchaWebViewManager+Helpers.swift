@@ -20,9 +20,10 @@ extension HCaptchaWebViewManager {
     convenience init(
         messageBody: String = "",
         apiKey: String? = nil,
-        endpoint: String? = nil,
+        endpoint: URL? = nil,
         shouldFail: Bool = false,
-        size: Size = .invisible
+        size: Size = .invisible,
+        rqdata: String? = nil
     ) {
         let html = String(format: HCaptchaWebViewManager.unformattedHTML,
                           arguments: [
@@ -34,15 +35,17 @@ extension HCaptchaWebViewManager {
             html: html,
             apiKey: apiKey,
             endpoint: endpoint,
-            size: size
+            size: size,
+            rqdata: rqdata
         )
     }
 
     convenience init(
         html: String,
         apiKey: String? = nil,
-        endpoint: String? = nil,
-        size: Size = .invisible
+        endpoint: URL? = nil,
+        size: Size = .invisible,
+        rqdata: String? = nil
     ) {
         let localhost = URL(string: "http://localhost")!
 
@@ -50,8 +53,9 @@ extension HCaptchaWebViewManager {
             html: html,
             apiKey: apiKey ?? String(arc4random()),
             baseURL: localhost,
-            endpoint: endpoint ?? localhost.absoluteString,
-            size: size
+            endpoint: endpoint ?? localhost,
+            size: size,
+            rqdata: rqdata
         )
     }
 
