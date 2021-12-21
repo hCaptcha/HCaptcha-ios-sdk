@@ -21,7 +21,7 @@ public class HCaptcha {
 
     /** Internal data model for CI in unit tests
      */
-    public struct Config {
+    struct Config {
         /// The raw unformated HTML file content
         let html: String
 
@@ -59,6 +59,10 @@ public class HCaptcha {
         /// Points loaded hCaptcha challenge images to a user defined image location, used for proxies.
         /// Default: https://imgs.hcaptcha.com
         let imghost: URL
+
+        /// Platform identifier where SDK works
+        /// Default: `\(apiKey).ios-sdk.hcaptcha.com`
+        let host: String?
 
         /// The Bundle that holds HCaptcha's assets
         private static let bundle: Bundle = {
@@ -101,7 +105,8 @@ public class HCaptcha {
                     endpoint: URL,
                     reportapi: URL,
                     assethost: URL,
-                    imghost: URL) throws {
+                    imghost: URL,
+                    host: String?) throws {
             guard let filePath = Config.bundle.path(forResource: "hcaptcha", ofType: "html") else {
                 throw HCaptchaError.htmlLoadError
             }
@@ -127,6 +132,7 @@ public class HCaptcha {
             self.reportapi = reportapi
             self.assethost = assethost
             self.imghost = imghost
+            self.host = host
         }
     }
 
@@ -163,7 +169,8 @@ public class HCaptcha {
         endpoint: URL = URL(string: "https://hcaptcha.com")!,
         reportapi: URL = URL(string: "https://accounts.hcaptcha.com")!,
         assethost: URL = URL(string: "https://assets.hcaptcha.com")!,
-        imghost: URL = URL(string: "https://imgs.hcaptcha.com")!
+        imghost: URL = URL(string: "https://imgs.hcaptcha.com")!,
+        host: String? = nil
     ) throws {
         let infoDict = Bundle.main.infoDictionary
 
@@ -181,7 +188,8 @@ public class HCaptcha {
                                 endpoint: endpoint,
                                 reportapi: reportapi,
                                 assethost: assethost,
-                                imghost: imghost)
+                                imghost: imghost,
+                                host: host)
 
         self.init(manager: HCaptchaWebViewManager(
             html: config.html,
@@ -313,13 +321,13 @@ extension HCaptcha.Config {
      The JS API endpoint to be loaded onto the HTML file.
      - parameter url: The URL to be fixed
      */
-    public func getEndpointURL(locale: Locale?) -> URL {
+    public func getEndpointURL(locale: Locale? = nil) -> URL {
         var result = URLComponents(url: apiEndpoint, resolvingAgainstBaseURL: false)!
         var queryItems = [
             URLQueryItem(name: "onload", value: "onloadCallback"),
             URLQueryItem(name: "render", value: "explicit"),
             URLQueryItem(name: "recaptchacompat", value: "off"),
-            URLQueryItem(name: "host", value: "\(apiKey).ios-sdk.hcaptcha.com"),
+            URLQueryItem(name: "host", value: host ?? "\(apiKey).ios-sdk.hcaptcha.com"),
             URLQueryItem(name: "sentry", value: String(sentry)),
             URLQueryItem(name: "endpoint", value: endpoint.absoluteString),
             URLQueryItem(name: "assethost", value: assethost.absoluteString),

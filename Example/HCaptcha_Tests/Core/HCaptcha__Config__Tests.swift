@@ -6,8 +6,8 @@
 //  Copyright © 2021 HCaptcha. All rights reserved.
 //
 
+@testable import HCaptcha
 import XCTest
-import HCaptcha
 
 class HCaptcha__Config__Tests: XCTestCase {
     private let expected = "https://hcaptcha.com/1/api.js?onload=onloadCallback&render=explicit"
@@ -17,29 +17,34 @@ class HCaptcha__Config__Tests: XCTestCase {
 
     var config: HCaptcha.Config?
 
-    override func setUpWithError() throws {
-        self.config = try? HCaptcha.Config(apiKey: "some-api-key",
-                                           infoPlistKey: nil,
-                                           baseURL: URL(string: "https://localhost")!,
-                                           infoPlistURL: nil,
-                                           size: .invisible,
-                                           rqdata: nil,
-                                           sentry: false,
-                                           apiEndpoint: URL(string: "https://hcaptcha.com/1/api.js")!,
-                                           endpoint: URL(string: "https://hcaptcha.com")!,
-                                           reportapi: URL(string: "https://accounts.hcaptcha.com")!,
-                                           assethost: URL(string: "https://assets.hcaptcha.com")!,
-                                           imghost: URL(string: "https://imgs.hcaptcha.com")!)
+    func createConfig(apiKey: String = "some-api-key", host: String? = nil) -> HCaptcha.Config? {
+        return try? HCaptcha.Config(apiKey: apiKey,
+                                    infoPlistKey: nil,
+                                    baseURL: URL(string: "https://localhost")!,
+                                    infoPlistURL: nil,
+                                    host: host)
     }
 
-  func test__Locale__Nil() {
-      let actual = config?.getEndpointURL(locale: nil).absoluteString
-      XCTAssertEqual(actual, expected)
-  }
 
-  func test__Locale__Valid() {
-    let actual = config?.getEndpointURL(locale: Locale(identifier: "pt-BR")).absoluteString
-    XCTAssertEqual(actual, "\(expected)&hl=pt-BR")
-  }
+    func test__Locale__Nil() {
+        let config = createConfig()
+        let actual = config?.getEndpointURL().absoluteString
+        XCTAssertEqual(actual, expected)
+    }
 
+    func test__Locale__Valid() {
+        let locale = "pt-BR"
+        let config = createConfig()
+        let actual = config?.getEndpointURL(locale: Locale(identifier: locale)).absoluteString
+        XCTAssertEqual(actual, "\(expected)&hl=\(locale)")
+    }
+
+    func test__Custom__Host() {
+        let host = "custom-host"
+        let config = createConfig(host: host)
+        let actual = config?.getEndpointURL().absoluteString
+        XCTAssertEqual(actual, expected.replacingOccurrences(
+            of: "some-api-key.ios-sdk.hcaptcha.com",
+            with: host))
+    }
 }
