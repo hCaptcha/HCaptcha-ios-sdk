@@ -56,3 +56,6 @@ fastlane/test_output
 
 ## VS Code
 .vscode
+
+## Swift package
+.build
