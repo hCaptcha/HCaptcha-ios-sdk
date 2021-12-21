@@ -126,11 +126,11 @@ let hcaptcha = try? HCaptcha(
 #### More params for Enterprise
 
 More params like:
- - `sentry`
- - `rqdata`
- - `reportapi`
- - `assethost`
- - `imghost`
+ - `sentry` (bool)
+ - `rqdata` (string)
+ - `reportapi` (string)
+ - `assethost` (string)
+ - `imghost` (string)
 
 Can be passed via `HCaptcha(...)`
 
