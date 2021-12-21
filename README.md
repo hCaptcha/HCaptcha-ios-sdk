@@ -89,7 +89,7 @@ hcaptcha.rx.validate(on: view)
     })
 ```
 
-#### Setting the host override
+#### Setting the host override (optional)
 
 Since this SDK uses a local HTML file, you will want to set a host override for better tracking and enforcement of siteverify parameters.
 
@@ -106,7 +106,7 @@ let hcaptcha = try? HCaptcha(
 ```
 
 
-#### Alternate endpoint
+#### Alternate endpoint (optional)
 
 If you are an Enterprise user with first-party hosting access, you will need to set your own endpoint.
 
@@ -122,7 +122,7 @@ let hcaptcha = try? HCaptcha(
 ...
 ```
 
-#### More params for Enterprise
+#### More params for Enterprise (optional)
 
 More params like:
  - `sentry` (bool)
