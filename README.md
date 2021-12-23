@@ -7,9 +7,7 @@
 
 -----
 
-Add [hCaptcha](https://www.hcaptcha.com/) to your project. This library
-automatically handles hCaptcha's events and retrieves the validation token or notifies you to present the challenge if
-invisibility is not possible.
+Add [hCaptcha](https://www.hcaptcha.com/) to your project. This library automatically handles hCaptcha's events and retrieves the validation token or notifies you to present the challenge if invisibility is not possible.
 
 
 #### _Warning_ ⚠️
@@ -18,9 +16,7 @@ To properly secure your application, you will still need to send the token recei
 
 ## Installation
 
-HCaptcha may eventually be available through [CocoaPods](http://cocoapods.org) and [Carthage](https://github.com/Carthage/Carthage).
-
-It is currently packaged for both.
+HCaptcha is available through [CocoaPods](http://cocoapods.org) and packaged for [Carthage](https://github.com/Carthage/Carthage) and [SPM](https://www.swift.org/package-manager/) (Swift Package Manager).
 
 To install it, simply add the following line to your dependencies file:
 
@@ -36,14 +32,18 @@ pod "HCaptcha/RxSwift"
 github "hCaptcha/HCaptcha"
 ```
 
+#### SPM
+Standard SPM formula: uses [Package.swift][./Package.swift]
+
+
 Carthage will create two different frameworks named `HCaptcha` and `HCaptcha_RxSwift`, the latter containing the RxSwift
 extension for the HCaptcha framework.
 
 ## Usage
 
-The hCaptcha keys can be specified as Info.plist keys or can be passed as parameters when instantiating HCaptcha().
+hCaptcha sitekeys can be specified as Info.plist keys or can be passed as parameters when instantiating `HCaptcha()`.
 
-For the Info.plist configuration, add `HCaptchaKey` and `HCaptchaDomain` (with a protocol ex. http:// or https://) to your Info.plist
+For the Info.plist configuration, add `HCaptchaKey` (sitekey) and `HCaptchaDomain` (with a protocol, i.e. https://) to your Info.plist.
 
 - `HCaptchaKey` is your hCaptcha sitekey.
 - `HCaptchaDomain` should be a string like `https://www.your.com`
@@ -91,20 +91,21 @@ hcaptcha.rx.validate(on: view)
 
 #### Setting the host override (optional)
 
-Since this SDK uses a local HTML file, you will want to set a host override for better tracking and enforcement of siteverify parameters.
+Since this SDK uses a local HTML file, you may want to set a host override for better tracking and enforcement of siteverify parameters.
 
-You can achieve this by passing extra param `host`:
+You can achieve this by passing the extra param `host`:
 
 ``` swift
 let hcaptcha = try? HCaptcha(
     ...
-    host: "custom-host",
+    host: "your-domain.com",
     ...
 )
 
 ...
 ```
 
+Note: this should be the **bare** host, i.e. not including a protocol.
 
 #### Alternate endpoint (optional)
 
