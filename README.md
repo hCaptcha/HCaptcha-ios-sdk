@@ -7,12 +7,12 @@
 
 -----
 
-Add [hCaptcha](https://www.hcaptcha.com/) to your project. This library automatically handles hCaptcha's events and retrieves the validation token or notifies you to present the challenge if invisibility is not possible.
+Add [hCaptcha](https://www.hcaptcha.com/) to your project. This library automatically handles hCaptcha's events and returns a validation token, presenting the challenge via a modal if needed.
 
 
 #### _Warning_ ⚠️
 
-To properly secure your application, you will still need to send the token received here to your server for server-side validation via the `siteverify` endpoint on hcaptcha.com.
+To secure your application, you need to send the token received here to your backend for server-side validation via the `api.hcaptcha.com/siteverify` endpoint.
 
 ## Installation
 
@@ -36,8 +36,7 @@ github "hCaptcha/HCaptcha"
 Standard SPM formula: uses [Package.swift][./Package.swift]
 
 
-Carthage will create two different frameworks named `HCaptcha` and `HCaptcha_RxSwift`, the latter containing the RxSwift
-extension for the HCaptcha framework.
+Carthage will create two different frameworks named `HCaptcha` and `HCaptcha_RxSwift`, the latter containing the RxSwift extension for the HCaptcha framework.
 
 ## Usage
 
@@ -70,7 +69,8 @@ func validate() {
 }
 ```
 
-If instead you prefer to keep the information out of the Info.plist, you can use:
+If you prefer to keep the information out of the Info.plist, you can instead use:
+
 ``` swift
 let hcaptcha = try? HCaptcha(
     apiKey: "YOUR_HCAPTCHA_KEY", 
@@ -105,11 +105,11 @@ let hcaptcha = try? HCaptcha(
 ...
 ```
 
-Note: this should be the **bare** host, i.e. not including a protocol.
+Note: this should be the **bare** host, i.e. not including a protocol prefix like https://.
 
 #### Alternate endpoint (optional)
 
-If you are an Enterprise user with first-party hosting access, you will need to set your own endpoint.
+If you are an Enterprise user with first-party hosting access, you can use your own endpoint (i.e. verify.your.com).
 
 You can then enable it in your code:
 
@@ -125,12 +125,13 @@ let hcaptcha = try? HCaptcha(
 
 #### More params for Enterprise (optional)
 
-More params like:
- - `sentry` (bool)
+Enterprise params like:
+
  - `rqdata` (string)
  - `reportapi` (string)
  - `assethost` (string)
  - `imghost` (string)
+ - `sentry` (bool)
 
 Can be passed via `HCaptcha(...)`
 
@@ -140,7 +141,7 @@ Please see the [hCaptcha Enterprise documentation](https://docs.hcaptcha.com/ent
 
 This iOS SDK assumes by default that you want an "invisible" checkbox, i.e. that triggering the hCaptcha flow from within your app should either return a token or show the user a challenge directly.
 
-If you instead want the classic "normal" or "compact" checkbox behavior of showing a checkbox to tick and then either closing or showing a challenge, you can pass `size` to HCaptcha initializer.
+If you instead want the classic "normal" or "compact" checkbox behavior of showing a checkbox to tick and then either closing or showing a challenge, you can pass `size` to the HCaptcha initializer.
 
 ```
 let hcaptcha = try? HCaptcha(size: .compact)
@@ -217,7 +218,7 @@ A. Most likely you have not included an asset in your build. Please double-check
 Q. I'm getting "xcconfig: unable to open file" after upgrading the SDK. (Or changing SDK and running Example app.)
 A: In your app or the Example app dir, run `pod deintegrate && pod install` to refresh paths.
 
-## Inspiration
+### Inspiration
 
 Originally forked from fjcaetano's ReCaptcha IOS SDK, licensed under MIT.
 
