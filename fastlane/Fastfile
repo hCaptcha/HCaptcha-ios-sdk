@@ -97,7 +97,7 @@ platform :ios do
 
   desc "Build Swift Package"
   lane :spm_build do
-    # swift build dones't support iOS build out of the box
+    # swift build doesn't support iOS build out of the box
     # https://github.com/fastlane/fastlane/discussions/17362
     swiftc = [
       '-sdk',
