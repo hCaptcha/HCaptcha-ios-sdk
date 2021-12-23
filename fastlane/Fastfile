@@ -15,6 +15,7 @@ platform :ios do
     test
     pod_lint
     carthage_lint
+    spm_build
   end
 
   desc "Runs all the tests"
@@ -92,6 +93,19 @@ platform :ios do
       no_skip_current: false,
       use_xcframeworks: true
     )
+  end
+
+  desc "Build Swift Package"
+  lane :spm_build do
+    # swift build doesn't support iOS build out of the box
+    # https://github.com/fastlane/fastlane/discussions/17362
+    swiftc = [
+      '-sdk',
+      `xcrun --sdk iphonesimulator --show-sdk-path`.strip,
+      '-target',
+      'x86_64-apple-ios9.0-simulator'
+    ].map { |o| " -Xswiftc \"#{o}\"" }
+    sh("swift build #{swiftc.join}")
   end
 
   desc "Deploy a new version to Github and Cocoapods"
