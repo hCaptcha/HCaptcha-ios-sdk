@@ -3,8 +3,8 @@ name: Bug report
 about: Create a report to help us improve
 ---
 ## Before opening an issue, check the following:
-1. You are using the **SITE** key
-2. The correct domain, with protocol, is setup.
+1. You are using the **SITE** key.
+2. The correct domain, with protocol, is set up.
 3. You are using an **hCaptcha** key. It does **NOT** start with 0x. That's a secret key.
 4. If the widget doesn't appear, that is expected since the library will try to resolve the challenge _invisibly_.
 
