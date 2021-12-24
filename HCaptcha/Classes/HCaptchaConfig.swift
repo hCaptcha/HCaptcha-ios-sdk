@@ -11,13 +11,6 @@ import UIKit
 import JavaScriptCore
 
 /** The color theme of the widget.
- */
-public enum Theme: String, CaseIterable {
-    case light
-    case dark
-}
-
-/** The color theme of the widget.
  */    
 public enum Size: String {
     case invisible
@@ -66,16 +59,16 @@ struct HCaptchaConfig {
     /// Default: https://imgs.hcaptcha.com
     let imghost: URL?
 
-    /// SDK's host identifier. nil value means that it will be generated
+    /// SDK's host identifier. nil value means that it will be generated.
     let host: String?
 
-    /// Set the color theme of the widget. Defaults to light.
-    let theme: Theme
+    /// Set the color theme of the widget. Default is "light".
+    let theme: String
 
-    /// Custom theme JSON string
+    /// Custom theme JSON string.
     let customTheme: String?
 
-    /// Return actual theme value based on init params. It must return valid JS object
+    /// Return actual theme value based on init params. It must return valid JS object.
     var actualTheme: String {
         self.customTheme ?? "\"\(theme)\""
     }
@@ -123,7 +116,7 @@ struct HCaptchaConfig {
                 assethost: URL?,
                 imghost: URL?,
                 host: String?,
-                theme: Theme,
+                theme: String,
                 customTheme: String?) throws {
         guard let filePath = HCaptchaConfig.bundle.path(forResource: "hcaptcha", ofType: "html") else {
             throw HCaptchaError.htmlLoadError

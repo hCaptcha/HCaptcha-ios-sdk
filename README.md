@@ -109,12 +109,12 @@ Note: this should be the **bare** host, i.e. not including a protocol prefix lik
 
 #### Change widget theme
 
-SDK supports two built-in themes: `light` and `dark`
+The SDK supports three built-in themes: `light`, `dark`, and `contrast`
 
 ``` swift
 let hcaptcha = try? HCaptcha(
     ...
-    theme: .dark, // .light
+    theme: "dark", // "light" or "contrast"
     ...
 )
 

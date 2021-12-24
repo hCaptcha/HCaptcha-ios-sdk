@@ -55,7 +55,7 @@ public class HCaptcha {
         assethost: URL? = nil,
         imghost: URL? = nil,
         host: String? = nil,
-        theme: Theme = .light,
+        theme: String = "light",
         customTheme: String? = nil
     ) throws {
         let infoDict = Bundle.main.infoDictionary

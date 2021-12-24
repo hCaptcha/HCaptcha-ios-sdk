@@ -29,7 +29,7 @@ extension HCaptchaConfig {
                       assethost: URL(string: "https://newassets.hcaptcha.com")!,
                       imghost: URL(string: "https://imgs.hcaptcha.com")!,
                       host: host,
-                      theme: .light,
+                      theme: "light",
                       customTheme: customTheme)
     }
 }
