@@ -121,7 +121,7 @@ let hcaptcha = try? HCaptcha(
 ...
 ```
 
-Also for Enterprise clients we support custom themes
+For Enterprise sitekeys we also support custom themes via the `customTheme` parameter, described below.
 
 #### Alternate endpoint (optional)
 
@@ -148,7 +148,7 @@ Enterprise params like:
  - `assethost` (string)
  - `imghost` (string)
  - `sentry` (bool)
- - `customTheme` (string representation of JS Object or JSON)
+ - `customTheme` (string representation of JS Object or JSON; see Enterprise docs)
 
 Can be passed via `HCaptcha(...)`
 

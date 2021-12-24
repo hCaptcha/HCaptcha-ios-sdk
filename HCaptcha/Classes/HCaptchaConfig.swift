@@ -1,5 +1,5 @@
 //
-//  HCaptcha.swift
+//  HCaptchaConfig.swift
 //  HCaptcha
 //
 //  Created by Flávio Caetano on 22/03/17.

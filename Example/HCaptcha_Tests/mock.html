@@ -6,7 +6,7 @@
       var endpoint = "${endpoint}";
       var shouldFail = ${shouldFail};
       var rqdata = "${rqdata}";
-      var theme = ${theme}; // don't used but need to make sure that template is correctly handle it
+      var theme = ${theme}; // unused, but need to make sure the template correctly handles it
 
       var post = function(value) {
           window.webkit.messageHandlers.hcaptcha.postMessage(value);
