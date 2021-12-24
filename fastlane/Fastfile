@@ -80,17 +80,21 @@ platform :ios do
   desc "Lint Carthage lib"
   lane :carthage_lint do
     carthage(
-      command: "update",
+      executable: "./carthage.sh",
       platform: "iOS",
       cache_builds: true,
+      use_binaries: false,
+      no_skip_current: false,
       use_xcframeworks: true
     )
 
     carthage(
+      executable: "./carthage.sh",
       command: "build",
+      # archive: true, use_xcframeworks not supported https://github.com/Carthage/Carthage/releases/tag/0.38.0
       platform: "iOS",
       cache_builds: true,
-      no_skip_current: false,
+      no_skip_current: true,
       use_xcframeworks: true
     )
   end
