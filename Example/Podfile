@@ -20,7 +20,7 @@ target 'HCaptcha_Example' do
   end
 end
 
-post_install do |i|
+post_install do |installer|
   target = File.join(Dir.pwd, "../.git/hooks/pre-push")
   unless File.symlink?(target)
     puts "Installing git hook for pre-push"
@@ -30,4 +30,10 @@ post_install do |i|
     rescue => exc
     end
   end
+
+  installer.pods_project.targets.each do |target|
+     target.build_configurations.each do |config|
+       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+     end
+   end
 end
