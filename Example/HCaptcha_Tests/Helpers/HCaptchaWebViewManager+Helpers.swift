@@ -55,7 +55,8 @@ extension HCaptchaWebViewManager {
             baseURL: localhost,
             endpoint: endpoint ?? localhost,
             size: size,
-            rqdata: rqdata
+            rqdata: rqdata,
+            theme: "\"light\""
         )
     }
 

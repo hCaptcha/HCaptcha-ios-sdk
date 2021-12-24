@@ -31,7 +31,7 @@
       };
 
       const getExecuteOpts = function() {
-        let opts;
+        var opts;
         const rqdata = "${rqdata}";
         if (rqdata) {
           opts = {'rqdata': rqdata};
@@ -91,6 +91,7 @@
           hcaptcha.render("hcaptcha-container", {
             sitekey: "${apiKey}",
             size: "${size}",
+            theme: ${theme},
             "callback": onPass,
             "close-callback": closeCallback,
             "expired-callback": expiredCallback,

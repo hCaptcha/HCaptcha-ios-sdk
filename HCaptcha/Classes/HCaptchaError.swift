@@ -9,7 +9,8 @@
 import Foundation
 
 /// The codes of possible errors thrown by HCaptcha
-public enum HCaptchaError: Error, CustomStringConvertible {
+public enum HCaptchaError: Error, CustomStringConvertible, Equatable {
+
     /// Unexpected error
     case unexpected(Error)
 
@@ -36,6 +37,13 @@ public enum HCaptchaError: Error, CustomStringConvertible {
 
     /// HCaptcha render failed
     case failedRender
+
+    /// Invalid custom theme passed
+    case invalidCustomTheme
+
+    public static func == (lhs: HCaptchaError, rhs: HCaptchaError) -> Bool {
+        return lhs.description == rhs.description
+    }
 
     /// A human-readable description for each error
     public var description: String {
@@ -69,6 +77,9 @@ public enum HCaptchaError: Error, CustomStringConvertible {
 
         case .failedRender:
             return "HCaptcha encountered an error in execution"
+
+        case .invalidCustomTheme:
+            return "Invalid JSON or JSObject as customTheme"
         }
     }
 }

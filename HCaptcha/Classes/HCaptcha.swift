@@ -8,6 +8,7 @@
 
 import WebKit
 import UIKit
+import JavaScriptCore
 
 /**
 */
@@ -17,6 +18,13 @@ public class HCaptcha {
             static let APIKey = "HCaptchaKey"
             static let Domain = "HCaptchaDomain"
         }
+    }
+
+    /** The color theme of the widget.
+     */
+    public enum Theme: String, CaseIterable {
+        case light = "light"
+        case dark = "dark"
     }
 
     /** Internal data model for CI in unit tests
@@ -63,6 +71,12 @@ public class HCaptcha {
         /// SDK's host identifier. nil value means that it will be generated
         let host: String?
 
+        /// Set the color theme of the widget. Defaults to light.
+        let theme: Theme
+
+        /// Custom theme JSON string
+        let customTheme: String? // TODO or [String: Any]
+
         /// The Bundle that holds HCaptcha's assets
         private static let bundle: Bundle = {
             #if SWIFT_PACKAGE
@@ -105,7 +119,9 @@ public class HCaptcha {
                     reportapi: URL?,
                     assethost: URL?,
                     imghost: URL?,
-                    host: String?) throws {
+                    host: String?,
+                    theme: Theme,
+                    customTheme: String?) throws {
             guard let filePath = Config.bundle.path(forResource: "hcaptcha", ofType: "html") else {
                 throw HCaptchaError.htmlLoadError
             }
@@ -116,6 +132,29 @@ public class HCaptcha {
 
             guard let domain = baseURL ?? infoPlistURL else {
                 throw HCaptchaError.baseURLNotFound
+            }
+
+            if let customTheme = customTheme {
+                // TODO move all validation logic to String extension
+                var validationJS : String!
+                if JSONSerialization.isValidJSONObject(customTheme) {
+                    validationJS = "(function() { return JSON.parse(\(customTheme)) })()"
+                } else {
+                    validationJS = "(function() { return \(customTheme) })()"
+                }
+
+                let context = JSContext()!
+                context.exceptionHandler = { context, exception in
+                    print(exception!.toString())
+                }
+                let result = context.evaluateScript(validationJS)
+                if result?.isObject != true {
+                    throw HCaptchaError.invalidCustomTheme
+                }
+
+                self.customTheme = result!.toString()
+            } else {
+                self.customTheme = customTheme
             }
 
             let rawHTML = try String(contentsOfFile: filePath)
@@ -132,6 +171,7 @@ public class HCaptcha {
             self.assethost = assethost
             self.imghost = imghost
             self.host = host
+            self.theme = theme
         }
     }
 
@@ -169,7 +209,9 @@ public class HCaptcha {
         reportapi: URL? = nil,
         assethost: URL? = nil,
         imghost: URL? = nil,
-        host: String? = nil
+        host: String? = nil,
+        theme: Theme = .light,
+        customTheme: String? = nil
     ) throws {
         let infoDict = Bundle.main.infoDictionary
 
@@ -188,7 +230,9 @@ public class HCaptcha {
                                 reportapi: reportapi,
                                 assethost: assethost,
                                 imghost: imghost,
-                                host: host)
+                                host: host,
+                                theme: theme,
+                                customTheme: customTheme)
 
         self.init(manager: HCaptchaWebViewManager(
             html: config.html,
@@ -196,7 +240,8 @@ public class HCaptcha {
             baseURL: config.baseURL,
             endpoint: config.getEndpointURL(locale: locale),
             size: config.size,
-            rqdata: config.rqdata
+            rqdata: config.rqdata,
+            theme: config.actualTheme
         ))
     }
 
@@ -347,6 +392,9 @@ extension HCaptcha.Config {
         if let locale = locale {
             queryItems.append(URLQueryItem(name: "hl", value: locale.identifier))
         }
+        if let customTheme = customTheme {
+            queryItems.append(URLQueryItem(name: "custom", value: String(true)))
+        }
 
         result.percentEncodedQuery = queryItems.map {
             $0.name +
@@ -355,6 +403,15 @@ extension HCaptcha.Config {
         }.joined(separator: "&")
 
         return result.url!
+    }
+
+    /**
+     Return actual theme value based on init params. It must return valid JS object
+     */
+    var actualTheme: String {
+        get {
+            customTheme ?? "\"\(theme)\""
+        }
     }
 }
 

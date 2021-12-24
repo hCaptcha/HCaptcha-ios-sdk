@@ -5,7 +5,8 @@
       var key = "${apiKey}";
       var endpoint = "${endpoint}";
       var shouldFail = ${shouldFail};
-      let rqdata = "${rqdata}";
+      var rqdata = "${rqdata}";
+      var theme = ${theme}; // don't used but need to make sure that template is correctly handle it
 
       var post = function(value) {
           window.webkit.messageHandlers.hcaptcha.postMessage(value);

@@ -43,6 +43,9 @@ class HCaptcha__Tests: XCTestCase {
         )
     }
 
+    // TODO most of the tests below belong to Config class not to HCaptcha class
+    // so move it to proper file
+
     func test__Base_URL() {
         // Ensures baseURL failure when nil
         do {
@@ -120,6 +123,67 @@ class HCaptcha__Tests: XCTestCase {
         // Set true
         hcaptcha.forceVisibleChallenge = true
         XCTAssertTrue(hcaptcha.forceVisibleChallenge)
+    }
+
+    func test__valid_js_customTheme() {
+        let customTheme = """
+              {
+                primary: {
+                  main: "#00FF00"
+                },
+                text: {
+                  heading: "#454545",
+                  body   : "#8C8C8C"
+                }
+              }
+            """
+        do {
+            _ = try HCaptcha(customTheme: customTheme)
+        } catch let e {
+            XCTFail("Unexpected error: \(e)")
+        }
+    }
+
+    func test__valid_json_customTheme() {
+        let customTheme = """
+              {
+                "primary": {
+                  "main": "#00FF00"
+                },
+                "text": {
+                  "heading": "#454545",
+                  "body"   : "#8C8C8C"
+                }
+              }
+            """
+        do {
+            _ = try HCaptcha(customTheme: customTheme)
+        } catch let e {
+            XCTFail("Unexpected error: \(e)")
+        }
+    }
+
+    func test__invalid_js_customTheme() {
+        let customTheme = """
+              {
+                primary: {
+                  main: "#00FF00"
+                },
+                text: {
+                  heading: "#454545",
+                  body   : "#8C8C8C"
+                }
+              // } missing last bracket
+            """
+        do {
+            _ = try HCaptcha(customTheme: customTheme)
+            XCTFail("Should not be reached. Error expected")
+        } catch let e as HCaptchaError {
+            print(e)
+            XCTAssertEqual(e, HCaptchaError.invalidCustomTheme)
+        } catch let e {
+            XCTFail("Unexpected error: \(e)")
+        }
     }
 }
 

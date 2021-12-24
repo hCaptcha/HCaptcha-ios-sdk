@@ -17,12 +17,15 @@ class HCaptcha__Config__Tests: XCTestCase {
 
     var config: HCaptcha.Config?
 
-    func createConfig(apiKey: String = "some-api-key", host: String? = nil) -> HCaptcha.Config? {
+    func createConfig(apiKey: String = "some-api-key",
+                      host: String? = nil,
+                      customTheme: String? = nil) -> HCaptcha.Config? {
         return try? HCaptcha.Config(apiKey: apiKey,
                                     infoPlistKey: nil,
                                     baseURL: URL(string: "https://localhost")!,
                                     infoPlistURL: nil,
-                                    host: host)
+                                    host: host,
+                                    customTheme: customTheme)
     }
 
 
@@ -46,5 +49,22 @@ class HCaptcha__Config__Tests: XCTestCase {
         XCTAssertEqual(actual, expected.replacingOccurrences(
             of: "some-api-key.ios-sdk.hcaptcha.com",
             with: host))
+    }
+
+    func test__Custom__Theme() {
+        let cusomtTheme = """
+          {
+            primary: {
+              main: "#00FF00"
+            },
+            text: {
+              heading: "#454545",
+              body   : "#8C8C8C"
+            }
+          }
+        """
+        let config = createConfig(customTheme: cusomtTheme)
+        let actual = config?.getEndpointURL().absoluteString
+        XCTAssertEqual(actual, expected + "&custom=true")
     }
 }

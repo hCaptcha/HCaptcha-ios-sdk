@@ -14,7 +14,8 @@ extension HCaptcha.Config {
          infoPlistKey: String?,
          baseURL: URL?,
          infoPlistURL: URL?,
-         host: String? = nil) throws {
+         host: String? = nil,
+         customTheme: String? = nil) throws {
         try self.init(apiKey: apiKey,
                       infoPlistKey: infoPlistKey,
                       baseURL: baseURL,
@@ -27,6 +28,8 @@ extension HCaptcha.Config {
                       reportapi: URL(string: "https://accounts.hcaptcha.com")!,
                       assethost: URL(string: "https://newassets.hcaptcha.com")!,
                       imghost: URL(string: "https://imgs.hcaptcha.com")!,
-                      host: host)
+                      host: host,
+                      theme: .light,
+                      customTheme: customTheme)
     }
 }
