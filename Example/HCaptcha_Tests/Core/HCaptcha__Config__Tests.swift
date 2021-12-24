@@ -117,7 +117,7 @@ class HCaptcha__Config__Tests: XCTestCase {
     }
 
     func test__Custom__Theme() {
-        let cusomtTheme = """
+        let customTheme = """
           {
             primary: {
               main: "#00FF00"
@@ -128,7 +128,7 @@ class HCaptcha__Config__Tests: XCTestCase {
             }
           }
         """
-        let config = createConfig(customTheme: cusomtTheme)
+        let config = createConfig(customTheme: customTheme)
         let actual = config?.getEndpointURL().absoluteString
         XCTAssertEqual(actual, expected + "&custom=true")
     }
