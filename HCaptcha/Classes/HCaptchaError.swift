@@ -9,7 +9,7 @@
 import Foundation
 
 /// The codes of possible errors thrown by HCaptcha
-public enum HCaptchaError: Error, CustomStringConvertible, Equatable {
+public enum HCaptchaError: Error, CustomStringConvertible {
 
     /// Unexpected error
     case unexpected(Error)

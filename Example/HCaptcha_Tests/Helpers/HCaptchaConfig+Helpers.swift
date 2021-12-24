@@ -9,7 +9,7 @@
 import Foundation
 @testable import HCaptcha
 
-extension HCaptcha.Config {
+extension HCaptchaConfig {
     init(apiKey: String?,
          infoPlistKey: String?,
          baseURL: URL?,
