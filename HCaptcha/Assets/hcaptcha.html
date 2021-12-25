@@ -67,7 +67,7 @@
       const onPass = function(token) {
         console.log("challenge got token");
         console.log(token);
-        post({ token });
+        post({ token: token });
       };
 
       const expiredCallback = function() {
@@ -89,9 +89,9 @@
         try {
           console.log("challenge onload starting");
           hcaptcha.render("hcaptcha-container", {
-            sitekey: "${apiKey}",
-            size: "${size}",
-            theme: ${theme},
+            "sitekey": "${apiKey}",
+            "size": "${size}",
+            "theme": ${theme},
             "callback": onPass,
             "close-callback": closeCallback,
             "expired-callback": expiredCallback,

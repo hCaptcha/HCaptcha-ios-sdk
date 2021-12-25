@@ -56,7 +56,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction private func didPressButton(button: UIButton) {
-        if (unitTesting) {
+        if unitTesting {
             return
         }
 
@@ -113,7 +113,7 @@ class ViewController: UIViewController {
     }
 
     private func setupHCaptcha() {
-        if (unitTesting) {
+        if unitTesting {
             return
         }
 

@@ -118,6 +118,9 @@ fileprivate extension HCaptchaDecoder.Result {
 
     private static func from(_ error: Int) -> HCaptchaDecoder.Result {
         switch error {
+        case 1:
+            return .error(.htmlLoadError)
+
         case 29:
             return .error(.failedSetup)
 

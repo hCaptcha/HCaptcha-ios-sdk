@@ -131,13 +131,7 @@ struct HCaptchaConfig {
         }
 
         if let customTheme = customTheme {
-            var validationJS: String!
-            if JSONSerialization.isValidJSONObject(customTheme) {
-                validationJS = "(function() { return JSON.parse(\(customTheme)) })()"
-            } else {
-                validationJS = "(function() { return \(customTheme) })()"
-            }
-
+            var validationJS: String = "(function() { return \(customTheme) })()"
             let context = JSContext()!
 #if DEBUG
             context.exceptionHandler = { _, err in
@@ -148,10 +142,6 @@ struct HCaptchaConfig {
             if result?.isObject != true {
                 throw HCaptchaError.invalidCustomTheme
             }
-
-            self.customTheme = result!.toString()
-        } else {
-            self.customTheme = customTheme
         }
 
         let rawHTML = try String(contentsOfFile: filePath)
@@ -169,6 +159,7 @@ struct HCaptchaConfig {
         self.imghost = imghost
         self.host = host
         self.theme = theme
+        self.customTheme = customTheme
     }
 
     /**
