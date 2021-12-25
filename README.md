@@ -33,7 +33,7 @@ github "hCaptcha/HCaptcha"
 ```
 
 #### SPM
-Standard SPM formula: uses [Package.swift][./Package.swift]
+Standard SPM formula: uses [Package.swift](./Package.swift)
 
 
 Carthage will create two different frameworks named `HCaptcha` and `HCaptcha_RxSwift`, the latter containing the RxSwift extension for the HCaptcha framework.
