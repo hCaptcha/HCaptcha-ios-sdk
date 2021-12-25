@@ -2,10 +2,24 @@
   <head>
     <meta name="viewport" content="width=device-width" />
     <script type="text/javascript">
+      // onerror need to report errors which happens on WKWebView.loadHTMLString
+      window.onerror = function(msg, url, line, column, error) {
+        if (window.webkit) {
+          window.webkit.messageHandlers.hcaptcha.postMessage({ "error": 1 });
+        } else {
+          console.log("Error:", error);
+        }
+      };
+    </script>
+    <script type="text/javascript">
       var key = "${apiKey}";
       var endpoint = "${endpoint}";
       var shouldFail = ${shouldFail};
-      let rqdata = "${rqdata}";
+      var rqdata = "${rqdata}";
+      var theme = ${theme};
+
+      const themeType = typeof theme;
+      console.assert(themeType === "string" || themeType === "object", "invalid theme object");
 
       var post = function(value) {
           window.webkit.messageHandlers.hcaptcha.postMessage(value);
@@ -28,6 +42,9 @@
       };
 
       post({ action: "didLoad" });
+
+      // clear global error handle, rest will be handled in WKWebView.evaluateJavaScript closure
+      window.onerror = null;
     </script>
   </head>
   <body>

@@ -101,9 +101,10 @@ internal class HCaptchaWebViewManager {
          - endpoint: The JS API endpoint to be loaded onto the HTML file.
          - size: Size of visible area
          - rqdata: Custom supplied challenge data
+         - theme: Widget theme, value must be valid JS Object or String with brackets
      */
     init(html: String, apiKey: String, baseURL: URL, endpoint: URL,
-         size: Size, rqdata: String?) {
+         size: Size, rqdata: String?, theme: String) {
         self.endpoint = endpoint.absoluteString
         self.decoder = HCaptchaDecoder { [weak self] result in
             self?.handle(result: result)
@@ -112,7 +113,8 @@ internal class HCaptchaWebViewManager {
         let formattedHTML = String(format: html, arguments: ["apiKey": apiKey,
                                                              "endpoint": self.endpoint,
                                                              "size": size.rawValue,
-                                                             "rqdata": rqdata ?? ""])
+                                                             "rqdata": rqdata ?? "",
+                                                             "theme": theme])
 
         if let window = UIApplication.shared.keyWindow {
             setupWebview(on: window, html: formattedHTML, url: baseURL)

@@ -18,7 +18,8 @@ extension HCaptchaError: Equatable {
              (.wrongMessageFormat, .wrongMessageFormat),
              (.failedSetup, .failedSetup),
              (.responseExpired, .responseExpired),
-             (.failedRender, .failedRender):
+             (.failedRender, .failedRender),
+             (.invalidCustomTheme, .invalidCustomTheme):
             return true
         case (.unexpected(let lhe as NSError), .unexpected(let rhe as NSError)):
             return lhe == rhe
@@ -36,6 +37,7 @@ extension HCaptchaError: Equatable {
         case 4: return .failedSetup
         case 5: return .responseExpired
         case 6: return .failedRender
+        case 7: return .invalidCustomTheme
         default: return .unexpected(NSError())
         }
     }

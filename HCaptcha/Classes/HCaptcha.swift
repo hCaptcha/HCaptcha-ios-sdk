@@ -8,6 +8,7 @@
 
 import WebKit
 import UIKit
+import JavaScriptCore
 
 /**
 */
@@ -16,122 +17,6 @@ public class HCaptcha {
         struct InfoDictKeys {
             static let APIKey = "HCaptchaKey"
             static let Domain = "HCaptchaDomain"
-        }
-    }
-
-    /** Internal data model for CI in unit tests
-     */
-    struct Config {
-        /// The raw unformated HTML file content
-        let html: String
-
-        /// The API key that will be sent to the HCaptcha API
-        let apiKey: String
-
-        /// Size of visible area
-        let size: Size
-
-        /// The base url to be used to resolve relative URLs in the webview
-        let baseURL: URL
-
-        /// The url of api.js
-        /// Default: https://hcaptcha.com/1/api.js
-        let jsSrc: URL
-
-        /// Custom supplied challenge data
-        let rqdata: String?
-
-        /// Enable / Disable sentry error reporting.
-        let sentry: Bool?
-
-        /// Point hCaptcha JS Ajax Requests to alternative API Endpoint.
-        /// Default: https://hcaptcha.com
-        let endpoint: URL?
-
-        /// Point hCaptcha Bug Reporting Request to alternative API Endpoint.
-        /// Default: https://accounts.hcaptcha.com
-        let reportapi: URL?
-
-        /// Points loaded hCaptcha assets to a user defined asset location, used for proxies.
-        /// Default: https://assets.hcaptcha.com
-        let assethost: URL?
-
-        /// Points loaded hCaptcha challenge images to a user defined image location, used for proxies.
-        /// Default: https://imgs.hcaptcha.com
-        let imghost: URL?
-
-        /// SDK's host identifier. nil value means that it will be generated
-        let host: String?
-
-        /// The Bundle that holds HCaptcha's assets
-        private static let bundle: Bundle = {
-            #if SWIFT_PACKAGE
-            return Bundle.module
-            #else
-            let bundle = Bundle(for: HCaptcha.self)
-            guard let cocoapodsBundle = bundle
-                    .path(forResource: "HCaptcha", ofType: "bundle")
-                    .flatMap(Bundle.init(path:)) else {
-                return bundle
-            }
-
-            return cocoapodsBundle
-            #endif
-        }()
-
-        /**
-         - parameters:
-             - apiKey: The API key sent to the HCaptcha init
-             - infoPlistKey: The API key retrived from the application's Info.plist
-             - baseURL: The base URL sent to the HCaptcha init
-             - infoPlistURL: The base URL retrieved from the application's Info.plist
-
-         - Throws: `HCaptchaError.htmlLoadError`: if is unable to load the HTML embedded in the bundle.
-         - Throws: `HCaptchaError.apiKeyNotFound`: if an `apiKey` is not provided and can't find one in the project's
-         Info.plist.
-         - Throws: `HCaptchaError.baseURLNotFound`: if a `baseURL` is not provided and can't find one in the project's
-         Info.plist.
-         - Throws: Rethrows any exceptions thrown by `String(contentsOfFile:)`
-         */
-        public init(apiKey: String?,
-                    infoPlistKey: String?,
-                    baseURL: URL?,
-                    infoPlistURL: URL?,
-                    jsSrc: URL,
-                    size: Size,
-                    rqdata: String?,
-                    sentry: Bool?,
-                    endpoint: URL?,
-                    reportapi: URL?,
-                    assethost: URL?,
-                    imghost: URL?,
-                    host: String?) throws {
-            guard let filePath = Config.bundle.path(forResource: "hcaptcha", ofType: "html") else {
-                throw HCaptchaError.htmlLoadError
-            }
-
-            guard let apiKey = apiKey ?? infoPlistKey else {
-                throw HCaptchaError.apiKeyNotFound
-            }
-
-            guard let domain = baseURL ?? infoPlistURL else {
-                throw HCaptchaError.baseURLNotFound
-            }
-
-            let rawHTML = try String(contentsOfFile: filePath)
-
-            self.html = rawHTML
-            self.apiKey = apiKey
-            self.size = size
-            self.baseURL = Config.fixSchemeIfNeeded(for: domain)
-            self.jsSrc = jsSrc
-            self.rqdata = rqdata
-            self.sentry = sentry
-            self.endpoint = endpoint
-            self.reportapi = reportapi
-            self.assethost = assethost
-            self.imghost = imghost
-            self.host = host
         }
     }
 
@@ -169,26 +54,30 @@ public class HCaptcha {
         reportapi: URL? = nil,
         assethost: URL? = nil,
         imghost: URL? = nil,
-        host: String? = nil
+        host: String? = nil,
+        theme: String = "light",
+        customTheme: String? = nil
     ) throws {
         let infoDict = Bundle.main.infoDictionary
 
         let plistApiKey = infoDict?[Constants.InfoDictKeys.APIKey] as? String
         let plistDomain = (infoDict?[Constants.InfoDictKeys.Domain] as? String).flatMap(URL.init(string:))
 
-        let config = try Config(apiKey: apiKey,
-                                infoPlistKey: plistApiKey,
-                                baseURL: baseURL,
-                                infoPlistURL: plistDomain,
-                                jsSrc: jsSrc,
-                                size: size,
-                                rqdata: rqdata,
-                                sentry: sentry,
-                                endpoint: endpoint,
-                                reportapi: reportapi,
-                                assethost: assethost,
-                                imghost: imghost,
-                                host: host)
+        let config = try HCaptchaConfig(apiKey: apiKey,
+                                        infoPlistKey: plistApiKey,
+                                        baseURL: baseURL,
+                                        infoPlistURL: plistDomain,
+                                        jsSrc: jsSrc,
+                                        size: size,
+                                        rqdata: rqdata,
+                                        sentry: sentry,
+                                        endpoint: endpoint,
+                                        reportapi: reportapi,
+                                        assethost: assethost,
+                                        imghost: imghost,
+                                        host: host,
+                                        theme: theme,
+                                        customTheme: customTheme)
 
         self.init(manager: HCaptchaWebViewManager(
             html: config.html,
@@ -196,7 +85,8 @@ public class HCaptcha {
             baseURL: config.baseURL,
             endpoint: config.getEndpointURL(locale: locale),
             size: config.size,
-            rqdata: config.rqdata
+            rqdata: config.rqdata,
+            theme: config.actualTheme
         ))
     }
 
@@ -286,80 +176,4 @@ public class HCaptcha {
         set { manager.shouldSkipForTests = newValue }
     }
 #endif
-}
-
-// MARK: - Private Methods
-
-private extension HCaptcha.Config {
-    /**
-     - parameter url: The URL to be fixed
-     - returns: An URL with scheme
-
-     If the given URL has no scheme, prepends `http://` to it and return the fixed URL.
-     */
-    static func fixSchemeIfNeeded(for url: URL) -> URL {
-        guard url.scheme?.isEmpty != false else {
-            return url
-        }
-
-#if DEBUG
-        print("⚠️ WARNING! Protocol not found for HCaptcha domain (\(url))! You should add http:// or https:// to it!")
-#endif
-
-        if let fixedURL = URL(string: "http://" + url.absoluteString) {
-            return fixedURL
-        }
-
-        return url
-    }
-}
-
-extension HCaptcha.Config {
-
-    /**
-     The JS API endpoint to be loaded onto the HTML file.
-     - parameter url: The URL to be fixed
-     */
-    public func getEndpointURL(locale: Locale? = nil) -> URL {
-        var result = URLComponents(url: jsSrc, resolvingAgainstBaseURL: false)!
-        var queryItems = [
-            URLQueryItem(name: "onload", value: "onloadCallback"),
-            URLQueryItem(name: "render", value: "explicit"),
-            URLQueryItem(name: "recaptchacompat", value: "off"),
-            URLQueryItem(name: "host", value: host ?? "\(apiKey).ios-sdk.hcaptcha.com")
-        ]
-
-        if let sentry = sentry {
-            queryItems.append(URLQueryItem(name: "sentry", value: String(sentry)))
-        }
-        if let url = endpoint {
-            queryItems.append(URLQueryItem(name: "endpoint", value: url.absoluteString))
-        }
-        if let url = assethost {
-            queryItems.append(URLQueryItem(name: "assethost", value: url.absoluteString))
-        }
-        if let url = imghost {
-            queryItems.append(URLQueryItem(name: "imghost", value: url.absoluteString))
-        }
-        if let url = reportapi {
-            queryItems.append(URLQueryItem(name: "reportapi", value: url.absoluteString))
-        }
-        if let locale = locale {
-            queryItems.append(URLQueryItem(name: "hl", value: locale.identifier))
-        }
-
-        result.percentEncodedQuery = queryItems.map {
-            $0.name +
-            "=" +
-            $0.value!.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed)!
-        }.joined(separator: "&")
-
-        return result.url!
-    }
-}
-
-public enum Size: String {
-    case invisible
-    case compact
-    case normal
 }

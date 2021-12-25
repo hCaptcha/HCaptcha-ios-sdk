@@ -22,14 +22,26 @@ class ViewController: UIViewController {
 
     private var locale: Locale?
 
+    /// Don't init SDK to avoid unnecessary API calls and simplify debugging if the application used as a host for tests
+    private var unitTesting: Bool {
+        return ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+    }
+
     @IBOutlet private weak var label: UILabel!
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
     @IBOutlet private weak var localeSegmentedControl: UISegmentedControl!
     @IBOutlet private weak var visibleChallengeSwitch: UISwitch!
+    @IBOutlet private weak var validateButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupHCaptcha()
+
+        if unitTesting {
+            validateButton.isEnabled = false
+            localeSegmentedControl.isEnabled = false
+            visibleChallengeSwitch.isEnabled = false
+        }
     }
 
     @IBAction func didPressLocaleSegmentedControl(_ sender: UISegmentedControl) {
@@ -44,6 +56,10 @@ class ViewController: UIViewController {
     }
 
     @IBAction private func didPressButton(button: UIButton) {
+        if unitTesting {
+            return
+        }
+
         disposeBag = DisposeBag()
 
         hcaptcha.rx.didFinishLoading
@@ -97,6 +113,10 @@ class ViewController: UIViewController {
     }
 
     private func setupHCaptcha() {
+        if unitTesting {
+            return
+        }
+
         // swiftlint:disable:next force_try
         hcaptcha = try! HCaptcha(locale: locale)
 

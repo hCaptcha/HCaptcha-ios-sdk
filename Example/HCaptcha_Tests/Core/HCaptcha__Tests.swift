@@ -43,74 +43,6 @@ class HCaptcha__Tests: XCTestCase {
         )
     }
 
-    func test__Base_URL() {
-        // Ensures baseURL failure when nil
-        do {
-            _ = try HCaptcha.Config(apiKey: "", infoPlistKey: nil, baseURL: nil, infoPlistURL: nil)
-            XCTFail("Should have failed")
-        } catch let e as HCaptchaError {
-            print(e)
-            XCTAssertEqual(e, HCaptchaError.baseURLNotFound)
-        } catch let e {
-            XCTFail("Unexpected error: \(e)")
-        }
-
-        // Ensures plist url if nil key
-        let plistURL = URL(string: "https://bar")!
-        let config1 = try? HCaptcha.Config(apiKey: "", infoPlistKey: nil, baseURL: nil, infoPlistURL: plistURL)
-        XCTAssertEqual(config1?.baseURL, plistURL)
-
-        // Ensures preference of given url over plist entry
-        let url = URL(string: "ftp://foo")!
-        let config2 = try? HCaptcha.Config(apiKey: "", infoPlistKey: nil, baseURL: url, infoPlistURL: plistURL)
-        XCTAssertEqual(config2?.baseURL, url)
-    }
-
-    func test__Base_URL_Without_Scheme() {
-        // Ignores URL with scheme
-        let goodURL = URL(string: "https://foo.bar")!
-        let config0 = try? HCaptcha.Config(apiKey: "", infoPlistKey: nil, baseURL: goodURL, infoPlistURL: nil)
-        XCTAssertEqual(config0?.baseURL, goodURL)
-
-        // Fixes URL without scheme
-        let badURL = URL(string: "foo")!
-        let config = try? HCaptcha.Config(apiKey: "", infoPlistKey: nil, baseURL: badURL, infoPlistURL: nil)
-        XCTAssertEqual(config?.baseURL.absoluteString, "http://" + badURL.absoluteString)
-    }
-
-    func test__API_Key() {
-        // Ensures key failure when nil
-        do {
-            _ = try HCaptcha.Config(apiKey: nil, infoPlistKey: nil, baseURL: nil, infoPlistURL: nil)
-            XCTFail("Should have failed")
-        } catch let e as HCaptchaError {
-            print(e)
-            XCTAssertEqual(e, HCaptchaError.apiKeyNotFound)
-        } catch let e {
-            XCTFail("Unexpected error: \(e)")
-        }
-
-        // Ensures plist key if nil key
-        let plistKey = "bar"
-        let config1 = try? HCaptcha.Config(
-            apiKey: nil,
-            infoPlistKey: plistKey,
-            baseURL: URL(string: "foo"),
-            infoPlistURL: nil
-        )
-        XCTAssertEqual(config1?.apiKey, plistKey)
-
-        // Ensures preference of given key over plist entry
-        let key = "foo"
-        let config2 = try? HCaptcha.Config(
-            apiKey: key,
-            infoPlistKey: plistKey,
-            baseURL: URL(string: "foo"),
-            infoPlistURL: nil
-        )
-        XCTAssertEqual(config2?.apiKey, key)
-    }
-
     func test__Force_Visible_Challenge() {
         let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager())
 
@@ -120,6 +52,67 @@ class HCaptcha__Tests: XCTestCase {
         // Set true
         hcaptcha.forceVisibleChallenge = true
         XCTAssertTrue(hcaptcha.forceVisibleChallenge)
+    }
+
+    func test__valid_js_customTheme() {
+        let customTheme = """
+              {
+                primary: {
+                  main: "#00FF00"
+                },
+                text: {
+                  heading: "#454545",
+                  body   : "#8C8C8C"
+                }
+              }
+            """
+        do {
+            _ = try HCaptcha(customTheme: customTheme)
+        } catch let e {
+            XCTFail("Unexpected error: \(e)")
+        }
+    }
+
+    func test__valid_json_customTheme() {
+        let customTheme = """
+              {
+                "primary": {
+                  "main": "#00FF00"
+                },
+                "text": {
+                  "heading": "#454545",
+                  "body"   : "#8C8C8C"
+                }
+              }
+            """
+        do {
+            _ = try HCaptcha(customTheme: customTheme)
+        } catch let e {
+            XCTFail("Unexpected error: \(e)")
+        }
+    }
+
+    func test__invalid_js_customTheme() {
+        let customTheme = """
+              {
+                primary: {
+                  main: "#00FF00"
+                },
+                text: {
+                  heading: "#454545",
+                  body   : "#8C8C8C"
+                }
+              // } missing last bracket
+            """
+        do {
+            _ = try HCaptcha(customTheme: customTheme)
+            XCTFail("Should not be reached. Error expected")
+        } catch let e as HCaptchaError {
+            print(e)
+            XCTAssertEqual(e, HCaptchaError.invalidCustomTheme)
+        } catch let e {
+            XCTFail("Unexpected error: \(e)")
+        }
     }
 }
 

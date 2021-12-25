@@ -20,7 +20,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        presenterView = UIApplication.shared.keyWindow!
+        presenterView = UIApplication.shared.keyWindow?.rootViewController?.view
         apiKey = String(arc4random())
     }
 
@@ -453,5 +453,25 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         manager.reset()
 
         waitForExpectations(timeout: 3)
+    }
+
+    func test__Invalid_Theme() {
+        let exp = expectation(description: "bad theme value")
+
+        let manager = HCaptchaWebViewManager(messageBody: "{action: \"showHCaptcha\"}",
+                                             apiKey: apiKey,
+                                             theme: "[Object object]") // invalid theme
+        // manager.webView.frame = presenterView.bounds
+        manager.shouldResetOnError = false
+        manager.configureWebView { _ in
+            XCTFail("should not ask to configure the webview")
+        }
+
+        manager.validate(on: presenterView, resetOnError: false) { response in
+            XCTAssertEqual(HCaptchaError.htmlLoadError, response.error)
+            exp.fulfill()
+        }
+
+        waitForExpectations(timeout: 10)
     }
 }

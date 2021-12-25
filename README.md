@@ -107,6 +107,22 @@ let hcaptcha = try? HCaptcha(
 
 Note: this should be the **bare** host, i.e. not including a protocol prefix like https://.
 
+#### Change widget theme
+
+The SDK supports three built-in themes: `light`, `dark`, and `contrast`
+
+``` swift
+let hcaptcha = try? HCaptcha(
+    ...
+    theme: "dark", // "light" or "contrast"
+    ...
+)
+
+...
+```
+
+For Enterprise sitekeys we also support custom themes via the `customTheme` parameter, described below.
+
 #### Alternate endpoint (optional)
 
 If you are an Enterprise user with first-party hosting access, you can use your own endpoint (i.e. verify.your.com).
@@ -132,6 +148,7 @@ Enterprise params like:
  - `assethost` (string)
  - `imghost` (string)
  - `sentry` (bool)
+ - `customTheme` (string representation of JS Object or JSON; see Enterprise docs)
 
 Can be passed via `HCaptcha(...)`
 

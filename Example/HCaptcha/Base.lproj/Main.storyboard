@@ -100,6 +100,7 @@
                         <outlet property="label" destination="o6f-cL-1PF" id="KQV-3X-RKr"/>
                         <outlet property="localeSegmentedControl" destination="kq2-ci-l1u" id="gL7-du-K6l"/>
                         <outlet property="spinner" destination="jHc-GP-v1Z" id="gRn-JW-FIK"/>
+                        <outlet property="validateButton" destination="RDW-bD-rSo" id="zxd-fD-KiJ"/>
                         <outlet property="visibleChallengeSwitch" destination="mGh-Ox-cFf" id="R13-nD-EXL"/>
                     </connections>
                 </viewController>
