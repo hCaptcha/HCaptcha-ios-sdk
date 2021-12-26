@@ -32,9 +32,9 @@ pod "HCaptcha/RxSwift"
 github "hCaptcha/HCaptcha-ios-sdk"
 ```
 
-Notes:
- - Carthage doesn't support prebuilts for `xcframework` - https://github.com/Carthage/Carthage/issues/3130
- - `RxSwift` build issue - https://github.com/Carthage/Carthage/issues/3243
+Known issues:
+ - Carthage doesn't support prebuilt zips for `xcframework` so use `--no-use-binaries` - https://github.com/Carthage/Carthage/issues/3130
+ - Carthage has a `RxSwift` build issue, also avoidable via `--no-use-binaries` - https://github.com/Carthage/Carthage/issues/3243
 
 #### SPM
 Standard SPM formula: uses [Package.swift](./Package.swift)
@@ -227,7 +227,7 @@ struct HCaptchaView: View {
 
 ### Objective-C Example
 
-_Support comming soon..._
+_Support coming soon..._
 
 ## License
 
