@@ -126,10 +126,6 @@ platform :ios do
       UI.user_error! "Podspec version different than tag name"
     end
 
-    carthage(
-      command: "archive",
-    )
-
     pod_push(
       path: "HCaptcha.podspec",
       verbose: true,
@@ -145,7 +141,6 @@ platform :ios do
       repository_name: "hCaptcha/HCaptcha-ios-sdk",
       tag_name: tag,
       name: tag,
-      upload_assets: ["HCaptcha.framework.zip"],
       description: changelog,
     )
   end
