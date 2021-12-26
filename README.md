@@ -29,7 +29,7 @@ pod "HCaptcha/RxSwift"
 
 #### Carthage
 ``` ruby
-github "hCaptcha/HCaptcha"
+github "hCaptcha/HCaptcha-ios-sdk"
 ```
 
 #### SPM
