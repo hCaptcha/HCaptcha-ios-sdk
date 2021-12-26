@@ -26,7 +26,7 @@ After merging and tests pass:
 
 ### Why do we need `HCaptcha-Carthage.xcodeproj` here?
 
-`Carthage` doesn't support the concept of `subspec`, so `HCaptcha-Carthage.xcodeproj` is used to achieve the similar goal.
+`Carthage` doesn't support the concept of `subspec`, so `HCaptcha-Carthage.xcodeproj` is used to achieve a similar goal.
 
 ### Where is the logic for releasing packages for `Carthage` or `Swift Package Manager`?
 
