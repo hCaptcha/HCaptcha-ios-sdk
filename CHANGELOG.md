@@ -1,3 +1,10 @@
+# 1.7.0
+
+- Feature: pass `rqdata` to hCaptcha initializer ([#24](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/24))
+- Feature: support Swift Package Manager ([#5](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/5))
+- Feature: pass `host` to hCaptcha initializer ([#14](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/14))
+- Feature: pass `theme`, `customeTheme` to hCaptcha initializer ([#27](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/27))
+
 # 1.6.0
 
 - RxSwift 6.2.0
