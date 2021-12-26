@@ -24,10 +24,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: Carthage/build
-          key: ${{ runner.os }}-carthage-${{ hashFiles('**/Cartfile.resolved') }}
+          key: ${{ runner.os }}-carthage-v2-${{ hashFiles('**/Cartfile.resolved') }}
           restore-keys: |
-            ${{ runner.os }}-carthage-
-            ${{ runner.os }}-
+            ${{ runner.os }}-carthage-v2
 
       - name: Prepare tools
         run: |
