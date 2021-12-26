@@ -1,12 +1,12 @@
-## How to release a new version
+# How to release a new version
 
-Notes: we use [SemVer format](https://semver.org/).
+**Note:** we use [SemVer format](https://semver.org/).
 
 MAJOR: breaking change.
-MINOR: new feature.
+MINOR: new feature(s), backwards compatible.
 PATCH: bugfix only.
 
-## Steps
+## Release steps
 
 In a PR:
 
@@ -20,12 +20,14 @@ After merging and tests pass:
 	+ Cocoapods
 	+ Github Releases
 	
-## Implementation details
+.. and that's it!
 
-### Why do `HCaptcha-Carthage.xcodeproj` here
+## Implementation details FAQ
 
-`Carthage` don't support concept of `subspec`, so `HCaptcha-Carthage.xcodeproj` used to achieve the similar goal
+### Why do we need `HCaptcha-Carthage.xcodeproj` here?
 
-### Where logic for releasing packages for `Carthage` or `Swift package manager`
+`Carthage` doesn't support the concept of `subspec`, so `HCaptcha-Carthage.xcodeproj` is used to achieve the similar goal.
 
-Opposite to `Cocoapods`, `Carthage` of `SPM` don't require any uploads to be used.
+### Where is the logic for releasing packages for `Carthage` or `Swift Package Manager`?
+
+Unlike `Cocoapods`, `Carthage` and `SPM` are decentralized. They do not require any centralized updates per version.
