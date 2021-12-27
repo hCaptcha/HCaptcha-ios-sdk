@@ -597,7 +597,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-HCaptcha_Objc_Example/Pods-HCaptcha_Objc_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/HCaptcha/HCaptcha.framework",
+				"${BUILT_PRODUCTS_DIR}/HCaptcha-Core/HCaptcha.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (

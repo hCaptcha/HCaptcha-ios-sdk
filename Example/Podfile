@@ -21,7 +21,7 @@ target 'HCaptcha_Example' do
 end
 
 target 'HCaptcha_Objc_Example' do
-  pod 'HCaptcha', :path => '../'
+  pod 'HCaptcha/Core', :path => '../'
 end
 
 post_install do |installer|
