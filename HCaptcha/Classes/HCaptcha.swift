@@ -186,4 +186,33 @@ public class HCaptcha: NSObject {
         set { manager.shouldSkipForTests = newValue }
     }
 #endif
+
+    // MARK: - Objective-C 'convenience' inits
+
+    @objc
+    public convenience init(locale: Locale) throws {
+        try self.init(locale: locale, size: .invisible)
+    }
+
+    @objc
+    public convenience init(size: HCaptchaSize) throws {
+        try self.init(locale: nil, size: size)
+    }
+
+
+    @objc
+    public convenience init(apiKey: String, baseURL: URL) throws {
+        try self.init(apiKey: apiKey, baseURL: baseURL, locale: nil)
+    }
+
+    @objc
+    public convenience init(apiKey: String, baseURL: URL, locale: Locale) throws {
+        try self.init(apiKey: apiKey, baseURL: baseURL, locale: locale, size: .invisible)
+    }
+
+
+    @objc
+    public convenience init(apiKey: String, baseURL: URL, locale: Locale, size: HCaptchaSize) throws {
+        try self.init(apiKey: apiKey, baseURL: baseURL, locale: locale, size: size, rqdata: nil)
+    }
 }
