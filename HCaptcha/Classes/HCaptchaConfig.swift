@@ -131,7 +131,7 @@ struct HCaptchaConfig {
         }
 
         if let customTheme = customTheme {
-            var validationJS: String = "(function() { return \(customTheme) })()"
+            let validationJS: String = "(function() { return \(customTheme) })()"
             let context = JSContext()!
 #if DEBUG
             context.exceptionHandler = { _, err in
