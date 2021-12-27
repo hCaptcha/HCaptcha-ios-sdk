@@ -142,7 +142,7 @@ public class HCaptcha: NSObject {
     /**
      Resets the HCaptcha.
 
-     The reset is achieved by calling `ghcaptcha.reset()` on the JS API.
+     The reset is achieved by calling `hcaptcha.reset()` on the JS API.
     */
     @objc
     public func reset() {
