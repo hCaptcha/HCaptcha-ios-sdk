@@ -227,7 +227,7 @@ struct HCaptchaView: View {
 
 ### Objective-C Example
 
-`HCaptcha` can be used from Objective-C code. Checkout the [Example Project](./Example/ObjC)
+`HCaptcha` can be used from Objective-C code. Check out the [Example Project](./Example/ObjC)
 
 ## License
 
