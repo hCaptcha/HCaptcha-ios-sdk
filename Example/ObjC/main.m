@@ -3,7 +3,7 @@
 //  HCaptcha_Objc_Example
 //
 //  Created by CAMOBAP on 12/27/21.
-//  Copyright © 2021 HCaptcha. All rights reserved.
+//  Copyright © 2021 HCaptcha. MIT License.
 //
 
 #import <UIKit/UIKit.h>
