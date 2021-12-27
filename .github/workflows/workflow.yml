@@ -41,6 +41,9 @@ jobs:
       - name: Run tests
         run: bundle exec fastlane ci
 
+      - name: Compile samples
+        run: bundle exec fastlane ios samples_build
+
       - if: startsWith(github.ref, 'refs/tags')
         name: Release
         env:

@@ -12,12 +12,19 @@ import Foundation
 
  This may contain the validation token on success, or an error that may have occurred.
  */
-public enum HCaptchaResult {
-    /// The validation token.
-    case token(String)
+@objc
+public class HCaptchaResult: NSObject {
 
-    /// An error that may have occurred.
-    case error(HCaptchaError)
+    /// Result token
+    let token: String?
+
+    /// Result error
+    let error: HCaptchaError?
+
+    public init (token: String? = nil, error: HCaptchaError? = nil) {
+        self.token = token
+        self.error = error
+    }
 
     /**
      - returns: The validation token uppon success.
@@ -26,13 +33,17 @@ public enum HCaptchaResult {
 
      - Throws: `HCaptchaError`
      */
+    @objc
     public func dematerialize() throws -> String {
-        switch self {
-        case .token(let token):
+        if let token = self.token {
             return token
+        }
 
-        case .error(let error):
+        if let error = self.error {
             throw error
         }
+
+        assertionFailure("Impossible state result must be initialized with token or error")
+        return ""
     }
 }

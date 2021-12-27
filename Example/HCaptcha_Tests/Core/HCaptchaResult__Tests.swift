@@ -13,7 +13,7 @@ import XCTest
 class HCaptchaResult__Tests: XCTestCase {
     func test__Get_Token() {
         let token = UUID().uuidString
-        let result = HCaptchaResult.token(token)
+        let result = HCaptchaResult(token: token)
 
         do {
             let value = try result.dematerialize()
@@ -26,7 +26,7 @@ class HCaptchaResult__Tests: XCTestCase {
 
     func test__Get_Token__Error() {
         let error = HCaptchaError.random()
-        let result = HCaptchaResult.error(error)
+        let result = HCaptchaResult(error: error)
 
         do {
             _ = try result.dematerialize()

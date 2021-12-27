@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment version="2304" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rZP-lG-qRu"/>
+                        <viewControllerLayoutGuide type="bottom" id="Uy6-4B-95y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dP2-oa-eBf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jMo-q3-EDz">
+                                <rect key="frame" x="50" y="423" width="314" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="rLp-L1-0af"/>
+                                </constraints>
+                                <state key="normal" title="Validate"/>
+                                <connections>
+                                    <action selector="didPressButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eLB-2y-igi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jMo-q3-EDz" firstAttribute="leading" secondItem="dP2-oa-eBf" secondAttribute="leading" constant="50" id="5sb-zf-GG2"/>
+                            <constraint firstAttribute="trailing" secondItem="jMo-q3-EDz" secondAttribute="trailing" constant="50" id="Ivv-lE-Ztz"/>
+                            <constraint firstItem="jMo-q3-EDz" firstAttribute="centerY" secondItem="dP2-oa-eBf" secondAttribute="centerY" id="bIY-74-z9S"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="validateButton" destination="jMo-q3-EDz" id="DgA-Gb-cHg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="120" y="26"/>
+        </scene>
+    </scenes>
+</document>

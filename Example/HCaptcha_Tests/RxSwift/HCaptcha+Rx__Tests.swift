@@ -128,7 +128,7 @@ class HCaptcha_Rx__Tests: XCTestCase {
 
             let reset = obs.do(onNext: hcaptcha.reset).subscribe()
 
-            let result = try obs
+            let result: [Void] = try obs
                 .toBlocking()
                 .toArray()
 
