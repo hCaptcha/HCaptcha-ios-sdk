@@ -22,7 +22,7 @@ extension HCaptchaWebViewManager {
         apiKey: String? = nil,
         endpoint: URL? = nil,
         shouldFail: Bool = false,
-        size: Size = .invisible,
+        size: HCaptchaSize = .invisible,
         rqdata: String? = nil,
         theme: String = "\"light\""
     ) {
@@ -46,7 +46,7 @@ extension HCaptchaWebViewManager {
         html: String,
         apiKey: String? = nil,
         endpoint: URL? = nil,
-        size: Size = .invisible,
+        size: HCaptchaSize = .invisible,
         rqdata: String? = nil,
         theme: String = "\"light\""
     ) {

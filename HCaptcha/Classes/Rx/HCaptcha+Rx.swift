@@ -12,9 +12,6 @@ import UIKit
 import HCaptcha
 #endif
 
-/// Makes HCaptcha compatible with RxSwift extensions
-extension HCaptcha: ReactiveCompatible {}
-
 /// Provides a public extension on HCaptcha that makes it reactive.
 public extension Reactive where Base: HCaptcha {
 
@@ -35,11 +32,9 @@ public extension Reactive where Base: HCaptcha {
     func validate(on view: UIView, resetOnError: Bool = true) -> Observable<String> {
         return Single<String>.create { [weak base] single in
             base?.validate(on: view, resetOnError: resetOnError) { result in
-                switch result {
-                case .token(let token):
-                    single(.success(token))
-
-                case .error(let error):
+                do {
+                    single(.success(try result.dematerialize()))
+                } catch {
                     single(.failure(error))
                 }
             }

@@ -16,6 +16,7 @@ PODS:
 
 DEPENDENCIES:
   - AppSwizzle (~> 1.3)
+  - HCaptcha/Core (from `../`)
   - HCaptcha/RxSwift (from `../`)
   - RxBlocking (~> 6.2.0)
   - RxCocoa (~> 6.2.0)
@@ -43,6 +44,6 @@ SPEC CHECKSUMS:
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 5d280514640e56af4ee07b4bb2c2d64390777b3c
+PODFILE CHECKSUM: 44657674683c7639f916ef6eb6fae5387395d652
 
 COCOAPODS: 1.11.2

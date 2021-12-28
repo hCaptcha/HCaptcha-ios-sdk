@@ -10,15 +10,42 @@ import WebKit
 import UIKit
 import JavaScriptCore
 
-/** The color theme of the widget.
- */    
-public enum Size: String {
+/** Widget display mode
+ */
+@objc
+public enum HCaptchaSize: Int, RawRepresentable {
     case invisible
     case compact
     case normal
+
+    public typealias RawValue = String
+
+    public var rawValue: RawValue {
+        switch self {
+        case .invisible:
+            return "invisible"
+        case .compact:
+            return "compact"
+        case .normal:
+            return "normal"
+        }
+    }
+
+    public init?(rawValue: RawValue) {
+        switch rawValue {
+        case "invisible":
+            self = .invisible
+        case "compact":
+            self = .compact
+        case "normal":
+            self = .normal
+        default:
+            return nil
+        }
+    }
 }
 
-/** Internal data model for CI in unit tests
+/** Internal data model to keep SDK init params
  */
 struct HCaptchaConfig {
     /// The raw unformated HTML file content
@@ -28,7 +55,7 @@ struct HCaptchaConfig {
     let apiKey: String
 
     /// Size of visible area
-    let size: Size
+    let size: HCaptchaSize
 
     /// The base url to be used to resolve relative URLs in the webview
     let baseURL: URL
@@ -108,7 +135,7 @@ struct HCaptchaConfig {
                 baseURL: URL?,
                 infoPlistURL: URL?,
                 jsSrc: URL,
-                size: Size,
+                size: HCaptchaSize,
                 rqdata: String?,
                 sentry: Bool?,
                 endpoint: URL?,

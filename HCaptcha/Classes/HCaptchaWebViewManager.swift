@@ -104,7 +104,7 @@ internal class HCaptchaWebViewManager {
          - theme: Widget theme, value must be valid JS Object or String with brackets
      */
     init(html: String, apiKey: String, baseURL: URL, endpoint: URL,
-         size: Size, rqdata: String?, theme: String) {
+         size: HCaptchaSize, rqdata: String?, theme: String) {
         self.endpoint = endpoint.absoluteString
         self.decoder = HCaptchaDecoder { [weak self] result in
             self?.handle(result: result)
@@ -139,7 +139,7 @@ internal class HCaptchaWebViewManager {
      func validate(on view: UIView) {
 #if DEBUG
         guard !shouldSkipForTests else {
-            completion?(.token(""))
+            completion?(HCaptchaResult(token: ""))
             return
         }
 #endif
@@ -195,7 +195,7 @@ fileprivate extension HCaptchaWebViewManager {
     func handle(result: HCaptchaDecoder.Result) {
         switch result {
         case .token(let token):
-            completion?(.token(token))
+            completion?(HCaptchaResult(token: token))
 
         case .error(let error):
             handle(error: error)
@@ -221,16 +221,15 @@ fileprivate extension HCaptchaWebViewManager {
 
     private func handle(error: HCaptchaError) {
         if case HCaptchaError.userClosed = error {
-            completion?(.error(error))
+            completion?(HCaptchaResult(error: error))
             return
         }
 
         if shouldResetOnError, let view = webView.superview {
             reset()
             validate(on: view)
-        }
-        else {
-            completion?(.error(error))
+        } else {
+            completion?(HCaptchaResult(error: error))
         }
     }
 

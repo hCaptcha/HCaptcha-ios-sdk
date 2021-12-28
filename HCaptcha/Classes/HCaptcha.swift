@@ -11,8 +11,10 @@ import UIKit
 import JavaScriptCore
 
 /**
+  hCaptcha SDK facade (entry point)
 */
-public class HCaptcha {
+@objc
+public class HCaptcha: NSObject {
     fileprivate struct Constants {
         struct InfoDictKeys {
             static let APIKey = "HCaptchaKey"
@@ -42,11 +44,12 @@ public class HCaptcha {
          Info.plist.
      - Throws: Rethrows any exceptions thrown by `String(contentsOfFile:)`
      */
+    @objc
     public convenience init(
         apiKey: String? = nil,
         baseURL: URL? = nil,
         locale: Locale? = nil,
-        size: Size = .invisible,
+        size: HCaptchaSize = .invisible,
         jsSrc: URL = URL(string: "https://js.hcaptcha.com/1/api.js")!,
         rqdata: String? = nil,
         sentry: Bool = false,
@@ -107,6 +110,7 @@ public class HCaptcha {
 
      Starts the challenge validation
     */
+    @objc
     public func validate(on view: UIView, resetOnError: Bool = true, completion: @escaping (HCaptchaResult) -> Void) {
         manager.shouldResetOnError = resetOnError
         manager.completion = completion
@@ -116,6 +120,7 @@ public class HCaptcha {
 
 
     /// Stops the execution of the webview
+    @objc
     public func stop() {
         manager.stop()
     }
@@ -129,6 +134,7 @@ public class HCaptcha {
      If presentation is required, the webview will already be a subview of `presenterView` if one is provided. Otherwise
      it might need to be added in a view currently visible.
     */
+    @objc
     public func configureWebView(_ configure: @escaping (WKWebView) -> Void) {
         manager.configureWebView = configure
     }
@@ -136,8 +142,9 @@ public class HCaptcha {
     /**
      Resets the HCaptcha.
 
-     The reset is achieved by calling `ghcaptcha.reset()` on the JS API.
+     The reset is achieved by calling `hcaptcha.reset()` on the JS API.
     */
+    @objc
     public func reset() {
         manager.reset()
     }
@@ -151,6 +158,7 @@ public class HCaptcha {
      in case of error or reset. This may also be immediately called if the resources have already
      finished loading when you set the closure.
     */
+    @objc
     public func didFinishLoading(_ closure: (() -> Void)?) {
         manager.onDidFinishLoading = closure
     }
@@ -159,6 +167,7 @@ public class HCaptcha {
 
 #if DEBUG
     /// Forces the challenge widget to be explicitly displayed.
+    @objc
     public var forceVisibleChallenge: Bool {
         get { return manager.forceVisibleChallenge }
         set { manager.forceVisibleChallenge = newValue }
@@ -171,9 +180,39 @@ public class HCaptcha {
      
      Use only when testing your application.
     */
+    @objc
     public var shouldSkipForTests: Bool {
         get { return manager.shouldSkipForTests }
         set { manager.shouldSkipForTests = newValue }
     }
 #endif
+
+    // MARK: - Objective-C 'convenience' inits
+
+    @objc
+    public convenience init(locale: Locale) throws {
+        try self.init(locale: locale, size: .invisible)
+    }
+
+    @objc
+    public convenience init(size: HCaptchaSize) throws {
+        try self.init(locale: nil, size: size)
+    }
+
+
+    @objc
+    public convenience init(apiKey: String, baseURL: URL) throws {
+        try self.init(apiKey: apiKey, baseURL: baseURL, locale: nil)
+    }
+
+    @objc
+    public convenience init(apiKey: String, baseURL: URL, locale: Locale) throws {
+        try self.init(apiKey: apiKey, baseURL: baseURL, locale: locale, size: .invisible)
+    }
+
+
+    @objc
+    public convenience init(apiKey: String, baseURL: URL, locale: Locale, size: HCaptchaSize) throws {
+        try self.init(apiKey: apiKey, baseURL: baseURL, locale: locale, size: size, rqdata: nil)
+    }
 }

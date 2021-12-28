@@ -20,6 +20,10 @@ target 'HCaptcha_Example' do
   end
 end
 
+target 'HCaptcha_Objc_Example' do
+  pod 'HCaptcha/Core', :path => '../'
+end
+
 post_install do |installer|
   target = File.join(Dir.pwd, "../.git/hooks/pre-push")
   unless File.symlink?(target)
