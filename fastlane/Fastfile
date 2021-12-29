@@ -13,6 +13,7 @@ platform :ios do
   desc "Runs the following lanes:\n- test\n- pod_lint\n- carthage_lint"
   lane :ci do
     test
+    html_lint
     pod_lint
     carthage_lint
     spm_build

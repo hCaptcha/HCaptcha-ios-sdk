@@ -26,24 +26,24 @@
     
     <script src="${endpoint}"></script>
     <script type="text/javascript">
-      const post = function(value) {
+      var post = function(value) {
         window.webkit.messageHandlers.hcaptcha.postMessage(value);
       };
 
-      const getExecuteOpts = function() {
+      var getExecuteOpts = function() {
         var opts;
-        const rqdata = "${rqdata}";
+        var rqdata = "${rqdata}";
         if (rqdata) {
           opts = {'rqdata': rqdata};
         }
         return opts;
-      }
+      };
 
       console.log = function(message) {
         post({ log: message });
       };
 
-      const execute = function() {
+      var execute = function() {
         console.log("challenge executing");
 
         try {
@@ -58,29 +58,29 @@
         }
       };
 
-      const reset = function() {
+      var reset = function() {
         console.log("challenge resetting");
         hcaptcha.reset();
         post({ action: "didLoad" });
       };
 
-      const onPass = function(token) {
+      var onPass = function(token) {
         console.log("challenge got token");
         console.log(token);
         post({ token: token });
       };
 
-      const expiredCallback = function() {
+      var expiredCallback = function() {
         console.log("expired challenge");
         post({ error: 15 });
       };
 
-      const errorCallback = function() {
+      var errorCallback = function() {
         console.log("challenge error: probably rate limit exceeded");
         post({ error: 31 });
       };
 
-      const closeCallback = function() {
+      var closeCallback = function() {
         console.log("challenge closed by user");
         post({ error: 30 });
       };
