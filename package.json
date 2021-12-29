@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "lint": "jshint --extract=always"
+  },
+  "devDependencies": {
+    "jshint": "^2.13.2"
+  }
+}
