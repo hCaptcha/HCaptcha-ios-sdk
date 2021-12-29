@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches: [ master, main ]
-    tags: [ '[0-9]+.[0-9]+.[0-9]+(\-.+)?' ]
+    tags: [ '[1-9]+.[0-9]+.[0-9]+*' ]
   pull_request:
   workflow_dispatch:
   repository_dispatch:
