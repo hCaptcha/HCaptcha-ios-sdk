@@ -13,6 +13,7 @@ platform :ios do
   desc "Runs the following lanes:\n- test\n- pod_lint\n- carthage_lint"
   lane :ci do
     test
+    html_lint
     pod_lint
     carthage_lint
     spm_build
@@ -110,6 +111,26 @@ platform :ios do
       'x86_64-apple-ios9.0-simulator'
     ].map { |o| " -Xswiftc \"#{o}\"" }
     sh("swift build #{swiftc.join}")
+  end
+
+  desc "Validate html template"
+  lane :html_lint do
+    html = File.read("../HCaptcha/Assets/hcaptcha.html")
+      .gsub("${endpoint}", "")
+      .gsub("${theme}", "{}")
+      .gsub("${rqdata}", "")
+      .gsub("${size}", "invisible")
+      .gsub("${apiKey}", "api-key")
+    Tempfile.open("hcaptcha.html") do |html_file|
+      html_file.write html
+      html_file.close
+
+      yarn(
+        command: "lint #{html_file.path}",
+        package_path: "package.json",
+        auto_install_dependencies: true
+      )
+    end
   end
 
   desc "Build samples"
