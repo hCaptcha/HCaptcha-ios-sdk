@@ -1,3 +1,11 @@
+# Prerequisites software
+
+- Xcode
+- Carthage
+- Cocoapods
+- Ruby
+- Node
+
 # How to release a new version
 
 **Note:** we use [SemVer format](https://semver.org/).

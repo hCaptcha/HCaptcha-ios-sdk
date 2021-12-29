@@ -1,3 +1,8 @@
+# 1.8.0
+
+- Feature: `Objective-C` support ([#4](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/4))
+- Fix: ES5 compliance ([#3](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/3))
+
 # 1.7.0
 
 - Feature: pass `rqdata` to hCaptcha initializer ([#24](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/24))
