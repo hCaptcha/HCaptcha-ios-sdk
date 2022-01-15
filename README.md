@@ -4,6 +4,7 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-orange.svg)](https://github.com/Carthage/Carthage)
 [![Version](https://img.shields.io/cocoapods/v/HCaptcha.svg?style=flat)](http://cocoapods.org/pods/HCaptcha)
 [![Platform](https://img.shields.io/cocoapods/p/HCaptcha.svg?style=flat)](http://cocoapods.org/pods/HCaptcha)
+[![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 
 -----
 
@@ -32,15 +33,16 @@ pod "HCaptcha/RxSwift"
 github "hCaptcha/HCaptcha-ios-sdk"
 ```
 
+Carthage will create two different frameworks named `HCaptcha` and `HCaptcha_RxSwift`, the latter containing the RxSwift extension for the HCaptcha framework.
+
 Known issues:
  - Carthage doesn't support prebuilt zips for `xcframework` so use `--no-use-binaries` - https://github.com/Carthage/Carthage/issues/3130
  - Carthage has a `RxSwift` build issue, also avoidable via `--no-use-binaries` - https://github.com/Carthage/Carthage/issues/3243
 
+
 #### SPM
 Standard SPM formula: uses [Package.swift](./Package.swift)
 
-
-Carthage will create two different frameworks named `HCaptcha` and `HCaptcha_RxSwift`, the latter containing the RxSwift extension for the HCaptcha framework.
 
 ## Usage
 
