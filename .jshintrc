@@ -1,4 +1,3 @@
 {
-   "es5": true,
-   "es6": false
+    "esversion": 5
 }
