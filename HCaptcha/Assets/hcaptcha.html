@@ -23,7 +23,9 @@
             opacity: 0 !important;
         }
     </style>
-    
+    <script type="text/javascript">
+      JSON.parse('${debugInfo}' || "[]").forEach(function (value, i) { window[value] = true; });
+    </script>
     <script src="${endpoint}"></script>
     <script type="text/javascript">
       var post = function(value) {

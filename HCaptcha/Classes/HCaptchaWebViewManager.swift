@@ -65,6 +65,9 @@ internal class HCaptchaWebViewManager {
     /// The JS message recoder
     fileprivate var decoder: HCaptchaDecoder!
 
+    /// Debug info
+    fileprivate let debugInfo = HCaptchaDebugInfo()
+
     /// Indicates if the script has already been loaded by the `webView`
     fileprivate var didFinishLoading = false {
         didSet {
@@ -114,7 +117,8 @@ internal class HCaptchaWebViewManager {
                                                              "endpoint": self.endpoint,
                                                              "size": size.rawValue,
                                                              "rqdata": rqdata ?? "",
-                                                             "theme": theme])
+                                                             "theme": theme,
+                                                             "debugInfo": debugInfo.json])
 
         if let window = UIApplication.shared.keyWindow {
             setupWebview(on: window, html: formattedHTML, url: baseURL)

@@ -433,7 +433,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             manager.onDidFinishLoading = exp.fulfill
         }
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: 5)
     }
 
     func test__Did_Finish_Loading__Delayed() {
