@@ -17,9 +17,10 @@ extension HCaptchaError: Equatable {
              (.baseURLNotFound, .baseURLNotFound),
              (.wrongMessageFormat, .wrongMessageFormat),
              (.failedSetup, .failedSetup),
-             (.responseExpired, .responseExpired),
-             (.failedRender, .failedRender),
-             (.invalidCustomTheme, .invalidCustomTheme):
+             (.sessionTimeout, .sessionTimeout),
+             (.rateLimit, .rateLimit),
+             (.invalidCustomTheme, .invalidCustomTheme),
+             (.networkError, .networkError):
             return true
         case (.unexpected(let lhe as NSError), .unexpected(let rhe as NSError)):
             return lhe == rhe
@@ -35,9 +36,10 @@ extension HCaptchaError: Equatable {
         case 2: return .baseURLNotFound
         case 3: return .wrongMessageFormat
         case 4: return .failedSetup
-        case 5: return .responseExpired
-        case 6: return .failedRender
+        case 5: return .sessionTimeout
+        case 6: return .rateLimit
         case 7: return .invalidCustomTheme
+        case 8: return .networkError
         default: return .unexpected(NSError())
         }
     }

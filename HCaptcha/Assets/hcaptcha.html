@@ -26,7 +26,17 @@
     <script type="text/javascript">
       JSON.parse('${debugInfo}' || "[]").forEach(function (value, i) { window[value] = true; });
     </script>
-    <script src="${endpoint}"></script>
+    <script type="text/javascript">
+      var script = document.createElement('script');
+      script.src = "${endpoint}";
+
+      script.onerror = function () {
+          // network issue
+          post({ error: 7 });
+      };
+
+      document.head.appendChild(script);
+    </script>
     <script type="text/javascript">
       var post = function(value) {
         window.webkit.messageHandlers.hcaptcha.postMessage(value);
@@ -77,8 +87,8 @@
         post({ error: 15 });
       };
 
-      var errorCallback = function() {
-        console.log("challenge error: probably rate limit exceeded");
+      var errorCallback = function(error) {
+        console.log("challenge error:", error || "probably rate limit exceeded");
         post({ error: 31 });
       };
 
@@ -108,15 +118,16 @@
           post({ error: 29 });
         }
       };
-        
-      document.body.onclick = function () {
+
+      document.addEventListener('DOMContentLoaded', function () {
+        document.body.onclick = function () {
           if (window.hcaptcha) {
               window.hcaptcha.close();
           } else {
               post({ error: 30 });
           }
-      };
-        
+        };
+      });
     </script>
   </head>
   <body>

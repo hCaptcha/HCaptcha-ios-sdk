@@ -14,6 +14,9 @@ public enum HCaptchaError: Error, CustomStringConvertible {
     /// Unexpected error
     case unexpected(Error)
 
+    /// Internet connection is missing
+    case networkError
+
     /// Could not load the HTML embedded in the bundle
     case htmlLoadError
 
@@ -29,14 +32,14 @@ public enum HCaptchaError: Error, CustomStringConvertible {
     /// HCaptcha setup failed
     case failedSetup
 
-    /// HCaptcha response expired
-    case responseExpired
+    /// HCaptcha response or session expired
+    case sessionTimeout
 
     /// user closed HCaptcha without answering
-    case userClosed
+    case challengeClosed
 
-    /// HCaptcha render failed
-    case failedRender
+    /// HCaptcha server rate-limited user request
+    case rateLimit
 
     /// Invalid custom theme passed
     case invalidCustomTheme
@@ -50,6 +53,9 @@ public enum HCaptchaError: Error, CustomStringConvertible {
         switch self {
         case .unexpected(let error):
             return "Unexpected Error: \(error)"
+
+        case .networkError:
+            return "Network issues"
 
         case .htmlLoadError:
             return "Could not load embedded HTML"
@@ -66,17 +72,17 @@ public enum HCaptchaError: Error, CustomStringConvertible {
         case .failedSetup:
             return """
             ⚠️ WARNING! HCaptcha wasn't successfully configured. Please double check your HCaptchaKey and HCaptchaDomain.
-            Also check that you're using HCaptcha's **SITE KEY** for client side integration.
+            Also check that you're using the hCaptcha **SITE KEY** for client side integration.
             """
 
-        case .responseExpired:
+        case .sessionTimeout:
             return "Response expired and need to re-verify"
 
-        case .userClosed:
+        case .challengeClosed:
             return "User closed challenge without answering"
 
-        case .failedRender:
-            return "HCaptcha encountered an error in execution"
+        case .rateLimit:
+            return "User was rate-limited"
 
         case .invalidCustomTheme:
             return "Invalid JSON or JSObject as customTheme"

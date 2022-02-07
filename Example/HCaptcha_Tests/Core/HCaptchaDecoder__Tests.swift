@@ -200,7 +200,7 @@ class HCaptchaDecoder__Tests: XCTestCase {
         waitForExpectations(timeout: 1)
 
         // Check
-        XCTAssertEqual(result, .error(.responseExpired))
+        XCTAssertEqual(result, .error(.sessionTimeout))
     }
 
     func test__Decode__Error_Render_Failed() {
@@ -219,7 +219,7 @@ class HCaptchaDecoder__Tests: XCTestCase {
         waitForExpectations(timeout: 1)
 
         // Check
-        XCTAssertEqual(result, .error(.failedRender))
+        XCTAssertEqual(result, .error(.rateLimit))
     }
 
     func test__Decode__Error_Wrong_Format() {

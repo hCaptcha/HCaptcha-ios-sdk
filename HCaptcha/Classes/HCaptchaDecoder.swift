@@ -121,17 +121,20 @@ fileprivate extension HCaptchaDecoder.Result {
         case 1:
             return .error(.htmlLoadError)
 
+        case 7:
+            return .error(.networkError)
+
+        case 15:
+            return .error(.sessionTimeout)
+
         case 29:
             return .error(.failedSetup)
 
-        case 15:
-            return .error(.responseExpired)
-
         case 31:
-            return .error(.failedRender)
+            return .error(.rateLimit)
 
         case 30:
-            return .error(.userClosed)
+            return .error(.challengeClosed)
 
         default:
             return .error(.wrongMessageFormat)

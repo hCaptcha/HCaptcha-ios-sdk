@@ -139,7 +139,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         XCTAssertNotNil(result?.error)
         XCTAssertNil(result?.token)
 
-        switch result!.error! {
+        switch result?.error {
         case .unexpected(let error as NSError):
             XCTAssertEqual(error.code, WKError.javaScriptExceptionOccurred.rawValue)
         default:
