@@ -139,7 +139,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         XCTAssertNotNil(result?.error)
         XCTAssertNil(result?.token)
 
-        switch result!.error! {
+        switch result?.error {
         case .unexpected(let error as NSError):
             XCTAssertEqual(error.code, WKError.javaScriptExceptionOccurred.rawValue)
         default:
@@ -433,7 +433,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             manager.onDidFinishLoading = exp.fulfill
         }
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: 5)
     }
 
     func test__Did_Finish_Loading__Delayed() {

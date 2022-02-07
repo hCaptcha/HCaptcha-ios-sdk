@@ -17,9 +17,11 @@
       var shouldFail = ${shouldFail};
       var rqdata = "${rqdata}";
       var theme = ${theme};
+      var debugInfo = JSON.parse('${debugInfo}');
 
       const themeType = typeof theme;
       console.assert(themeType === "string" || themeType === "object", "invalid theme object");
+      console.assert(Array.isArray(debugInfo), "invalid type");
 
       var post = function(value) {
           window.webkit.messageHandlers.hcaptcha.postMessage(value);

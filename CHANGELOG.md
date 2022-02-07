@@ -1,3 +1,10 @@
+# 2.0.0
+
+- **Breaking Change**:  error codes have been renamed and expanded to conform with the Android SDK.
+  - renamed: `.responseExpired` -> `.sessionTimeout`
+  - renamed:   `.failedRender` -> `.rateLimit`
+  - added: `.networkError` ([#41](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/41))
+
 # 1.8.0
 
 - Feature: `Objective-C` support ([#4](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/4))

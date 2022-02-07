@@ -139,10 +139,10 @@ isarray@0.0.1:
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
   integrity sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=
 
-jshint@^2.13.2:
-  version "2.13.2"
-  resolved "https://registry.yarnpkg.com/jshint/-/jshint-2.13.2.tgz#f2aeeb00396e597680e628346a105e87ca1235a2"
-  integrity sha512-xt9lIEqJ0B/48GwIuFA4sw3PPQvmFo/fVCe9Yim9oU2UdX437lnkrBrHEHF/R0HS64WgLFXUvSxrHb0UOrYhAA==
+jshint@^2.13.4:
+  version "2.13.4"
+  resolved "https://registry.yarnpkg.com/jshint/-/jshint-2.13.4.tgz#cee025a57c3f393d5455532d9ec7ccb018f890db"
+  integrity sha512-HO3bosL84b2qWqI0q+kpT/OpRJwo0R4ivgmxaO848+bo10rc50SkPnrtwSFXttW0ym4np8jbJvLwk5NziB7jIw==
   dependencies:
     cli "~1.0.0"
     console-browserify "1.1.x"
@@ -150,7 +150,6 @@ jshint@^2.13.2:
     htmlparser2 "3.8.x"
     lodash "~4.17.21"
     minimatch "~3.0.2"
-    shelljs "0.3.x"
     strip-json-comments "1.0.x"
 
 lodash@~4.17.21:
@@ -186,11 +185,6 @@ readable-stream@1.1:
     inherits "~2.0.1"
     isarray "0.0.1"
     string_decoder "~0.10.x"
-
-shelljs@0.3.x:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.3.0.tgz#3596e6307a781544f591f37da618360f31db57b1"
-  integrity sha1-NZbmMHp4FUT1kfN9phg2DzHbV7E=
 
 string_decoder@~0.10.x:
   version "0.10.31"

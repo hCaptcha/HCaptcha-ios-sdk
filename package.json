@@ -3,6 +3,6 @@
     "lint": "jshint --extract=always"
   },
   "devDependencies": {
-    "jshint": "^2.13.2"
+    "jshint": "^2.13.4"
   }
 }

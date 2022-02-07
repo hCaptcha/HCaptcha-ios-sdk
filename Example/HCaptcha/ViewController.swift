@@ -32,6 +32,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var localeSegmentedControl: UISegmentedControl!
     @IBOutlet private weak var visibleChallengeSwitch: UISwitch!
     @IBOutlet private weak var validateButton: UIButton!
+    @IBOutlet private weak var resetButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,12 @@ class ViewController: UIViewController {
             localeSegmentedControl.isEnabled = false
             visibleChallengeSwitch.isEnabled = false
         }
+
+        resetButton.rx.tap
+            .subscribe(onNext: { [weak hcaptcha] _ in
+                hcaptcha?.reset()
+            })
+            .disposed(by: disposeBag)
     }
 
     @IBAction func didPressLocaleSegmentedControl(_ sender: UISegmentedControl) {
@@ -55,6 +62,7 @@ class ViewController: UIViewController {
         setupHCaptcha()
     }
 
+    // swiftlint:disable function_body_length
     @IBAction private func didPressButton(button: UIButton) {
         if unitTesting {
             return
@@ -108,6 +116,12 @@ class ViewController: UIViewController {
         visibleChallengeSwitch.rx.value
             .subscribe(onNext: { [weak hcaptcha] value in
                 hcaptcha?.forceVisibleChallenge = value
+            })
+            .disposed(by: disposeBag)
+
+        resetButton.rx.tap
+            .subscribe(onNext: { [weak hcaptcha] _ in
+                hcaptcha?.reset()
             })
             .disposed(by: disposeBag)
     }
