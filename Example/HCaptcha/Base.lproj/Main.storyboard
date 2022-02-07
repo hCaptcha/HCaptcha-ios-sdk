@@ -74,13 +74,21 @@
                                     <action selector="didPressLocaleSegmentedControl:" destination="vXZ-lx-hvc" eventType="valueChanged" id="nSA-f3-8eS"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzK-em-8dU" userLabel="Reset">
+                                <rect key="frame" x="50" y="501" width="275" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Reset"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="o6f-cL-1PF" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="0dV-t0-W0Y"/>
                             <constraint firstAttribute="trailing" secondItem="RDW-bD-rSo" secondAttribute="trailing" constant="50" id="1Lj-Ox-Kl4"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Uyt-0M-CR7" secondAttribute="bottom" constant="20" id="Bfs-p5-IBM"/>
+                            <constraint firstItem="lzK-em-8dU" firstAttribute="trailing" secondItem="RDW-bD-rSo" secondAttribute="trailing" id="Djx-Uy-pGB"/>
+                            <constraint firstItem="lzK-em-8dU" firstAttribute="leading" secondItem="RDW-bD-rSo" secondAttribute="leading" id="Gaz-BQ-Ops"/>
                             <constraint firstItem="o6f-cL-1PF" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" priority="750" id="NMD-ir-PXe"/>
+                            <constraint firstItem="lzK-em-8dU" firstAttribute="width" secondItem="RDW-bD-rSo" secondAttribute="width" id="QFp-mX-khG"/>
                             <constraint firstItem="RDW-bD-rSo" firstAttribute="top" secondItem="o6f-cL-1PF" secondAttribute="bottom" constant="30" id="TZe-z9-MZS"/>
                             <constraint firstItem="jHc-GP-v1Z" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="VOe-WJ-FKo"/>
                             <constraint firstItem="jHc-GP-v1Z" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="XkT-zr-eUO"/>
@@ -89,6 +97,7 @@
                             <constraint firstItem="RDW-bD-rSo" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="50" id="iXO-hP-XZ7"/>
                             <constraint firstItem="kq2-ci-l1u" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="ice-pp-mVe"/>
                             <constraint firstItem="Uyt-0M-CR7" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="qfG-68-ySO"/>
+                            <constraint firstItem="lzK-em-8dU" firstAttribute="top" secondItem="kq2-ci-l1u" secondAttribute="bottom" constant="36.5" id="v0S-Ga-Y7X"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -99,6 +108,7 @@
                     <connections>
                         <outlet property="label" destination="o6f-cL-1PF" id="KQV-3X-RKr"/>
                         <outlet property="localeSegmentedControl" destination="kq2-ci-l1u" id="gL7-du-K6l"/>
+                        <outlet property="resetButton" destination="lzK-em-8dU" id="9BO-5x-8q6"/>
                         <outlet property="spinner" destination="jHc-GP-v1Z" id="gRn-JW-FIK"/>
                         <outlet property="validateButton" destination="RDW-bD-rSo" id="zxd-fD-KiJ"/>
                         <outlet property="visibleChallengeSwitch" destination="mGh-Ox-cFf" id="R13-nD-EXL"/>
