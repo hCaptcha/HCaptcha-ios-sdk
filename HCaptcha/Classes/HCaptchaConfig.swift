@@ -100,6 +100,9 @@ struct HCaptchaConfig {
         self.customTheme ?? "\"\(theme)\""
     }
 
+    /// Enable SSL pinning
+    let sslPinning: Bool
+
     /// The Bundle that holds HCaptcha's assets
     private static let bundle: Bundle = {
         #if SWIFT_PACKAGE
@@ -144,7 +147,8 @@ struct HCaptchaConfig {
                 imghost: URL?,
                 host: String?,
                 theme: String,
-                customTheme: String?) throws {
+                customTheme: String?,
+                sslPinning: Bool) throws {
         guard let filePath = HCaptchaConfig.bundle.path(forResource: "hcaptcha", ofType: "html") else {
             throw HCaptchaError.htmlLoadError
         }
@@ -187,6 +191,7 @@ struct HCaptchaConfig {
         self.host = host
         self.theme = theme
         self.customTheme = customTheme
+        self.sslPinning = sslPinning
     }
 
     /**

@@ -21,6 +21,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/ReactiveX/RxSwift", .upToNextMajor(from: "6.2.0"))
+        .package(url: "https://github.com/wultra/ssl-pinning-ios")
     ],
     targets: [
         .target(

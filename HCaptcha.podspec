@@ -25,6 +25,8 @@ invisibility is not possible.
     core.source_files = 'HCaptcha/Classes/*'
     core.frameworks = ['WebKit', 'JavaScriptCore']
 
+    core.dependency 'WultraSSLPinning/PowerAuthIntegration'
+
     core.resource_bundles = {
       'HCaptcha' => ['HCaptcha/Assets/**/*']
     }

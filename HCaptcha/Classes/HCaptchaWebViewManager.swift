@@ -8,6 +8,7 @@
 
 import Foundation
 import WebKit
+import WultraSSLPinning
 
 
 /** Handles comunications with the webview containing the HCaptcha challenge.
@@ -89,6 +90,12 @@ internal class HCaptchaWebViewManager {
     /// Keep error If it happens before validate call
     fileprivate var lastError: HCaptchaError?
 
+    /// Enable SSL pinning
+    fileprivate var sslPinning: Bool
+
+    /// SSL pinning aware navigation delegate
+    fileprivate let webViewNavDelegate = HCaptchaWebViewNavDelegate()
+
     /// The webview that executes JS code
     lazy var webView: WKWebView = {
         let webview = WKWebView(
@@ -98,6 +105,10 @@ internal class HCaptchaWebViewManager {
         webview.accessibilityIdentifier = "webview"
         webview.accessibilityTraits = UIAccessibilityTraits.link
         webview.isHidden = true
+
+        if sslPinning {
+            webview.navigationDelegate = webViewNavDelegate
+        }
 
         return webview
     }()
@@ -113,8 +124,9 @@ internal class HCaptchaWebViewManager {
          - theme: Widget theme, value must be valid JS Object or String with brackets
      */
     init(html: String, apiKey: String, baseURL: URL, endpoint: URL,
-         size: HCaptchaSize, rqdata: String?, theme: String) {
+         size: HCaptchaSize, rqdata: String?, theme: String, sslPinning: Bool) {
         self.baseURL = baseURL
+        self.sslPinning = sslPinning
         self.decoder = HCaptchaDecoder { [weak self] result in
             self?.handle(result: result)
         }
