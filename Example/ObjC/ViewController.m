@@ -15,6 +15,7 @@
 @interface ViewController ()
 
 @property (weak, nonatomic) HCaptcha *hCaptcha;
+@property (weak, nonatomic) WKWebView *webView;
 
 @end
 
@@ -28,6 +29,7 @@
 
     [self.hCaptcha configureWebView:^(WKWebView * _Nonnull webView) {
         webView.frame = self.view.bounds;
+        self.webView = webView;
     }];
 }
 
@@ -36,6 +38,7 @@
         NSError *error = nil;
         NSString *token = [result dematerializeAndReturnError: &error];
         NSLog(@"DONE token:%@ error:%@", token, [error description]);
+        [self.webView removeFromSuperview];
     }];
 }
 
