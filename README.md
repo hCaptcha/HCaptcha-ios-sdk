@@ -95,7 +95,7 @@ hcaptcha.rx.validate(on: view)
     })
 ```
 
-Important note: the caller's code is responsible for hiding `WebView` after challenge processing. This can be achieved with:
+Note: caller code is responsible for hiding the `WebView` after challenge processing. This is illustrated in the Example app, and can be achieved with:
 
 1. Regular Swift API:
    ```swift
