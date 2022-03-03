@@ -95,6 +95,50 @@ hcaptcha.rx.validate(on: view)
     })
 ```
 
+Note: caller code is responsible for hiding the `WebView` after challenge processing. This is illustrated in the Example app, and can be achieved with:
+
+1. Regular Swift API:
+   ```swift
+   ...
+   var captchaWebView: WKWebView?
+   ...
+
+   hcaptcha?.configureWebView { [weak self] webview in
+       self?.captchaWebView = webview
+   }
+   ...
+
+   hcaptcha.validate(on: view) { result in
+       ...
+
+       captchaWebView?.removeFromSuperview()
+   }
+
+   ```
+
+1. `RxSwift` API (check [the example](./Example/HCaptcha/ViewController.swift) for more details):
+   ```swift
+   ...
+   hcaptcha?.configureWebView { [weak self] webview in
+       webview.tag = "hCaptchaViewTag"
+   }
+   ...
+
+   let disposeBag = DisposeBag()
+   let validate = hcaptcha.rx.validate(on: view)
+   ...
+
+   validate
+       .map { [weak self] _ in
+           self?.view.viewWithTag("hCaptchaViewTag")
+       }
+       .subscribe(onNext: { webview in
+           webview?.removeFromSuperview()
+       })
+       .disposed(by: disposeBag)
+   ```
+
+
 #### Setting the host override (optional)
 
 Since this SDK uses a local HTML file, you may want to set a host override for better tracking and enforcement of siteverify parameters.
