@@ -75,6 +75,10 @@ func validate() {
 }
 ```
 
+Note: in case if you need to show hCaptcha above `UIVisualEffectView` make sure to pass `visualEffectView.contentView` instead `visualEffectView`. Because per Apple's documentation:
+
+After you add the visual effect view to the view hierarchy, add any subviews to the contentView property of the visual effect view. Do not add subviews directly to the visual effect view itself.
+
 If you prefer to keep the information out of the Info.plist, you can instead use:
 
 ``` swift
