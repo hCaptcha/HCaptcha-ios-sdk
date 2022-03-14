@@ -79,6 +79,8 @@ func validate() {
 
 > After you add the visual effect view to the view hierarchy, add any subviews to the contentView property of the visual effect view. Do not add subviews directly to the visual effect view itself.
 
+More details [here](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/50).
+
 If you prefer to keep the information out of the Info.plist, you can instead use:
 
 ``` swift
