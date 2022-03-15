@@ -59,7 +59,8 @@ public class HCaptcha: NSObject {
         imghost: URL? = nil,
         host: String? = nil,
         theme: String = "light",
-        customTheme: String? = nil
+        customTheme: String? = nil,
+        sslPinning: Bool = false
     ) throws {
         let infoDict = Bundle.main.infoDictionary
 
@@ -80,7 +81,8 @@ public class HCaptcha: NSObject {
                                         imghost: imghost,
                                         host: host,
                                         theme: theme,
-                                        customTheme: customTheme)
+                                        customTheme: customTheme,
+                                        sslPinning: sslPinning)
 
         self.init(manager: HCaptchaWebViewManager(
             html: config.html,
@@ -89,7 +91,8 @@ public class HCaptcha: NSObject {
             endpoint: config.getEndpointURL(locale: locale),
             size: config.size,
             rqdata: config.rqdata,
-            theme: config.actualTheme
+            theme: config.actualTheme,
+            sslPinning: config.sslPinning
         ))
     }
 

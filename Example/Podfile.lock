@@ -1,9 +1,13 @@
 PODS:
   - AppSwizzle (1.3.1)
-  - HCaptcha/Core (2.0.0)
+  - HCaptcha/Core (2.0.0):
+    - WultraSSLPinning/PowerAuthIntegration
   - HCaptcha/RxSwift (2.0.0):
     - HCaptcha/Core
     - RxSwift (~> 6.2.0)
+  - PowerAuth2 (1.6.2):
+    - PowerAuthCore (~> 1.6.2)
+  - PowerAuthCore (1.6.2)
   - RxBlocking (6.2.0):
     - RxSwift (= 6.2.0)
   - RxCocoa (6.2.0):
@@ -13,6 +17,10 @@ PODS:
     - RxSwift (= 6.2.0)
   - RxSwift (6.2.0)
   - SwiftLint (0.43.1)
+  - WultraSSLPinning/Lib (1.4.0)
+  - WultraSSLPinning/PowerAuthIntegration (1.4.0):
+    - PowerAuth2 (>= 1.6.0)
+    - WultraSSLPinning/Lib
 
 DEPENDENCIES:
   - AppSwizzle (~> 1.3)
@@ -25,11 +33,14 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AppSwizzle
+    - PowerAuth2
+    - PowerAuthCore
     - RxBlocking
     - RxCocoa
     - RxRelay
     - RxSwift
     - SwiftLint
+    - WultraSSLPinning
 
 EXTERNAL SOURCES:
   HCaptcha:
@@ -37,12 +48,15 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AppSwizzle: db36e436f56110d93e5ae0147683435df593cabc
-  HCaptcha: a4c1efafe5a049c2db09d847736e369645d1079a
+  HCaptcha: 4ce547fc4e00a50fcad0d1a9811e67703dcdc0a1
+  PowerAuth2: 18365eda20a3aaec6e1d0d92679c7e90d646cc05
+  PowerAuthCore: 733c68b8f923d49304353ac5d7871ef49f948b38
   RxBlocking: 0b29f7d2079109a8de49c411381bed7c33ef1eeb
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
+  WultraSSLPinning: 73a73de4f89b0ac98154c3ef761ed6eee7760749
 
 PODFILE CHECKSUM: 44657674683c7639f916ef6eb6fae5387395d652
 

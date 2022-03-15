@@ -486,16 +486,22 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-HCaptcha_Example/Pods-HCaptcha_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/HCaptcha-Core-RxSwift/HCaptcha.framework",
+				"${BUILT_PRODUCTS_DIR}/PowerAuth2/PowerAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/WultraSSLPinning/WultraSSLPinning.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/PowerAuthCore/PowerAuthCore.framework/PowerAuthCore",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCaptcha.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PowerAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WultraSSLPinning.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PowerAuthCore.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -598,10 +604,16 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-HCaptcha_Objc_Example/Pods-HCaptcha_Objc_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/HCaptcha-Core/HCaptcha.framework",
+				"${BUILT_PRODUCTS_DIR}/PowerAuth2/PowerAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/WultraSSLPinning/WultraSSLPinning.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/PowerAuthCore/PowerAuthCore.framework/PowerAuthCore",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCaptcha.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PowerAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WultraSSLPinning.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PowerAuthCore.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
