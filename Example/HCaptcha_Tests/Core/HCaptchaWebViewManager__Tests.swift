@@ -44,6 +44,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         }
 
         manager.validate(on: presenterView) { response in
+            XCTAssertFalse(manager.webView.isHidden)
             result1 = response
             exp1.fulfill()
         }
@@ -469,6 +470,20 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         manager.validate(on: presenterView, resetOnError: false) { response in
             XCTAssertEqual(HCaptchaError.htmlLoadError, response.error)
+            exp.fulfill()
+        }
+
+        waitForExpectations(timeout: 10)
+    }
+
+    func test__WebView_Hidden_For_PassiveKey() {
+        let exp = expectation(description: "webview invisible")
+        let manager = HCaptchaWebViewManager(messageBody: "{token: key}",
+                                             apiKey: apiKey,
+                                             passiveKey: true)
+
+        manager.validate(on: presenterView) { _ in
+            XCTAssertTrue(manager.webView.isHidden)
             exp.fulfill()
         }
 

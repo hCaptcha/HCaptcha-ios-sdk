@@ -95,6 +95,9 @@ struct HCaptchaConfig {
     /// Custom theme JSON string.
     let customTheme: String?
 
+    /// For passive key webview stays hidden
+    let passiveKey: Bool?
+
     /// Return actual theme value based on init params. It must return valid JS object.
     var actualTheme: String {
         self.customTheme ?? "\"\(theme)\""
@@ -144,7 +147,8 @@ struct HCaptchaConfig {
                 imghost: URL?,
                 host: String?,
                 theme: String,
-                customTheme: String?) throws {
+                customTheme: String?,
+                passiveKey: Bool?) throws {
         guard let filePath = HCaptchaConfig.bundle.path(forResource: "hcaptcha", ofType: "html") else {
             throw HCaptchaError.htmlLoadError
         }
@@ -187,6 +191,7 @@ struct HCaptchaConfig {
         self.host = host
         self.theme = theme
         self.customTheme = customTheme
+        self.passiveKey = passiveKey
     }
 
     /**

@@ -81,7 +81,10 @@ internal class HCaptchaWebViewManager {
     fileprivate var observer: NSObjectProtocol?
 
     /// Base URL for WebView
-    fileprivate var baseURL: URL!
+    fileprivate let baseURL: URL!
+
+    /// If passiveKey is true WebView will stay hidden
+    fileprivate let passiveKey: Bool
 
     /// Actual HTML
     fileprivate var formattedHTML: String!
@@ -113,8 +116,9 @@ internal class HCaptchaWebViewManager {
          - theme: Widget theme, value must be valid JS Object or String with brackets
      */
     init(html: String, apiKey: String, baseURL: URL, endpoint: URL,
-         size: HCaptchaSize, rqdata: String?, theme: String) {
+         size: HCaptchaSize, rqdata: String?, theme: String, passiveKey: Bool) {
         self.baseURL = baseURL
+        self.passiveKey = passiveKey
         self.decoder = HCaptchaDecoder { [weak self] result in
             self?.handle(result: result)
         }
@@ -140,8 +144,10 @@ internal class HCaptchaWebViewManager {
             return
         }
 #endif
-        webView.isHidden = false
-        view.addSubview(webView)
+        if !passiveKey {
+            webView.isHidden = false
+            view.addSubview(webView)
+        }
 
         executeJS(command: .execute)
     }

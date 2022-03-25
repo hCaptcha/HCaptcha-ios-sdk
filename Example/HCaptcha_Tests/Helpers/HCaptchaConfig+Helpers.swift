@@ -30,6 +30,7 @@ extension HCaptchaConfig {
                       imghost: URL(string: "https://imgs.hcaptcha.com")!,
                       host: host,
                       theme: "light",
-                      customTheme: customTheme)
+                      customTheme: customTheme,
+                      passiveKey: false)
     }
 }
