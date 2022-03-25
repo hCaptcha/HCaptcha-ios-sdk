@@ -9,13 +9,11 @@ on:
   repository_dispatch:
 
 jobs:
-  test_macOS:
-    name: Test HCaptcha
+  sdk:
+    name: Test SDK
     runs-on: macOS-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       - name: Use Xcode 12.4
         run: sudo xcode-select -switch /Applications/Xcode_12.4.app
@@ -28,24 +26,58 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-carthage-v2
 
-      - name: Prepare tools
-        run: |
-          brew upgrade carthage
+      - run: brew upgrade carthage
 
-      - name: Setup ruby
-        uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7.2
           bundler-cache: true
 
-      - name: Run tests
-        run: bundle exec fastlane ci
+      - run: bundle exec fastlane ci
 
-      - name: Compile samples
-        run: bundle exec fastlane ios samples_build
+  samples:
+    name: Build Samples
+    needs: sdk
+    runs-on: macos-11
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode: [ '12.4' ]
+        experimental: [ false ]
+        include:
+          - xcode: '13.2.1'
+            experimental: true
+    steps:
+      - uses: actions/checkout@v2
 
-      - if: startsWith(github.ref, 'refs/tags')
-        name: Release
+      - name: Use Xcode ${{ matrix.xcode }}
+        run: sudo xcode-select -switch /Applications/Xcode_${{ matrix.xcode }}.app
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.2
+          bundler-cache: true
+
+      - run: bundle exec pod install
+        working-directory: Example
+
+      - run: bundle exec fastlane ios samples_build
+
+  release:
+    name: Relase
+    if: startsWith(github.ref, 'refs/tags')
+    needs: samples
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.2
+          bundler-cache: true
+
+      - name: Release
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
