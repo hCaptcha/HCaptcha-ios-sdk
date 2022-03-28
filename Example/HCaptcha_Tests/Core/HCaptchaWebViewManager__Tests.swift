@@ -34,13 +34,14 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
     // MARK: Validate
 
     func test__Validate__Token() {
+        let exp0 = expectation(description: "should call configureWebView")
         let exp1 = expectation(description: "load token")
         var result1: HCaptchaResult?
 
         // Validate
         let manager = HCaptchaWebViewManager(messageBody: "{token: key}", apiKey: apiKey)
         manager.configureWebView { _ in
-            XCTFail("should not ask to configure the webview")
+            exp0.fulfill()
         }
 
         manager.validate(on: presenterView) { response in
@@ -95,18 +96,19 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
 
     func test__Validate__Message_Error() {
+        let exp0 = expectation(description: "should call configureWebView")
         var result: HCaptchaResult?
-        let exp = expectation(description: "message error")
+        let exp1 = expectation(description: "message error")
 
         // Validate
         let manager = HCaptchaWebViewManager(messageBody: "\"foobar\"")
         manager.configureWebView { _ in
-            XCTFail("should not ask to configure the webview")
+            exp0.fulfill()
         }
 
         manager.validate(on: presenterView, resetOnError: false) { response in
             result = response
-            exp.fulfill()
+            exp1.fulfill()
         }
 
         waitForExpectations(timeout: 10)
@@ -119,17 +121,18 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
     func test__Validate__JS_Error() {
         var result: HCaptchaResult?
-        let exp = expectation(description: "js error")
+        let exp0 = expectation(description: "should call configureWebView")
+        let exp1 = expectation(description: "js error")
 
         // Validate
         let manager = HCaptchaWebViewManager(messageBody: "foobar")
         manager.configureWebView { _ in
-            XCTFail("should not ask to configure the webview")
+            exp0.fulfill()
         }
 
         manager.validate(on: presenterView, resetOnError: false) { response in
             result = response
-            exp.fulfill()
+            exp1.fulfill()
         }
 
         waitForExpectations(timeout: 10)
@@ -214,14 +217,14 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         let exp0 = expectation(description: "configure webview 0")
 
         let manager = HCaptchaWebViewManager(messageBody: "{action: \"showHCaptcha\"}")
-        manager.validate(on: presenterView) { _ in
-            XCTFail("should not call completion")
-        }
-
         // Configure Webview
         manager.configureWebView { _ in
             manager.webView.evaluateJavaScript("execute();") { XCTAssertNil($1) }
             exp0.fulfill()
+        }
+
+        manager.validate(on: presenterView) { _ in
+            XCTFail("should not call completion")
         }
 
         waitForExpectations(timeout: 10)
@@ -286,18 +289,19 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
     // MARK: Setup
 
     func test__Key_Setup() {
-        let exp = expectation(description: "setup key")
+        let exp0 = expectation(description: "should call configureWebView")
+        let exp1 = expectation(description: "setup key")
         var result: HCaptchaResult?
 
         // Validate
         let manager = HCaptchaWebViewManager(messageBody: "{token: key}", apiKey: apiKey)
         manager.configureWebView { _ in
-            XCTFail("should not ask to configure the webview")
+            exp0.fulfill()
         }
 
         manager.validate(on: presenterView) { response in
             result = response
-            exp.fulfill()
+            exp1.fulfill()
         }
 
         waitForExpectations(timeout: 10)
@@ -308,18 +312,19 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
     }
 
     func test__Endpoint_Setup() {
-        let exp = expectation(description: "setup endpoint")
+        let exp0 = expectation(description: "should call configureWebView")
+        let exp1 = expectation(description: "setup endpoint")
         let endpoint = URL(string: "https://some.endpoint")!
         var result: HCaptchaResult?
 
         let manager = HCaptchaWebViewManager(messageBody: "{token: endpoint}", endpoint: endpoint)
         manager.configureWebView { _ in
-            XCTFail("should not ask to configure the webview")
+            exp0.fulfill()
         }
 
         manager.validate(on: presenterView) { response in
             result = response
-            exp.fulfill()
+            exp1.fulfill()
         }
 
         waitForExpectations(timeout: 10)
@@ -332,13 +337,14 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
     // MARK: Reset
 
     func test__Reset() {
+        let exp0 = expectation(description: "should call configureWebView #1")
         let exp1 = expectation(description: "fail on first execution")
         var result1: HCaptchaResult?
 
         // Validate
         let manager = HCaptchaWebViewManager(messageBody: "{token: key}", apiKey: apiKey, shouldFail: true)
         manager.configureWebView { _ in
-            XCTFail("should not ask to configure the webview")
+            exp0.fulfill()
         }
 
         // Error
@@ -348,38 +354,50 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         }
 
         waitForExpectations(timeout: 10)
+
+        let exp2 = expectation(description: "should call configureWebView #2")
+        manager.configureWebView { _ in
+            exp2.fulfill()
+        }
+
         XCTAssertEqual(result1?.error, .wrongMessageFormat)
 
         // Resets and tries again
-        let exp2 = expectation(description: "validates after reset")
-        var result2: HCaptchaResult?
+        let exp3 = expectation(description: "validates after reset")
+        var result3: HCaptchaResult?
 
         manager.reset()
         manager.validate(on: presenterView, resetOnError: false) { result in
-            result2 = result
-            exp2.fulfill()
+            result3 = result
+            exp3.fulfill()
         }
 
         waitForExpectations(timeout: 10)
 
-        XCTAssertNil(result2?.error)
-        XCTAssertEqual(result2?.token, apiKey)
+        XCTAssertNil(result3?.error)
+        XCTAssertEqual(result3?.token, apiKey)
     }
 
     func test__Validate__Reset_On_Error() {
-        let exp = expectation(description: "fail on first execution")
+        let exp0 = expectation(description: "should call configureWebView")
+        var exp0Count = 0
+        let exp1 = expectation(description: "fail on first execution")
         var result: HCaptchaResult?
 
         // Validate
         let manager = HCaptchaWebViewManager(messageBody: "{token: key}", apiKey: apiKey, shouldFail: true)
         manager.configureWebView { _ in
-            XCTFail("should not ask to configure the webview")
+            exp0Count += 1
+            if exp0Count == 2 {
+                exp0.fulfill()
+            }
         }
 
         // Error
         manager.validate(on: presenterView, resetOnError: true) { response in
             result = response
-            exp.fulfill()
+
+            exp1.fulfill()
         }
 
         waitForExpectations(timeout: 10)
@@ -461,7 +479,6 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         let manager = HCaptchaWebViewManager(messageBody: "{action: \"showHCaptcha\"}",
                                              apiKey: apiKey,
                                              theme: "[Object object]") // invalid theme
-        // manager.webView.frame = presenterView.bounds
         manager.shouldResetOnError = false
         manager.configureWebView { _ in
             XCTFail("should not ask to configure the webview")

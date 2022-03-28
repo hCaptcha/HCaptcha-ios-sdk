@@ -140,7 +140,6 @@ internal class HCaptchaWebViewManager {
             return
         }
 #endif
-        webView.isHidden = false
         view.addSubview(webView)
 
         executeJS(command: .execute)
@@ -202,15 +201,18 @@ fileprivate extension HCaptchaWebViewManager {
             handle(error: error)
 
         case .showHCaptcha:
-            DispatchQueue.once(token: configureWebViewDispatchToken) { [weak self] in
-                guard let `self` = self else { return }
-                self.configureWebView?(self.webView)
-            }
+            webView.isHidden = false
 
         case .didLoad:
             didFinishLoading = true
             if completion != nil {
                 executeJS(command: .execute)
+            }
+            if configureWebView != nil {
+                DispatchQueue.once(token: configureWebViewDispatchToken) { [weak self] in
+                    guard let `self` = self else { return }
+                    self.configureWebView?(self.webView)
+                }
             }
 
         case .log(let message):
