@@ -182,7 +182,7 @@ platform :ios do
 
     set_github_release(
       repository_name: "hCaptcha/HCaptcha-ios-sdk",
-      api_token: ENV["GITHUB_TOKEN"],
+      api_bearer: ENV["GITHUB_TOKEN"],
       tag_name: tag,
       name: tag,
       description: changelog,
