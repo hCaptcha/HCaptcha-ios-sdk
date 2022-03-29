@@ -1,3 +1,7 @@
+# 2.1.0
+
+- Change: Now `configureWebView` is calling after WebView loading finished, before this it was called once `hCaptcha` showed
+
 # 2.0.0
 
 - **Breaking Change**:  error codes have been renamed and expanded to conform with the Android SDK.
