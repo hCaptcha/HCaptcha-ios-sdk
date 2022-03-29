@@ -1,3 +1,7 @@
+# 2.1.0
+
+- Change: you no longer need to set `webview.isHidden = true` on passive sitekeys. The webview is only unhidden if a visual challenge is shown, and `configureWebView` is now called after WebView finishes loading.
+
 # 2.0.0
 
 - **Breaking Change**:  error codes have been renamed and expanded to conform with the Android SDK.

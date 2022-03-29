@@ -35,9 +35,10 @@ class HCaptcha_Rx__Tests: XCTestCase {
 
 
     func test__Validate__Token() {
+        let exp = expectation(description: "should call configureWebView")
         let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager(messageBody: "{token: key}", apiKey: apiKey))
         hcaptcha.configureWebView { _ in
-            XCTFail("should not ask to configure the webview")
+            exp.fulfill()
         }
 
         do {
@@ -52,6 +53,7 @@ class HCaptcha_Rx__Tests: XCTestCase {
         catch let error {
             XCTFail(error.localizedDescription)
         }
+        waitForExpectations(timeout: 0)
     }
 
 
@@ -82,9 +84,10 @@ class HCaptcha_Rx__Tests: XCTestCase {
 
 
     func test__Validate__Error() {
+        let exp = expectation(description: "should call configureWebView")
         let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager(messageBody: "\"foobar\"", apiKey: apiKey))
         hcaptcha.configureWebView { _ in
-            XCTFail("should not ask to configure the webview")
+            exp.fulfill()
         }
 
         do {
@@ -98,6 +101,7 @@ class HCaptcha_Rx__Tests: XCTestCase {
         catch let error {
             XCTAssertEqual(error as? HCaptchaError, .wrongMessageFormat)
         }
+        waitForExpectations(timeout: 0)
     }
 
     // MARK: - Did Finish Loading
@@ -182,16 +186,17 @@ class HCaptcha_Rx__Tests: XCTestCase {
     // MARK: - Dispose
 
     func test__Dispose() {
-        let exp = expectation(description: "stop loading")
+        let exp0 = expectation(description: "should call configureWebView")
+        let exp1 = expectation(description: "stop loading")
 
         // Stop
         let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager(messageBody: "{log: \"foo\"}"))
         hcaptcha.configureWebView { _ in
-            XCTFail("should not ask to configure the webview")
+            exp0.fulfill()
         }
 
         let disposable = hcaptcha.rx.validate(on: presenterView)
-            .do(onDispose: exp.fulfill)
+            .do(onDispose: exp1.fulfill)
             .subscribe { _ in
                 XCTFail("should not validate")
             }
@@ -204,13 +209,19 @@ class HCaptcha_Rx__Tests: XCTestCase {
     // MARK: - Reset
 
     func test__Reset() {
+        var expCount = 0
+        let exp = expectation(description: "should call configureWebView")
+
         // Validate
         let hcaptcha = HCaptcha(
             manager: HCaptchaWebViewManager(messageBody: "{token: key}", apiKey: apiKey, shouldFail: true)
         )
 
         hcaptcha.configureWebView { _ in
-            XCTFail("should not ask to configure the webview")
+            expCount += 1
+            if expCount == 2 {
+                exp.fulfill()
+            }
         }
 
         do {
@@ -238,16 +249,24 @@ class HCaptcha_Rx__Tests: XCTestCase {
         catch let error {
             XCTFail(error.localizedDescription)
         }
+
+        waitForExpectations(timeout: 0)
     }
 
     func test__Validate__Reset_On_Error() {
+        var expCount = 0
+        let exp = expectation(description: "should call configureWebView")
+
         // Validate
         let hcaptcha = HCaptcha(
             manager: HCaptchaWebViewManager(messageBody: "{token: key}", apiKey: apiKey, shouldFail: true)
         )
 
         hcaptcha.configureWebView { _ in
-            XCTFail("should not ask to configure the webview")
+            expCount += 1
+            if expCount == 2 {
+                exp.fulfill()
+            }
         }
 
         do {
@@ -261,5 +280,7 @@ class HCaptcha_Rx__Tests: XCTestCase {
         catch let error {
             XCTFail(error.localizedDescription)
         }
+
+        waitForExpectations(timeout: 0)
     }
 }

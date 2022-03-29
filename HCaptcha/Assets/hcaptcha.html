@@ -61,8 +61,10 @@
         try {
           if ("${size}" === 'invisible') {
             hcaptcha.execute(getExecuteOpts());
+          } else {
+            post({ action: "showHCaptcha" });
           }
-          post({ action: "showHCaptcha" });
+
           console.log("showing challenge");
         } catch (e) {
           console.log("failed to show challenge");
@@ -97,6 +99,11 @@
         post({ error: 30 });
       };
 
+      var openCallback = function(e) {
+        console.log("challenge opened", e);
+        post({ action: "showHCaptcha" });
+      };
+
       var onloadCallback = function() {
         try {
           console.log("challenge onload starting");
@@ -108,10 +115,10 @@
             "close-callback": closeCallback,
             "expired-callback": expiredCallback,
             "chalexpired-callback": expiredCallback,
-            "error-callback": errorCallback
+            "error-callback": errorCallback,
+            "open-callback": openCallback,
           });
 
-          // have loaded by this point; render is sync.
           post({ action: "didLoad" });
         } catch (e) {
           console.log("challenge failed to render");
