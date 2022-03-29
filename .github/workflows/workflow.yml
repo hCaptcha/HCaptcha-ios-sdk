@@ -4,7 +4,11 @@ on:
   push:
     branches: [ master, main ]
     tags: [ '[1-9]+.[0-9]+.[0-9]+*' ]
+    paths-ignore:
+      - '**.md'
   pull_request:
+    paths-ignore:
+      - '**.md'
   workflow_dispatch:
   repository_dispatch:
 
