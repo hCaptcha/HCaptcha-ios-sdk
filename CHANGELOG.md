@@ -1,6 +1,6 @@
 # 2.1.0
 
-- Change: Now `configureWebView` is calling after WebView loading finished, before this it was called once `hCaptcha` showed
+- Change: you no longer need to set `webview.isHidden = true` on passive sitekeys. The webview is only unhidden if a visual challenge is shown, and `configureWebView` is now called after WebView finishes loading.
 
 # 2.0.0
 
