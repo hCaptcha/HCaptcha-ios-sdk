@@ -1,6 +1,6 @@
 # 2.1.1
 
-- Infrastructure: CI now test examples compilation for Xcode 12.x and 13.x
+- Infrastructure: CI now tests example app compilation for both Xcode 12.x and 13.x
 
 # 2.1.0
 
