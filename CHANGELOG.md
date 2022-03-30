@@ -1,3 +1,7 @@
+# 2.1.1
+
+- Infrastructure: CI now test examples compilation for Xcode 12.x and 13.x
+
 # 2.1.0
 
 - Change: you no longer need to set `webview.isHidden = true` on passive sitekeys. The webview is only unhidden if a visual challenge is shown, and `configureWebView` is now called after WebView finishes loading.
