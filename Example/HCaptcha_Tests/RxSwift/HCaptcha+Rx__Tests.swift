@@ -201,7 +201,7 @@ class HCaptcha_Rx__Tests: XCTestCase {
                 XCTFail("should not validate")
             }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: disposable.dispose)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: disposable.dispose)
 
         waitForExpectations(timeout: 10)
     }
