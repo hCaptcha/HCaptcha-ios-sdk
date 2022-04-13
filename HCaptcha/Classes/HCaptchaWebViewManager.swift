@@ -296,6 +296,9 @@ fileprivate extension HCaptchaWebViewManager {
                     self?.completion?(HCaptchaResult(error: error))
                     self?.lastError = nil
                 }
+                if error == .networkError {
+                    self.webView.loadHTMLString(formattedHTML, baseURL: baseURL)
+                }
             }
             return
         }
