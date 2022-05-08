@@ -216,11 +216,45 @@ This iOS SDK assumes by default that you want an "invisible" checkbox, i.e. that
 
 If you instead want the classic "normal" or "compact" checkbox behavior of showing a checkbox to tick and then either closing or showing a challenge, you can pass `size` to the HCaptcha initializer.
 
-```
+```swift
 let hcaptcha = try? HCaptcha(size: .compact)
 ```
 
 And you will now get the desired behavior.
+
+### SDK Events
+
+API allows you to listen for events from the SDK. At the moment the SDK supports:
+
+ - `open` event, which fired once hCaptcha is opened (visible to an app user)
+
+You can implement this with code below:
+
+``` swift
+let hcaptcha = try? HCaptcha(...)
+...
+hcaptcha.onEvent { (event, data) in
+    if event == .open {
+        ...
+    }
+}
+```
+
+For `RxSwift`:
+
+```swift
+let hcaptcha = try? HCaptcha(...)
+...
+hcaptcha.rx.events()
+    .subscribe { [weak self] rxevent in
+        let event = rxevent.element?.0
+
+        if event == .open {
+            ...
+        }
+    }
+    ...
+```
 
 ### SwiftUI Example
 

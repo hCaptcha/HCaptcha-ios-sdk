@@ -35,6 +35,9 @@
                   post({"log": rqdata});
               }
               post(${message});
+              setTimeout(function() {
+                  post({ action: "onOpen" });
+              }, 100);
           }
       };
 

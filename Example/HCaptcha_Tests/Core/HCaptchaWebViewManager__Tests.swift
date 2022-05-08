@@ -491,4 +491,33 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         waitForExpectations(timeout: 10)
     }
+
+    func test__On_Event_Callback() {
+        let exp0 = expectation(description: "should call configureWebView")
+        let exp1 = expectation(description: "setup key")
+        let exp2 = expectation(description: "hcaptcha opened")
+        var result: HCaptchaResult?
+
+        // Validate
+        let manager = HCaptchaWebViewManager(messageBody: "{token: key}", apiKey: apiKey)
+        manager.configureWebView { _ in
+            exp0.fulfill()
+        }
+        manager.onEvent = { (event, data) in
+            XCTAssertNil(data)
+            XCTAssertEqual(event, .open)
+            exp1.fulfill()
+        }
+
+        manager.validate(on: presenterView) { response in
+            result = response
+            exp2.fulfill()
+        }
+
+        waitForExpectations(timeout: 10)
+
+        XCTAssertNotNil(result)
+        XCTAssertNil(result?.error)
+        XCTAssertEqual(result?.token, apiKey)
+    }
 }

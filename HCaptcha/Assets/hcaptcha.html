@@ -102,6 +102,7 @@
       var openCallback = function(e) {
         console.log("challenge opened", e);
         post({ action: "showHCaptcha" });
+        post({ action: "onOpen" });
       };
 
       var onloadCallback = function() {

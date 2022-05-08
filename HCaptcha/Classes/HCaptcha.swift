@@ -103,6 +103,16 @@ public class HCaptcha: NSObject {
     }
 
     /**
+     - parameter reciever: A callback function
+
+       onEvent allow to subscribe to SDK's events
+     */
+    @objc
+    public func onEvent(_ reciever: ((HCaptchaEvent, Any?) -> Void)? = nil) {
+        manager.onEvent = reciever
+    }
+
+    /**
      - parameters:
          - view: The view that should present the webview.
          - resetOnError: If HCaptcha should be reset if it errors. Defaults to `true`.

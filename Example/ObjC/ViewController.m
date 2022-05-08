@@ -31,6 +31,17 @@
         webView.frame = self.view.bounds;
         self.webView = webView;
     }];
+
+    [self.hCaptcha onEvent:^(enum HCaptchaEvent event, id _Nullable _) {
+        if (event == HCaptchaEventOpen) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"On Event" message:@"Opened" preferredStyle:UIAlertControllerStyleAlert];
+            [self presentViewController:alert animated: YES completion:^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [alert dismissViewControllerAnimated:YES completion:nil];
+                });
+            }];
+        }
+    }];
 }
 
 - (IBAction) didPressButton:(UIButton *)button {

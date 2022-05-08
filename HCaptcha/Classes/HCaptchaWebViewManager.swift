@@ -44,6 +44,9 @@ internal class HCaptchaWebViewManager {
     /// Sends the result message
     var completion: ((HCaptchaResult) -> Void)?
 
+    /// Called when a challenge become visible
+    var onEvent: ((HCaptchaEvent, Any?) -> Void)?
+
     /// Notifies the JS bundle has finished loading
     var onDidFinishLoading: (() -> Void)? {
         didSet {
@@ -214,6 +217,9 @@ fileprivate extension HCaptchaWebViewManager {
                     self.configureWebView?(self.webView)
                 }
             }
+
+        case .onOpen:
+            onEvent?(.open, nil)
 
         case .log(let message):
             #if DEBUG
