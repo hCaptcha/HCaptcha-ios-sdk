@@ -224,11 +224,11 @@ And you will now get the desired behavior.
 
 ### SDK Events
 
-API allows you to listen for events from the SDK. At the moment the SDK supports:
+This SDK allows you to receive interaction events, for your analytics via the `onEvent` method. At the moment the SDK supports:
 
- - `open` event, which fired once hCaptcha is opened (visible to an app user)
+ - `open` event, which fires when hCaptcha is opened and a challenge is visible to an app user
 
-You can implement this with code below:
+You can implement this with the code below:
 
 ``` swift
 let hcaptcha = try? HCaptcha(...)
