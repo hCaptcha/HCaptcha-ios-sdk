@@ -28,6 +28,9 @@ internal class HCaptchaDecoder: NSObject {
         /// Did finish loading resources
         case didLoad
 
+        /// Did a challenge become visible
+        case onOpen
+
         /// Logs a string onto the console
         case log(String)
     }
@@ -103,6 +106,9 @@ fileprivate extension HCaptchaDecoder.Result {
 
             case "didLoad":
                 return .didLoad
+
+            case "onOpen":
+                return .onOpen
 
             default:
                 break

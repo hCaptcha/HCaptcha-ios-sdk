@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F833B7F271DC69C00E4DAB2 /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */; };
 		1F833B80271DC69C00E4DAB2 /* RxSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E634944A2828856300130AC5 /* HCaptchaEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63494492828856300130AC5 /* HCaptchaEvent.swift */; };
 		E65145E327786BDB0079668A /* HCaptchaConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65145E227786BDB0079668A /* HCaptchaConfig.swift */; };
 		E6DB9EA827B15954008F0327 /* HCaptchaDebugInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DB9EA727B15954008F0327 /* HCaptchaDebugInfo.swift */; };
 		F206BAB51F8D3DE900A25807 /* HCaptcha-Carthage.h in Headers */ = {isa = PBXBuildFile; fileRef = F206BAB31F8D3DE900A25807 /* HCaptcha-Carthage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -50,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
+		E63494492828856300130AC5 /* HCaptchaEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaEvent.swift; sourceTree = "<group>"; };
 		E65145E227786BDB0079668A /* HCaptchaConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaConfig.swift; sourceTree = "<group>"; };
 		E6DB9EA727B15954008F0327 /* HCaptchaDebugInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaDebugInfo.swift; sourceTree = "<group>"; };
 		F206BAB01F8D3DE900A25807 /* HCaptcha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HCaptcha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,6 +160,7 @@
 		F24EA1D71F9683F5001DEC17 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E63494492828856300130AC5 /* HCaptchaEvent.swift */,
 				E65145E227786BDB0079668A /* HCaptchaConfig.swift */,
 				F24EA1D81F9683F5001DEC17 /* HCaptchaDecoder.swift */,
 				E6DB9EA727B15954008F0327 /* HCaptchaDebugInfo.swift */,
@@ -309,6 +312,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E634944A2828856300130AC5 /* HCaptchaEvent.swift in Sources */,
 				F24EA1E51F968403001DEC17 /* HCaptchaError.swift in Sources */,
 				E65145E327786BDB0079668A /* HCaptchaConfig.swift in Sources */,
 				F24EA1E21F968403001DEC17 /* HCaptchaDecoder.swift in Sources */,

@@ -75,6 +75,25 @@ class ViewController: UIViewController {
             .subscribe()
             .disposed(by: disposeBag)
 
+        hcaptcha.rx.events()
+            .debug("events")
+            .subscribe { [weak self] rxevent in
+                let event = rxevent.element?.0
+                _ = rxevent.element?.1
+
+                if event == .open {
+                    let alertController = UIAlertController(title: "On Event",
+                                                            message: "Opened",
+                                                            preferredStyle: .alert)
+                    self?.present(alertController, animated: true) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            alertController.dismiss(animated: true, completion: nil)
+                        }
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+
         let validate = hcaptcha.rx.validate(on: view, resetOnError: false)
             .catch { error in
                 return .just("Error \(error)")

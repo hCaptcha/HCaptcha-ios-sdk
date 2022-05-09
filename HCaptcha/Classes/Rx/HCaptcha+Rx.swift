@@ -16,6 +16,22 @@ import HCaptcha
 public extension Reactive where Base: HCaptcha {
 
     /**
+     Returns observable which allows to listen for different events from SDK
+     */
+    func events() -> Observable<(HCaptchaEvent, Any?)> {
+        return Observable<(HCaptchaEvent, Any?)>.create { [weak base] observer -> Disposable in
+            base?.onEvent { (event, data) in
+                observer.onNext((event, data))
+            }
+
+            return Disposables.create {
+                observer.onCompleted()
+                base?.onEvent(nil)
+            }
+        }
+    }
+
+    /**
      - parameters:
         - view: The view that should present the webview.
         - resetOnError: If HCaptcha should be reset if it errors. Defaults to `true`
