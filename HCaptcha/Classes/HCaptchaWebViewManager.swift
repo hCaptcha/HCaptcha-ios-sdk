@@ -44,7 +44,7 @@ internal class HCaptchaWebViewManager {
     /// Sends the result message
     var completion: ((HCaptchaResult) -> Void)?
 
-    /// Called when a challenge become visible
+    /// Called (currently) when a challenge becomes visible
     var onEvent: ((HCaptchaEvent, Any?) -> Void)?
 
     /// Notifies the JS bundle has finished loading
