@@ -1,3 +1,7 @@
+# 2.2.0
+
+- Feature: the SDK allows you to receive interaction events for your analytics via the `onEvent` method ([#72](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/72))
+
 # 2.1.1
 
 - Infrastructure: CI now tests example app compilation for both Xcode 12.x and 13.x
