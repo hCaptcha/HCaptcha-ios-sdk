@@ -3,6 +3,7 @@ excluded:
   - Example/Pods
   - vendor
   - .build
+  - .lint
 
 disabled_rules:
   - nesting
