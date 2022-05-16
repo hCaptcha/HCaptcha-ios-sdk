@@ -315,6 +315,12 @@ struct HCaptchaView: View {
 
 `HCaptcha` can be used from Objective-C code. Check out the [Example Project](./Example/ObjC)
 
+
+### Compiled size: impact on including in your app
+
+HCaptcha pod size: **90** KB as of May 16 2022. You can always see the latest number in the CI logs by searching for the "pod size" string.
+
+
 ## License
 
 HCaptcha is available under the MIT license. See the LICENSE file for more info.
@@ -327,6 +333,7 @@ A. Most likely you have not included an asset in your build. Please double-check
 
 Q. I'm getting "xcconfig: unable to open file" after upgrading the SDK. (Or changing SDK and running Example app.)
 A: In your app or the Example app dir, run `pod deintegrate && pod install` to refresh paths.
+
 
 ### Inspiration
 
