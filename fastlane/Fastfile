@@ -2,6 +2,8 @@ fastlane_version "2.196"
 
 default_platform :ios
 
+max_pod_size_kb = 150
+
 platform :ios do
   skip_docs
 
@@ -17,6 +19,7 @@ platform :ios do
     pod_lint
     carthage_lint
     spm_build
+    pod_size
   end
 
   desc "Runs all the tests"
@@ -130,6 +133,42 @@ platform :ios do
         package_path: "package.json",
         auto_install_dependencies: true
       )
+    end
+  end
+
+  desc "Cocoapods size check"
+  lane :pod_size do
+    cocoapods_size_repo = Pathname.new "../.lint/cocoapods-size"
+    unless cocoapods_size_repo.exist?
+      cocoapods_size_repo.parent.mkpath
+      sh("git clone https://github.com/google/cocoapods-size #{cocoapods_size_repo}")
+    end
+
+    Dir.chdir(cocoapods_size_repo) do
+      config_json = "source_config.json"
+      File.write(config_json, {
+                                pods:[
+                                  {
+                                    sdk: "HCaptcha",
+                                    path: Pathname.getwd.parent.parent
+                                  }
+                                ]
+                              }.to_json)
+      output_json = "result.json"
+
+      sh ["./measure_cocoapod_size.py",
+          "--cocoapods HCaptcha",
+          "--cocoapods_source_config #{config_json}",
+          "--mode swift",
+          "--json #{output_json}"].join(" ")
+
+      output = JSON.parse(File.read(output_json))
+
+      pod_size_kb = output["combined_pods_extra_size"].to_int / 1024
+
+      UI.user_error!("HCaptcha pod size size exceeded! #{pod_size_kb}KB > #{max_pod_size_kb}KB") if pod_size_kb > max_pod_size_kb
+
+      puts("HCaptcha pod size is #{pod_size_kb}KB")
     end
   end
 
