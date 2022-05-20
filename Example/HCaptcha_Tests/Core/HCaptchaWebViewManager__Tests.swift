@@ -492,7 +492,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         waitForExpectations(timeout: 10)
     }
 
-    func test__On_Event_Callback() {
+    func test__OnEvent_Open_Callback() {
         let exp0 = expectation(description: "should call configureWebView")
         let exp1 = expectation(description: "setup key")
         let exp2 = expectation(description: "hcaptcha opened")
@@ -519,5 +519,32 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         XCTAssertNotNil(result)
         XCTAssertNil(result?.error)
         XCTAssertEqual(result?.token, apiKey)
+    }
+
+    func test__OnEvent_Without_Validation() {
+        let testParams: [(String, HCaptchaEvent)] = [("onChallengeExpired", .challengeExpired),
+                                                     ("onExpired", .expired),
+                                                     ("onClose", .close)]
+
+        testParams.forEach { (action, expectedEventType) in
+            let exp0 = expectation(description: "should call configureWebView")
+            let exp = expectation(description: "challenge expired received")
+
+            let manager = HCaptchaWebViewManager(messageBody: "{action: \"\(action)\"}")
+            manager.configureWebView { _ in
+                exp0.fulfill()
+            }
+            manager.onEvent = { (event, data) in
+                XCTAssertNil(data)
+                XCTAssertEqual(expectedEventType, event)
+                exp.fulfill()
+            }
+
+            manager.validate(on: presenterView) { _ in
+                XCTFail("should not validate")
+            }
+
+            waitForExpectations(timeout: 5)
+        }
     }
 }

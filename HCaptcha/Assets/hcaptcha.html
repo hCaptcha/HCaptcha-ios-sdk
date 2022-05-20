@@ -84,9 +84,12 @@
         post({ token: token });
       };
 
-      var expiredCallback = function() {
-        console.log("expired challenge");
-        post({ error: 15 });
+      var expiredCallback = function(action) {
+        return function() {
+          console.log("expired challenge");
+          post({ error: 15 });
+          post({ action: action });
+        };
       };
 
       var errorCallback = function(error) {
@@ -97,6 +100,7 @@
       var closeCallback = function() {
         console.log("challenge closed by user");
         post({ error: 30 });
+        post({ action: "onClose" });
       };
 
       var openCallback = function(e) {
@@ -114,8 +118,8 @@
             "theme": ${theme},
             "callback": onPass,
             "close-callback": closeCallback,
-            "expired-callback": expiredCallback,
-            "chalexpired-callback": expiredCallback,
+            "expired-callback": expiredCallback("onExpired"),
+            "chalexpired-callback": expiredCallback("onChallengeExpired"),
             "error-callback": errorCallback,
             "open-callback": openCallback,
           });

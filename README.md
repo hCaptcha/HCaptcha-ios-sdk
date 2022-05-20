@@ -226,7 +226,10 @@ And you will now get the desired behavior.
 
 This SDK allows you to receive interaction events, for your analytics via the `onEvent` method. At the moment the SDK supports:
 
- - `open` event, which fires when hCaptcha is opened and a challenge is visible to an app user
+ - `open`  fires when hCaptcha is opened and a challenge is visible to an app user
+ - `expired` fires when the passcode response expires and the user must re-verify
+ - `challengeExpired` fires when the user display of a challenge times out with no answer
+ - `close` fires when the user dismisses a challenge.
 
 You can implement this with the code below:
 

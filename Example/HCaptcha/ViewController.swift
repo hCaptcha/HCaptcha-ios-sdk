@@ -81,14 +81,12 @@ class ViewController: UIViewController {
                 let event = rxevent.element?.0
                 _ = rxevent.element?.1
 
-                if event == .open {
-                    let alertController = UIAlertController(title: "On Event",
-                                                            message: "Opened",
-                                                            preferredStyle: .alert)
-                    self?.present(alertController, animated: true) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            alertController.dismiss(animated: true, completion: nil)
-                        }
+                let alertController = UIAlertController(title: "On Event",
+                                                        message: event?.rawValue,
+                                                        preferredStyle: .alert)
+                self?.present(alertController, animated: true) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        alertController.dismiss(animated: true, completion: nil)
                     }
                 }
             }

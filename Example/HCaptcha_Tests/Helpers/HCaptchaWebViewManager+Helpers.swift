@@ -18,7 +18,7 @@ extension HCaptchaWebViewManager {
     }()
 
     convenience init(
-        messageBody: String = "",
+        messageBody: String = "undefined",
         apiKey: String? = nil,
         endpoint: URL? = nil,
         shouldFail: Bool = false,
