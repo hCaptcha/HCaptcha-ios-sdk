@@ -470,7 +470,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         manager.onDidFinishLoading = exp.fulfill
         manager.reset()
 
-        waitForExpectations(timeout: 3)
+        waitForExpectations(timeout: 5)
     }
 
     func test__Invalid_Theme() {
