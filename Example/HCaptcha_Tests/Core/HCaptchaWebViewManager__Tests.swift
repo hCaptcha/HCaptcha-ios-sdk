@@ -381,7 +381,8 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
     func test__Validate__Reset_On_Error() {
         let exp0 = expectation(description: "should call configureWebView")
         var exp0Count = 0
-        let exp1 = expectation(description: "fail on first execution")
+        let exp1 = expectation(description: "should call onEvent")
+        let exp2 = expectation(description: "fail on first execution")
         var result: HCaptchaResult?
 
         // Validate
@@ -393,11 +394,17 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             }
         }
 
+        manager.onEvent = { (event, error) in
+            XCTAssertEqual(.error, event)
+            XCTAssertEqual(HCaptchaError.wrongMessageFormat, error as? HCaptchaError)
+            exp1.fulfill()
+        }
+
         // Error
         manager.validate(on: presenterView, resetOnError: true) { response in
             result = response
 
-            exp1.fulfill()
+            exp2.fulfill()
         }
 
         waitForExpectations(timeout: 10)

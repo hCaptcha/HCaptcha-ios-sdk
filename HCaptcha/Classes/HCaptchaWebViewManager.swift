@@ -202,6 +202,7 @@ fileprivate extension HCaptchaWebViewManager {
 
         case .error(let error):
             handle(error: error)
+            onEvent?(.error, error)
 
         case .showHCaptcha:
             webView.isHidden = false

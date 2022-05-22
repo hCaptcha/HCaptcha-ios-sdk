@@ -15,6 +15,7 @@ public enum HCaptchaEvent: Int, RawRepresentable {
     case expired
     case challengeExpired
     case close
+    case error
 
     public typealias RawValue = String
 
@@ -28,6 +29,8 @@ public enum HCaptchaEvent: Int, RawRepresentable {
             return "challengeExpired"
         case .close:
             return "close"
+        case .error:
+            return "error"
         }
     }
 
@@ -41,21 +44,10 @@ public enum HCaptchaEvent: Int, RawRepresentable {
             self = .challengeExpired
         case "close":
             self = .close
+        case "error":
+            self = .error
         default:
             return nil
         }
     }
-
-//    public init?(result: HCaptchaDecoder.Result) {
-//        switch result {
-//        case .onOpen
-//            self = .open
-//        case .onChallengeExpired
-//            self = .challengeExpired
-//        case .onExpired
-//            self = .expired
-//        case .onClose
-//            self = .close
-//        }
-//    }
 }
