@@ -230,7 +230,7 @@ This SDK allows you to receive interaction events, for your analytics via the `o
  - `expired` fires when the passcode response expires and the user must re-verify
  - `challengeExpired` fires when the user display of a challenge times out with no answer
  - `close` fires when the user dismisses a challenge.
- - `error` fires when any error happens during a challenge verification, for example a transient network error ( details about an error will be privided by `data` param, check example below). Note: This event is not for error handling but only for analytics purposes. For error handling please check the `validate` API call
+ - `error` fires when an internal error happens during challenge verification, for example a network error. Details about the error will be provided by the `data` param, as in the example below. Note: This event is not intended for error handling, but only for analytics purposes. For error handling please see the `validate` API call docs.
 
 You can implement this with the code below:
 
