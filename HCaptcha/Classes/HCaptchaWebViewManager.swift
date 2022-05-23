@@ -202,24 +202,25 @@ fileprivate extension HCaptchaWebViewManager {
 
         case .error(let error):
             handle(error: error)
+            onEvent?(.error, error)
 
         case .showHCaptcha:
             webView.isHidden = false
 
         case .didLoad:
-            didFinishLoading = true
-            if completion != nil {
-                executeJS(command: .execute)
-            }
-            if configureWebView != nil {
-                DispatchQueue.once(token: configureWebViewDispatchToken) { [weak self] in
-                    guard let `self` = self else { return }
-                    self.configureWebView?(self.webView)
-                }
-            }
+            didLoad()
 
         case .onOpen:
             onEvent?(.open, nil)
+
+        case .onExpired:
+            onEvent?(.expired, nil)
+
+        case .onChallengeExpired:
+            onEvent?(.challengeExpired, nil)
+
+        case .onClose:
+            onEvent?(.close, nil)
 
         case .log(let message):
             #if DEBUG
@@ -244,6 +245,19 @@ fileprivate extension HCaptchaWebViewManager {
                 validate(on: view)
             } else {
                 completion?(HCaptchaResult(error: error))
+            }
+        }
+    }
+
+    private func didLoad() {
+        didFinishLoading = true
+        if completion != nil {
+            executeJS(command: .execute)
+        }
+        if configureWebView != nil {
+            DispatchQueue.once(token: configureWebViewDispatchToken) { [weak self] in
+                guard let `self` = self else { return }
+                self.configureWebView?(self.webView)
             }
         }
     }

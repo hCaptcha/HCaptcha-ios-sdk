@@ -31,6 +31,15 @@ internal class HCaptchaDecoder: NSObject {
         /// Did a challenge become visible
         case onOpen
 
+        /// Called when the user display of a challenge times out with no answer.
+        case onChallengeExpired
+
+        /// Called when the passcode response expires and the user must re-verify.
+        case onExpired
+
+        /// Called when the user dismisses a challenge.
+        case onClose
+
         /// Logs a string onto the console
         case log(String)
     }
@@ -100,18 +109,8 @@ fileprivate extension HCaptchaDecoder.Result {
         }
 
         if let action = response["action"] as? String {
-            switch action {
-            case "showHCaptcha":
-                return .showHCaptcha
-
-            case "didLoad":
-                return .didLoad
-
-            case "onOpen":
-                return .onOpen
-
-            default:
-                break
+            if let result = fromAction(action) {
+                return result
             }
         }
 
@@ -144,6 +143,31 @@ fileprivate extension HCaptchaDecoder.Result {
 
         default:
             return .error(.wrongMessageFormat)
+        }
+    }
+
+    private static func fromAction(_ action: String) -> HCaptchaDecoder.Result? {
+        switch action {
+        case "showHCaptcha":
+            return .showHCaptcha
+
+        case "didLoad":
+            return .didLoad
+
+        case "onOpen":
+            return .onOpen
+
+        case "onExpired":
+            return .onExpired
+
+        case "onChallengeExpired":
+            return .onChallengeExpired
+
+        case "onClose":
+            return .onClose
+
+        default:
+            return nil
         }
     }
 }

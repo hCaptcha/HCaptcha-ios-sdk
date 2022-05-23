@@ -1,3 +1,7 @@
+# 2.3.0
+
+- Feature: support more events in `onEvent` ([#78](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/78))
+
 # 2.2.0
 
 - Feature: the SDK allows you to receive interaction events for your analytics via the `onEvent` method ([#72](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/72))

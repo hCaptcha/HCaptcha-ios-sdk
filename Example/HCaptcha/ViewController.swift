@@ -77,18 +77,18 @@ class ViewController: UIViewController {
 
         hcaptcha.rx.events()
             .debug("events")
-            .subscribe { [weak self] rxevent in
-                let event = rxevent.element?.0
-                _ = rxevent.element?.1
+            .subscribe { [weak self] (event, data) in
+                if event == .error {
+                    let error = data as? HCaptchaError
+                    print("onEvent error: \(String(describing: error))")
+                }
 
-                if event == .open {
-                    let alertController = UIAlertController(title: "On Event",
-                                                            message: "Opened",
-                                                            preferredStyle: .alert)
-                    self?.present(alertController, animated: true) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            alertController.dismiss(animated: true, completion: nil)
-                        }
+                let alertController = UIAlertController(title: "On Event",
+                                                        message: event.rawValue,
+                                                        preferredStyle: .alert)
+                self?.present(alertController, animated: true) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        alertController.dismiss(animated: true, completion: nil)
                     }
                 }
             }

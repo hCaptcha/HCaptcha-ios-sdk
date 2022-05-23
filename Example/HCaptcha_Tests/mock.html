@@ -34,10 +34,13 @@
               if (rqdata) {
                   post({"log": rqdata});
               }
-              post(${message});
-              setTimeout(function() {
-                  post({ action: "onOpen" });
-              }, 100);
+              var messageToPost = ${message};
+              post(messageToPost);
+              if (messageToPost && messageToPost.token || messageToPost.action === "showHCaptcha") {
+                  setTimeout(function() {
+                      post({ action: "onOpen" });
+                  }, 100);
+              }
           }
       };
 

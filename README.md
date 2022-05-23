@@ -226,7 +226,11 @@ And you will now get the desired behavior.
 
 This SDK allows you to receive interaction events, for your analytics via the `onEvent` method. At the moment the SDK supports:
 
- - `open` event, which fires when hCaptcha is opened and a challenge is visible to an app user
+ - `open`  fires when hCaptcha is opened and a challenge is visible to an app user
+ - `expired` fires when the passcode response expires and the user must re-verify
+ - `challengeExpired` fires when the user display of a challenge times out with no answer
+ - `close` fires when the user dismisses a challenge.
+ - `error` fires when an internal error happens during challenge verification, for example a network error. Details about the error will be provided by the `data` param, as in the example below. Note: This event is not intended for error handling, but only for analytics purposes. For error handling please see the `validate` API call docs.
 
 You can implement this with the code below:
 
@@ -235,6 +239,10 @@ let hcaptcha = try? HCaptcha(...)
 ...
 hcaptcha.onEvent { (event, data) in
     if event == .open {
+        ...
+    } else if event == .error {
+        let error = data as? HCaptchaError
+        print("onEvent error: \(String(describing: error))")
         ...
     }
 }
@@ -255,6 +263,8 @@ hcaptcha.rx.events()
     }
     ...
 ```
+
+
 
 ### SwiftUI Example
 
