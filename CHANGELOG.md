@@ -1,3 +1,7 @@
+# 2.3.1
+
+- Fix: double call of `completion` for `.challengeClosed` error
+
 # 2.3.0
 
 - Feature: support more events in `onEvent` ([#78](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/78))
