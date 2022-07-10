@@ -92,6 +92,8 @@ let hcaptcha = try? HCaptcha(
 ...
 ```
 
+**Note**: in most cases `baseURL` can be `http://localhost`
+
 You can also install the reactive subpod and use it with RxSwift:
 
 ``` swift

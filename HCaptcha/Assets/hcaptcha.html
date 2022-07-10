@@ -133,10 +133,8 @@
 
       document.addEventListener('DOMContentLoaded', function () {
         document.body.onclick = function () {
-          if (window.hcaptcha) {
-              window.hcaptcha.close();
-          } else {
-              post({ error: 30 });
+          if (!window.hcaptcha) {
+            post({ error: 30 });
           }
         };
       });
