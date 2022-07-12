@@ -78,6 +78,9 @@ internal class HCaptchaWebViewManager: NSObject {
         }
     }
 
+    /// Indicates if the `webView` loading was stopped
+    fileprivate var didStopped = false
+
     /// The observer for `.UIWindowDidBecomeVisible`
     fileprivate var observer: NSObjectProtocol?
 
@@ -124,14 +127,19 @@ internal class HCaptchaWebViewManager: NSObject {
         self.decoder = HCaptchaDecoder { [weak self] result in
             self?.handle(result: result)
         }
-        self.formattedHTML = String(format: html, arguments: ["apiKey": apiKey,
-                                                              "endpoint": endpoint.absoluteString,
-                                                              "size": size.rawValue,
-                                                              "rqdata": rqdata ?? "",
-                                                              "theme": theme,
-                                                              "debugInfo": "[]"])
-
-        setupWebview(html: self.formattedHTML, url: baseURL)
+        DispatchQueue.global(qos: .userInitiated).async {
+            let debugInfo = HCaptchaDebugInfo.json
+            let formattedHTML = String(format: html, arguments: ["apiKey": apiKey,
+                                                                 "endpoint": endpoint.absoluteString,
+                                                                 "size": size.rawValue,
+                                                                 "rqdata": rqdata ?? "",
+                                                                 "theme": theme,
+                                                                 "debugInfo": debugInfo])
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.setupWebview(html: formattedHTML)
+            }
+        }
     }
 
     /**
@@ -157,6 +165,7 @@ internal class HCaptchaWebViewManager: NSObject {
 
     /// Stops the execution of the webview
     func stop() {
+        didStopped = true
         webView.stopLoading()
     }
 
@@ -170,8 +179,9 @@ internal class HCaptchaWebViewManager: NSObject {
         if didFinishLoading {
             executeJS(command: .reset)
             didFinishLoading = false
-        } else {
-            setupWebview(html: formattedHTML, url: baseURL)
+            didStopped = false
+        } else if let formattedHTML = self.formattedHTML {
+            setupWebview(html: formattedHTML)
         }
     }
 }
@@ -259,6 +269,7 @@ fileprivate extension HCaptchaWebViewManager {
         didFinishLoading = true
         if completion != nil {
             executeJS(command: .execute)
+            didStopped = false
         }
         self.doConfigureWebView()
     }
@@ -279,7 +290,8 @@ fileprivate extension HCaptchaWebViewManager {
 
      Adds the webview to a valid UIView and loads the initial HTML file
      */
-    func setupWebview(html: String, url: URL) {
+    func setupWebview(html: String) {
+        self.formattedHTML = html
         if let window = UIApplication.shared.keyWindow {
             setupWebview(on: window, html: formattedHTML, url: baseURL)
         } else {
@@ -304,7 +316,11 @@ fileprivate extension HCaptchaWebViewManager {
      Adds the webview to a valid UIView and loads the initial HTML file
      */
     func setupWebview(on window: UIWindow, html: String, url: URL) {
-        window.addSubview(webView)
+        guard !didStopped else { return }
+
+        if webView.superview == nil {
+            window.addSubview(webView)
+        }
         webView.loadHTMLString(html, baseURL: url)
         webView.navigationDelegate = self
 
