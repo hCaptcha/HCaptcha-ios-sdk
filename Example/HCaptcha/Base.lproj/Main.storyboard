@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -75,29 +75,42 @@
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzK-em-8dU" userLabel="Reset">
-                                <rect key="frame" x="50" y="501" width="275" height="31"/>
+                                <rect key="frame" x="50" y="564.5" width="275" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Reset"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nEH-8i-SaF" userLabel="Stop">
+                                <rect key="frame" x="50" y="605.5" width="275" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Stop"/>
+                                <connections>
+                                    <action selector="didPressStopButtonWithButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kju-bo-2Kv"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="o6f-cL-1PF" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="0dV-t0-W0Y"/>
                             <constraint firstAttribute="trailing" secondItem="RDW-bD-rSo" secondAttribute="trailing" constant="50" id="1Lj-Ox-Kl4"/>
+                            <constraint firstItem="nEH-8i-SaF" firstAttribute="height" secondItem="lzK-em-8dU" secondAttribute="height" id="3pm-RQ-D7A"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Uyt-0M-CR7" secondAttribute="bottom" constant="20" id="Bfs-p5-IBM"/>
                             <constraint firstItem="lzK-em-8dU" firstAttribute="trailing" secondItem="RDW-bD-rSo" secondAttribute="trailing" id="Djx-Uy-pGB"/>
                             <constraint firstItem="lzK-em-8dU" firstAttribute="leading" secondItem="RDW-bD-rSo" secondAttribute="leading" id="Gaz-BQ-Ops"/>
                             <constraint firstItem="o6f-cL-1PF" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" priority="750" id="NMD-ir-PXe"/>
                             <constraint firstItem="lzK-em-8dU" firstAttribute="width" secondItem="RDW-bD-rSo" secondAttribute="width" id="QFp-mX-khG"/>
+                            <constraint firstItem="nEH-8i-SaF" firstAttribute="top" secondItem="lzK-em-8dU" secondAttribute="bottom" constant="10" id="S28-yG-cOb"/>
                             <constraint firstItem="RDW-bD-rSo" firstAttribute="top" secondItem="o6f-cL-1PF" secondAttribute="bottom" constant="30" id="TZe-z9-MZS"/>
                             <constraint firstItem="jHc-GP-v1Z" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="VOe-WJ-FKo"/>
+                            <constraint firstItem="nEH-8i-SaF" firstAttribute="width" secondItem="lzK-em-8dU" secondAttribute="width" id="WBm-xf-WfJ"/>
                             <constraint firstItem="jHc-GP-v1Z" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="XkT-zr-eUO"/>
                             <constraint firstItem="kq2-ci-l1u" firstAttribute="top" secondItem="RDW-bD-rSo" secondAttribute="bottom" constant="20" id="Y4H-6k-gDx"/>
                             <constraint firstAttribute="trailing" secondItem="o6f-cL-1PF" secondAttribute="trailing" constant="20" id="c74-nm-rgi"/>
+                            <constraint firstItem="nEH-8i-SaF" firstAttribute="leading" secondItem="lzK-em-8dU" secondAttribute="leading" id="eLV-Zr-ouZ"/>
                             <constraint firstItem="RDW-bD-rSo" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="50" id="iXO-hP-XZ7"/>
                             <constraint firstItem="kq2-ci-l1u" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="ice-pp-mVe"/>
                             <constraint firstItem="Uyt-0M-CR7" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="qfG-68-ySO"/>
-                            <constraint firstItem="lzK-em-8dU" firstAttribute="top" secondItem="kq2-ci-l1u" secondAttribute="bottom" constant="36.5" id="v0S-Ga-Y7X"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nEH-8i-SaF" secondAttribute="trailing" constant="20" symbolic="YES" id="s0Q-93-b0r"/>
+                            <constraint firstItem="lzK-em-8dU" firstAttribute="top" secondItem="kq2-ci-l1u" secondAttribute="bottom" constant="100" id="v0S-Ga-Y7X"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">

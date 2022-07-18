@@ -145,6 +145,10 @@ class ViewController: UIViewController {
             .disposed(by: disposeBag)
     }
 
+    @IBAction private func didPressStopButton(button: UIButton) {
+        hcaptcha.stop()
+    }
+
     private func setupHCaptcha() {
         if unitTesting {
             return
