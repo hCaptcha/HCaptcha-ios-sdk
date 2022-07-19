@@ -132,11 +132,15 @@
       };
 
       document.addEventListener('DOMContentLoaded', function () {
-        document.body.onclick = function () {
-          if (!window.hcaptcha) {
+        var container = document.getElementById("hcaptcha-container");
+        container.addEventListener("click", function () {
+          if (window.hcaptcha) {
+            // Allows dismissal of checkbox view
+            window.hcaptcha.close();
+          } else {
             post({ error: 30 });
           }
-        };
+        });
       });
     </script>
   </head>
