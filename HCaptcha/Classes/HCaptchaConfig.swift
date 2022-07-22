@@ -145,10 +145,6 @@ struct HCaptchaConfig {
                 host: String?,
                 theme: String,
                 customTheme: String?) throws {
-        guard let filePath = HCaptchaConfig.bundle.path(forResource: "hcaptcha", ofType: "html") else {
-            throw HCaptchaError.htmlLoadError
-        }
-
         guard let apiKey = apiKey ?? infoPlistKey else {
             throw HCaptchaError.apiKeyNotFound
         }
@@ -171,9 +167,7 @@ struct HCaptchaConfig {
             }
         }
 
-        let rawHTML = try String(contentsOfFile: filePath)
-
-        self.html = rawHTML
+        self.html = HCaptchaHtml.template
         self.apiKey = apiKey
         self.size = size
         self.baseURL = HCaptchaConfig.fixSchemeIfNeeded(for: domain)

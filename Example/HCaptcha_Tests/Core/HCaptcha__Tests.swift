@@ -20,29 +20,6 @@ class HCaptcha__Tests: XCTestCase {
         }
     }
 
-    func test__Fails_Without_HTML_File() {
-        _ = Bundle.swizzleInstanceMethod(
-            origSelector: #selector(Bundle.path(forResource:ofType:)),
-            toAlterSelector: #selector(Bundle.failHTMLLoad(_:type:))
-        )
-
-        do {
-            _ = try HCaptcha()
-            XCTFail("Should have failed")
-        } catch let e as HCaptchaError {
-            print(e)
-            XCTAssertEqual(e, HCaptchaError.htmlLoadError)
-        } catch let e {
-            XCTFail("Unexpected error: \(e)")
-        }
-
-        // Unswizzle
-        _ = Bundle.swizzleInstanceMethod(
-            origSelector: #selector(Bundle.path(forResource:ofType:)),
-            toAlterSelector: #selector(Bundle.failHTMLLoad(_:type:))
-        )
-    }
-
     func test__Force_Visible_Challenge() {
         let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager())
 
