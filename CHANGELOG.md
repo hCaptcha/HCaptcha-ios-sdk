@@ -1,3 +1,8 @@
+# 2.3.2
+
+- Fix: callback called twice on close error
+- Feature: `hcaptcha-form.html` asset moved into a variable
+
 # 2.3.1
 
 - Fix: double call of `completion` for `.challengeClosed` error
