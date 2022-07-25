@@ -78,6 +78,8 @@ internal class HCaptchaWebViewManager: NSObject {
         }
     }
 
+    fileprivate var didLoadTimer: Timer?
+
     /// flab which will prevent
     private var stopInitLoading = false
 
@@ -169,6 +171,7 @@ internal class HCaptchaWebViewManager: NSObject {
     func stop() {
         stopInitLoading = true
         webView.stopLoading()
+        didLoadTimer?.invalidate()
     }
 
     /**
@@ -247,6 +250,7 @@ fileprivate extension HCaptchaWebViewManager {
     }
 
     private func handle(error: HCaptchaError) {
+        didLoadTimer?.invalidate()
         switch error {
         case HCaptchaError.challengeClosed:
             completion?(HCaptchaResult(error: error))
@@ -268,6 +272,7 @@ fileprivate extension HCaptchaWebViewManager {
 
     private func didLoad() {
         didFinishLoading = true
+        didLoadTimer?.invalidate()
 
         if completion != nil {
             executeJS(command: .execute)
@@ -282,6 +287,11 @@ fileprivate extension HCaptchaWebViewManager {
                 self.configureWebView?(self.webView)
             }
         }
+    }
+
+    @objc
+    private func didLoadTimeout() {
+        completion?(HCaptchaResult(error: .htmlLoadError))
     }
 
     /**
@@ -321,6 +331,9 @@ fileprivate extension HCaptchaWebViewManager {
         }
         webView.loadHTMLString(html, baseURL: url)
         webView.navigationDelegate = self
+
+        didLoadTimer?.invalidate()
+        didLoadTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.didLoadTimeout), userInfo: nil, repeats: false)
 
         if let observer = observer {
             NotificationCenter.default.removeObserver(observer)
