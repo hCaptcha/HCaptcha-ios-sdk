@@ -333,7 +333,13 @@ fileprivate extension HCaptchaWebViewManager {
         webView.navigationDelegate = self
 
         didLoadTimer?.invalidate()
-        didLoadTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.didLoadTimeout), userInfo: nil, repeats: false)
+        didLoadTimer = Timer.scheduledTimer(
+            timeInterval: 0.2,
+            target: self,
+            selector: #selector(self.didLoadTimeout),
+            userInfo: nil,
+            repeats: false
+        )
 
         if let observer = observer {
             NotificationCenter.default.removeObserver(observer)
