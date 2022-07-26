@@ -11,12 +11,6 @@
 
 Add [hCaptcha](https://www.hcaptcha.com/) to your project. This library automatically handles hCaptcha's events and returns a validation token, presenting the challenge via a modal if needed.
 
-| Platform | Requirements              |
-|----------|---------------------------|
-| iOS      | :white_check_mark: >= 9.0 |
-| WatchOS  | :heavy_multiplication_x:  |
-
-
 #### _Warning_ ⚠️
 
 To secure your application, you need to send the token received here to your backend for server-side validation via the `api.hcaptcha.com/siteverify` endpoint.
@@ -49,6 +43,12 @@ Known issues:
 #### SPM
 Standard SPM formula: uses [Package.swift](./Package.swift)
 
+## Requirements
+
+| Platform | Requirements              |
+|----------|---------------------------|
+| iOS      | :white_check_mark: >= 9.0 |
+| WatchOS  | :heavy_multiplication_x:  |
 
 ## Usage
 
