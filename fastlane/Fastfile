@@ -203,24 +203,19 @@ platform :ios do
 
   desc "Build samples"
   lane :samples_build do
-    gym(
-      workspace: "Example/HCaptcha.xcworkspace",
-      scheme: "HCaptcha-Example",
-      configuration: "Debug",
-      skip_archive: true,
-      skip_package_ipa: true,
-      skip_codesigning: true,
-      destination: "generic/platform=iOS"
-    )
-    gym(
-      workspace: "Example/HCaptcha.xcworkspace",
-      scheme: "HCaptcha-Objc-Example",
-      configuration: "Debug",
-      skip_archive: true,
-      skip_package_ipa: true,
-      skip_codesigning: true,
-      destination: "generic/platform=iOS"
-    )
+    ["HCaptcha-Example",
+     "HCaptcha-Objc-Example",
+     "HCaptcha-SwiftUI-Example"].each do |scheme|
+      gym(
+        workspace: "Example/HCaptcha.xcworkspace",
+        scheme: scheme,
+        configuration: "Debug",
+        skip_archive: true,
+        skip_package_ipa: true,
+        skip_codesigning: true,
+        destination: "generic/platform=iOS"
+      )
+    end
   end
 
   desc "Deploy a new version to Github and Cocoapods"
