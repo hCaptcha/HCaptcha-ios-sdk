@@ -141,6 +141,9 @@ internal class HCaptchaWebViewManager {
         }
 #endif
         view.addSubview(webView)
+        if webView.bounds.size == CGSize.zero {
+            self.configureWebView?(self.webView)
+        }
 
         executeJS(command: .execute)
     }
