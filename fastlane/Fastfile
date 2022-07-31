@@ -118,6 +118,7 @@ platform :ios do
 
   desc "Validate html template"
   lane :html_lint do
+    html2swift
     unless system("git diff --exit-code --output=/dev/null ../HCaptcha/Classes/HCaptchaHtml.swift")
       UI.user_error!(
         "HCaptcha/Assets/hcaptcha.html looks different from HCaptcha/Classes/HCaptchaHtml.swift!" \
@@ -192,8 +193,8 @@ platform :ios do
 
         import Foundation
 
-        public struct HCaptchaHtml {
-            public static let template = """
+        struct HCaptchaHtml {
+            static let template = """
         #{indent(File.read('../HCaptcha/Assets/hcaptcha.html'), 8)}
             """
         }

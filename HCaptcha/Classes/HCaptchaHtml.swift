@@ -7,8 +7,8 @@
 
 import Foundation
 
-public struct HCaptchaHtml {
-    public static let template = """
+struct HCaptchaHtml {
+    static var template = """
         <html>
           <head>
             <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>

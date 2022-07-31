@@ -18,6 +18,7 @@
 		B32DA0FE7EA8E5C693D67220 /* Pods_HCaptcha_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7C9DF3D486114AD2A813021 /* Pods_HCaptcha_Example.framework */; };
 		BDFAD6E83D15B582D138D6BC /* Pods_HCaptcha_UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5369BD0117A5DA463EACA9 /* Pods_HCaptcha_UITests.framework */; };
 		E62A74212771290A00973B5E /* HCaptcha__Config__Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62A74202771290A00973B5E /* HCaptcha__Config__Tests.swift */; };
+		E64F97912895CD250044257C /* HCaptcha__Bench.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64F97902895CD250044257C /* HCaptcha__Bench.swift */; };
 		E65145EC2779AE830079668A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E65145EB2779AE830079668A /* AppDelegate.m */; };
 		E65145F22779AE830079668A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65145F12779AE830079668A /* ViewController.m */; };
 		E65145FD2779AE850079668A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E65145FC2779AE850079668A /* main.m */; };
@@ -78,6 +79,7 @@
 		AF5369BD0117A5DA463EACA9 /* Pods_HCaptcha_UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HCaptcha_UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8537003ECC47117AF54DCA9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		E62A74202771290A00973B5E /* HCaptcha__Config__Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptcha__Config__Tests.swift; sourceTree = "<group>"; };
+		E64F97902895CD250044257C /* HCaptcha__Bench.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptcha__Bench.swift; sourceTree = "<group>"; };
 		E65145E82779AE830079668A /* HCaptcha_Objc_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_Objc_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E65145EA2779AE830079668A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E65145EB2779AE830079668A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				F2ECCF8D1E9FE68C0097B199 /* HCaptchaWebViewManager__Tests.swift */,
 				9C5125BD26CB9A3A0094B023 /* HCaptchaWebViewManager__HTML__Tests.swift */,
 				F2E2685D1F7AEE3400CD876D /* HCaptcha__Tests.swift */,
+				E64F97902895CD250044257C /* HCaptcha__Bench.swift */,
 				E62A74202771290A00973B5E /* HCaptcha__Config__Tests.swift */,
 				F231B3961FEC325A00F82943 /* DispatchQueue__Tests.swift */,
 				F2AE8611204F3430002E28D7 /* HCaptchaResult__Tests.swift */,
@@ -695,6 +698,7 @@
 				F2ECCF961EA00A5B0097B199 /* HCaptchaWebViewManager+Helpers.swift in Sources */,
 				F2ECCF8E1E9FE68C0097B199 /* HCaptchaWebViewManager__Tests.swift in Sources */,
 				F231B3971FEC325A00F82943 /* DispatchQueue__Tests.swift in Sources */,
+				E64F97912895CD250044257C /* HCaptcha__Bench.swift in Sources */,
 				F231B39F1FED4A8C00F82943 /* HCaptchaDecoder+Helper.swift in Sources */,
 				F2E2685E1F7AEE3400CD876D /* HCaptcha__Tests.swift in Sources */,
 				F2ECCF931EA009360097B199 /* HCaptcha+Rx__Tests.swift in Sources */,
@@ -1015,7 +1019,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HCaptcha_Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.HCaptcha-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1035,7 +1039,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HCaptcha_Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.HCaptcha-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
