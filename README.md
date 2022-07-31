@@ -1,15 +1,15 @@
 # HCaptcha
 
-<!-- [![Build Status](https://travis-ci.org/hCaptcha/HCaptcha-ios-sdk.svg?branch=master)](https://travis-ci.org/hCaptcha/HCaptcha-ios-sdk) -->
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-orange.svg)](https://github.com/Carthage/Carthage)
 [![Version](https://img.shields.io/cocoapods/v/HCaptcha.svg?style=flat)](http://cocoapods.org/pods/HCaptcha)
 [![Platform](https://img.shields.io/cocoapods/p/HCaptcha.svg?style=flat)](http://cocoapods.org/pods/HCaptcha)
+[![Requirements](https://img.shields.io/badge/iOS-%3E=9.0-blue.svg)](https://developer.apple.com/support/app-store/)
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
+[![Build](https://github.com/hCaptcha/HCaptcha-ios-sdk/actions/workflows/workflow.yml/badge.svg)](https://github.com/hCaptcha/HCaptcha-ios-sdk/actions/workflows/workflow.yml)
 
 -----
 
 Add [hCaptcha](https://www.hcaptcha.com/) to your project. This library automatically handles hCaptcha's events and returns a validation token, presenting the challenge via a modal if needed.
-
 
 #### _Warning_ ⚠️
 
@@ -43,6 +43,12 @@ Known issues:
 #### SPM
 Standard SPM formula: uses [Package.swift](./Package.swift)
 
+## Requirements
+
+| Platform | Requirements              |
+|----------|---------------------------|
+| iOS      | :white_check_mark: >= 9.0 |
+| WatchOS  | :heavy_multiplication_x:  |
 
 ## Usage
 
