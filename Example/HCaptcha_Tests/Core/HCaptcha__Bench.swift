@@ -51,7 +51,7 @@ class HCaptcha__Bench: XCTestCase {
     }
 
     let options: XCTMeasureOptions = {
-        var result = XCTMeasureOptions();
+        var result = XCTMeasureOptions()
         result.iterationCount = 100
         result.invocationOptions = .manuallyStop
         return result
@@ -68,7 +68,7 @@ class HCaptcha__Bench: XCTestCase {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 600))
         self.measure(options: XCTMeasureOptions(), block: {
             let hcaptcha = try? HCaptcha(apiKey: "10000000-ffff-ffff-ffff-000000000001", size: .invisible)
-            hcaptcha?.validate(on: view, completion: { result in
+            hcaptcha?.validate(on: view, completion: { _ in
                 self.stopMeasuring()
             })
         })
@@ -78,7 +78,7 @@ class HCaptcha__Bench: XCTestCase {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 600))
         let hcaptcha = try? HCaptcha(apiKey: "10000000-ffff-ffff-ffff-000000000001", size: .invisible)
         self.measure {
-            hcaptcha?.validate(on: view, completion: { result in
+            hcaptcha?.validate(on: view, completion: { _ in
                 self.stopMeasuring()
             })
         }
