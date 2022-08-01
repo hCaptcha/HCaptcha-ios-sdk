@@ -57,9 +57,11 @@ class HCaptcha__Bench: XCTestCase {
         return result
     }()
 
+    let apiKey = "10000000-ffff-ffff-ffff-000000000001"
+
     func testBenchInit() throws {
         self.measure {
-            _ = try? HCaptcha(apiKey: "10000000-ffff-ffff-ffff-000000000001", size: .invisible)
+            _ = try? HCaptcha(apiKey: apiKey, size: .invisible)
             self.stopMeasuring()
         }
     }
@@ -67,7 +69,7 @@ class HCaptcha__Bench: XCTestCase {
     func testBenchColdrun() throws {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 600))
         self.measure(options: XCTMeasureOptions(), block: {
-            let hcaptcha = try? HCaptcha(apiKey: "10000000-ffff-ffff-ffff-000000000001", size: .invisible)
+            let hcaptcha = try? HCaptcha(apiKey: apiKey, size: .invisible)
             hcaptcha?.validate(on: view, completion: { _ in
                 self.stopMeasuring()
             })
@@ -76,7 +78,7 @@ class HCaptcha__Bench: XCTestCase {
 
     func testBenchVerify() throws {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 600))
-        let hcaptcha = try? HCaptcha(apiKey: "10000000-ffff-ffff-ffff-000000000001", size: .invisible)
+        let hcaptcha = try? HCaptcha(apiKey: apiKey, size: .invisible)
         self.measure {
             hcaptcha?.validate(on: view, completion: { _ in
                 self.stopMeasuring()
