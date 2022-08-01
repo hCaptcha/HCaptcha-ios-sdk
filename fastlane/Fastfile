@@ -194,7 +194,7 @@ platform :ios do
         import Foundation
 
         struct HCaptchaHtml {
-            static let template = """
+            static var template = """
         #{indent(File.read('../HCaptcha/Assets/hcaptcha.html'), 8)}
             """
         }
