@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,9 @@
 		B239CA7190DC61887942610E /* Pods_HCaptcha_Objc_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8352086EA5EE39AFD3CDA308 /* Pods_HCaptcha_Objc_Example.framework */; };
 		B32DA0FE7EA8E5C693D67220 /* Pods_HCaptcha_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7C9DF3D486114AD2A813021 /* Pods_HCaptcha_Example.framework */; };
 		BDFAD6E83D15B582D138D6BC /* Pods_HCaptcha_UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5369BD0117A5DA463EACA9 /* Pods_HCaptcha_UITests.framework */; };
+		E626A8002890568A0069D449 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E626A7FF2890568A0069D449 /* ContentView.swift */; };
+		E626A8022890568C0069D449 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E626A8012890568C0069D449 /* Assets.xcassets */; };
+		E626A80A289056E00069D449 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = E626A809289056E00069D449 /* App.swift */; };
 		E62A74212771290A00973B5E /* HCaptcha__Config__Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62A74202771290A00973B5E /* HCaptcha__Config__Tests.swift */; };
 		E64F97912895CD250044257C /* HCaptcha__Bench.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64F97902895CD250044257C /* HCaptcha__Bench.swift */; };
 		E65145EC2779AE830079668A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E65145EB2779AE830079668A /* AppDelegate.m */; };
@@ -26,6 +29,7 @@
 		E651460F277A09C20079668A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65146042779E5380079668A /* Main.storyboard */; };
 		E6514610277A09C60079668A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		E6514611277A0A9A0079668A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E65145F62779AE850079668A /* Assets.xcassets */; };
+		E6586CCF2893DBCA0051EFE7 /* HCaptcha in Frameworks */ = {isa = PBXBuildFile; productRef = E6586CCE2893DBCA0051EFE7 /* HCaptcha */; };
 		F206BAD51F8D3FEB00A25807 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = F206BAD41F8D3FEB00A25807 /* Cartfile */; };
 		F231B3971FEC325A00F82943 /* DispatchQueue__Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F231B3961FEC325A00F82943 /* DispatchQueue__Tests.swift */; };
 		F231B39F1FED4A8C00F82943 /* HCaptchaDecoder+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F231B39E1FED4A8C00F82943 /* HCaptchaDecoder+Helper.swift */; };
@@ -78,6 +82,11 @@
 		9C766C7826CB814A00E0A592 /* HCaptchaConfig+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HCaptchaConfig+Helpers.swift"; sourceTree = "<group>"; };
 		AF5369BD0117A5DA463EACA9 /* Pods_HCaptcha_UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HCaptcha_UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8537003ECC47117AF54DCA9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		E626A7FB2890568A0069D449 /* HCaptcha_SwiftUI_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_SwiftUI_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E626A7FF2890568A0069D449 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E626A8012890568C0069D449 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E626A809289056E00069D449 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		E626A80C289058B70069D449 /* ios-sdk */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "ios-sdk"; path = ..; sourceTree = "<group>"; };
 		E62A74202771290A00973B5E /* HCaptcha__Config__Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptcha__Config__Tests.swift; sourceTree = "<group>"; };
 		E64F97902895CD250044257C /* HCaptcha__Bench.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptcha__Bench.swift; sourceTree = "<group>"; };
 		E65145E82779AE830079668A /* HCaptcha_Objc_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_Objc_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +127,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B32DA0FE7EA8E5C693D67220 /* Pods_HCaptcha_Example.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E626A7F82890568A0069D449 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6586CCF2893DBCA0051EFE7 /* HCaptcha in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,11 +179,13 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				E626A80B289058B70069D449 /* Packages */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for HCaptcha */,
 				F2ECCF771E9FC47B0097B199 /* HCaptcha_Tests */,
 				F28FAC9D200E425600E14987 /* HCaptcha_UITests */,
 				E65145E92779AE830079668A /* ObjC */,
+				E626A7FC2890568A0069D449 /* SwiftUI */,
 				607FACD11AFB9204008FA782 /* Products */,
 				61C8B559C1E1C131025EE4EB /* Pods */,
 				3FB378B928AB7C6EDFA21696 /* Frameworks */,
@@ -180,6 +199,7 @@
 				F2ECCF761E9FC47B0097B199 /* HCaptcha_Tests.xctest */,
 				F28FAC9C200E425600E14987 /* HCaptcha_UITests.xctest */,
 				E65145E82779AE830079668A /* HCaptcha_Objc_Example.app */,
+				E626A7FB2890568A0069D449 /* HCaptcha_SwiftUI_Example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -231,6 +251,24 @@
 				8453AB7DC2F84E620BCFA704 /* Pods-HCaptcha_Objc_Example.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E626A7FC2890568A0069D449 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				E626A809289056E00069D449 /* App.swift */,
+				E626A7FF2890568A0069D449 /* ContentView.swift */,
+				E626A8012890568C0069D449 /* Assets.xcassets */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		E626A80B289058B70069D449 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				E626A80C289058B70069D449 /* ios-sdk */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 		E65145E92779AE830079668A /* ObjC */ = {
@@ -326,6 +364,27 @@
 			productReference = 607FACD01AFB9204008FA782 /* HCaptcha_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E626A7FA2890568A0069D449 /* HCaptcha_SwiftUI_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E626A8082890568C0069D449 /* Build configuration list for PBXNativeTarget "HCaptcha_SwiftUI_Example" */;
+			buildPhases = (
+				E626A7F72890568A0069D449 /* Sources */,
+				E626A7F82890568A0069D449 /* Frameworks */,
+				E626A7F92890568A0069D449 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E6586CD12893DBD80051EFE7 /* PBXTargetDependency */,
+			);
+			name = HCaptcha_SwiftUI_Example;
+			packageProductDependencies = (
+				E6586CCE2893DBCA0051EFE7 /* HCaptcha */,
+			);
+			productName = HCaptcha_SwiftUI_Example;
+			productReference = E626A7FB2890568A0069D449 /* HCaptcha_SwiftUI_Example.app */;
+			productType = "com.apple.product-type.application";
+		};
 		E65145E72779AE830079668A /* HCaptcha_Objc_Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E65146002779AE850079668A /* Build configuration list for PBXNativeTarget "HCaptcha_Objc_Example" */;
@@ -391,7 +450,7 @@
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0910;
+				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = HCaptcha;
 				TargetAttributes = {
@@ -400,6 +459,10 @@
 						DevelopmentTeam = 58EEZG76L8;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Manual;
+					};
+					E626A7FA2890568A0069D449 = {
+						CreatedOnToolsVersion = 13.4.1;
+						ProvisioningStyle = Automatic;
 					};
 					E65145E72779AE830079668A = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -437,6 +500,7 @@
 				F2ECCF751E9FC47B0097B199 /* HCaptcha_Tests */,
 				F28FAC9B200E425600E14987 /* HCaptcha_UITests */,
 				E65145E72779AE830079668A /* HCaptcha_Objc_Example */,
+				E626A7FA2890568A0069D449 /* HCaptcha_SwiftUI_Example */,
 			);
 		};
 /* End PBXProject section */
@@ -450,6 +514,14 @@
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				E6514610277A09C60079668A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E626A7F92890568A0069D449 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E626A8022890568C0069D449 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -672,6 +744,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E626A7F72890568A0069D449 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E626A8002890568A0069D449 /* ContentView.swift in Sources */,
+				E626A80A289056E00069D449 /* App.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E65145E42779AE830079668A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -713,6 +794,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		E6586CD12893DBD80051EFE7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = E6586CD02893DBD80051EFE7 /* HCaptcha */;
+		};
 		F28FACA2200E425600E14987 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 607FACCF1AFB9204008FA782 /* HCaptcha_Example */;
@@ -845,7 +930,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -858,7 +944,10 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 58EEZG76L8;
 				INFOPLIST_FILE = HCaptcha/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.HCaptcha-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -875,12 +964,96 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HCaptcha/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.HCaptcha-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		E626A8062890568C0069D449 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ObjC/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.HCaptcha-SwiftUI-Example.HCaptcha-SwiftUI-Example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E626A8072890568C0069D449 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ObjC/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.HCaptcha-SwiftUI-Example.HCaptcha-SwiftUI-Example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -910,7 +1083,10 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LOCALIZED_STRING_SWIFTUI_SUPPORT = NO;
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -948,7 +1124,10 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LOCALIZED_STRING_SWIFTUI_SUPPORT = NO;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
@@ -975,7 +1154,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = HCaptcha_UITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "HCaptcha.HCaptcha-UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -999,7 +1182,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = HCaptcha_UITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "HCaptcha.HCaptcha-UITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1020,7 +1207,11 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HCaptcha_Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.HCaptcha-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG UNIT_TESTS";
@@ -1040,7 +1231,11 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HCaptcha_Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.HCaptcha-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1065,6 +1260,15 @@
 			buildConfigurations = (
 				607FACF01AFB9204008FA782 /* Debug */,
 				607FACF11AFB9204008FA782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E626A8082890568C0069D449 /* Build configuration list for PBXNativeTarget "HCaptcha_SwiftUI_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E626A8062890568C0069D449 /* Debug */,
+				E626A8072890568C0069D449 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1097,6 +1301,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E6586CCE2893DBCA0051EFE7 /* HCaptcha */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HCaptcha;
+		};
+		E6586CD02893DBD80051EFE7 /* HCaptcha */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HCaptcha;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 607FACC81AFB9204008FA782 /* Project object */;
 }
