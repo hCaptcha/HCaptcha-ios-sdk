@@ -52,7 +52,7 @@ class HCaptcha__Bench: XCTestCase {
 
     let options: XCTMeasureOptions = {
         var result = XCTMeasureOptions()
-        result.iterationCount = 100
+        result.iterationCount = 3
         result.invocationOptions = .manuallyStop
         return result
     }()
