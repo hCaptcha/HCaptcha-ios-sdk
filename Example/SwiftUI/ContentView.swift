@@ -18,6 +18,7 @@ struct UIViewWrapperView: UIViewRepresentable {
     }
 
     func updateUIView(_ view: UIView, context: Context) {
+        // nothing to update
     }
 }
 
@@ -32,12 +33,14 @@ struct HCaptchaView: View {
             placeholder.frame(width: 640, height: 640, alignment: .center)
             Button(
                 "validate",
-                action: {
-                    hcaptcha.validate(on: placeholder.uiview) { result in
-                        print(result)
-                    }
-                }
+                action: { showCaptcha(placeholder.uiview) }
             ).padding()
+        }
+    }
+
+    func showCaptcha(_ view: UIView) {
+        hcaptcha.validate(on: view) { result in
+            print(result)
         }
     }
 
