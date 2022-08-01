@@ -2,7 +2,7 @@
 //  ViewController.h
 //  HCaptcha_Objc_Example
 //
-//  Copyright © 2022 HCaptcha. All rights reserved.
+//  Copyright © 2022 HCaptcha. MIT License.
 //
 
 @import UIKit;
