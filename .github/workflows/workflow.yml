@@ -17,7 +17,7 @@ jobs:
     name: Test SDK
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Use Xcode 12.4
         run: sudo xcode-select -switch /Applications/Xcode_12.4.app
@@ -37,7 +37,64 @@ jobs:
           ruby-version: 2.7.2
           bundler-cache: true
 
-      - run: bundle exec fastlane ci
+      - run: |
+          bundle exec fastlane ci
+          cp .lint/cocoapods-size/result.json cocoapods-size-result.json
+
+      - if: github.event_name == 'push'
+        uses: actions/cache@v3
+        with:
+          path: cocoapods-size-result.json
+          key: cocoapods-size-${{ github.sha }}
+
+  size-report:
+    name: Cocoapods size report
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/cache@v3
+        with:
+          path: cocoapods-size-result.json
+          key: cocoapods-size-${{ github.sha }}
+          restore-keys: cocoapods-size-
+
+      - uses: sergeysova/jq-action@v2
+        id: main_size
+        with:
+          cmd: jq '.combined_pods_extra_size // 0' cocoapods-size-result.json -r
+
+      - run: bundle exec fastlane pod_size
+
+      - uses: sergeysova/jq-action@v2
+        id: pr_size
+        with:
+          cmd: jq '.combined_pods_extra_size' .lint/cocoapods-size/result.json -r
+
+      - id: diff_size
+        run: echo "::set-output name=value::$((${{ steps.pr_size.outputs.value }} - ${{ steps.main_size.outputs.value }}))"
+
+      - uses: peter-evans/find-comment@v1
+        id: find_comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body-includes: Cocoapods size report
+
+      - uses: peter-evans/create-or-update-comment@v1
+        with:
+          body: |
+            Cocoapods size report:
+            ```
+            OLD: ${{ steps.main_size.outputs.value }} bytes
+            NEW: ${{ steps.pr_size.outputs.value }} bytes
+
+            DIFF: ${{ steps.diff_size.outputs.value }} bytes
+            ```
+          edit-mode: replace
+          comment-id: ${{ steps.find_comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   samples:
     name: Build Samples
