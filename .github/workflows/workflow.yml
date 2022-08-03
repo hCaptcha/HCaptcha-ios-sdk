@@ -64,16 +64,16 @@ jobs:
           key: cocoapods-size-${{ github.sha }}
           restore-keys: cocoapods-size-
 
-      - if: hashFiles('cocoapods-size-result.json') == ''
-        uses: sergeysova/jq-action@v2
-        with:
-          cmd: |
-            jq -n '{combined_pods_extra_size: 0}' > cocoapods-size-result.json
+      - run: brew install jq
 
-      - uses: sergeysova/jq-action@v2
-        id: main_size
-        with:
-          cmd: jq '.combined_pods_extra_size // 0' cocoapods-size-result.json -r
+      - if: hashFiles('cocoapods-size-result.json') == ''
+        run: |
+          jq -n '{combined_pods_extra_size: 0}' > cocoapods-size-result.json
+
+      - id: main_size
+        run: |
+          main_size=$(jq '.combined_pods_extra_size // 0' cocoapods-size-result.json -r)
+          echo "::set-output name=value::${main_size}"
 
       - run: sudo xcode-select -switch /Applications/Xcode_12.4.app
 
@@ -84,10 +84,10 @@ jobs:
 
       - run: bundle exec fastlane pod_size
 
-      - uses: sergeysova/jq-action@v2
-        id: pr_size
-        with:
-          cmd: jq '.combined_pods_extra_size' .lint/cocoapods-size/result.json -r
+      - id: pr_size
+        run: |
+          pr_size=$(jq '.combined_pods_extra_size' .lint/cocoapods-size/result.json -r)
+          echo "::set-output name=value::${pr_size}"
 
       - id: diff_size
         run: echo "::set-output name=value::$((${{ steps.pr_size.outputs.value }} - ${{ steps.main_size.outputs.value }}))"
