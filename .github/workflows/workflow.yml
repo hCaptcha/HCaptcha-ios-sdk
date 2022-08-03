@@ -60,6 +60,12 @@ jobs:
           key: cocoapods-size-${{ github.sha }}
           restore-keys: cocoapods-size-
 
+      - if: hashFiles('cocoapods-size-result.json') == ''
+        uses: sergeysova/jq-action@v2
+        with:
+          cmd: |
+            jq -n '{combined_pods_extra_size: 0}' > cocoapods-size-result.json
+
       - uses: sergeysova/jq-action@v2
         id: main_size
         with:
