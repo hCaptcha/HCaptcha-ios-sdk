@@ -68,7 +68,7 @@ class HCaptcha__Bench: XCTestCase {
                 self.stopMeasuring()
                 exp.fulfill()
             })
-            waitForExpectations(timeout: 1)
+            waitForExpectations(timeout: 5)
         })
     }
 
@@ -81,7 +81,7 @@ class HCaptcha__Bench: XCTestCase {
                 self.stopMeasuring()
                 exp.fulfill()
             })
-            waitForExpectations(timeout: 1)
+            waitForExpectations(timeout: 5)
         })
     }
 }
