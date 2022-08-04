@@ -50,39 +50,38 @@ class HCaptcha__Bench: XCTestCase {
         """
     }
 
-    let options: XCTMeasureOptions = {
-        var result = XCTMeasureOptions()
-        result.iterationCount = 3
-        result.invocationOptions = .manuallyStop
-        return result
-    }()
-
     let apiKey = "10000000-ffff-ffff-ffff-000000000001"
 
     func testBenchInit() throws {
-        self.measure {
+        self.measureMetrics([.wallClockTime], automaticallyStartMeasuring: true, for: {
             _ = try? HCaptcha(apiKey: apiKey, size: .invisible)
             self.stopMeasuring()
-        }
+        })
     }
 
     func testBenchColdrun() throws {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 600))
-        self.measure(options: XCTMeasureOptions(), block: {
+        self.measureMetrics([.wallClockTime], automaticallyStartMeasuring: true, for: {
+            let exp = expectation(description: "completed")
             let hcaptcha = try? HCaptcha(apiKey: apiKey, size: .invisible)
             hcaptcha?.validate(on: view, completion: { _ in
                 self.stopMeasuring()
+                exp.fulfill()
             })
+            waitForExpectations(timeout: 1)
         })
     }
 
     func testBenchVerify() throws {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 600))
         let hcaptcha = try? HCaptcha(apiKey: apiKey, size: .invisible)
-        self.measure {
+        self.measureMetrics([.wallClockTime], automaticallyStartMeasuring: true, for: {
+            let exp = expectation(description: "completed")
             hcaptcha?.validate(on: view, completion: { _ in
                 self.stopMeasuring()
+                exp.fulfill()
             })
-        }
+            waitForExpectations(timeout: 1)
+        })
     }
 }
