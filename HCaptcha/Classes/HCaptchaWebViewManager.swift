@@ -24,6 +24,8 @@ internal class HCaptchaWebViewManager {
         static let BotUserAgent = "bot/2.1"
     }
 
+    fileprivate let webViewInitSize = CGSize(width: 1, height: 1)
+
 #if DEBUG
     /// Forces the challenge to be explicitly displayed.
     var forceVisibleChallenge = false {
@@ -92,7 +94,7 @@ internal class HCaptchaWebViewManager {
     /// The webview that executes JS code
     lazy var webView: WKWebView = {
         let webview = WKWebView(
-            frame: CGRect(x: 0, y: 0, width: 1, height: 1),
+            frame: CGRect(origin: CGPoint.zero, size: webViewInitSize),
             configuration: self.buildConfiguration()
         )
         webview.accessibilityIdentifier = "webview"
@@ -141,8 +143,8 @@ internal class HCaptchaWebViewManager {
         }
 #endif
         view.addSubview(webView)
-        if webView.bounds.size == CGSize.zero {
-            self.configureWebView?(self.webView)
+        if self.didFinishLoading && (webView.bounds.size == CGSize.zero || webView.bounds.size == webViewInitSize) {
+            self.doConfigureWebView()
         }
 
         executeJS(command: .execute)
@@ -254,6 +256,10 @@ fileprivate extension HCaptchaWebViewManager {
         if completion != nil {
             executeJS(command: .execute)
         }
+        self.doConfigureWebView()
+    }
+
+    private func doConfigureWebView() {
         if configureWebView != nil {
             DispatchQueue.once(token: configureWebViewDispatchToken) { [weak self] in
                 guard let `self` = self else { return }
