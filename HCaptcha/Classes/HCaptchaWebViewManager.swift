@@ -12,7 +12,7 @@ import WebKit
 
 /** Handles comunications with the webview containing the HCaptcha challenge.
  */
-internal class HCaptchaWebViewManager {
+internal class HCaptchaWebViewManager: NSObject {
     enum JSCommand: String {
         case execute = "execute();"
         case reset = "reset();"
@@ -114,6 +114,7 @@ internal class HCaptchaWebViewManager {
      */
     init(html: String, apiKey: String, baseURL: URL, endpoint: URL,
          size: HCaptchaSize, rqdata: String?, theme: String) {
+        super.init()
         self.baseURL = baseURL
         self.decoder = HCaptchaDecoder { [weak self] result in
             self?.handle(result: result)
@@ -296,6 +297,7 @@ fileprivate extension HCaptchaWebViewManager {
     func setupWebview(on window: UIWindow, html: String, url: URL) {
         window.addSubview(webView)
         webView.loadHTMLString(html, baseURL: url)
+        webView.navigationDelegate = self
 
         if let observer = observer {
             NotificationCenter.default.removeObserver(observer)
@@ -328,5 +330,21 @@ fileprivate extension HCaptchaWebViewManager {
                 self?.decoder.send(error: .unexpected(error))
             }
         }
+    }
+}
+
+extension HCaptchaWebViewManager: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
+                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if navigationAction.targetFrame == nil, let url = navigationAction.request.url {
+            if UIApplication.shared.canOpenURL(url) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
+            }
+        }
+        decisionHandler(WKNavigationActionPolicy.allow)
     }
 }
