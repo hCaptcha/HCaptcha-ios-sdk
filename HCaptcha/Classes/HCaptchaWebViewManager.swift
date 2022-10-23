@@ -339,10 +339,8 @@ fileprivate extension HCaptchaWebViewManager {
 extension HCaptchaWebViewManager: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if navigationAction.targetFrame == nil, let url = navigationAction.request.url {
-            if urlOpener.canOpenURL(url) {
-                urlOpener.openURL(url)
-            }
+        if navigationAction.targetFrame == nil, let url = navigationAction.request.url, urlOpener.canOpenURL(url) {
+            urlOpener.openURL(url)
         }
         decisionHandler(WKNavigationActionPolicy.allow)
     }
