@@ -9,7 +9,6 @@
 import Foundation
 import WebKit
 
-
 /** Handles comunications with the webview containing the HCaptcha challenge.
  */
 internal class HCaptchaWebViewManager: NSObject {
@@ -102,6 +101,9 @@ internal class HCaptchaWebViewManager: NSObject {
         return webview
     }()
 
+    /// Responsible for external link handling
+    fileprivate let urlOpener: HCaptchaURLOpener
+
     /**
      - parameters:
          - html: The HTML string to be loaded onto the webview
@@ -113,7 +115,8 @@ internal class HCaptchaWebViewManager: NSObject {
          - theme: Widget theme, value must be valid JS Object or String with brackets
      */
     init(html: String, apiKey: String, baseURL: URL, endpoint: URL,
-         size: HCaptchaSize, rqdata: String?, theme: String) {
+         size: HCaptchaSize, rqdata: String?, theme: String, urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener()) {
+        self.urlOpener = urlOpener
         super.init()
         self.baseURL = baseURL
         self.decoder = HCaptchaDecoder { [weak self] result in
@@ -337,12 +340,8 @@ extension HCaptchaWebViewManager: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.targetFrame == nil, let url = navigationAction.request.url {
-            if UIApplication.shared.canOpenURL(url) {
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                } else {
-                    UIApplication.shared.openURL(url)
-                }
+            if urlOpener.canOpenURL(url) {
+                urlOpener.openURL(url)
             }
         }
         decisionHandler(WKNavigationActionPolicy.allow)
