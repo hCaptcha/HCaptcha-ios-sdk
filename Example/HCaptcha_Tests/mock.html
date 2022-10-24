@@ -35,6 +35,9 @@
                   post({"log": rqdata});
               }
               var messageToPost = ${message};
+              if (messageToPost.action === "openExternalPage") {
+                  document.getElementById("external-link").click();
+              }
               post(messageToPost);
               if (messageToPost && messageToPost.token || messageToPost.action === "showHCaptcha") {
                   setTimeout(function() {
@@ -57,5 +60,6 @@
   </head>
   <body>
     <span id="submit" style="visibility: hidden;"></span>
+    <a id="external-link" target="_blank" href="https://hcaptcha.com" rel="noopener">Test external</a>
   </body>
 </html>

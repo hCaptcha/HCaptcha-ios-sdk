@@ -9,10 +9,9 @@
 import Foundation
 import WebKit
 
-
 /** Handles comunications with the webview containing the HCaptcha challenge.
  */
-internal class HCaptchaWebViewManager {
+internal class HCaptchaWebViewManager: NSObject {
     enum JSCommand: String {
         case execute = "execute();"
         case reset = "reset();"
@@ -102,6 +101,9 @@ internal class HCaptchaWebViewManager {
         return webview
     }()
 
+    /// Responsible for external link handling
+    fileprivate let urlOpener: HCaptchaURLOpener
+
     /**
      - parameters:
          - html: The HTML string to be loaded onto the webview
@@ -113,7 +115,9 @@ internal class HCaptchaWebViewManager {
          - theme: Widget theme, value must be valid JS Object or String with brackets
      */
     init(html: String, apiKey: String, baseURL: URL, endpoint: URL,
-         size: HCaptchaSize, rqdata: String?, theme: String) {
+         size: HCaptchaSize, rqdata: String?, theme: String, urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener()) {
+        self.urlOpener = urlOpener
+        super.init()
         self.baseURL = baseURL
         self.decoder = HCaptchaDecoder { [weak self] result in
             self?.handle(result: result)
@@ -296,6 +300,7 @@ fileprivate extension HCaptchaWebViewManager {
     func setupWebview(on window: UIWindow, html: String, url: URL) {
         window.addSubview(webView)
         webView.loadHTMLString(html, baseURL: url)
+        webView.navigationDelegate = self
 
         if let observer = observer {
             NotificationCenter.default.removeObserver(observer)
@@ -328,5 +333,15 @@ fileprivate extension HCaptchaWebViewManager {
                 self?.decoder.send(error: .unexpected(error))
             }
         }
+    }
+}
+
+extension HCaptchaWebViewManager: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
+                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if navigationAction.targetFrame == nil, let url = navigationAction.request.url, urlOpener.canOpenURL(url) {
+            urlOpener.openURL(url)
+        }
+        decisionHandler(WKNavigationActionPolicy.allow)
     }
 }
