@@ -1,3 +1,10 @@
+# 2.3.3
+
+- Fix: Call configureWebView in case if WebView size wasn't changed ([#98](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/98)) ([#91](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/91))
+- Fix: open _black links from WebView ([#100](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/100))
+- Added pod size diff report ([#96](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/96))
+- Added benchmarking for public API ([#95](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/95))
+
 # 2.3.2
 
 - Fix: callback called twice on close error
