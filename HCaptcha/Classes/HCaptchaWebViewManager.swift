@@ -78,8 +78,6 @@ internal class HCaptchaWebViewManager: NSObject {
         }
     }
 
-    fileprivate var didLoadTimer: Timer?
-
     /// flab which will prevent
     private var stopInitLoading = false
 
@@ -132,11 +130,11 @@ internal class HCaptchaWebViewManager: NSObject {
         DispatchQueue.global(qos: .userInitiated).async {
             let debugInfo = HCaptchaDebugInfo.json
             self.formattedHTML = String(format: html, arguments: ["apiKey": apiKey,
-                                                                 "endpoint": endpoint.absoluteString,
-                                                                 "size": size.rawValue,
-                                                                 "rqdata": rqdata ?? "",
-                                                                 "theme": theme,
-                                                                 "debugInfo": debugInfo])
+                                                                  "endpoint": endpoint.absoluteString,
+                                                                  "size": size.rawValue,
+                                                                  "rqdata": rqdata ?? "",
+                                                                  "theme": theme,
+                                                                  "debugInfo": debugInfo])
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 guard !self.stopInitLoading else { return }
@@ -171,7 +169,6 @@ internal class HCaptchaWebViewManager: NSObject {
     func stop() {
         stopInitLoading = true
         webView.stopLoading()
-        didLoadTimer?.invalidate()
     }
 
     /**
@@ -181,6 +178,7 @@ internal class HCaptchaWebViewManager: NSObject {
      */
     func reset() {
         configureWebViewDispatchToken = UUID()
+        stopInitLoading = false
         if didFinishLoading {
             executeJS(command: .reset)
             didFinishLoading = false
@@ -250,7 +248,6 @@ fileprivate extension HCaptchaWebViewManager {
     }
 
     private func handle(error: HCaptchaError) {
-        didLoadTimer?.invalidate()
         switch error {
         case HCaptchaError.challengeClosed:
             completion?(HCaptchaResult(error: error))
@@ -272,7 +269,6 @@ fileprivate extension HCaptchaWebViewManager {
 
     private func didLoad() {
         didFinishLoading = true
-        didLoadTimer?.invalidate()
 
         if completion != nil {
             executeJS(command: .execute)
@@ -287,11 +283,6 @@ fileprivate extension HCaptchaWebViewManager {
                 self.configureWebView?(self.webView)
             }
         }
-    }
-
-    @objc
-    private func didLoadTimeout() {
-        completion?(HCaptchaResult(error: .htmlLoadError))
     }
 
     /**
@@ -334,15 +325,6 @@ fileprivate extension HCaptchaWebViewManager {
             webView.navigationDelegate = self
         }
 
-        didLoadTimer?.invalidate()
-        didLoadTimer = Timer.scheduledTimer(
-            timeInterval: 0.2,
-            target: self,
-            selector: #selector(self.didLoadTimeout),
-            userInfo: nil,
-            repeats: false
-        )
-
         if let observer = observer {
             NotificationCenter.default.removeObserver(observer)
         }
@@ -384,5 +366,25 @@ extension HCaptchaWebViewManager: WKNavigationDelegate {
             urlOpener.openURL(url)
         }
         decisionHandler(WKNavigationActionPolicy.allow)
+    }
+
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        completion?(HCaptchaResult(error: .unexpected(error)))
+    }
+
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        completion?(HCaptchaResult(error: .unexpected(error)))
+    }
+
+    func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+        let kHCaptchaErrorWebViewProcessDidTerminate = -1
+        let kHCaptchaErrorDomain = "com.hcaptcha.sdk-ios"
+        let error = NSError(domain: kHCaptchaErrorDomain,
+                            code: kHCaptchaErrorWebViewProcessDidTerminate,
+                            userInfo: [
+                                NSLocalizedDescriptionKey: "WebView web content process did terminate",
+                                NSLocalizedRecoverySuggestionErrorKey: ""])
+        completion?(HCaptchaResult(error: .unexpected(error)))
+        didFinishLoading = false
     }
 }

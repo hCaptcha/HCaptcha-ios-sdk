@@ -590,4 +590,22 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         wait(for: [exp1, exp2], timeout: 5)
     }
+
+    func test__Invalid_HTML() {
+        let exp = expectation(description: "bad theme value")
+
+        let manager = HCaptchaWebViewManager(messageBody: "{ invalid json",
+                                             apiKey: apiKey)
+        manager.shouldResetOnError = false
+        manager.configureWebView { _ in
+            XCTFail("should not ask to configure the webview")
+        }
+
+        manager.validate(on: presenterView, resetOnError: false) { response in
+            XCTAssertEqual(HCaptchaError.htmlLoadError, response.error)
+            exp.fulfill()
+        }
+
+        waitForExpectations(timeout: 10)
+    }
 }
