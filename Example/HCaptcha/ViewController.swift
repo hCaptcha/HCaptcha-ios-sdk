@@ -30,6 +30,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var label: UILabel!
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
     @IBOutlet private weak var localeSegmentedControl: UISegmentedControl!
+    @IBOutlet private weak var apiSegmentedControl: UISegmentedControl!
     @IBOutlet private weak var visibleChallengeSwitch: UISwitch!
     @IBOutlet private weak var validateButton: UIButton!
     @IBOutlet private weak var resetButton: UIButton!
@@ -37,12 +38,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupHCaptcha()
-
-        if unitTesting {
-            validateButton.isEnabled = false
-            localeSegmentedControl.isEnabled = false
-            visibleChallengeSwitch.isEnabled = false
-        }
 
         resetButton.rx.tap
             .subscribe(onNext: { [weak hcaptcha] _ in
@@ -62,12 +57,28 @@ class ViewController: UIViewController {
         setupHCaptcha()
     }
 
-    // swiftlint:disable function_body_length
     @IBAction private func didPressButton(button: UIButton) {
-        if unitTesting {
-            return
+        if self.apiSegmentedControl.selectedSegmentIndex == 0 {
+            self.verifyRxApi()
+        } else {
+            self.verifyRegularApi()
         }
+    }
 
+    private func verifyRegularApi() {
+        hcaptcha.validate(on: self.view) { result in
+            do {
+                self.label.text = try result.dematerialize()
+            } catch {
+                self.label.text = error.localizedDescription
+            }
+            let subview = self.view.viewWithTag(Constants.webViewTag)
+            subview?.removeFromSuperview()
+        }
+    }
+
+    // swiftlint:disable function_body_length
+    private func verifyRxApi() {
         disposeBag = DisposeBag()
 
         hcaptcha.rx.didFinishLoading
@@ -116,7 +127,7 @@ class ViewController: UIViewController {
             .share(replay: 1)
 
         isEnabled
-            .bind(to: button.rx.isEnabled)
+            .bind(to: validateButton.rx.isEnabled)
             .disposed(by: disposeBag)
 
         validate

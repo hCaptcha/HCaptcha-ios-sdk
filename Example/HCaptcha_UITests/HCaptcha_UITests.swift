@@ -21,23 +21,21 @@ class HCaptcha_UITests: XCTestCase {
         XCUIApplication().launch()
     }
 
-//    func test__Validate__Default_Endpoint() {
-//        let app = XCUIApplication()
-//        app.segmentedControls.buttons["Default Endpoint"].tap()
-//        app.switches["Switch"].tap()
-//        app.buttons["Validate"].tap()
-//
-//        verifyValidation()
-//    }
-//
-//    func test__Validate__Alternate_Endpoint() {
-//        let app = XCUIApplication()
-//        app.segmentedControls.buttons["Alternate"].tap()
-//        app.switches["Switch"].tap()
-//        app.buttons["Validate"].tap()
-//
-//        verifyValidation()
-//    }
+    func test__Validate__Default_Endpoint() {
+        let app = XCUIApplication()
+        app.segmentedControls.buttons["Rx"].tap()
+        app.buttons["Validate"].tap()
+
+        verifyValidation()
+    }
+
+    func test__Validate__Alternate_Endpoint() {
+        let app = XCUIApplication()
+        app.segmentedControls.buttons["Regular"].tap()
+        app.buttons["Validate"].tap()
+
+        verifyValidation()
+    }
 
     // MARK: Private Methods
 

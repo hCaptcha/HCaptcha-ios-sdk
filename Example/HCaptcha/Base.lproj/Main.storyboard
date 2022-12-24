@@ -64,15 +64,12 @@
                                     <constraint firstItem="mGh-Ox-cFf" firstAttribute="leading" secondItem="awK-8H-OCQ" secondAttribute="trailing" constant="10" id="wzo-g0-VEj"/>
                                 </constraints>
                             </view>
-                            <segmentedControl clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kq2-ci-l1u">
+                            <segmentedControl clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kq2-ci-l1u" userLabel="API">
                                 <rect key="frame" x="108" y="433.5" width="159" height="32"/>
                                 <segments>
-                                    <segment title="Nil Locale"/>
-                                    <segment title="Chinese"/>
+                                    <segment title="Rx"/>
+                                    <segment title="Regular"/>
                                 </segments>
-                                <connections>
-                                    <action selector="didPressLocaleSegmentedControl:" destination="vXZ-lx-hvc" eventType="valueChanged" id="nSA-f3-8eS"/>
-                                </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzK-em-8dU" userLabel="Reset">
                                 <rect key="frame" x="50" y="564.5" width="275" height="31"/>
@@ -80,19 +77,31 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Reset"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nEH-8i-SaF" userLabel="Stop">
-                                <rect key="frame" x="50" y="605.5" width="275" height="31"/>
+                                <rect key="frame" x="50" y="609" width="275" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Stop"/>
                                 <connections>
                                     <action selector="didPressStopButtonWithButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kju-bo-2Kv"/>
                                 </connections>
                             </button>
+                            <segmentedControl clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9VI-dQ-4wQ">
+                                <rect key="frame" x="108" y="482.5" width="159" height="32"/>
+                                <segments>
+                                    <segment title="Nil Locale"/>
+                                    <segment title="Chinese"/>
+                                </segments>
+                                <connections>
+                                    <action selector="didPressLocaleSegmentedControl:" destination="vXZ-lx-hvc" eventType="valueChanged" id="gad-39-aSJ"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="o6f-cL-1PF" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="0dV-t0-W0Y"/>
                             <constraint firstAttribute="trailing" secondItem="RDW-bD-rSo" secondAttribute="trailing" constant="50" id="1Lj-Ox-Kl4"/>
                             <constraint firstItem="nEH-8i-SaF" firstAttribute="height" secondItem="lzK-em-8dU" secondAttribute="height" id="3pm-RQ-D7A"/>
+                            <constraint firstItem="kq2-ci-l1u" firstAttribute="width" secondItem="9VI-dQ-4wQ" secondAttribute="width" id="AKK-eB-CKO"/>
+                            <constraint firstItem="9VI-dQ-4wQ" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Aii-oY-Avx"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Uyt-0M-CR7" secondAttribute="bottom" constant="20" id="Bfs-p5-IBM"/>
                             <constraint firstItem="lzK-em-8dU" firstAttribute="trailing" secondItem="RDW-bD-rSo" secondAttribute="trailing" id="Djx-Uy-pGB"/>
                             <constraint firstItem="lzK-em-8dU" firstAttribute="leading" secondItem="RDW-bD-rSo" secondAttribute="leading" id="Gaz-BQ-Ops"/>
@@ -106,6 +115,7 @@
                             <constraint firstItem="kq2-ci-l1u" firstAttribute="top" secondItem="RDW-bD-rSo" secondAttribute="bottom" constant="20" id="Y4H-6k-gDx"/>
                             <constraint firstAttribute="trailing" secondItem="o6f-cL-1PF" secondAttribute="trailing" constant="20" id="c74-nm-rgi"/>
                             <constraint firstItem="nEH-8i-SaF" firstAttribute="leading" secondItem="lzK-em-8dU" secondAttribute="leading" id="eLV-Zr-ouZ"/>
+                            <constraint firstItem="9VI-dQ-4wQ" firstAttribute="top" secondItem="kq2-ci-l1u" secondAttribute="bottom" constant="18" id="hUz-NG-iNA"/>
                             <constraint firstItem="RDW-bD-rSo" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="50" id="iXO-hP-XZ7"/>
                             <constraint firstItem="kq2-ci-l1u" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="ice-pp-mVe"/>
                             <constraint firstItem="Uyt-0M-CR7" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="qfG-68-ySO"/>
@@ -119,8 +129,9 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="apiSegmentedControl" destination="kq2-ci-l1u" id="Qjg-vy-uma"/>
                         <outlet property="label" destination="o6f-cL-1PF" id="KQV-3X-RKr"/>
-                        <outlet property="localeSegmentedControl" destination="kq2-ci-l1u" id="gL7-du-K6l"/>
+                        <outlet property="localeSegmentedControl" destination="9VI-dQ-4wQ" id="jne-ST-NXq"/>
                         <outlet property="resetButton" destination="lzK-em-8dU" id="9BO-5x-8q6"/>
                         <outlet property="spinner" destination="jHc-GP-v1Z" id="gRn-JW-FIK"/>
                         <outlet property="validateButton" destination="RDW-bD-rSo" id="zxd-fD-KiJ"/>
