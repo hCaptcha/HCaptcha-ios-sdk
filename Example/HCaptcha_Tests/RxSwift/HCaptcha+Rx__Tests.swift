@@ -149,7 +149,7 @@ class HCaptcha_Rx__Tests: XCTestCase {
 
         do {
             _ = try hcaptcha.rx.didFinishLoading
-                .toBlocking(timeout: 0.1)
+                .toBlocking(timeout: 0.01)
                 .first()
 
             XCTFail("should have timed out")
