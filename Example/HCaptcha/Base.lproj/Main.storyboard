@@ -26,7 +26,7 @@
                                 </constraints>
                                 <state key="normal" title="Validate"/>
                                 <connections>
-                                    <action selector="didPressButtonWithButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="FpZ-S1-HW0"/>
+                                    <action selector="didPressVerifyButtonWithButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ggy-zg-Lzj"/>
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="jHc-GP-v1Z">
@@ -72,12 +72,15 @@
                                 </segments>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzK-em-8dU" userLabel="Reset">
-                                <rect key="frame" x="50" y="564.5" width="275" height="31"/>
+                                <rect key="frame" x="50" y="564.5" width="275" height="34.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Reset"/>
+                                <connections>
+                                    <action selector="didPressResetButtonWithButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="m9z-aL-2Ax"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nEH-8i-SaF" userLabel="Stop">
-                                <rect key="frame" x="50" y="609" width="275" height="31"/>
+                                <rect key="frame" x="50" y="609" width="275" height="34"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Stop"/>
                                 <connections>

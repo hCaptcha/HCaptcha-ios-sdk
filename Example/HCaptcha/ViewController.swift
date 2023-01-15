@@ -38,12 +38,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupHCaptcha()
-
-        resetButton.rx.tap
-            .subscribe(onNext: { [weak hcaptcha] _ in
-                hcaptcha?.reset()
-            })
-            .disposed(by: disposeBag)
     }
 
     @IBAction func didPressLocaleSegmentedControl(_ sender: UISegmentedControl) {
@@ -57,7 +51,7 @@ class ViewController: UIViewController {
         setupHCaptcha()
     }
 
-    @IBAction private func didPressButton(button: UIButton) {
+    @IBAction private func didPressVerifyButton(button: UIButton) {
         if self.apiSegmentedControl.selectedSegmentIndex == 0 {
             self.verifyRxApi()
         } else {
@@ -69,8 +63,10 @@ class ViewController: UIViewController {
         hcaptcha.validate(on: self.view) { result in
             do {
                 self.label.text = try result.dematerialize()
-            } catch {
-                self.label.text = error.localizedDescription
+            } catch let error as HCaptchaError {
+                self.label.text = error.description
+            } catch let error {
+                self.label.text = String(describing: error)
             }
             let subview = self.view.viewWithTag(Constants.webViewTag)
             subview?.removeFromSuperview()
@@ -158,6 +154,10 @@ class ViewController: UIViewController {
 
     @IBAction private func didPressStopButton(button: UIButton) {
         hcaptcha.stop()
+    }
+
+    @IBAction private func didPressResetButton(button: UIButton) {
+        hcaptcha?.reset()
     }
 
     private func setupHCaptcha() {

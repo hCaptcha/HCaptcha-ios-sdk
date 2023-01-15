@@ -21,7 +21,7 @@ class HCaptcha_UITests: XCTestCase {
         XCUIApplication().launch()
     }
 
-    func test__Validate__Default_Endpoint() {
+    func test__Simple__Validate__Rx() {
         let app = XCUIApplication()
         app.segmentedControls.buttons["Rx"].tap()
         app.buttons["Validate"].tap()
@@ -29,7 +29,7 @@ class HCaptcha_UITests: XCTestCase {
         verifyValidation()
     }
 
-    func test__Validate__Alternate_Endpoint() {
+    func test__Simple__Validate__Regular() {
         let app = XCUIApplication()
         app.segmentedControls.buttons["Regular"].tap()
         app.buttons["Validate"].tap()
@@ -42,8 +42,7 @@ class HCaptcha_UITests: XCTestCase {
     private func verifyValidation() {
         let app = XCUIApplication()
         let webview = app.staticTexts.element(matching: .any, identifier: "webview")
-        let webviewExists = webview.waitForExistence(timeout: 10)
 
-        XCTAssertTrue(webviewExists)
+        XCTAssertTrue(webview.waitForExistence(timeout: 10))
     }
 }
