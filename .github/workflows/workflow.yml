@@ -125,7 +125,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        xcode: [ "${{ env.XCODE_VERSION }}" ]
+        xcode: [ '13.1' ]
         experimental: [ false ]
         include:
           - xcode: '13.4.1'

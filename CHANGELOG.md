@@ -1,3 +1,9 @@
+# 2.4.0
+
+- Fix: call completion on WebContent process termination
+- Added: handle possible WebView navigation errors
+- Added: non-blocking initialization path
+
 # 2.3.3
 
 - Fix: Call configureWebView in case if WebView size wasn't changed ([#98](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/98)) ([#91](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/91))
