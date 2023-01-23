@@ -1,7 +1,8 @@
 # 2.4.0
 
-- Fix: call completionon WebContent process termination
+- Fix: call completion on WebContent process termination
 - Added: handle possible WebView navigation errors
+- Added: non-blocking initialization path
 
 # 2.3.3
 
