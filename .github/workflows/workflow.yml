@@ -16,6 +16,9 @@ concurrency:
   group: '${{ github.workflow }}-${{ github.job }}-${{ github.head_ref || github.ref_name }}'
   cancel-in-progress: true
 
+env:
+  XCODE_VERSION: '13.1'
+
 jobs:
   sdk:
     name: Test SDK
@@ -23,8 +26,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Use Xcode 12.4
-        run: sudo xcode-select -switch /Applications/Xcode_12.4.app
+      - name: Use Xcode ${{ env.XCODE_VERSION }}
+        run: sudo xcode-select -switch /Applications/Xcode_${XCODE_VERSION}.app
 
       - name: "Cache dependencies"
         uses: actions/cache@v2
@@ -75,7 +78,8 @@ jobs:
           main_size=$(jq '.combined_pods_extra_size // 0' cocoapods-size-result.json -r)
           echo "::set-output name=value::${main_size}"
 
-      - run: sudo xcode-select -switch /Applications/Xcode_12.4.app
+      - name: Use Xcode ${{ env.XCODE_VERSION }}
+        run: sudo xcode-select -switch /Applications/Xcode_${XCODE_VERSION}.app
 
       - uses: ruby/setup-ruby@v1
         with:
@@ -116,15 +120,17 @@ jobs:
   samples:
     name: Build Samples
     needs: sdk
-    runs-on: macos-11
+    runs-on: macos-12
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
-        xcode: [ '12.4' ]
+        xcode: [ "${{ env.XCODE_VERSION }}" ]
         experimental: [ false ]
         include:
-          - xcode: '13.2.1'
+          - xcode: '13.4.1'
+            experimental: true
+          - xcode: '14.2'
             experimental: true
     steps:
       - uses: actions/checkout@v2
