@@ -53,7 +53,7 @@ class HCaptcha_Rx__Tests: XCTestCase {
         catch let error {
             XCTFail(error.localizedDescription)
         }
-        waitForExpectations(timeout: 0)
+        waitForExpectations(timeout: 5)
     }
 
 
@@ -62,10 +62,10 @@ class HCaptcha_Rx__Tests: XCTestCase {
             manager: HCaptchaWebViewManager(messageBody: "{action: \"showHCaptcha\"}", apiKey: apiKey)
         )
 
-        var didConfigureWebView = false
+        let exp = expectation(description: "should call configureWebView")
 
         hcaptcha.configureWebView { _ in
-            didConfigureWebView = true
+            exp.fulfill()
         }
 
         do {
@@ -77,8 +77,8 @@ class HCaptcha_Rx__Tests: XCTestCase {
             XCTFail("should have thrown exception")
         }
         catch let error {
+            waitForExpectations(timeout: 5)
             XCTAssertEqual(String(describing: error), RxError.timeout.debugDescription)
-            XCTAssertTrue(didConfigureWebView)
         }
     }
 
@@ -149,7 +149,7 @@ class HCaptcha_Rx__Tests: XCTestCase {
 
         do {
             _ = try hcaptcha.rx.didFinishLoading
-                .toBlocking(timeout: 0.1)
+                .toBlocking(timeout: 0.01)
                 .first()
 
             XCTFail("should have timed out")

@@ -16,6 +16,9 @@ concurrency:
   group: '${{ github.workflow }}-${{ github.job }}-${{ github.head_ref || github.ref_name }}'
   cancel-in-progress: true
 
+env:
+  XCODE_VERSION: '13.1'
+
 jobs:
   sdk:
     name: Test SDK
@@ -23,11 +26,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Use Xcode 12.4
-        run: sudo xcode-select -switch /Applications/Xcode_12.4.app
+      - name: Use Xcode ${{ env.XCODE_VERSION }}
+        run: sudo xcode-select -switch /Applications/Xcode_${XCODE_VERSION}.app
 
       - name: "Cache dependencies"
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: Carthage/build
           key: ${{ runner.os }}-carthage-v2-${{ hashFiles('**/Cartfile.resolved') }}
@@ -73,9 +76,10 @@ jobs:
       - id: main_size
         run: |
           main_size=$(jq '.combined_pods_extra_size // 0' cocoapods-size-result.json -r)
-          echo "::set-output name=value::${main_size}"
+          echo "value=${main_size}" >> $GITHUB_OUTPUT
 
-      - run: sudo xcode-select -switch /Applications/Xcode_12.4.app
+      - name: Use Xcode ${{ env.XCODE_VERSION }}
+        run: sudo xcode-select -switch /Applications/Xcode_${XCODE_VERSION}.app
 
       - uses: ruby/setup-ruby@v1
         with:
@@ -87,10 +91,10 @@ jobs:
       - id: pr_size
         run: |
           pr_size=$(jq '.combined_pods_extra_size' .lint/cocoapods-size/result.json -r)
-          echo "::set-output name=value::${pr_size}"
+          echo "value=${pr_size}" >> $GITHUB_OUTPUT
 
       - id: diff_size
-        run: echo "::set-output name=value::$((${{ steps.pr_size.outputs.value }} - ${{ steps.main_size.outputs.value }}))"
+        run: echo "value=$((${{ steps.pr_size.outputs.value }} - ${{ steps.main_size.outputs.value }}))" >> $GITHUB_OUTPUT
 
       - uses: peter-evans/find-comment@v1
         id: find_comment
@@ -98,7 +102,7 @@ jobs:
           issue-number: ${{ github.event.pull_request.number }}
           body-includes: Cocoapods size report
 
-      - uses: peter-evans/create-or-update-comment@v1
+      - uses: peter-evans/create-or-update-comment@v2
         with:
           body: |
             Cocoapods size report:
@@ -116,18 +120,20 @@ jobs:
   samples:
     name: Build Samples
     needs: sdk
-    runs-on: macos-11
+    runs-on: macos-12
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
-        xcode: [ '12.4' ]
+        xcode: [ '13.1' ]
         experimental: [ false ]
         include:
-          - xcode: '13.2.1'
+          - xcode: '13.4.1'
+            experimental: true
+          - xcode: '14.2'
             experimental: true
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Use Xcode ${{ matrix.xcode }}
         run: sudo xcode-select -switch /Applications/Xcode_${{ matrix.xcode }}.app
@@ -148,7 +154,7 @@ jobs:
     needs: samples
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: ruby/setup-ruby@v1
         with:

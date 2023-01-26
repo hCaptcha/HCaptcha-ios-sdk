@@ -18,8 +18,6 @@ internal class HCaptchaWebViewManager: NSObject {
     }
 
     fileprivate struct Constants {
-        static let ExecuteJSCommand = "execute();"
-        static let ResetCommand = "reset();"
         static let BotUserAgent = "bot/2.1"
     }
 
@@ -78,6 +76,9 @@ internal class HCaptchaWebViewManager: NSObject {
         }
     }
 
+    /// Stop async webView configuration
+    private var stopInitWebViewConfiguration = false
+
     /// The observer for `.UIWindowDidBecomeVisible`
     fileprivate var observer: NSObjectProtocol?
 
@@ -124,14 +125,21 @@ internal class HCaptchaWebViewManager: NSObject {
         self.decoder = HCaptchaDecoder { [weak self] result in
             self?.handle(result: result)
         }
-        self.formattedHTML = String(format: html, arguments: ["apiKey": apiKey,
-                                                              "endpoint": endpoint.absoluteString,
-                                                              "size": size.rawValue,
-                                                              "rqdata": rqdata ?? "",
-                                                              "theme": theme,
-                                                              "debugInfo": "[]"])
+        DispatchQueue.global(qos: .userInitiated).async {
+            let debugInfo = HCaptchaDebugInfo.json
+            self.formattedHTML = String(format: html, arguments: ["apiKey": apiKey,
+                                                                  "endpoint": endpoint.absoluteString,
+                                                                  "size": size.rawValue,
+                                                                  "rqdata": rqdata ?? "",
+                                                                  "theme": theme,
+                                                                  "debugInfo": debugInfo])
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                guard !self.stopInitWebViewConfiguration else { return }
 
-        setupWebview(html: self.formattedHTML, url: baseURL)
+                self.setupWebview(html: self.formattedHTML, url: baseURL)
+            }
+        }
     }
 
     /**
@@ -157,6 +165,7 @@ internal class HCaptchaWebViewManager: NSObject {
 
     /// Stops the execution of the webview
     func stop() {
+        stopInitWebViewConfiguration = true
         webView.stopLoading()
     }
 
@@ -167,10 +176,11 @@ internal class HCaptchaWebViewManager: NSObject {
      */
     func reset() {
         configureWebViewDispatchToken = UUID()
+        stopInitWebViewConfiguration = false
         if didFinishLoading {
             executeJS(command: .reset)
             didFinishLoading = false
-        } else {
+        } else if let formattedHTML = self.formattedHTML {
             setupWebview(html: formattedHTML, url: baseURL)
         }
     }
@@ -257,6 +267,7 @@ fileprivate extension HCaptchaWebViewManager {
 
     private func didLoad() {
         didFinishLoading = true
+
         if completion != nil {
             executeJS(command: .execute)
         }
@@ -281,7 +292,7 @@ fileprivate extension HCaptchaWebViewManager {
      */
     func setupWebview(html: String, url: URL) {
         if let window = UIApplication.shared.keyWindow {
-            setupWebview(on: window, html: formattedHTML, url: baseURL)
+            setupWebview(on: window, html: html, url: url)
         } else {
             observer = NotificationCenter.default.addObserver(
                 forName: UIWindow.didBecomeVisibleNotification,
@@ -290,7 +301,7 @@ fileprivate extension HCaptchaWebViewManager {
             ) { [weak self] notification in
                 guard let window = notification.object as? UIWindow else { return }
                 guard let slf = self else { return }
-                slf.setupWebview(on: window, html: slf.formattedHTML, url: slf.baseURL)
+                slf.setupWebview(on: window, html: html, url: url)
             }
         }
     }
@@ -304,9 +315,13 @@ fileprivate extension HCaptchaWebViewManager {
      Adds the webview to a valid UIView and loads the initial HTML file
      */
     func setupWebview(on window: UIWindow, html: String, url: URL) {
-        window.addSubview(webView)
+        if webView.superview == nil {
+            window.addSubview(webView)
+        }
         webView.loadHTMLString(html, baseURL: url)
-        webView.navigationDelegate = self
+        if webView.navigationDelegate == nil {
+            webView.navigationDelegate = self
+        }
 
         if let observer = observer {
             NotificationCenter.default.removeObserver(observer)
@@ -349,5 +364,28 @@ extension HCaptchaWebViewManager: WKNavigationDelegate {
             urlOpener.openURL(url)
         }
         decisionHandler(WKNavigationActionPolicy.allow)
+    }
+
+    /// Tells the delegate that an error occurred during navigation.
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        completion?(HCaptchaResult(error: .unexpected(error)))
+    }
+
+    /// Tells the delegate that an error occurred during the early navigation process.
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        completion?(HCaptchaResult(error: .unexpected(error)))
+    }
+
+    /// Tells the delegate that the web view’s content process was terminated.
+    func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+        let kHCaptchaErrorWebViewProcessDidTerminate = -1
+        let kHCaptchaErrorDomain = "com.hcaptcha.sdk-ios"
+        let error = NSError(domain: kHCaptchaErrorDomain,
+                            code: kHCaptchaErrorWebViewProcessDidTerminate,
+                            userInfo: [
+                                NSLocalizedDescriptionKey: "WebView web content process did terminate",
+                                NSLocalizedRecoverySuggestionErrorKey: "Call HCaptcha.reset()"])
+        completion?(HCaptchaResult(error: .unexpected(error)))
+        didFinishLoading = false
     }
 }
