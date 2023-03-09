@@ -18,6 +18,7 @@ concurrency:
 
 env:
   XCODE_VERSION: '13.1'
+  RUBY_VERSION: '2.7.2'
 
 jobs:
   sdk:
@@ -41,7 +42,7 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.2
+          ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
       - run: |
@@ -83,7 +84,7 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.2
+          ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
       - run: bundle exec fastlane pod_size
@@ -96,7 +97,7 @@ jobs:
       - id: diff_size
         run: echo "value=$((${{ steps.pr_size.outputs.value }} - ${{ steps.main_size.outputs.value }}))" >> $GITHUB_OUTPUT
 
-      - uses: peter-evans/find-comment@v1
+      - uses: peter-evans/find-comment@v2
         id: find_comment
         with:
           issue-number: ${{ github.event.pull_request.number }}
@@ -140,7 +141,7 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.2
+          ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
       - run: bundle exec pod install
@@ -149,16 +150,19 @@ jobs:
       - run: bundle exec fastlane ios samples_build
 
   release:
-    name: Relase
+    name: Release
     if: startsWith(github.ref, 'refs/tags')
     needs: samples
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v3
 
+      - name: Use Xcode ${{ env.XCODE_VERSION }}
+        run: sudo xcode-select -switch /Applications/Xcode_${XCODE_VERSION}.app
+
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.7.2
+          ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
       - name: Release
