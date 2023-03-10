@@ -1,3 +1,7 @@
+# 2.4.1
+
+- Fix: release job in CI ([#108](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/108))
+
 # 2.4.0
 
 - Fix: call completion on WebContent process termination
