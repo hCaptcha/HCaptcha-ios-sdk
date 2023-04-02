@@ -114,11 +114,13 @@ internal class HCaptchaWebViewManager: NSObject {
          - baseURL: The URL configured with the sitekey
          - endpoint: The JS API endpoint to be loaded onto the HTML file.
          - size: Size of visible area
+         - orientation: Of the widget
          - rqdata: Custom supplied challenge data
          - theme: Widget theme, value must be valid JS Object or String with brackets
      */
     init(html: String, apiKey: String, baseURL: URL, endpoint: URL,
-         size: HCaptchaSize, rqdata: String?, theme: String, urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener()) {
+         size: HCaptchaSize, orientation: HCaptchaOrientation, rqdata: String?,
+         theme: String, urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener()) {
         self.urlOpener = urlOpener
         super.init()
         self.baseURL = baseURL
@@ -130,6 +132,7 @@ internal class HCaptchaWebViewManager: NSObject {
             self.formattedHTML = String(format: html, arguments: ["apiKey": apiKey,
                                                                   "endpoint": endpoint.absoluteString,
                                                                   "size": size.rawValue,
+                                                                  "orientation": orientation.rawValue,
                                                                   "rqdata": rqdata ?? "",
                                                                   "theme": theme,
                                                                   "debugInfo": debugInfo])

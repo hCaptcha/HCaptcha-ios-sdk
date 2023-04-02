@@ -22,6 +22,7 @@ extension HCaptchaConfig {
                       infoPlistURL: infoPlistURL,
                       jsSrc: URL(string: "https://hcaptcha.com/1/api.js")!,
                       size: .invisible,
+                      orientation: .portrait,
                       rqdata: nil,
                       sentry: false,
                       endpoint: URL(string: "https://api.hcaptcha.com")!,

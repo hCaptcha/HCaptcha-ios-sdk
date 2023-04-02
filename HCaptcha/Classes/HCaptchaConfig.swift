@@ -45,6 +45,36 @@ public enum HCaptchaSize: Int, RawRepresentable {
     }
 }
 
+/** Widget opientation mode
+ */
+@objc
+public enum HCaptchaOrientation: Int, RawRepresentable {
+    case portrait
+    case landscape
+
+    public typealias RawValue = String
+
+    public var rawValue: RawValue {
+        switch self {
+        case .portrait:
+            return "portrait"
+        case .landscape:
+            return "landscape"
+        }
+    }
+
+    public init?(rawValue: RawValue) {
+        switch rawValue {
+        case "portrait":
+            self = .portrait
+        case "landscape":
+            self = .landscape
+        default:
+            return nil
+        }
+    }
+}
+
 /** Internal data model to keep SDK init params
  */
 struct HCaptchaConfig {
@@ -56,6 +86,9 @@ struct HCaptchaConfig {
 
     /// Size of visible area
     let size: HCaptchaSize
+
+    /// Orientation of widget
+    let orientation: HCaptchaOrientation
 
     /// The base url to be used to resolve relative URLs in the webview
     let baseURL: URL
@@ -136,6 +169,7 @@ struct HCaptchaConfig {
                 infoPlistURL: URL?,
                 jsSrc: URL,
                 size: HCaptchaSize,
+                orientation: HCaptchaOrientation,
                 rqdata: String?,
                 sentry: Bool?,
                 endpoint: URL?,
@@ -170,6 +204,7 @@ struct HCaptchaConfig {
         self.html = HCaptchaHtml.template
         self.apiKey = apiKey
         self.size = size
+        self.orientation = orientation
         self.baseURL = HCaptchaConfig.fixSchemeIfNeeded(for: domain)
         self.jsSrc = jsSrc
         self.rqdata = rqdata
