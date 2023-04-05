@@ -45,7 +45,7 @@ public enum HCaptchaSize: Int, RawRepresentable {
     }
 }
 
-/** Widget opientation mode
+/** Widget orientation mode
  */
 @objc
 public enum HCaptchaOrientation: Int, RawRepresentable {
