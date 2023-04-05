@@ -230,6 +230,19 @@ let hcaptcha = try? HCaptcha(size: .compact)
 
 And you will now get the desired behavior.
 
+### Using landscape instead of portrait orientation
+
+The `orientation` argument can be set either `.portrait` or `.landscape`  orientation to adjust challenge modal behavior.
+
+```swift
+let hcaptcha = try? HCaptcha(orientation: .landscape)
+```
+
+By default, orientation is portrait and does not reflow.
+
+However, if you have an app used exclusively in landscape mode (e.g. a game) then you can also switch the challenge UI to match this design choice.
+
+
 ### SDK Events
 
 This SDK allows you to receive interaction events, for your analytics via the `onEvent` method. At the moment the SDK supports:
