@@ -1,3 +1,7 @@
+# 2.5.0
+
+- Feature: new `orientation` argument to set either `.portrait` or `.landscape` challenge orientation.
+
 # 2.4.1
 
 - Fix: release job in CI ([#108](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/108))

@@ -49,6 +49,7 @@ extension HCaptchaWebViewManager {
         apiKey: String? = nil,
         endpoint: URL? = nil,
         size: HCaptchaSize = .invisible,
+        orientation: HCaptchaOrientation = .portrait,
         rqdata: String? = nil,
         theme: String = "\"light\"",
         urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener()
@@ -61,6 +62,7 @@ extension HCaptchaWebViewManager {
             baseURL: localhost,
             endpoint: endpoint ?? localhost,
             size: size,
+            orientation: orientation,
             rqdata: rqdata,
             theme: theme,
             urlOpener: urlOpener

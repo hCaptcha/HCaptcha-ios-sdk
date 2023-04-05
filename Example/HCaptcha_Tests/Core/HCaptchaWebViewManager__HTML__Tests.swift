@@ -32,6 +32,12 @@ class HCaptchaWebViewManager__HTML__Tests: XCTestCase {
         waitForWebViewContent(manager: manager)
         XCTAssertEqual(webViewContent, "size: compact")
     }
+
+    func test__Orientation_Is_Mapped_Into_HTML() {
+        let manager = HCaptchaWebViewManager(html: "orientation: ${orientation}", orientation: .portrait)
+        waitForWebViewContent(manager: manager)
+        XCTAssertEqual(webViewContent, "orientation: portrait")
+    }
 }
 
 extension HCaptchaWebViewManager__HTML__Tests: WKNavigationDelegate {

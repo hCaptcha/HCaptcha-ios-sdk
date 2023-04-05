@@ -126,6 +126,7 @@ struct HCaptchaHtml {
                   hcaptcha.render("hcaptcha-container", {
                     "sitekey": "${apiKey}",
                     "size": "${size}",
+                    "orientation": "${orientation}",
                     "theme": ${theme},
                     "callback": onPass,
                     "close-callback": closeCallback,

@@ -50,6 +50,7 @@ public class HCaptcha: NSObject {
         baseURL: URL? = nil,
         locale: Locale? = nil,
         size: HCaptchaSize = .invisible,
+        orientation: HCaptchaOrientation = .portrait,
         jsSrc: URL = URL(string: "https://js.hcaptcha.com/1/api.js")!,
         rqdata: String? = nil,
         sentry: Bool = false,
@@ -72,6 +73,7 @@ public class HCaptcha: NSObject {
                                         infoPlistURL: plistDomain,
                                         jsSrc: jsSrc,
                                         size: size,
+                                        orientation: orientation,
                                         rqdata: rqdata,
                                         sentry: sentry,
                                         endpoint: endpoint,
@@ -88,6 +90,7 @@ public class HCaptcha: NSObject {
             baseURL: config.baseURL,
             endpoint: config.getEndpointURL(locale: locale),
             size: config.size,
+            orientation: config.orientation,
             rqdata: config.rqdata,
             theme: config.actualTheme
         ))
