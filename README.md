@@ -1,8 +1,8 @@
 # HCaptcha
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-orange.svg)](https://github.com/Carthage/Carthage)
-[![Version](https://img.shields.io/cocoapods/v/HCaptcha.svg?style=flat)](http://cocoapods.org/pods/HCaptcha)
-[![Platform](https://img.shields.io/cocoapods/p/HCaptcha.svg?style=flat)](http://cocoapods.org/pods/HCaptcha)
+[![Version](https://img.shields.io/cocoapods/v/HCaptcha)](http://cocoapods.org/pods/HCaptcha)
+[![Platform](https://img.shields.io/badge/Platform-ios-blue)](http://cocoapods.org/pods/HCaptcha)
 [![Requirements](https://img.shields.io/badge/iOS-%3E=9.0-blue.svg)](https://developer.apple.com/support/app-store/)
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 [![Build](https://github.com/hCaptcha/HCaptcha-ios-sdk/actions/workflows/workflow.yml/badge.svg)](https://github.com/hCaptcha/HCaptcha-ios-sdk/actions/workflows/workflow.yml)
