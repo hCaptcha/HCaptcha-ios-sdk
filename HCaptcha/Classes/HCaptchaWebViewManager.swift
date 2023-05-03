@@ -68,7 +68,7 @@ internal class HCaptchaWebViewManager: NSObject {
     fileprivate var decoder: HCaptchaDecoder!
 
     /// Indicates if the script has already been loaded by the `webView`
-    fileprivate var didFinishLoading = false {
+    internal var didFinishLoading = false {
         didSet {
             if didFinishLoading {
                 onDidFinishLoading?()
@@ -106,7 +106,7 @@ internal class HCaptchaWebViewManager: NSObject {
     }()
 
     /// Responsible for external link handling
-    fileprivate let urlOpener: HCaptchaURLOpener
+    internal let urlOpener: HCaptchaURLOpener
 
     /**
      - parameters:
@@ -358,50 +358,5 @@ fileprivate extension HCaptchaWebViewManager {
                 self?.decoder.send(error: .unexpected(error))
             }
         }
-    }
-}
-
-extension HCaptchaWebViewManager: WKNavigationDelegate {
-    /// To handle <a target="_black" ...> links
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
-                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if navigationAction.targetFrame == nil, let url = navigationAction.request.url, urlOpener.canOpenURL(url) {
-            urlOpener.openURL(url)
-        }
-        decisionHandler(WKNavigationActionPolicy.allow)
-    }
-
-    /// Tells the delegate that an error occurred during navigation.
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        completion?(HCaptchaResult(error: .unexpected(error)))
-    }
-
-    /// Tells the delegate that an error occurred during the early navigation process.
-    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        completion?(HCaptchaResult(error: .unexpected(error)))
-    }
-
-    /// Tells the delegate that the web view’s content process was terminated.
-    func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
-        let kHCaptchaErrorWebViewProcessDidTerminate = -1
-        let kHCaptchaErrorDomain = "com.hcaptcha.sdk-ios"
-        let error = NSError(domain: kHCaptchaErrorDomain,
-                            code: kHCaptchaErrorWebViewProcessDidTerminate,
-                            userInfo: [
-                                NSLocalizedDescriptionKey: "WebView web content process did terminate",
-                                NSLocalizedRecoverySuggestionErrorKey: "Call HCaptcha.reset()"])
-        completion?(HCaptchaResult(error: .unexpected(error)))
-        didFinishLoading = false
-    }
-}
-
-extension HCaptchaWebViewManager: WKUIDelegate {
-
-    /// To handle window.open() calls
-    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        if let url = navigationAction.request.url {
-            urlOpener.openURL(url)
-        }
-        return nil
     }
 }
