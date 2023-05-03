@@ -100,6 +100,7 @@ internal class HCaptchaWebViewManager: NSObject {
         webview.accessibilityIdentifier = "webview"
         webview.accessibilityTraits = UIAccessibilityTraits.link
         webview.isHidden = true
+        webview.uiDelegate = self
 
         return webview
     }()
@@ -361,6 +362,7 @@ fileprivate extension HCaptchaWebViewManager {
 }
 
 extension HCaptchaWebViewManager: WKNavigationDelegate {
+    /// To handle <a target="_black" ...> links
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.targetFrame == nil, let url = navigationAction.request.url, urlOpener.canOpenURL(url) {
@@ -390,5 +392,16 @@ extension HCaptchaWebViewManager: WKNavigationDelegate {
                                 NSLocalizedRecoverySuggestionErrorKey: "Call HCaptcha.reset()"])
         completion?(HCaptchaResult(error: .unexpected(error)))
         didFinishLoading = false
+    }
+}
+
+extension HCaptchaWebViewManager: WKUIDelegate {
+
+    /// To handle window.open() calls
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if let url = navigationAction.request.url {
+            urlOpener.openURL(url)
+        }
+        return nil
     }
 }
