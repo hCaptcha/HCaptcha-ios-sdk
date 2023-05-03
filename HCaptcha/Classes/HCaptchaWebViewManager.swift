@@ -24,6 +24,9 @@ internal class HCaptchaWebViewManager: NSObject {
     fileprivate let webViewInitSize = CGSize(width: 1, height: 1)
 
 #if DEBUG
+    /// Allows validation stubbing for testing
+    public var shouldSkipForTests = false
+
     /// Forces the challenge to be explicitly displayed.
     var forceVisibleChallenge = false {
         didSet {
@@ -36,8 +39,6 @@ internal class HCaptchaWebViewManager: NSObject {
         }
     }
 
-    /// Allows validation stubbing for testing
-    public var shouldSkipForTests = false
 #endif
 
     /// Sends the result message
@@ -64,33 +65,6 @@ internal class HCaptchaWebViewManager: NSObject {
     /// If the HCaptcha should be reset when it errors
     var shouldResetOnError = true
 
-    /// The JS message recoder
-    fileprivate var decoder: HCaptchaDecoder!
-
-    /// Indicates if the script has already been loaded by the `webView`
-    internal var didFinishLoading = false {
-        didSet {
-            if didFinishLoading {
-                onDidFinishLoading?()
-            }
-        }
-    }
-
-    /// Stop async webView configuration
-    private var stopInitWebViewConfiguration = false
-
-    /// The observer for `.UIWindowDidBecomeVisible`
-    fileprivate var observer: NSObjectProtocol?
-
-    /// Base URL for WebView
-    fileprivate var baseURL: URL!
-
-    /// Actual HTML
-    fileprivate var formattedHTML: String!
-
-    /// Keep error If it happens before validate call
-    fileprivate var lastError: HCaptchaError?
-
     /// The webview that executes JS code
     lazy var webView: WKWebView = {
         let webview = WKWebView(
@@ -105,8 +79,35 @@ internal class HCaptchaWebViewManager: NSObject {
         return webview
     }()
 
+    /// Indicates if the script has already been loaded by the `webView`
+    internal var didFinishLoading = false {
+        didSet {
+            if didFinishLoading {
+                onDidFinishLoading?()
+            }
+        }
+    }
+
     /// Responsible for external link handling
     internal let urlOpener: HCaptchaURLOpener
+
+    /// The JS message recoder
+    fileprivate var decoder: HCaptchaDecoder!
+
+    /// The observer for `.UIWindowDidBecomeVisible`
+    fileprivate var observer: NSObjectProtocol?
+
+    /// Base URL for WebView
+    fileprivate var baseURL: URL!
+
+    /// Actual HTML
+    fileprivate var formattedHTML: String!
+
+    /// Keep error If it happens before validate call
+    fileprivate var lastError: HCaptchaError?
+
+    /// Stop async webView configuration
+    private var stopInitWebViewConfiguration = false
 
     /**
      - parameters:
@@ -249,7 +250,7 @@ fileprivate extension HCaptchaWebViewManager {
         }
     }
 
-    private func handle(error: HCaptchaError) {
+    func handle(error: HCaptchaError) {
         switch error {
         case HCaptchaError.challengeClosed:
             completion?(HCaptchaResult(error: error))
@@ -269,7 +270,7 @@ fileprivate extension HCaptchaWebViewManager {
         }
     }
 
-    private func didLoad() {
+    func didLoad() {
         didFinishLoading = true
 
         if completion != nil {
@@ -278,7 +279,7 @@ fileprivate extension HCaptchaWebViewManager {
         self.doConfigureWebView()
     }
 
-    private func doConfigureWebView() {
+    func doConfigureWebView() {
         if configureWebView != nil {
             DispatchQueue.once(token: configureWebViewDispatchToken) { [weak self] in
                 guard let `self` = self else { return }
