@@ -9,6 +9,21 @@
 
 -----
 
+- [HCaptcha](#hcaptcha)
+  * [Installation](#installation)
+      - [Cocoapods](#cocoapods)
+      - [SPM](#spm)
+  * [Requirements](#requirements)
+  * [Usage](#usage)
+      - [Change widget theme](#change-widget-theme)
+      - [More params for Enterprise (optional)](#more-params-for-enterprise-optional)
+    + [Enabling the visible checkbox flow](#enabling-the-visible-checkbox-flow)
+    + [Using landscape instead of portrait orientation](#using-landscape-instead-of-portrait-orientation)
+    + [SDK Events](#sdk-events)
+  * [Known issues](#known-issues)
+  * [License](#license)
+  * [Troubleshooting](#troubleshooting)
+
 Add [hCaptcha](https://www.hcaptcha.com/) to your project. This library automatically handles hCaptcha's events and returns a validation token, presenting the challenge via a modal if needed.
 
 #### _Warning_ ⚠️
@@ -300,6 +315,9 @@ hcaptcha.rx.events()
 
 HCaptcha pod size: **90** KB as of May 16 2022. You can always see the latest number in the CI logs by searching for the "pod size" string.
 
+## Known issues
+
+- WebView crashes on Simulator iOS 14.x (arm64). [More details](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/103)
 
 ## License
 
