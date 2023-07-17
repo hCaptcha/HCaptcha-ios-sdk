@@ -209,7 +209,7 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
             let validationJS: String = "(function() { return \(customTheme) })()"
             let context = JSContext()!
             context.exceptionHandler = { _, err in
-                HCaptchaLogger.error("customTheme validation error: \(err?.toString())")
+                HCaptchaLogger.error("customTheme validation error: \(String(describing: err))")
             }
             let result = context.evaluateScript(validationJS)
             if result?.isObject != true {
