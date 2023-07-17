@@ -1,6 +1,6 @@
 # 2.5.1
 
-- Feature: new diagnosticLog argument to enable diagnostic log
+- Feature: new `diagnosticLog` argument to enable debug logs.
 
 # 2.5.0
 
