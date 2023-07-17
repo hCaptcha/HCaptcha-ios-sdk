@@ -17,6 +17,10 @@ Steps to reproduce the behavior:
 2. Click on '...'
 3. ...
 
+## Logs
+
+`HCaptcha` constructor accept `diagnosticLog` flag to enable detailed SDK logs. Please attach output to the issue
+
 ## Expected behavior
 A clear and concise description of what you expected to happen.
 
