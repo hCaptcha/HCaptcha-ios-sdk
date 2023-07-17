@@ -17,9 +17,9 @@ Steps to reproduce the behavior:
 2. Click on '...'
 3. ...
 
-## Logs
+## Debug Logs
 
-`HCaptcha` constructor accept `diagnosticLog` flag to enable detailed SDK logs. Please attach output to the issue
+The `HCaptcha` constructor accepts a `diagnosticLog` flag (bool) to enable detailed SDK logs. If you would like to report an issue with the SDK, please enable this flag and attach `diagnosticLog` output when you open the issue.
 
 ## Expected behavior
 A clear and concise description of what you expected to happen.
