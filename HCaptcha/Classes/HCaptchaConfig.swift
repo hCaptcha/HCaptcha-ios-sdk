@@ -77,7 +77,7 @@ public enum HCaptchaOrientation: Int, RawRepresentable {
 
 /** Internal data model to keep SDK init params
  */
-struct HCaptchaConfig {
+struct HCaptchaConfig: CustomDebugStringConvertible {
     /// The raw unformated HTML file content
     let html: String
 
@@ -149,6 +149,24 @@ struct HCaptchaConfig {
         #endif
     }()
 
+    var debugDescription: String {
+        let mirror = Mirror(reflecting: self)
+
+        var result = "HCaptchaConfig("
+        for (label, value) in mirror.children {
+            if let label = label, label != "html" {
+                result.append("\(label): \(value), ")
+            }
+        }
+
+        if !mirror.children.isEmpty {
+            let lastIndex = result.index(result.endIndex, offsetBy: -2)
+            result.removeSubrange(lastIndex...)
+        }
+
+        return result + ")"
+    }
+
     /**
      - parameters:
          - apiKey: The API key sent to the HCaptcha init
@@ -190,11 +208,9 @@ struct HCaptchaConfig {
         if let customTheme = customTheme {
             let validationJS: String = "(function() { return \(customTheme) })()"
             let context = JSContext()!
-#if DEBUG
             context.exceptionHandler = { _, err in
-                print("[hCaptcha]: customTheme validation error: ", err?.toString() ?? "nil")
+                HCaptchaLogger.error("customTheme validation error: \(String(describing: err))")
             }
-#endif
             let result = context.evaluateScript(validationJS)
             if result?.isObject != true {
                 throw HCaptchaError.invalidCustomTheme
@@ -277,9 +293,10 @@ private extension HCaptchaConfig {
             return url
         }
 
-#if DEBUG
-        print("⚠️ WARNING! Protocol not found for HCaptcha domain (\(url))! You should add http:// or https:// to it!")
-#endif
+        HCaptchaLogger.warn("""
+                               ⚠️ WARNING! Protocol not found for HCaptcha domain (\(url))!
+                               You should add http:// or https:// to it!
+                            """)
 
         if let fixedURL = URL(string: "http://" + url.absoluteString) {
             return fixedURL
