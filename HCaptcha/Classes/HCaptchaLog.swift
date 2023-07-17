@@ -5,6 +5,8 @@
 //  Copyright © 2023 HCaptcha. All rights reserved.
 //
 
+import Foundation
+
 /** Internal SDK logger level
  */
 enum HCaptchaLogLevel: Int, CustomStringConvertible {
