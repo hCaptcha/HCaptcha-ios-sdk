@@ -317,7 +317,7 @@ HCaptcha pod size: **90** KB as of May 16 2022. You can always see the latest nu
 
 ## Known issues
 
-- WebView crashes on Simulator iOS 14.x (arm64). [More details](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/103)
+- WebView crashes on Simulator iOS 14.x (arm64) but not on real devices. [More details](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/103)
 
 ## License
 
