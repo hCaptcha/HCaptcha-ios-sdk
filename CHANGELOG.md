@@ -1,3 +1,7 @@
+# 2.5.1
+
+- Feature: new `diagnosticLog` argument to enable debug logs.
+
 # 2.5.0
 
 - Feature: new `orientation` argument to set either `.portrait` or `.landscape` challenge orientation.
