@@ -44,6 +44,7 @@ internal class HCaptchaLogger {
     }
 
     static func log(level: HCaptchaLogLevel, message: String, args: [CVarArg]) {
+#if DEBUG
         guard level.rawValue >= minLevel.rawValue else {
             return
         }
@@ -52,6 +53,7 @@ internal class HCaptchaLogger {
         let logMessage = "\(timestamp) HCaptcha/\(level.description): \(formattedMessage)"
 
         print(logMessage)
+#endif
     }
 
     private static var timestamp: String {
