@@ -40,6 +40,6 @@ After merging and tests pass:
 
 Unlike `Cocoapods`, `Carthage` and `SPM` are decentralized. They do not require any centralized updates per version.
 
-### How the release will be triggered?
+### How is a release triggered?
 
-It's triggered by tag on default branch (at this moment it's `master` branch). Don't tag on feature branches! Just update metadata for release
+We use GitOps. It is triggered by a version tag on the default branch (`master`). This must be done by an administrator, as we use tag protection. Don't tag the new version on feature branches, just update the metadata for release.
