@@ -39,3 +39,7 @@ After merging and tests pass:
 ### Where is the logic for releasing packages for `Carthage` or `Swift Package Manager`?
 
 Unlike `Cocoapods`, `Carthage` and `SPM` are decentralized. They do not require any centralized updates per version.
+
+### How the release will be triggered?
+
+It's triggered by tag on default branch (at this moment it's `master` branch). Don't tag on feature branches! Just update metadata for release
