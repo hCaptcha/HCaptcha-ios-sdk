@@ -303,7 +303,7 @@ hcaptcha.rx.events()
 
 ### Disable new token fetch on expiry
 
-By default SDK will automatically fetch a new token on expiry. This behavior can be adjusted with `resetOnError: false` argument on `validate` call:
+By default the SDK will automatically fetch a new token upon expiry once you have requested a token via `validate`. This behavior can be adjusted by passing `resetOnError: false` to the `validate` call:
 
 ```
 hcaptcha.validate(on: view, resetOnError: false) { result in
