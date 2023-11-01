@@ -20,6 +20,7 @@
     + [Enabling the visible checkbox flow](#enabling-the-visible-checkbox-flow)
     + [Using landscape instead of portrait orientation](#using-landscape-instead-of-portrait-orientation)
     + [SDK Events](#sdk-events)
+    + [Disable new token fetch on expiry](#disable-new-token-fetch-on-expiry)
   * [Known issues](#known-issues)
   * [License](#license)
   * [Troubleshooting](#troubleshooting)
@@ -300,7 +301,15 @@ hcaptcha.rx.events()
     ...
 ```
 
+### Disable new token fetch on expiry
 
+By default the SDK will automatically fetch a new token upon expiry once you have requested a token via `validate`. This behavior can be adjusted by passing `resetOnError: false` to the `validate` call:
+
+```
+hcaptcha.validate(on: view, resetOnError: false) { result in
+       ...
+   }
+```
 
 ### SwiftUI Example
 
