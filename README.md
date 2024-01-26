@@ -322,7 +322,7 @@ hcaptcha.validate(on: view, resetOnError: false) { result in
 
 ### Compiled size: impact on including in your app
 
-HCaptcha pod size: **90** KB as of May 16 2022. You can always see the latest number in the CI logs by searching for the "pod size" string.
+HCaptcha pod size: **140** KB as of Jan 2024. You can always see the latest number in the CI logs by searching for the "pod size" string.
 
 ## Known issues
 
@@ -335,11 +335,14 @@ HCaptcha is available under the MIT license. See the LICENSE file for more info.
 
 ## Troubleshooting
 
-Q. I'm getting a "Could not load embedded HTML" exception. What does it mean?
-A. Most likely you have not included an asset in your build. Please double-check this, and see the example app for more details.
+Q. I'm getting a "Could not load embedded HTML" exception. What does this mean?
+
+A. Most likely you have not included an asset in your build. Please double-check assets, and see the example app for more details.
+
 
 Q. I'm getting "xcconfig: unable to open file" after upgrading the SDK. (Or changing SDK and running Example app.)
-A: In your app or the Example app dir, run `pod deintegrate && pod install` to refresh paths.
+
+A. In your app or the Example app dir, run `pod deintegrate && pod install` to refresh paths.
 
 
 ### Inspiration
