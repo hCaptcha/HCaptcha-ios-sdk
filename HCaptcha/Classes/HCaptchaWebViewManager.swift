@@ -103,11 +103,11 @@ internal class HCaptchaWebViewManager: NSObject {
         webview.accessibilityTraits = UIAccessibilityTraits.link
         webview.isHidden = true
         if debug {
-            if webview.responds(to: Selector("setInspectable:")) {
-                webview.perform(Selector("setInspectable:"), with: true)
+            if #available(iOS 16.4, *) {
+                webview.perform(Selector(("setInspectable:")), with: true)
             }
             webview.evaluateJavaScript("navigator.userAgent") { (result, _) in
-                Log.debug("WebViewManager WKWebView UserAgent: \(result)")
+                Log.debug("WebViewManager WKWebView UserAgent: \(result ?? "nil")")
             }
         }
         Log.debug("WebViewManager WKWebView instance created")
