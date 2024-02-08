@@ -260,10 +260,10 @@ fileprivate extension HCaptchaWebViewManager {
 
     private func didLoad() {
         Log.debug("WebViewManager.didLoad")
-        didFinishLoading = true
         if completion != nil {
             executeJS(command: .execute)
         }
+        didFinishLoading = true
         self.doConfigureWebView()
     }
 
