@@ -50,7 +50,7 @@ internal class HCaptchaLogger {
         }
 
         let formattedMessage = String(format: message, arguments: args)
-        let logMessage = "\(timestamp) HCaptcha/\(level.description): \(formattedMessage)"
+        let logMessage = "\(timestamp) \(threadId) HCaptcha/\(level.description): \(formattedMessage)"
 
         print(logMessage)
 #endif
@@ -60,5 +60,9 @@ internal class HCaptchaLogger {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.sss"
         return dateFormatter.string(from: Date())
+    }
+
+    private static var threadId: String {
+        return Thread.isMainThread ? "main" : "\(pthread_self())"
     }
 }
