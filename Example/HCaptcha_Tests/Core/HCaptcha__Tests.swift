@@ -91,6 +91,23 @@ class HCaptcha__Tests: XCTestCase {
             XCTFail("Unexpected error: \(e)")
         }
     }
+
+    func test__validate_from_didFinishLoading() {
+        let exp = expectation(description: "execute js function must be called only once")
+        let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager(messageBody: "{action: \"showHCaptcha\"}"))
+        hcaptcha.didFinishLoading {
+            let view = UIApplication.shared.windows.first?.rootViewController?.view
+            hcaptcha.onEvent { e, _ in
+                if e == .open {
+                    exp.fulfill()
+                }
+            }
+            hcaptcha.validate(on: view!) { _ in
+                XCTFail("Should not be called")
+            }
+        }
+        wait(for: [exp], timeout: 10)
+    }
 }
 
 
