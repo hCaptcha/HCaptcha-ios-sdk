@@ -1,3 +1,7 @@
+# 2.5.2
+
+- Fix: disabled controls on visual challenge if validation requested from didFinishLoading
+
 # 2.5.1
 
 - Feature: new `diagnosticLog` argument to enable debug logs.
