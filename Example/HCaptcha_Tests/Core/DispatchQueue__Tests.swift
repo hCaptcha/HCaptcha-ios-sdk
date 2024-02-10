@@ -26,7 +26,7 @@ class DispatchQueue__Tests: XCTestCase {
         // Execute closure called once
         let exp0 = expectation(description: "did call single closure")
 
-        DispatchQueue.main.throttle(deadline: .now() + 0.1) {
+        DispatchQueue.main.throttle(deadline: .now() + 0.01) {
             exp0.fulfill()
         }
 
@@ -34,12 +34,12 @@ class DispatchQueue__Tests: XCTestCase {
 
         // Does not execute first closure
         let exp1 = expectation(description: "did call last closure")
-        DispatchQueue.main.throttle(deadline: .now() + 0.1) {
+        DispatchQueue.main.throttle(deadline: .now() + 0.01) {
             XCTFail("Shouldn't be called")
         }
 
         DispatchQueue.main.throttle(
-            deadline: .now() + 0.1,
+            deadline: .now() + 0.01,
             action: exp1.fulfill
         )
 
@@ -52,7 +52,7 @@ class DispatchQueue__Tests: XCTestCase {
         let c0 = UUID()
 
         DispatchQueue.main.throttle(
-            deadline: .now() + 0.1,
+            deadline: .now() + 0.01,
             context: c0,
             action: exp0.fulfill
         )
@@ -62,12 +62,12 @@ class DispatchQueue__Tests: XCTestCase {
         // Does not execute first closure
         let exp1 = expectation(description: "execute on valid context")
         let c1 = UUID()
-        DispatchQueue.main.throttle(deadline: .now() + 0.1, context: c1) {
+        DispatchQueue.main.throttle(deadline: .now() + 0.01, context: c1) {
             XCTFail("Shouldn't be called")
         }
 
         DispatchQueue.main.throttle(
-            deadline: .now() + 0.1,
+            deadline: .now() + 0.01,
             context: c1,
             action: exp1.fulfill
         )
@@ -76,7 +76,7 @@ class DispatchQueue__Tests: XCTestCase {
         let exp2 = expectation(description: "execute on different context")
         let c2 = UUID()
         DispatchQueue.main.throttle(
-            deadline: .now() + 0.1,
+            deadline: .now() + 0.01,
             context: c2,
             action: exp2.fulfill
         )
@@ -91,7 +91,7 @@ class DispatchQueue__Tests: XCTestCase {
         let exp0 = expectation(description: "did call first closure")
 
         DispatchQueue.main.debounce(
-            interval: 0.1,
+            interval: 0.01,
             action: exp0.fulfill
         )
 
@@ -103,9 +103,9 @@ class DispatchQueue__Tests: XCTestCase {
 
         // Executes closure after previous has timed out
         let exp1 = expectation(description: "did call closure")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
             DispatchQueue.main.debounce(
-                interval: 0.1,
+                interval: 0.01,
                 action: exp1.fulfill
             )
         }
@@ -119,7 +119,7 @@ class DispatchQueue__Tests: XCTestCase {
         let c0 = UUID()
 
         DispatchQueue.main.debounce(
-            interval: 0.1,
+            interval: 0.01,
             context: c0,
             action: exp0.fulfill
         )
@@ -141,9 +141,9 @@ class DispatchQueue__Tests: XCTestCase {
 
         // Executes closure after previous has timed out
         let exp2 = expectation(description: "did call closure")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
             DispatchQueue.main.debounce(
-                interval: 0.1,
+                interval: 0.01,
                 context: c0,
                 action: exp2.fulfill
             )
