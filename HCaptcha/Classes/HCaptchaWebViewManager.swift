@@ -260,10 +260,10 @@ fileprivate extension HCaptchaWebViewManager {
 
     private func didLoad() {
         Log.debug("WebViewManager.didLoad")
-        didFinishLoading = true
         if completion != nil {
-            executeJS(command: .execute)
+            executeJS(command: .execute, didLoad: true)
         }
+        didFinishLoading = true
         self.doConfigureWebView()
     }
 
@@ -326,13 +326,14 @@ fileprivate extension HCaptchaWebViewManager {
     /**
      - parameters:
          - command: The JavaScript command to be executed
+         - didLoad: True if didLoad event already occured
 
      Executes the JS command that loads the HCaptcha challenge. This method has no effect if the webview hasn't
      finished loading.
      */
-    func executeJS(command: JSCommand) {
+    func executeJS(command: JSCommand, didLoad: Bool = false) {
         Log.debug("WebViewManager.executeJS: \(command)")
-        guard didFinishLoading else {
+        guard didLoad else {
             if let error = lastError {
                 DispatchQueue.main.async { [weak self] in
                     Log.debug("WebViewManager complete with pendingError: \(error)")
@@ -351,6 +352,10 @@ fileprivate extension HCaptchaWebViewManager {
                 self?.decoder.send(error: .unexpected(error))
             }
         }
+    }
+
+    func executeJS(command: JSCommand) {
+        executeJS(command: command, didLoad: self.didFinishLoading)
     }
 }
 
