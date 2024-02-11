@@ -94,6 +94,7 @@ internal class HCaptchaWebViewManager: NSObject {
 
     /// The webview that executes JS code
     lazy var webView: WKWebView = {
+        let debug = Log.minLevel == .debug
         let webview = WKWebView(
             frame: CGRect(origin: CGPoint.zero, size: webViewInitSize),
             configuration: self.buildConfiguration()
@@ -101,7 +102,14 @@ internal class HCaptchaWebViewManager: NSObject {
         webview.accessibilityIdentifier = "webview"
         webview.accessibilityTraits = UIAccessibilityTraits.link
         webview.isHidden = true
-
+        if debug {
+            if #available(iOS 16.4, *) {
+                webview.perform(Selector(("setInspectable:")), with: true)
+            }
+            webview.evaluateJavaScript("navigator.userAgent") { (result, _) in
+                Log.debug("WebViewManager WKWebView UserAgent: \(result ?? "nil")")
+            }
+        }
         Log.debug("WebViewManager WKWebView instance created")
 
         return webview
