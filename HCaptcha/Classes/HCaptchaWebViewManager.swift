@@ -1,9 +1,7 @@
+// swiftlint:disable file_length
 //
 //  HCaptchaWebViewManager.swift
 //  HCaptcha
-//
-//  Copyright © 2018 HCaptcha. All rights reserved.
-//
 
 import Foundation
 import WebKit
