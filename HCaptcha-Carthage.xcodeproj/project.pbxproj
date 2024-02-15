@@ -10,6 +10,7 @@
 		1F833B7F271DC69C00E4DAB2 /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */; };
 		1F833B80271DC69C00E4DAB2 /* RxSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E634944A2828856300130AC5 /* HCaptchaEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63494492828856300130AC5 /* HCaptchaEvent.swift */; };
+		E64C60082B7DFBE900D203F4 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E64C60072B7DFBE900D203F4 /* PrivacyInfo.xcprivacy */; };
 		E65145E327786BDB0079668A /* HCaptchaConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65145E227786BDB0079668A /* HCaptchaConfig.swift */; };
 		E65C08A02A656CC6002E82EC /* HCaptchaLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C089F2A656CC6002E82EC /* HCaptchaLog.swift */; };
 		E683772129053E560021BFD7 /* HCaptchaURLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = E683772029053E560021BFD7 /* HCaptchaURLOpener.swift */; };
@@ -24,7 +25,6 @@
 		F24EA1E41F968403001DEC17 /* String+Dict.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24EA1DA1F9683F5001DEC17 /* String+Dict.swift */; };
 		F24EA1E51F968403001DEC17 /* HCaptchaError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24EA1DB1F9683F5001DEC17 /* HCaptchaError.swift */; };
 		F24EA1E61F968403001DEC17 /* HCaptcha.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24EA1DE1F9683F5001DEC17 /* HCaptcha.swift */; };
-		F24EA1E71F968406001DEC17 /* hcaptcha.html in Resources */ = {isa = PBXBuildFile; fileRef = F24EA1E01F9683F5001DEC17 /* hcaptcha.html */; };
 		F2AE8614204F3B42002E28D7 /* HCaptchaResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AE8613204F3B41002E28D7 /* HCaptchaResult.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +55,7 @@
 /* Begin PBXFileReference section */
 		1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
 		E63494492828856300130AC5 /* HCaptchaEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaEvent.swift; sourceTree = "<group>"; };
+		E64C60072B7DFBE900D203F4 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		E65145E227786BDB0079668A /* HCaptchaConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaConfig.swift; sourceTree = "<group>"; };
 		E65C089F2A656CC6002E82EC /* HCaptchaLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaLog.swift; sourceTree = "<group>"; };
 		E683772029053E560021BFD7 /* HCaptchaURLOpener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaURLOpener.swift; sourceTree = "<group>"; };
@@ -75,7 +76,6 @@
 		F24EA1DB1F9683F5001DEC17 /* HCaptchaError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaError.swift; sourceTree = "<group>"; };
 		F24EA1DD1F9683F5001DEC17 /* HCaptcha+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HCaptcha+Rx.swift"; sourceTree = "<group>"; };
 		F24EA1DE1F9683F5001DEC17 /* HCaptcha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptcha.swift; sourceTree = "<group>"; };
-		F24EA1E01F9683F5001DEC17 /* hcaptcha.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = hcaptcha.html; sourceTree = "<group>"; };
 		F2AE8613204F3B41002E28D7 /* HCaptchaResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +98,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E64C60062B7DFBE900D203F4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E64C60072B7DFBE900D203F4 /* PrivacyInfo.xcprivacy */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		F206BAA61F8D3DE900A25807 = {
 			isa = PBXGroup;
 			children = (
@@ -157,8 +165,8 @@
 		F24EA1D61F9683F5001DEC17 /* HCaptcha */ = {
 			isa = PBXGroup;
 			children = (
+				E64C60062B7DFBE900D203F4 /* Resources */,
 				F24EA1D71F9683F5001DEC17 /* Classes */,
-				F24EA1DF1F9683F5001DEC17 /* Assets */,
 			);
 			path = HCaptcha;
 			sourceTree = SOURCE_ROOT;
@@ -190,14 +198,6 @@
 				F24EA1DD1F9683F5001DEC17 /* HCaptcha+Rx.swift */,
 			);
 			path = Rx;
-			sourceTree = "<group>";
-		};
-		F24EA1DF1F9683F5001DEC17 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				F24EA1E01F9683F5001DEC17 /* hcaptcha.html */,
-			);
-			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,7 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F24EA1E71F968406001DEC17 /* hcaptcha.html in Resources */,
+				E64C60082B7DFBE900D203F4 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

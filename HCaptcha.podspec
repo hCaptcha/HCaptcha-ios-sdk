@@ -22,6 +22,7 @@ invisibility is not possible.
 
   s.subspec 'Core' do |core|
     core.source_files = 'HCaptcha/Classes/*'
+    core.resource_bundles  = { 'HCaptcha_Privacy' => ['HCaptcha/Resources/PrivacyInfo.xcprivacy'] }
     core.frameworks = ['WebKit', 'JavaScriptCore']
   end
 
