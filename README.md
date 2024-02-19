@@ -310,6 +310,24 @@ hcaptcha.validate(on: view, resetOnError: false) { result in
        ...
    }
 ```
+### Force the webview Redrawing
+
+If you want to update the CGRect of the webview displaying the Hcaptcha, (in cases where you may have other conflicting element on your app page), you can call hcaptcha.reload() to froce a redraw without resetting the challenge.
+
+```
+hcaptcha.validate(on: view) { result in
+
+	//You may want to compute a new height for your webview based on the state of the challenge
+    	let newHeight = 100
+
+	//reset your webview bounds
+	placeholder.uiview.bounds = CGRect(x:0,y:0,width:400,height:newHeight)	
+
+	//just call this method to explicitly redraw the webview
+	hcaptcha.reload()
+}
+```
+
 
 ### SwiftUI Example
 
