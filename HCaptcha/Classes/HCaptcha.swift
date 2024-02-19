@@ -262,4 +262,9 @@ public class HCaptcha: NSObject {
     public convenience init(apiKey: String, baseURL: URL, locale: Locale, size: HCaptchaSize) throws {
         try self.init(apiKey: apiKey, baseURL: baseURL, locale: locale, size: size, rqdata: nil)
     }
+    
+    @objc
+    public func reload() {
+        self.manager.forceRedrawWebview()
+    }
 }

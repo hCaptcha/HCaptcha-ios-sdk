@@ -12,6 +12,7 @@ internal class HCaptchaWebViewManager: NSObject {
     enum JSCommand: String {
         case execute = "execute();"
         case reset = "reset();"
+        case reload = "reload();"
     }
 
     typealias Log = HCaptchaLogger
@@ -58,7 +59,7 @@ internal class HCaptchaWebViewManager: NSObject {
     var configureWebView: ((WKWebView) -> Void)?
 
     /// The dispatch token used to ensure `configureWebView` is only called once.
-    var configureWebViewDispatchToken = UUID()
+    public var configureWebViewDispatchToken = UUID()
 
     /// If the HCaptcha should be reset when it errors
     var shouldResetOnError = true
@@ -176,6 +177,10 @@ internal class HCaptchaWebViewManager: NSObject {
 
         executeJS(command: .execute)
     }
+    
+    func reload() {
+        executeJS(command: .reload)
+    }
 
     /// Stops the execution of the webview
     func stop() {
@@ -281,6 +286,10 @@ fileprivate extension HCaptchaWebViewManager {
                 self.configureWebView?(self.webView)
             }
         }
+    }
+    
+    public func forceRedrawWebview() {
+        self.configureWebView?(self.webView)
     }
 
     /**
