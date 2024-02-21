@@ -10,6 +10,7 @@ import HCaptcha
 import RxCocoa
 import RxSwift
 import UIKit
+import WebKit
 
 class ViewController: UIViewController {
     private struct Constants {
@@ -21,6 +22,7 @@ class ViewController: UIViewController {
     private var disposeBag = DisposeBag()
 
     private var locale: Locale?
+    private var challengeShown: Bool = false
 
     /// Don't init SDK to avoid unnecessary API calls and simplify debugging if the application used as a host for tests
     private var unitTesting: Bool {
@@ -90,6 +92,11 @@ class ViewController: UIViewController {
                     print("onEvent error: \(String(describing: error))")
                 }
 
+                if event == .open {
+                    self?.challengeShown = true
+                    self?.hcaptcha.redrawView()
+                }
+
                 let alertController = UIAlertController(title: "On Event",
                                                         message: event.rawValue,
                                                         preferredStyle: .alert)
@@ -131,6 +138,7 @@ class ViewController: UIViewController {
                 self?.view.viewWithTag(Constants.webViewTag)
             }
             .subscribe(onNext: { subview in
+                self.challengeShown = false
                 subview?.removeFromSuperview()
             })
             .disposed(by: disposeBag)
@@ -169,6 +177,10 @@ class ViewController: UIViewController {
         hcaptcha = try! HCaptcha(locale: locale)
 
         hcaptcha.configureWebView { [weak self] webview in
+            if self?.challengeShown == true {
+                self?.moveHCaptchaUp(webview)
+                return
+            }
             webview.frame = self?.view.bounds ?? CGRect.zero
             webview.tag = Constants.webViewTag
 
@@ -186,5 +198,18 @@ class ViewController: UIViewController {
             label.accessibilityLabel = "webview"
             self?.view.addSubview(label)
         }
+    }
+
+    private func moveHCaptchaUp(_ webview: WKWebView) {
+        let padding: CGFloat = 0
+        let windowHeight = view.frame.size.height
+        let targetHeight = (2.0 / 3.0) * windowHeight
+
+        webview.frame = CGRect(
+            x: padding,
+            y: padding,
+            width: view.frame.size.width - 2 * padding,
+            height: targetHeight - 2 * padding
+        )
     }
 }
