@@ -17,13 +17,13 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  XCODE_VERSION: '13.1'
-  RUBY_VERSION: '2.7.2'
+  XCODE_VERSION: '15.1'
+  RUBY_VERSION: '3.1'
 
 jobs:
   sdk:
     name: Test SDK
-    runs-on: macOS-latest
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
 
@@ -58,7 +58,7 @@ jobs:
   size-report:
     name: Cocoapods size report
     if: github.event_name == 'pull_request'
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
 
@@ -121,18 +121,13 @@ jobs:
   samples:
     name: Build Samples
     needs: sdk
-    runs-on: macos-12
+    runs-on: macos-13
     continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
-        xcode: [ '13.1' ]
+        xcode: [ '15.1' ]
         experimental: [ false ]
-        include:
-          - xcode: '13.4.1'
-            experimental: true
-          - xcode: '14.2'
-            experimental: true
     steps:
       - uses: actions/checkout@v4
 
@@ -153,7 +148,7 @@ jobs:
     name: Release
     if: startsWith(github.ref, 'refs/tags')
     needs: samples
-    runs-on: macOS-latest
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
 
