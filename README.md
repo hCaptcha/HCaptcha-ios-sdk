@@ -21,7 +21,7 @@
     + [Using landscape instead of portrait orientation](#using-landscape-instead-of-portrait-orientation)
     + [SDK Events](#sdk-events)
     + [Disable new token fetch on expiry](#disable-new-token-fetch-on-expiry)
-    + [Change hCaptch frame](#change-hcaptcha-frame)
+    + [Change hCaptcha frame](#change-hcaptcha-frame)
   * [Known issues](#known-issues)
   * [License](#license)
   * [Troubleshooting](#troubleshooting)
@@ -312,9 +312,9 @@ hcaptcha.validate(on: view, resetOnError: false) { result in
    }
 ```
 
-### Change hCaptch frame
+### Change hCaptcha frame
 
-In case if you need to change hCaptcha layout for example after visual challenge appear you can use approach above
+If you are customizing display beyond the defaults and need to resize or change the hCaptcha layout, for example after a visual challenge appears, you can use the following approach  to trigger a redraw of the view:
 
 ``` swift
 let hcaptcha = try? HCaptcha(...)
