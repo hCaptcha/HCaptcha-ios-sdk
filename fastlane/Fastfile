@@ -114,7 +114,7 @@ platform :ios do
       '-sdk',
       `xcrun --sdk iphonesimulator --show-sdk-path`.strip,
       '-target',
-      'x86_64-apple-ios9.0-simulator'
+      'x86_64-apple-ios17.2-simulator'
     ].map { |o| " -Xswiftc \"#{o}\"" }
     sh("swift build #{swiftc.join}")
   end
