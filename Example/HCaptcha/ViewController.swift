@@ -200,6 +200,9 @@ class ViewController: UIViewController {
         }
     }
 
+    /**
+     Move hCaptcha WebView frame to the top part of the screen
+    */
     private func moveHCaptchaUp(_ webview: WKWebView) {
         let padding: CGFloat = 0
         let windowHeight = view.frame.size.height
