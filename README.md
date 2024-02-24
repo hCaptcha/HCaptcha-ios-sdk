@@ -314,7 +314,7 @@ hcaptcha.validate(on: view, resetOnError: false) { result in
 
 ### Change hCaptcha frame
 
-If you are customizing display beyond the defaults and need to resize or change the hCaptcha layout, for example after a visual challenge appears, you can use the following approach  to trigger a redraw of the view:
+If you are customizing display beyond the defaults and need to resize or change the hCaptcha layout, for example after a visual challenge appears, you can use the following approach to trigger a redraw of the view:
 
 ``` swift
 let hcaptcha = try? HCaptcha(...)
