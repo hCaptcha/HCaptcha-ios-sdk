@@ -94,6 +94,7 @@ class ViewController: UIViewController {
 
                 if event == .open {
                     self?.challengeShown = true
+                    /// redrawView call is not required, included for demo purposes
                     self?.hcaptcha.redrawView()
                 }
 
