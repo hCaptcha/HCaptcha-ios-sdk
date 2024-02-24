@@ -108,6 +108,30 @@ class HCaptcha__Tests: XCTestCase {
         }
         wait(for: [exp], timeout: 10)
     }
+
+    func test__reconfigure() {
+        let exp = expectation(description: "configureWebView called twice")
+        var configureCounter = 0
+        let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager(messageBody: "{action: \"showHCaptcha\"}"))
+        hcaptcha.configureWebView { _ in
+            configureCounter += 1
+            if configureCounter == 2 {
+                exp.fulfill()
+            }
+        }
+        hcaptcha.didFinishLoading {
+            let view = UIApplication.shared.windows.first?.rootViewController?.view
+            hcaptcha.onEvent { e, _ in
+                if e == .open {
+                    hcaptcha.redrawView()
+                }
+            }
+            hcaptcha.validate(on: view!) { _ in
+                XCTFail("Should not be called")
+            }
+        }
+        wait(for: [exp], timeout: 10)
+    }
 }
 
 

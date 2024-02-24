@@ -21,6 +21,7 @@
     + [Using landscape instead of portrait orientation](#using-landscape-instead-of-portrait-orientation)
     + [SDK Events](#sdk-events)
     + [Disable new token fetch on expiry](#disable-new-token-fetch-on-expiry)
+    + [Change hCaptcha frame](#change-hcaptcha-frame)
   * [Known issues](#known-issues)
   * [License](#license)
   * [Troubleshooting](#troubleshooting)
@@ -309,6 +310,45 @@ By default the SDK will automatically fetch a new token upon expiry once you hav
 hcaptcha.validate(on: view, resetOnError: false) { result in
        ...
    }
+```
+
+### Change hCaptcha frame
+
+If you are customizing display beyond the defaults and need to resize or change the hCaptcha layout, for example after a visual challenge appears, you can use the following approach to trigger a redraw of the view:
+
+``` swift
+let hcaptcha = try? HCaptcha(...)
+var visualChallengeShown = false
+...
+hcaptcha?.configureWebView { [weak self] webview in
+    webview.tag = "hCaptchaViewTag"
+    if visualChallengeShown {
+        let padding = 10
+        webview.frame = CGRect(
+            x: padding,
+            y: padding,
+            width: view.frame.size.width - 2 * padding,
+            height: targetHeight - 2 * padding
+        )
+    } else {
+        webview.frame = self?.view.bounds ?? CGRect.zero
+    }
+}
+...
+hcaptcha.onEvent { (event, data) in
+    if event == .open {
+        visualChallengeShown = true
+        hcaptcha.redrawView*()
+    } else if event == .error {
+        let error = data as? HCaptchaError
+        print("onEvent error: \(String(describing: error))")
+        ...
+    }
+}
+...
+hcaptcha.validate(on: view, resetOnError: false) { result in
+    visualChallengeShown = false
+}
 ```
 
 ### SwiftUI Example

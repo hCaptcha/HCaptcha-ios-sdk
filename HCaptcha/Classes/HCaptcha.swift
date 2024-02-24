@@ -206,6 +206,16 @@ public class HCaptcha: NSObject {
         manager.onDidFinishLoading = closure
     }
 
+    /**
+     Request for a call to the `configureWebView` closure.
+
+     This may be useful if you need to modify the layout of hCaptcha.
+    */
+    @objc
+    public func redrawView() {
+        manager.configureWebView?(manager.webView)
+    }
+
     // MARK: - Development
 
 #if DEBUG
