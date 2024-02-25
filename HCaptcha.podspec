@@ -17,7 +17,7 @@ invisibility is not possible.
   s.social_media_url  = 'https://twitter.com/hCaptcha'
   s.documentation_url = 'https://github.com/hCaptcha/HCaptcha-ios-sdk'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '12.0'
   s.default_subspecs = 'Core'
 
   s.subspec 'Core' do |core|

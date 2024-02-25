@@ -62,10 +62,10 @@ Standard SPM formula: uses [Package.swift](./Package.swift)
 
 ## Requirements
 
-| Platform | Requirements              |
-|----------|---------------------------|
-| iOS      | :white_check_mark: >= 9.0 |
-| WatchOS  | :heavy_multiplication_x:  |
+| Platform | Requirements               |
+|----------|----------------------------|
+| iOS      | :white_check_mark: >= 12.0 |
+| WatchOS  | :heavy_multiplication_x:   |
 
 ## Usage
 
