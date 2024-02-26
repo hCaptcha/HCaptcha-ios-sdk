@@ -1,3 +1,7 @@
+# 2.6.2
+
+- Feature: new `redrawView` API was added ([#138](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/138))
+
 # 2.5.2
 
 - Fix: disabled controls on visual challenge if validation requested from didFinishLoading
