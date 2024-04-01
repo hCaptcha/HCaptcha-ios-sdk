@@ -75,7 +75,6 @@ For the Info.plist configuration, add `HCaptchaKey` (sitekey) and `HCaptchaDomai
 
 - `HCaptchaKey` is your hCaptcha sitekey.
 - `HCaptchaDomain` should be a string like `https://www.your.com`
-- `baseURL` should match `HCaptchaDomain` if specified; it controls the URI used to initialize the hCaptcha session. Example: `https://www.your.com`
 
 With these values set, run:
 
@@ -115,7 +114,11 @@ let hcaptcha = try? HCaptcha(
 ...
 ```
 
-**Note**: in most cases `baseURL` can be `http://localhost`
+**Notes**:
+
+- in most cases `baseURL` can be `http://localhost`. This value is mainly used for your convenience in analytics.
+- `baseURL` should match `HCaptchaDomain` if specified; it controls the URI used to initialize the hCaptcha session. Example: `https://www.your.com`
+
 
 You can also install the reactive subpod and use it with RxSwift:
 
@@ -172,7 +175,7 @@ Note: caller code is responsible for hiding the `WebView` after challenge proces
 
 #### Setting the host override (optional)
 
-Since this SDK uses a local HTML file, you may want to set a host override for better tracking and enforcement of siteverify parameters.
+Since this SDK uses local resources, you may want to set a host override for better tracking and enforcement of siteverify parameters.
 
 You can achieve this by passing the extra param `host`:
 
