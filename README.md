@@ -69,15 +69,17 @@ Standard SPM formula: uses [Package.swift](./Package.swift)
 
 ## Usage
 
-hCaptcha sitekeys can be specified as Info.plist keys or can be passed as parameters when instantiating `HCaptcha()`.
+hCaptcha has two mandatory parameters to initialize:
 
-For the Info.plist configuration, add `HCaptchaKey` (sitekey) and `HCaptchaDomain` (with a protocol, i.e. https://) to your Info.plist.
+- `sitekey`
+- `domain` - should be a valid URL string like `https://www.your.com`, it controls the URL used to initialize the hCaptcha session. Example: `https://www.your.com`
 
-- `HCaptchaKey` is your hCaptcha sitekey.
-- `HCaptchaDomain` should be a string like `https://www.your.com`
-- `baseURL` should match `HCaptchaDomain` if specified; it controls the URI used to initialize the hCaptcha session. Example: `https://www.your.com`
+Both of them can be specified in `Info.plist` keys or passed as parameters when instantiating `HCaptcha`
 
-With these values set, run:
+- `sitekey` can be specified as `HCaptchaKey` in `Info.plist` keys or can be passed as `apiKey` parameter when instantiating `HCaptcha`.
+- `domain` can be specified as `HCaptchaDomain` in `Info.plist` keys or can be passed as `baseURL` parameter when instantiating `HCaptcha`.
+
+With these values set in `Info.plist` keys, run:
 
 ``` swift
 let hcaptcha = try? HCaptcha()
@@ -104,7 +106,7 @@ func validate() {
 
 More details [here](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/50).
 
-If you prefer to keep the information out of the Info.plist, you can instead use:
+If you prefer to keep the information out of the `Info.plist`, you can instead use:
 
 ``` swift
 let hcaptcha = try? HCaptcha(
