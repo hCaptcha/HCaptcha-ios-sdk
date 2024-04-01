@@ -114,7 +114,11 @@ let hcaptcha = try? HCaptcha(
 ...
 ```
 
-**Note**: in most cases `baseURL` can be `http://localhost`. This value is only used for your convenience in analytics.
+**Notes**:
+
+- in most cases `baseURL` can be `http://localhost`. This value is mainly used for your convenience in analytics.
+- `baseURL` should match `HCaptchaDomain` if specified; it controls the URI used to initialize the hCaptcha session. Example: `https://www.your.com`
+
 
 You can also install the reactive subpod and use it with RxSwift:
 
