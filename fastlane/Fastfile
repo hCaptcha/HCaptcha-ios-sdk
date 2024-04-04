@@ -16,6 +16,7 @@ platform :ios do
   lane :ci do
     test
     html_lint
+    xcprivacy_lint
     pod_lint
     carthage_lint
     spm_build
@@ -142,6 +143,11 @@ platform :ios do
         auto_install_dependencies: true
       )
     end
+  end
+
+  desc "PrivacyInfo.xcprivacy plist validation"
+  lane :xcprivacy_lint do
+    sh %w[plutil -lint ../HCaptcha/Resources/PrivacyInfo.xcprivacy]
   end
 
   desc "Cocoapods size check"

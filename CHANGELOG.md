@@ -1,3 +1,7 @@
+# 2.6.3
+
+- Feature: PrivacyInfo.xcprivacy was added ([#128](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/128))
+
 # 2.6.2
 
 - Feature: new `redrawView` API was added ([#138](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/138))
