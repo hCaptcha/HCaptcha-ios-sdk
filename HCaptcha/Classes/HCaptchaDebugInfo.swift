@@ -54,7 +54,8 @@ class HCaptchaDebugInfo {
 
     private class func buildDebugInfo() -> [String] {
         let depth: UInt32 = 16
-        var depsCount = 0, sysCount = 0
+        var depsCount = 0
+        var sysCount = 0
         let depsCtx = UnsafeMutablePointer<CC_MD5_CTX>.allocate(capacity: 1)
         let sysCtx = UnsafeMutablePointer<CC_MD5_CTX>.allocate(capacity: 1)
         let appCtx = UnsafeMutablePointer<CC_MD5_CTX>.allocate(capacity: 1)
