@@ -2,7 +2,7 @@
 //  HCaptchaDebugInfo.m
 //  HCaptcha
 //
-//  Copyright © 2022 HCaptcha. All rights reserved.
+//  Copyright © 2024 HCaptcha. All rights reserved.
 //
 
 import Foundation
@@ -16,11 +16,11 @@ extension String {
     }
 }
 
-private func updateInfoFor(_ image: String, _ ctx: UnsafeMutablePointer<CC_MD5_CTX>) {
+private func updateInfoFor(_ image: String, _ ctx: UnsafeMutablePointer<CC_MD5_CTX>, depth: UInt32 = 16) {
     var count: UInt32 = 0
     if let imagePtr = (image as NSString).utf8String {
         let classes = objc_copyClassNamesForImage(imagePtr, &count)
-        for cls in UnsafeBufferPointer<UnsafePointer<CChar>>(start: classes, count: Int(count)) {
+        for cls in UnsafeBufferPointer<UnsafePointer<CChar>>(start: classes, count: Int(min(depth, count))) {
             CC_MD5_Update(ctx, cls, CC_LONG(strlen(cls)))
         }
         classes?.deallocate()
@@ -53,6 +53,9 @@ class HCaptchaDebugInfo {
     }
 
     private class func buildDebugInfo() -> [String] {
+        let depth: UInt32 = 16
+        var depsCount = 0
+        var sysCount = 0
         let depsCtx = UnsafeMutablePointer<CC_MD5_CTX>.allocate(capacity: 1)
         let sysCtx = UnsafeMutablePointer<CC_MD5_CTX>.allocate(capacity: 1)
         let appCtx = UnsafeMutablePointer<CC_MD5_CTX>.allocate(capacity: 1)
@@ -66,6 +69,16 @@ class HCaptchaDebugInfo {
             let image = frameworkPath.appendingPathComponent(frameworkBin).absoluteString
             let systemFramework = image.contains("/Library/PrivateFrameworks/") ||
                                   image.contains("/System/Library/Frameworks/")
+
+            if systemFramework && sysCount < depth {
+                sysCount += 1
+            } else if !systemFramework && depsCount < depth {
+                depsCount += 1
+            } else if sysCount < depth || depsCount < depth {
+                continue
+            } else {
+                break
+            }
 
             let md5Ctx = systemFramework ? sysCtx : depsCtx
             updateInfoFor(image, md5Ctx)
