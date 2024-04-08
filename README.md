@@ -388,6 +388,14 @@ Q. I'm getting "xcconfig: unable to open file" after upgrading the SDK. (Or chan
 A. In your app or the Example app dir, run `pod deintegrate && pod install` to refresh paths.
 
 
+Q: Captcha displayed but it's impossible to interact with it, how to fix it?
+
+A: There are several reasons why this may happen:
+
+- [`UIApplication.shared.beginIgnoringInteractionEvents()`](https://developer.apple.com/documentation/uikit/uiapplication/1623047-beginignoringinteractionevents) was called, which prevents any user interaction. Make sure to call [`UIApplication.shared.endIgnoringInteractionEvents()`](https://developer.apple.com/documentation/uikit/uiapplication/1622938-endignoringinteractionevents) to enable interaction back.
+
+- Ensure that there is no transparent overlay on hCaptcha's WebView. This can be checked with [the view debugger](https://developer.apple.com/documentation/xcode/diagnosing-and-resolving-bugs-in-your-running-app#Inspect-and-resolve-appearance-and-layout-issues)
+
 ### Inspiration
 
 Originally forked from fjcaetano's ReCaptcha IOS SDK, licensed under MIT.
