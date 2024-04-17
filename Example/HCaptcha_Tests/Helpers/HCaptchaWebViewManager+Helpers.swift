@@ -21,7 +21,7 @@ extension HCaptchaWebViewManager {
         messageBody: String = "undefined",
         apiKey: String? = nil,
         endpoint: URL? = nil,
-        shouldFail: Bool = false,
+        shouldFail: Bool = false, // will fail with retriable sessionTimeout
         size: HCaptchaSize = .invisible,
         rqdata: String? = nil,
         theme: String = "\"light\"",
