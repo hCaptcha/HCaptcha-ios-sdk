@@ -286,6 +286,41 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         waitForExpectations(timeout: 10)
     }
 
+    func test__Reset_After_Stop() {
+        let exp0 = expectation(description: "stop loading")
+        let exp1 = expectation(description: "configureWebView called")
+        let exp2 = expectation(description: "token recieved")
+
+        // Stop
+        let manager = HCaptchaWebViewManager(messageBody: "{token: \"some_token\"}")
+        manager.stop()
+        manager.configureWebView { _ in
+            XCTFail("should not ask to configure the webview")
+        }
+
+        manager.validate(on: presenterView) { _ in
+            XCTFail("should not validate")
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            exp0.fulfill()
+        }
+
+        manager.reset()
+
+        manager.configureWebView { _ in
+            exp1.fulfill()
+        }
+
+        manager.validate(on: presenterView) { result in
+            let token = try? result.dematerialize()
+            XCTAssertEqual("some_token", token)
+            exp2.fulfill()
+        }
+
+        waitForExpectations(timeout: 10)
+    }
+
     // MARK: Setup
 
     func test__Key_Setup() {
@@ -383,6 +418,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         var exp0Count = 0
         let exp1 = expectation(description: "should call onEvent")
         let exp2 = expectation(description: "fail on first execution")
+        let exp3 = expectation(description: "hcaptcha opened")
         var result: HCaptchaResult?
 
         // Validate
@@ -395,9 +431,17 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         }
 
         manager.onEvent = { (event, error) in
-            XCTAssertEqual(.error, event)
-            XCTAssertEqual(HCaptchaError.sessionTimeout, error as? HCaptchaError)
-            exp1.fulfill()
+            XCTAssertTrue([.error, .open].contains(event))
+            switch event {
+            case .error:
+                XCTAssertEqual(.error, event)
+                XCTAssertEqual(HCaptchaError.sessionTimeout, error as? HCaptchaError)
+                exp1.fulfill()
+            case .open:
+                exp3.fulfill()
+            default:
+                XCTFail("Unexpected event \(event)")
+            }
         }
 
         // Error

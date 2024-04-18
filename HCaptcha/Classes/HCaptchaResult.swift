@@ -21,7 +21,11 @@ public class HCaptchaResult: NSObject {
     /// Result error
     let error: HCaptchaError?
 
-    public init (token: String? = nil, error: HCaptchaError? = nil) {
+    /// Manager
+    let manager: HCaptchaWebViewManager
+
+    internal init (_ manager: HCaptchaWebViewManager, token: String? = nil, error: HCaptchaError? = nil) {
+        self.manager = manager
         self.token = token
         self.error = error
     }
@@ -35,6 +39,8 @@ public class HCaptchaResult: NSObject {
      */
     @objc
     public func dematerialize() throws -> String {
+        manager.resultHandled = true
+
         if let token = self.token {
             return token
         }

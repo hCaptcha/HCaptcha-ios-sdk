@@ -1,3 +1,8 @@
+# 2.7.0
+
+- Fix: don't emit `.sessionTimeout` error once `HCaptchaResult.dematerialize` called ([#129](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/129))
+- Fix: keep `.sessionTimeout` as only retriable error to avoid stack overflow
+
 # 2.6.3
 
 - Feature: PrivacyInfo.xcprivacy was added ([#128](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/128))
