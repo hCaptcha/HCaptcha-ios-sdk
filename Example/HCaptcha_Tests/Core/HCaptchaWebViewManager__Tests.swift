@@ -395,7 +395,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             exp2.fulfill()
         }
 
-        XCTAssertEqual(result1?.error, .wrongMessageFormat)
+        XCTAssertEqual(result1?.error, .sessionTimeout)
 
         // Resets and tries again
         let exp3 = expectation(description: "validates after reset")
@@ -435,7 +435,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             switch event {
             case .error:
                 XCTAssertEqual(.error, event)
-                XCTAssertEqual(HCaptchaError.wrongMessageFormat, error as? HCaptchaError)
+                XCTAssertEqual(HCaptchaError.sessionTimeout, error as? HCaptchaError)
                 exp1.fulfill()
             case .open:
                 exp3.fulfill()

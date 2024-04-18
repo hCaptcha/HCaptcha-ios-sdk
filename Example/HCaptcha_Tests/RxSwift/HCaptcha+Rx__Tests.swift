@@ -231,7 +231,7 @@ class HCaptcha_Rx__Tests: XCTestCase {
                 .single()
         }
         catch let error {
-            XCTAssertEqual(error as? HCaptchaError, .wrongMessageFormat)
+            XCTAssertEqual(error as? HCaptchaError, .sessionTimeout)
 
             // Resets after failure
             _ = Observable<Void>.just(())
