@@ -29,7 +29,7 @@
 
       var execute = function() {
           if (shouldFail) {
-              post("error");
+              post({error: 15}); // .sessionTimeout
           } else {
               if (rqdata) {
                   post({"log": rqdata});

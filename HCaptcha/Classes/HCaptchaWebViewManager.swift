@@ -1,4 +1,3 @@
-// swiftlint:disable file_length
 //
 //  HCaptchaWebViewManager.swift
 //  HCaptcha
@@ -245,21 +244,18 @@ fileprivate extension HCaptchaWebViewManager {
     }
 
     private func handle(error: HCaptchaError) {
-        switch error {
-        case HCaptchaError.challengeClosed:
-            completion?(HCaptchaResult(error: error))
-        case HCaptchaError.networkError:
-            if let completion = completion {
-                completion(HCaptchaResult(error: error))
-            } else {
-                lastError = error
-            }
-        default:
+        if error == .sessionTimeout {
             if shouldResetOnError, let view = webView.superview {
                 reset()
                 validate(on: view)
             } else {
                 completion?(HCaptchaResult(error: error))
+            }
+        } else {
+            if let completion = completion {
+                completion(HCaptchaResult(error: error))
+            } else {
+                lastError = error
             }
         }
     }
