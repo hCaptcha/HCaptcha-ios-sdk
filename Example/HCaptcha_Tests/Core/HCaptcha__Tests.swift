@@ -132,6 +132,25 @@ class HCaptcha__Tests: XCTestCase {
         }
         wait(for: [exp], timeout: 10)
     }
+
+    func test__passiveSiteKey_configure_not_called() {
+        let loaded = expectation(description: "hCaptcha WebView loaded")
+        let tokenRecieved = expectation(description: "hCaptcha token recieved")
+        let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager(messageBody: "{token: \"some_token\"}",
+                                                                passiveApiKey: true))
+        hcaptcha.configureWebView { _ in
+            XCTFail("configureWebView should not be called for passive sitekey")
+        }
+        hcaptcha.didFinishLoading {
+            loaded.fulfill()
+        }
+        let view = UIApplication.shared.windows.first!.rootViewController!.view!
+        hcaptcha.validate(on: view) { result in
+            XCTAssertEqual("some_token", result.token)
+            tokenRecieved.fulfill()
+        }
+        wait(for: [loaded, tokenRecieved], timeout: 10)
+    }
 }
 
 

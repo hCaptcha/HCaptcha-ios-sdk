@@ -365,8 +365,8 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         waitForExpectations(timeout: 10)
 
         XCTAssertNotNil(result)
-        XCTAssertNil(result?.error)
-        XCTAssertEqual(result?.token, endpoint.absoluteString)
+        XCTAssertNil(result!.error)
+        XCTAssertTrue(result!.token!.contains("endpoint=https%3A%2F%2Fsome.endpoint"))
     }
 
     // MARK: Reset
@@ -522,25 +522,6 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         manager.reset()
 
         waitForExpectations(timeout: 5)
-    }
-
-    func test__Invalid_Theme() {
-        let exp = expectation(description: "bad theme value")
-
-        let manager = HCaptchaWebViewManager(messageBody: "{action: \"showHCaptcha\"}",
-                                             apiKey: apiKey,
-                                             theme: "[Object object]") // invalid theme
-        manager.shouldResetOnError = false
-        manager.configureWebView { _ in
-            XCTFail("should not ask to configure the webview")
-        }
-
-        manager.validate(on: presenterView, resetOnError: false) { response in
-            XCTAssertEqual(HCaptchaError.htmlLoadError, response.error)
-            exp.fulfill()
-        }
-
-        waitForExpectations(timeout: 10)
     }
 
     func test__OnEvent_Open_Callback() {

@@ -61,6 +61,7 @@ public class HCaptcha: NSObject {
     @objc
     public convenience init(
         apiKey: String? = nil,
+        passiveApiKey: Bool = false,
         baseURL: URL? = nil,
         locale: Locale? = nil,
         size: HCaptchaSize = .invisible,
@@ -85,6 +86,7 @@ public class HCaptcha: NSObject {
         let plistDomain = (infoDict?[Constants.InfoDictKeys.Domain] as? String).flatMap(URL.init(string:))
 
         let config = try HCaptchaConfig(apiKey: apiKey,
+                                        passiveApiKey: passiveApiKey,
                                         infoPlistKey: plistApiKey,
                                         baseURL: baseURL,
                                         infoPlistURL: plistDomain,
@@ -99,20 +101,12 @@ public class HCaptcha: NSObject {
                                         imghost: imghost,
                                         host: host,
                                         theme: theme,
-                                        customTheme: customTheme)
+                                        customTheme: customTheme,
+                                        locale: locale)
 
         Log.debug(".init with: \(config)")
 
-        self.init(manager: HCaptchaWebViewManager(
-            html: config.html,
-            apiKey: config.apiKey,
-            baseURL: config.baseURL,
-            endpoint: config.getEndpointURL(locale: locale),
-            size: config.size,
-            orientation: config.orientation,
-            rqdata: config.rqdata,
-            theme: config.actualTheme
-        ))
+        self.init(manager: HCaptchaWebViewManager(config: config))
     }
 
     /**
@@ -256,10 +250,19 @@ public class HCaptcha: NSObject {
         try self.init(locale: nil, size: size)
     }
 
+    @objc
+    public convenience init(passiveApiKey: Bool) throws {
+        try self.init(passiveApiKey: passiveApiKey)
+    }
 
     @objc
-    public convenience init(apiKey: String, baseURL: URL) throws {
-        try self.init(apiKey: apiKey, baseURL: baseURL, locale: nil)
+    public convenience init(apiKey: String) throws {
+        try self.init(apiKey: apiKey, locale: nil)
+    }
+
+    @objc
+    public convenience init(apiKey: String, passiveApiKey: Bool) throws {
+        try self.init(apiKey: apiKey, passiveApiKey: passiveApiKey)
     }
 
     @objc
