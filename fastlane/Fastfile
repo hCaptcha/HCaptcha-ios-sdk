@@ -158,6 +158,7 @@ platform :ios do
     unless cocoapods_size_repo.exist?
       cocoapods_size_repo.parent.mkpath
       sh("git clone https://github.com/google/cocoapods-size #{cocoapods_size_repo}")
+      sh("sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = 11.4/IPHONEOS_DEPLOYMENT_TARGET = 12.0/g' #{cocoapods_size_repo}/SwiftApp/SwiftApp.xcodeproj/project.pbxproj")
     end
 
     Dir.chdir(cocoapods_size_repo) do
