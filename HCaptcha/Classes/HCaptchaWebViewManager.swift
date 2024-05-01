@@ -149,7 +149,7 @@ internal class HCaptchaWebViewManager: NSObject {
                 guard let self = self else { return }
                 guard !self.stopInitWebViewConfiguration else { return }
 
-                self.setupWebview(html: self.formattedHTML, url: baseURL)
+                self.setupWebview(html: self.formattedHTML, url: self.baseURL)
             }
         }
     }
