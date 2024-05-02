@@ -56,6 +56,8 @@ platform :ios do
       scheme: "HCaptcha-Example",
       workspace: "Example/HCaptcha.xcworkspace",
       code_coverage: true,
+      number_of_retries: 3,
+      disable_concurrent_testing: true,
     )
 
     #codecov(
