@@ -261,6 +261,11 @@ public class HCaptcha: NSObject {
     }
 
     @objc
+    public convenience init(apiKey: String, baseURL: URL) throws {
+        try self.init(apiKey: apiKey, baseURL: baseURL, locale: nil)
+    }
+
+    @objc
     public convenience init(apiKey: String, passiveApiKey: Bool) throws {
         try self.init(apiKey: apiKey, passiveApiKey: passiveApiKey)
     }
