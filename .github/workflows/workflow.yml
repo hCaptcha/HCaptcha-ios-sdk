@@ -18,8 +18,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  XCODE_VERSION: '13.1'
-  RUBY_VERSION: '2.7.2'
+  XCODE_VERSION: '14.3.1'
+  RUBY_VERSION: '3.3.1'
 
 jobs:
   sdk:
@@ -49,6 +49,7 @@ jobs:
       - run: |
           bundle exec fastlane ci
           cp .lint/cocoapods-size/result.json cocoapods-size-result.json
+        timeout-minutes: 15
 
       - if: github.event_name == 'push'
         uses: actions/cache@v4
