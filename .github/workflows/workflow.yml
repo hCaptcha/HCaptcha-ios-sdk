@@ -24,7 +24,7 @@ env:
 jobs:
   sdk:
     name: Test SDK
-    runs-on: macos-13
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -60,7 +60,7 @@ jobs:
   size-report:
     name: Cocoapods size report
     if: github.event_name == 'pull_request'
-    runs-on: macos-13
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -155,7 +155,7 @@ jobs:
     name: Release
     if: github.event_name == 'release'
     needs: samples
-    runs-on: macos-13
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
 
