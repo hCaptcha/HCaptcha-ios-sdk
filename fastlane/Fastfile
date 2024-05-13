@@ -110,13 +110,21 @@ platform :ios do
   lane :spm_build do
     # swift build doesn't support iOS build out of the box
     # https://github.com/fastlane/fastlane/discussions/17362
+    sdk = `xcrun --sdk iphoneos --show-sdk-path`.strip
+    target = 'arm64-apple-ios17.0'
     swiftc = [
       '-sdk',
-      `xcrun --sdk iphonesimulator --show-sdk-path`.strip,
+      sdk,
       '-target',
-      'x86_64-apple-ios17.2-simulator'
+      target
     ].map { |o| " -Xswiftc \"#{o}\"" }
-    sh("swift build #{swiftc.join}")
+    cc = [
+      '-isysroot',
+      sdk,
+      '-target',
+      target
+    ].map { |o| " -Xcc \"#{o}\"" }
+    sh("swift build #{swiftc.join} #{cc.join}")
   end
 
   desc "Validate html template"
