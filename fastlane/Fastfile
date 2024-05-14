@@ -18,7 +18,7 @@ platform :ios do
     html_lint
     xcprivacy_lint
     pod_lint
-    carthage_lint
+    carthage_build
     spm_build
     pod_size
   end
@@ -28,12 +28,6 @@ platform :ios do
     cocoapods(
       podfile: "Example/Podfile",
       try_repo_update_on_error: true,
-    )
-
-    swiftlint(
-      executable: "Example/Pods/Swiftlint/swiftlint",
-      strict: true,
-      reporter: "emoji",
     )
 
     # The problem lies in the fact (or rather: serious bug in xcodebuild) that
@@ -79,13 +73,23 @@ platform :ios do
     end
   end
 
+  desc "Swift Lint"
+  lane :swift_lint do
+    cocoapods(podfile: "Example/Podfile")
+    swiftlint(
+      executable: "Example/Pods/Swiftlint/swiftlint",
+      strict: true,
+      reporter: "emoji",
+    )
+  end
+
   desc "Lint Cocoapods Lib"
   lane :pod_lint do
     pod_lib_lint(allow_warnings: false)
   end
 
-  desc "Lint Carthage lib"
-  lane :carthage_lint do
+  desc "Build Carthage lib"
+  lane :carthage_build do
     carthage(
       executable: "./carthage.sh",
       platform: "iOS",
