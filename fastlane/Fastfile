@@ -18,7 +18,7 @@ platform :ios do
     html_lint
     xcprivacy_lint
     pod_lint
-    carthage_lint
+    carthage_build
     spm_build
     pod_size
   end
@@ -28,12 +28,6 @@ platform :ios do
     cocoapods(
       podfile: "Example/Podfile",
       try_repo_update_on_error: true,
-    )
-
-    swiftlint(
-      executable: "Example/Pods/Swiftlint/swiftlint",
-      strict: true,
-      reporter: "emoji",
     )
 
     # The problem lies in the fact (or rather: serious bug in xcodebuild) that
@@ -79,13 +73,23 @@ platform :ios do
     end
   end
 
+  desc "Swift Lint"
+  lane :swift_lint do
+    cocoapods(podfile: "Example/Podfile")
+    swiftlint(
+      executable: "Example/Pods/Swiftlint/swiftlint",
+      strict: true,
+      reporter: "emoji",
+    )
+  end
+
   desc "Lint Cocoapods Lib"
   lane :pod_lint do
     pod_lib_lint(allow_warnings: false)
   end
 
-  desc "Lint Carthage lib"
-  lane :carthage_lint do
+  desc "Build Carthage lib"
+  lane :carthage_build do
     carthage(
       executable: "./carthage.sh",
       platform: "iOS",
@@ -110,13 +114,21 @@ platform :ios do
   lane :spm_build do
     # swift build doesn't support iOS build out of the box
     # https://github.com/fastlane/fastlane/discussions/17362
+    sdk = `xcrun --sdk iphoneos --show-sdk-path`.strip
+    target = 'arm64-apple-ios17.0'
     swiftc = [
       '-sdk',
-      `xcrun --sdk iphonesimulator --show-sdk-path`.strip,
+      sdk,
       '-target',
-      'x86_64-apple-ios9.0-simulator'
+      target
     ].map { |o| " -Xswiftc \"#{o}\"" }
-    sh("swift build #{swiftc.join}")
+    cc = [
+      '-isysroot',
+      sdk,
+      '-target',
+      target
+    ].map { |o| " -Xcc \"#{o}\"" }
+    sh("swift build #{swiftc.join} #{cc.join}")
   end
 
   desc "Validate html template"
@@ -158,6 +170,7 @@ platform :ios do
     unless cocoapods_size_repo.exist?
       cocoapods_size_repo.parent.mkpath
       sh("git clone https://github.com/google/cocoapods-size #{cocoapods_size_repo}")
+      sh("sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = 11.4/IPHONEOS_DEPLOYMENT_TARGET = 12.0/g' #{cocoapods_size_repo}/SwiftApp/SwiftApp.xcodeproj/project.pbxproj")
     end
 
     Dir.chdir(cocoapods_size_repo) do
