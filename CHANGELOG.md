@@ -1,3 +1,8 @@
+# 2.8.0
+
+- Feature: passive site key ([#152](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/152))
+- Feature: upgrade Xcode to 12
+
 # 2.7.0
 
 - Fix: don't emit `.sessionTimeout` error once `HCaptchaResult.dematerialize` called ([#129](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/129))
