@@ -1,7 +1,7 @@
 # 2.8.0
 
 - Feature: passive site key ([#152](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/152))
-- Feature: upgrade Xcode to 12. NOTE: this also increases the minimum supported iOS version to 12.
+- Feature: upgrade Xcode to 15. NOTE: this also increases the minimum supported iOS version to 12. ([#134](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/134))
 
 
 # 2.7.0
