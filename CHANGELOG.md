@@ -1,10 +1,10 @@
 # 2.8.1
 
-- Feature: api key syntax validation
+- Feature: sitekey ("apiKey") syntax validation
 
 # 2.8.0
 
-- Feature: passive site key ([#152](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/152))
+- Feature: passive sitekey ([#152](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/152))
 - Feature: upgrade Xcode to 15. NOTE: this also increases the minimum supported iOS version to 12. ([#134](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/134))
 
 
