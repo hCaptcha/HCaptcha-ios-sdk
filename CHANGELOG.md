@@ -1,3 +1,7 @@
+# 2.8.1
+
+- Feature: api key syntax validation
+
 # 2.8.0
 
 - Feature: passive site key ([#152](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/152))
