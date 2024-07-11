@@ -44,6 +44,9 @@ public enum HCaptchaError: Error, CustomStringConvertible {
     /// Invalid custom theme passed
     case invalidCustomTheme
 
+    /// HCaptchaKey is invalid
+    case apiKeyInvalid
+
     public static func == (lhs: HCaptchaError, rhs: HCaptchaError) -> Bool {
         return lhs.description == rhs.description
     }
@@ -62,6 +65,9 @@ public enum HCaptchaError: Error, CustomStringConvertible {
 
         case .apiKeyNotFound:
             return "HCaptchaKey not provided"
+
+        case .apiKeyInvalid:
+            return "HCaptchaKey invalid"
 
         case .baseURLNotFound:
             return "HCaptchaDomain not provided"

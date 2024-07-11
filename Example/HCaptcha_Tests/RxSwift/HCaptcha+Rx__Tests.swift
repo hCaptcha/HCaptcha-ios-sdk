@@ -23,7 +23,7 @@ class HCaptcha_Rx__Tests: XCTestCase {
         super.setUp()
 
         presenterView = UIApplication.shared.keyWindow!
-        apiKey = String(arc4random())
+        apiKey = UUID().uuidString
     }
 
     override func tearDown() {

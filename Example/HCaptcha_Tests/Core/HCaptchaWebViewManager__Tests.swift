@@ -21,7 +21,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         super.setUp()
 
         presenterView = UIApplication.shared.keyWindow?.rootViewController?.view
-        apiKey = String(arc4random())
+        apiKey = UUID().uuidString
     }
 
     override func tearDown() {

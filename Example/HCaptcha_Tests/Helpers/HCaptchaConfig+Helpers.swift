@@ -11,7 +11,7 @@ import Foundation
 
 extension HCaptchaConfig {
     init(html: String = HCaptchaHtml.template,
-         apiKey: String? = String(arc4random()),
+         apiKey: String? = UUID().uuidString,
          passiveApiKey: Bool = false,
          infoPlistKey: String? = "api-key",
          baseURL: URL? = URL(string: "http://localhost")!,
@@ -46,7 +46,7 @@ extension HCaptchaConfig {
                       locale: locale)
     }
 
-    init(apiKey: String = "some-api-key",
+    init(apiKey: String = UUID().uuidString,
          host: String? = nil,
          customTheme: String? = nil,
          locale: Locale? = nil) throws {

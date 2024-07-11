@@ -214,6 +214,10 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
             throw HCaptchaError.baseURLNotFound
         }
 
+        guard UUID(uuidString: apiKey) != nil else {
+            throw HCaptchaError.apiKeyInvalid
+        }
+
         if let customTheme = customTheme {
             let validationJS: String = "(function() { return \(customTheme) })()"
             let context = JSContext()!

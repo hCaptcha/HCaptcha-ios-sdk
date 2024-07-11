@@ -37,7 +37,7 @@ extension HCaptchaWebViewManager {
 
         self.init(
             html: html,
-            apiKey: apiKey ?? "api-key",
+            apiKey: apiKey ?? UUID().uuidString,
             passiveApiKey: passiveApiKey,
             endpoint: endpoint ?? URL(string: "https://api.hcaptcha.com")!,
             size: size,
