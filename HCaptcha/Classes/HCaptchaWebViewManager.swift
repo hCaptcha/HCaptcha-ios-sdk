@@ -77,6 +77,8 @@ internal class HCaptchaWebViewManager: NSObject {
         }
     }
 
+    internal var loadingTimer: Timer?
+
     /// Stop async webView configuration
     private var stopInitWebViewConfiguration = false
 
@@ -185,6 +187,8 @@ internal class HCaptchaWebViewManager: NSObject {
         stopInitWebViewConfiguration = true
         webView.stopLoading()
         resultHandled = true
+        loadingTimer?.invalidate()
+        loadingTimer = nil
     }
 
     /**
@@ -278,6 +282,8 @@ fileprivate extension HCaptchaWebViewManager {
             executeJS(command: .execute, didLoad: true)
         }
         didFinishLoading = true
+        loadingTimer?.invalidate()
+        loadingTimer = nil
         self.doConfigureWebView()
     }
 
@@ -331,6 +337,11 @@ fileprivate extension HCaptchaWebViewManager {
         if webView.navigationDelegate == nil {
             webView.navigationDelegate = self
         }
+        loadingTimer?.invalidate()
+        loadingTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false, block: { _ in
+            self.handle(error: .htmlLoadError)
+            self.loadingTimer = nil
+        })
 
         if let observer = observer {
             NotificationCenter.default.removeObserver(observer)
