@@ -131,8 +131,11 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
     /// Custom theme JSON string.
     let customTheme: String?
 
-    /// locale: A locale value to translate HCaptcha into a different language
+    /// A locale value to translate HCaptcha into a different language
     let locale: Locale?
+
+    /// A time before throw the `.htmlLoadError` if HCaptcha is not loaded
+    let loadingTimeout: TimeInterval
 
     /// Return actual theme value based on init params. It must return valid JS object.
     var actualTheme: String {
@@ -205,7 +208,8 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
                 host: String?,
                 theme: String,
                 customTheme: String?,
-                locale: Locale?) throws {
+                locale: Locale?,
+                loadingTimeout: TimeInterval = 5.0) throws {
         guard let apiKey = apiKey ?? infoPlistKey else {
             throw HCaptchaError.apiKeyNotFound
         }
@@ -243,6 +247,7 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
         self.theme = theme
         self.customTheme = customTheme
         self.locale = locale
+        self.loadingTimeout = loadingTimeout
     }
 
     /**

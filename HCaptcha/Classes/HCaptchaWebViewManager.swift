@@ -97,6 +97,9 @@ internal class HCaptchaWebViewManager: NSObject {
     /// Keep error If it happens before validate call
     fileprivate var lastError: HCaptchaError?
 
+    /// Timeout to throw `.htmlLoadError` if no `didLoad` called
+    fileprivate let loadingTimeout: TimeInterval
+
     /// The webview that executes JS code
     lazy var webView: WKWebView = {
         let debug = Log.minLevel == .debug
@@ -133,6 +136,7 @@ internal class HCaptchaWebViewManager: NSObject {
         self.urlOpener = urlOpener
         self.baseURL = config.baseURL
         self.passiveApiKey = config.passiveApiKey
+        self.loadingTimeout = config.loadingTimeout
         super.init()
         self.decoder = HCaptchaDecoder { [weak self] result in
             self?.handle(result: result)
@@ -260,6 +264,8 @@ fileprivate extension HCaptchaWebViewManager {
     }
 
     private func handle(error: HCaptchaError) {
+        loadingTimer?.invalidate()
+        loadingTimer = nil
         if error == .sessionTimeout {
             if shouldResetOnError, let view = webView.superview {
                 reset()
@@ -338,7 +344,7 @@ fileprivate extension HCaptchaWebViewManager {
             webView.navigationDelegate = self
         }
         loadingTimer?.invalidate()
-        loadingTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false, block: { _ in
+        loadingTimer = Timer.scheduledTimer(withTimeInterval: self.loadingTimeout, repeats: false, block: { _ in
             self.handle(error: .htmlLoadError)
             self.loadingTimer = nil
         })
@@ -360,6 +366,8 @@ fileprivate extension HCaptchaWebViewManager {
         Log.debug("WebViewManager.executeJS: \(command)")
         guard didLoad else {
             if let error = lastError {
+                loadingTimer?.invalidate()
+                loadingTimer = nil
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     Log.debug("WebViewManager complete with pendingError: \(error)")

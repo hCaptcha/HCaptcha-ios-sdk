@@ -52,13 +52,14 @@ extension HCaptchaWebViewManager {
         html: String,
         apiKey: String,
         passiveApiKey: Bool = false,
-        endpoint: URL,
+        endpoint: URL = URL(string: "https://api.hcaptcha.com")!,
         size: HCaptchaSize = .invisible,
         orientation: HCaptchaOrientation = .portrait,
         rqdata: String? = nil,
         theme: String = "light",
         customTheme: String? = nil,
-        urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener()
+        urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener(),
+        loadingTimeout: TimeInterval = 5
     ) {
         let localhost = URL(string: "http://localhost")!
 
@@ -72,7 +73,8 @@ extension HCaptchaWebViewManager {
                                          rqdata: rqdata,
                                          endpoint: endpoint,
                                          theme: theme,
-                                         customTheme: customTheme)
+                                         customTheme: customTheme,
+                                         loadingTimeout: loadingTimeout)
 
         self.init(
             config: config,

@@ -23,7 +23,8 @@ extension HCaptchaConfig {
          host: String? = nil,
          theme: String = "\"light\"",
          customTheme: String? = nil,
-         locale: Locale? = nil) throws {
+         locale: Locale? = nil,
+         loadingTimeout: TimeInterval = 5.0) throws {
 
         try self.init(html: html,
                       apiKey: apiKey,
@@ -43,7 +44,8 @@ extension HCaptchaConfig {
                       host: host,
                       theme: theme,
                       customTheme: customTheme,
-                      locale: locale)
+                      locale: locale,
+                      loadingTimeout: loadingTimeout)
     }
 
     init(apiKey: String = "some-api-key",
@@ -57,6 +59,5 @@ extension HCaptchaConfig {
                       host: host,
                       customTheme: customTheme,
                       locale: locale)
-
     }
 }
