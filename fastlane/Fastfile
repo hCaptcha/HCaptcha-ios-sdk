@@ -50,8 +50,17 @@ platform :ios do
       scheme: "HCaptcha-Example",
       workspace: "Example/HCaptcha.xcworkspace",
       code_coverage: true,
-      number_of_retries: 3,
+      skip_testing: ["HCaptcha_Tests/HCaptcha__Bench"],
+    )
+
+    scan(
+      test_without_building: true,
+      devices: self.select_similar_simulator(devices),
+      scheme: "HCaptcha-Example",
+      workspace: "Example/HCaptcha.xcworkspace",
+      code_coverage: true,
       disable_concurrent_testing: true,
+      only_testing: ["HCaptcha_Tests/HCaptcha__Bench"]
     )
 
     #codecov(
