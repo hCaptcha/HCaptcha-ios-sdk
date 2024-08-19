@@ -1,3 +1,7 @@
+# 2.9.0
+
+- Fix: emit `.htmlLoadError` if `HCaptcha` WebView is not loaded in specified timeout (5 sec default)
+
 # 2.8.0
 
 - Feature: passive site key ([#152](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/152))
