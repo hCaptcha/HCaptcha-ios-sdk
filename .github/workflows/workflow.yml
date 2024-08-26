@@ -210,6 +210,8 @@ jobs:
           - xcode: '15.2'
             experimental: false
           - xcode: '15.4'
+            experimental: false
+          - xcode: '16.1'
             experimental: true
     steps:
       - uses: actions/checkout@v4
