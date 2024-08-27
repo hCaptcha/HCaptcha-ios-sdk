@@ -204,12 +204,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        xcode: [ '15.1' ]
+        xcode: [ '15.4' ]
         experimental: [ false ]
         include:
-          - xcode: '15.2'
-            experimental: false
-          - xcode: '15.4'
+          - xcode: '14.3.1'
             experimental: false
           - xcode: '16.1'
             experimental: true
