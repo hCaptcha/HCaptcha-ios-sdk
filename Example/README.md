@@ -38,3 +38,4 @@ For example:
 +        hcaptcha = try! HCaptcha(locale: locale, size: .normal)
 ```
 
+Tapping "Validate" will now show a visible checkbox, which can be tapped to continue the interaction.
