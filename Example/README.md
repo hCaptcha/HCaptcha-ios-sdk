@@ -23,7 +23,9 @@ Finally, install the pods needed for the Example app:
 You should now be able to build and run the example in Xcode.
 
 
-## Example Change: Switching to a Visible Checkbox
+## Example Changes
+
+### Switching to a Visible Checkbox
 
 You can try switching the 'size' parameter or any other by editing Example/HCaptcha/ViewController.swift
 
@@ -39,3 +41,9 @@ For example:
 ```
 
 Tapping "Validate" will now show a visible checkbox, which can be tapped to continue the interaction.
+
+### Changing the Example Sitekey
+
+This example app sets the sitekey in Example/HCaptcha/Info.plist via the `HCaptchaKey` field.
+
+You can replace it with your own sitekey to try a different sitekey configuration, e.g. Passive mode.
