@@ -5,7 +5,7 @@ This app is designed to let you quickly experiment with HCaptcha SDK options.
 You can also simply copy the example code in the ViewController to get up and running quickly in your own app.
 
 
-## Building the Example
+## Quickstart: Building the Example
 
 If you don't already have a working CocoaPods environment, we recommend homebrew:
 
