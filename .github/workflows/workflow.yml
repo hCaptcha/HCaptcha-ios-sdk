@@ -101,11 +101,22 @@ jobs:
     name: Carthage Build
     needs: test
     runs-on: macos-14
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode: [ '15.4' ]
+        experimental: [ false ]
+        include:
+          - xcode: '14.3.1'
+            experimental: false
+          - xcode: '16.1'
+            experimental: true
     steps:
       - uses: actions/checkout@v4
 
-      - name: Use Xcode ${{ env.XCODE_VERSION }}
-        run: sudo xcode-select -switch /Applications/Xcode_${XCODE_VERSION}.app
+      - name: Use Xcode ${{ matrix.xcode }}
+        run: sudo xcode-select -switch /Applications/Xcode_${{ matrix.xcode }}.app
 
       - uses: ruby/setup-ruby@v1
         with:
