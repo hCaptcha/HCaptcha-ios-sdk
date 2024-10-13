@@ -1,3 +1,7 @@
+# 2.9.1
+
+- Fix: performance issue on building a timestamp prefix in `print` (`HCaptchaLog`)
+
 # 2.9.0
 
 - Fix: emit `.htmlLoadError` if `HCaptcha` WebView is not loaded in specified timeout (5 sec default)
