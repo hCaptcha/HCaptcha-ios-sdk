@@ -2,10 +2,11 @@
 //  HCaptchaEvent.swift
 //  HCaptcha
 //
-//  Copyright © 2023 HCaptcha. All rights reserved.
+//  Copyright © 2024 HCaptcha. All rights reserved.
 //
 
 import Foundation
+import os
 
 /** Internal SDK logger level
  */
@@ -50,17 +51,12 @@ internal class HCaptchaLogger {
         }
 
         let formattedMessage = String(format: message, arguments: args)
-        let logMessage = "\(timestamp) \(threadId) HCaptcha/\(level.description): \(formattedMessage)"
+        let logMessage = "\(threadId) HCaptcha/\(level.description): \(formattedMessage)"
 
-        print(logMessage)
+        NSLog(logMessage)
 #endif
     }
 
-    private static var timestamp: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.sss"
-        return dateFormatter.string(from: Date())
-    }
 
     private static var threadId: String {
         return Thread.isMainThread ? "main" : "\(pthread_self())"
