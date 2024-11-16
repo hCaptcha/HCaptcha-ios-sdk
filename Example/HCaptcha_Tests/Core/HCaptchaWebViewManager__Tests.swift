@@ -457,39 +457,6 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         XCTAssertEqual(result?.token, apiKey)
     }
 
-    func test__Validate__Should_Skip_For_Tests() {
-        let exp = expectation(description: "did skip validation")
-
-        let manager = HCaptchaWebViewManager()
-        manager.shouldSkipForTests = true
-
-        manager.completion = { result in
-            XCTAssertEqual(result.token, "")
-            exp.fulfill()
-        }
-
-        manager.validate(on: presenterView)
-
-        waitForExpectations(timeout: 1)
-    }
-
-    // MARK: Force Challenge Visible
-
-    func test__Force_Visible_Challenge() {
-        let manager = HCaptchaWebViewManager()
-
-        // Initial value
-        XCTAssertFalse(manager.forceVisibleChallenge)
-
-        // Set True
-        manager.forceVisibleChallenge = true
-        XCTAssertEqual(manager.webView.customUserAgent, "bot/2.1")
-
-        // Set False
-        manager.forceVisibleChallenge = false
-        XCTAssertNotEqual(manager.webView.customUserAgent?.isEmpty, false)
-    }
-
     // MARK: On Did Finish Loading
 
     func test__Did_Finish_Loading__Immediate() {

@@ -20,17 +20,6 @@ class HCaptcha__Tests: XCTestCase {
         }
     }
 
-    func test__Force_Visible_Challenge() {
-        let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager())
-
-        // Initial value
-        XCTAssertFalse(hcaptcha.forceVisibleChallenge)
-
-        // Set true
-        hcaptcha.forceVisibleChallenge = true
-        XCTAssertTrue(hcaptcha.forceVisibleChallenge)
-    }
-
     func test__valid_js_customTheme() {
         let customTheme = """
               {

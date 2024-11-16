@@ -39,31 +39,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uyt-0M-CR7">
-                                <rect key="frame" x="77.5" y="616" width="220" height="31"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Force visible captcha" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awK-8H-OCQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="161" height="31"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mGh-Ox-cFf">
-                                        <rect key="frame" x="171" y="0.0" width="51" height="31"/>
-                                        <accessibility key="accessibilityConfiguration" identifier="Switch"/>
-                                    </switch>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="awK-8H-OCQ" secondAttribute="bottom" id="0Wx-IJ-Kwg"/>
-                                    <constraint firstAttribute="trailing" secondItem="mGh-Ox-cFf" secondAttribute="trailing" id="8Xc-zN-tVW"/>
-                                    <constraint firstItem="awK-8H-OCQ" firstAttribute="top" secondItem="Uyt-0M-CR7" secondAttribute="top" id="IbZ-YP-G0R"/>
-                                    <constraint firstItem="mGh-Ox-cFf" firstAttribute="top" secondItem="Uyt-0M-CR7" secondAttribute="top" id="P27-Ua-aX7"/>
-                                    <constraint firstItem="awK-8H-OCQ" firstAttribute="leading" secondItem="Uyt-0M-CR7" secondAttribute="leading" id="fna-4f-wRD"/>
-                                    <constraint firstAttribute="bottom" secondItem="mGh-Ox-cFf" secondAttribute="bottom" id="vnT-b0-5h3"/>
-                                    <constraint firstItem="mGh-Ox-cFf" firstAttribute="leading" secondItem="awK-8H-OCQ" secondAttribute="trailing" constant="10" id="wzo-g0-VEj"/>
-                                </constraints>
-                            </view>
                             <segmentedControl clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kq2-ci-l1u" userLabel="API">
                                 <rect key="frame" x="108" y="433.5" width="159" height="32"/>
                                 <segments>
@@ -105,7 +80,6 @@
                             <constraint firstItem="nEH-8i-SaF" firstAttribute="height" secondItem="lzK-em-8dU" secondAttribute="height" id="3pm-RQ-D7A"/>
                             <constraint firstItem="kq2-ci-l1u" firstAttribute="width" secondItem="9VI-dQ-4wQ" secondAttribute="width" id="AKK-eB-CKO"/>
                             <constraint firstItem="9VI-dQ-4wQ" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Aii-oY-Avx"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Uyt-0M-CR7" secondAttribute="bottom" constant="20" id="Bfs-p5-IBM"/>
                             <constraint firstItem="lzK-em-8dU" firstAttribute="trailing" secondItem="RDW-bD-rSo" secondAttribute="trailing" id="Djx-Uy-pGB"/>
                             <constraint firstItem="lzK-em-8dU" firstAttribute="leading" secondItem="RDW-bD-rSo" secondAttribute="leading" id="Gaz-BQ-Ops"/>
                             <constraint firstItem="o6f-cL-1PF" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" priority="750" id="NMD-ir-PXe"/>
@@ -121,15 +95,9 @@
                             <constraint firstItem="9VI-dQ-4wQ" firstAttribute="top" secondItem="kq2-ci-l1u" secondAttribute="bottom" constant="18" id="hUz-NG-iNA"/>
                             <constraint firstItem="RDW-bD-rSo" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="50" id="iXO-hP-XZ7"/>
                             <constraint firstItem="kq2-ci-l1u" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="ice-pp-mVe"/>
-                            <constraint firstItem="Uyt-0M-CR7" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="qfG-68-ySO"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nEH-8i-SaF" secondAttribute="trailing" constant="20" symbolic="YES" id="s0Q-93-b0r"/>
                             <constraint firstItem="lzK-em-8dU" firstAttribute="top" secondItem="kq2-ci-l1u" secondAttribute="bottom" constant="100" id="v0S-Ga-Y7X"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="Uyt-0M-CR7"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="apiSegmentedControl" destination="kq2-ci-l1u" id="Qjg-vy-uma"/>
@@ -138,7 +106,6 @@
                         <outlet property="resetButton" destination="lzK-em-8dU" id="9BO-5x-8q6"/>
                         <outlet property="spinner" destination="jHc-GP-v1Z" id="gRn-JW-FIK"/>
                         <outlet property="validateButton" destination="RDW-bD-rSo" id="zxd-fD-KiJ"/>
-                        <outlet property="visibleChallengeSwitch" destination="mGh-Ox-cFf" id="R13-nD-EXL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

@@ -33,7 +33,6 @@ class ViewController: UIViewController {
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
     @IBOutlet private weak var localeSegmentedControl: UISegmentedControl!
     @IBOutlet private weak var apiSegmentedControl: UISegmentedControl!
-    @IBOutlet private weak var visibleChallengeSwitch: UISwitch!
     @IBOutlet private weak var validateButton: UIButton!
     @IBOutlet private weak var resetButton: UIButton!
 
@@ -148,12 +147,6 @@ class ViewController: UIViewController {
             .bind(to: label.rx.text)
             .disposed(by: disposeBag)
 
-        visibleChallengeSwitch.rx.value
-            .subscribe(onNext: { [weak hcaptcha] value in
-                hcaptcha?.forceVisibleChallenge = value
-            })
-            .disposed(by: disposeBag)
-
         resetButton.rx.tap
             .subscribe(onNext: { [weak hcaptcha] _ in
                 hcaptcha?.reset()
@@ -175,7 +168,7 @@ class ViewController: UIViewController {
         }
 
         // swiftlint:disable:next force_try
-        hcaptcha = try! HCaptcha(locale: locale)
+        hcaptcha = try! HCaptcha(locale: self.locale, diagnosticLog: true)
 
         hcaptcha.configureWebView { [weak self] webview in
             if self?.challengeShown == true {
