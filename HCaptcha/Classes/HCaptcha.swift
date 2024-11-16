@@ -252,7 +252,7 @@ public class HCaptcha: NSObject {
 
     @objc
     public convenience init(passiveApiKey: Bool) throws {
-        try self.init(passiveApiKey: passiveApiKey)
+        try self.init(passiveApiKey: passiveApiKey, locale: nil)
     }
 
     @objc
@@ -267,7 +267,7 @@ public class HCaptcha: NSObject {
 
     @objc
     public convenience init(apiKey: String, passiveApiKey: Bool) throws {
-        try self.init(apiKey: apiKey, passiveApiKey: passiveApiKey)
+        try self.init(apiKey: apiKey, passiveApiKey: passiveApiKey, locale: nil)
     }
 
     @objc

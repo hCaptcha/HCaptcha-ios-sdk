@@ -151,6 +151,22 @@ class HCaptcha__Tests: XCTestCase {
         }
         wait(for: [loaded, tokenRecieved], timeout: 10)
     }
+
+    func test__convenience_inits_is_not_recursive() throws {
+        XCTAssertNotNil(try? HCaptcha(locale: Locale.current))
+        XCTAssertNotNil(try? HCaptcha(size: .compact))
+        XCTAssertNotNil(try? HCaptcha(passiveApiKey: true))
+        XCTAssertNotNil(try? HCaptcha(apiKey: "10000000-ffff-ffff-ffff-000000000001"))
+        XCTAssertNotNil(try? HCaptcha(apiKey: "10000000-ffff-ffff-ffff-000000000001",
+                                      baseURL: URL(string: "http://localhost")!))
+        XCTAssertNotNil(try? HCaptcha(apiKey: "10000000-ffff-ffff-ffff-000000000001",
+                                      baseURL: URL(string: "http://localhost")!,
+                                      locale: Locale.current))
+        XCTAssertNotNil(try? HCaptcha(apiKey: "10000000-ffff-ffff-ffff-000000000001",
+                                      baseURL: URL(string: "http://localhost")!,
+                                      locale: Locale.current,
+                                      size: .normal))
+    }
 }
 
 
