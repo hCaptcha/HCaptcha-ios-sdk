@@ -139,8 +139,9 @@ public class HCaptcha: NSObject {
      Starts the challenge validation
     */
     @objc
-    public func validate(on view: UIView, resetOnError: Bool = true, completion: @escaping (HCaptchaResult) -> Void) {
-        Log.debug(".validate on: \(view) resetOnError: \(resetOnError)")
+    public func validate(on view: UIView? = nil, resetOnError: Bool = true,
+                         completion: @escaping (HCaptchaResult) -> Void) {
+        Log.debug(".validate on: \(String(describing: view)) resetOnError: \(resetOnError)")
 
         manager.shouldResetOnError = resetOnError
         manager.completion = completion

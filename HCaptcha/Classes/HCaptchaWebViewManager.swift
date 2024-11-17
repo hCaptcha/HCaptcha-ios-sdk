@@ -148,11 +148,16 @@ internal class HCaptchaWebViewManager: NSObject {
 
      Starts the challenge validation
      */
-    func validate(on view: UIView) {
-        Log.debug("WebViewManager.validate on: \(view)")
+    func validate(on view: UIView?) {
+        Log.debug("WebViewManager.validate on: \(String(describing: view))")
         resultHandled = false
 
         if !passiveApiKey {
+            guard let view = view else {
+                completion?(HCaptchaResult(self, error: .failedSetup))
+                return
+            }
+
             view.addSubview(webView)
             if self.didFinishLoading && (webView.bounds.size == CGSize.zero || webView.bounds.size == webViewInitSize) {
                 self.doConfigureWebView()
