@@ -36,6 +36,10 @@
 		E6A23A2C2CEA3AEA0071D531 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		E6A23A2D2CEA48BA0071D531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Assets.xcassets */; };
 		E6A23A2E2CEA48C90071D531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Assets.xcassets */; };
+		E6A23A4D2CEA6DA70071D531 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A23A4A2CEA6DA70071D531 /* ContentView.swift */; };
+		E6A23A4E2CEA6DA70071D531 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A23A4B2CEA6DA70071D531 /* App.swift */; };
+		E6A23A512CEA6DDB0071D531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Assets.xcassets */; };
+		E6A23A532CEA73790071D531 /* HCaptcha in Frameworks */ = {isa = PBXBuildFile; productRef = E6A23A522CEA73790071D531 /* HCaptcha */; };
 		F206BAD51F8D3FEB00A25807 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = F206BAD41F8D3FEB00A25807 /* Cartfile */; };
 		F231B3971FEC325A00F82943 /* DispatchQueue__Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F231B3961FEC325A00F82943 /* DispatchQueue__Tests.swift */; };
 		F231B39F1FED4A8C00F82943 /* HCaptchaDecoder+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F231B39E1FED4A8C00F82943 /* HCaptchaDecoder+Helper.swift */; };
@@ -124,6 +128,9 @@
 		E65146042779E5380079668A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E6A239E62CEA15E50071D531 /* HCaptcha_UIKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_UIKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6A23A0C2CEA1AC50071D531 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E6A23A392CEA6D480071D531 /* HCaptacha_PassiveExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptacha_PassiveExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6A23A4A2CEA6DA70071D531 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E6A23A4B2CEA6DA70071D531 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		EE4771EFB96171863ED97253 /* Pods-HCaptcha_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_Tests.debug.xcconfig"; path = "Target Support Files/Pods-HCaptcha_Tests/Pods-HCaptcha_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		F0C65B53B0061534EA17E10A /* Pods-HCaptcha_Objc_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_Objc_Example.debug.xcconfig"; path = "Target Support Files/Pods-HCaptcha_Objc_Example/Pods-HCaptcha_Objc_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		F206BAD41F8D3FEB00A25807 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
@@ -176,6 +183,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D974807F9A78F46BA2DF507 /* Pods_HCaptcha_UIKit_Example.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6A23A362CEA6D480071D531 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6A23A532CEA73790071D531 /* HCaptcha in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +248,7 @@
 				E65145E82779AE830079668A /* HCaptcha_Objc_Example.app */,
 				E626A7FB2890568A0069D449 /* HCaptcha_SwiftUI_Example.app */,
 				E6A239E62CEA15E50071D531 /* HCaptcha_UIKit_Example.app */,
+				E6A23A392CEA6D480071D531 /* HCaptacha_PassiveExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -342,9 +358,19 @@
 				E626A7FC2890568A0069D449 /* SwiftUI-Example */,
 				E65145E92779AE830079668A /* ObjC-Example */,
 				607FACD21AFB9204008FA782 /* RxSwift-Example */,
+				E6A23A4C2CEA6DA70071D531 /* Passive-Example */,
 				E6A23A182CEA20130071D531 /* Shared */,
 			);
 			name = Examples;
+			sourceTree = "<group>";
+		};
+		E6A23A4C2CEA6DA70071D531 /* Passive-Example */ = {
+			isa = PBXGroup;
+			children = (
+				E6A23A4A2CEA6DA70071D531 /* ContentView.swift */,
+				E6A23A4B2CEA6DA70071D531 /* App.swift */,
+			);
+			path = "Passive-Example";
 			sourceTree = "<group>";
 		};
 		F28FAC9D200E425600E14987 /* HCaptcha_UITests */ = {
@@ -484,6 +510,26 @@
 			productReference = E6A239E62CEA15E50071D531 /* HCaptcha_UIKit_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E6A23A382CEA6D480071D531 /* HCaptacha_PassiveExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E6A23A462CEA6D4C0071D531 /* Build configuration list for PBXNativeTarget "HCaptacha_PassiveExample" */;
+			buildPhases = (
+				E6A23A352CEA6D480071D531 /* Sources */,
+				E6A23A362CEA6D480071D531 /* Frameworks */,
+				E6A23A372CEA6D480071D531 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HCaptacha_PassiveExample;
+			packageProductDependencies = (
+				E6A23A522CEA73790071D531 /* HCaptcha */,
+			);
+			productName = HCaptacha_PassiveExample;
+			productReference = E6A23A392CEA6D480071D531 /* HCaptacha_PassiveExample.app */;
+			productType = "com.apple.product-type.application";
+		};
 		F28FAC9B200E425600E14987 /* HCaptcha_UITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F28FACA5200E425600E14987 /* Build configuration list for PBXNativeTarget "HCaptcha_UITests" */;
@@ -553,6 +599,9 @@
 					E6A239E52CEA15E50071D531 = {
 						CreatedOnToolsVersion = 16.0;
 					};
+					E6A23A382CEA6D480071D531 = {
+						CreatedOnToolsVersion = 16.0;
+					};
 					F28FAC9B200E425600E14987 = {
 						CreatedOnToolsVersion = 9.1;
 						LastSwiftMigration = 1020;
@@ -585,6 +634,7 @@
 				E626A7FA2890568A0069D449 /* HCaptcha_SwiftUI_Example */,
 				607FACCF1AFB9204008FA782 /* HCaptcha_RxSwift_Example */,
 				E65145E72779AE830079668A /* HCaptcha_Objc_Example */,
+				E6A23A382CEA6D480071D531 /* HCaptacha_PassiveExample */,
 				F2ECCF751E9FC47B0097B199 /* HCaptcha_Tests */,
 				F28FAC9B200E425600E14987 /* HCaptcha_UITests */,
 			);
@@ -628,6 +678,14 @@
 				E6A23A1A2CEA29F40071D531 /* Assets.xcassets in Resources */,
 				E6A23A1B2CEA29FC0071D531 /* Main.storyboard in Resources */,
 				E6A23A2C2CEA3AEA0071D531 /* LaunchScreen.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6A23A372CEA6D480071D531 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6A23A512CEA6DDB0071D531 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -905,6 +963,15 @@
 			files = (
 				E6A23A192CEA22190071D531 /* AppDelegate.swift in Sources */,
 				E6A23A0E2CEA1AC50071D531 /* ViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6A23A352CEA6D480071D531 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6A23A4D2CEA6DA70071D531 /* ContentView.swift in Sources */,
+				E6A23A4E2CEA6DA70071D531 /* App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1379,6 +1446,91 @@
 			};
 			name = Release;
 		};
+		E6A23A442CEA6D4C0071D531 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hcaptcha.HCaptacha-PassiveExample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E6A23A452CEA6D4C0071D531 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hcaptcha.HCaptacha-PassiveExample";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		F28FACA3200E425600E14987 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F9ED7BF8ED7CB5CA4E75F987 /* Pods-HCaptcha_UITests.debug.xcconfig */;
@@ -1531,6 +1683,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		E6A23A462CEA6D4C0071D531 /* Build configuration list for PBXNativeTarget "HCaptacha_PassiveExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6A23A442CEA6D4C0071D531 /* Debug */,
+				E6A23A452CEA6D4C0071D531 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F28FACA5200E425600E14987 /* Build configuration list for PBXNativeTarget "HCaptcha_UITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1557,6 +1718,10 @@
 			productName = HCaptcha;
 		};
 		E6586CD02893DBD80051EFE7 /* HCaptcha */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HCaptcha;
+		};
+		E6A23A522CEA73790071D531 /* HCaptcha */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HCaptcha;
 		};

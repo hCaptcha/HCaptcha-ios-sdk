@@ -363,6 +363,9 @@ hcaptcha.validate(on: view, resetOnError: false) { result in
 
 `HCaptcha` can be used from Objective-C code. Check out the [Example Project](./Example/ObjC-Example/ViewController.m)
 
+### Passive API Key Example
+
+`HCaptcha` allows verification that doesn't require any interaction from the user's side, i.e., [Passive Site Keys](https://docs.hcaptcha.com/faq#what-are-the-difficulty-levels-for-the-challenges-and-how-are-they-selected). Check out the [Example](./Example/Passive-Example/ContentView.swift) for more details.
 
 ### Compiled size: impact on including in your app
 
