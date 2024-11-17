@@ -12,42 +12,9 @@ import RxSwift
 import UIKit
 import WebKit
 
-class ViewController: UIViewController {
-    private struct Constants {
-        static let webViewTag = 123
-        static let testLabelTag = 321
-    }
+class ViewController: BaseViewController {
+    var disposeBag = DisposeBag()
 
-    private var hcaptcha: HCaptcha!
-    private var disposeBag = DisposeBag()
-
-    private var locale: Locale?
-
-    @IBOutlet private weak var label: UILabel!
-    @IBOutlet private weak var spinner: UIActivityIndicatorView!
-    @IBOutlet private weak var localeSegmentedControl: UISegmentedControl!
-    @IBOutlet private weak var validateButton: UIButton!
-    @IBOutlet private weak var resetButton: UIButton!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if !Bundle.main.bundlePath.contains("Tests") {
-            setupHCaptcha()
-        }
-    }
-
-    @IBAction func didPressLocaleSegmentedControl(_ sender: UISegmentedControl) {
-        label.text = ""
-        switch sender.selectedSegmentIndex {
-        case 0: locale = nil
-        case 1: locale = Locale(identifier: "zh-CN")
-        default: assertionFailure("invalid index")
-        }
-
-        setupHCaptcha()
-    }
-
-    // swiftlint:disable function_body_length
     @IBAction private func didPressVerifyButton(button: UIButton) {
         disposeBag = DisposeBag()
 
@@ -101,28 +68,14 @@ class ViewController: UIViewController {
             .disposed(by: disposeBag)
     }
 
-    @IBAction private func didPressStopButton(button: UIButton) {
-        hcaptcha.stop()
-    }
-
-    @IBAction private func didPressResetButton(button: UIButton) {
-        hcaptcha?.reset()
-    }
-
-    private func setupHCaptcha() {
+    override func setupHCaptcha() {
         // swiftlint:disable:next force_try
-        hcaptcha = try! HCaptcha(apiKey: "10000000-ffff-ffff-ffff-000000000001", locale: self.locale, diagnosticLog: true)
+        hcaptcha = try! HCaptcha(apiKey: "00000000-0000-0000-0000-000000000000", locale: locale, diagnosticLog: true)
 
         hcaptcha.configureWebView { [weak self] webview in
             webview.frame = self?.view.bounds ?? CGRect.zero
             webview.tag = Constants.webViewTag
 
-            // could use this option if using an enterprise passive sitekey:
-            // webview.isHidden = true
-            // seems to prevent flickering on latest iOS 15.2
-            webview.isOpaque = false
-            webview.backgroundColor = UIColor.clear
-            webview.scrollView.backgroundColor = UIColor.clear
             // For testing purposes
             // If the webview requires presentation, this should work as a way of detecting the webview in UI tests
             self?.view.viewWithTag(Constants.testLabelTag)?.removeFromSuperview()
