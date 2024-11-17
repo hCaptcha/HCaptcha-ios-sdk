@@ -43,3 +43,7 @@ Unlike `Cocoapods`, `Carthage` and `SPM` are decentralized. They do not require 
 ### How is a release triggered?
 
 We use GitOps. It is triggered by a version tag on the default branch (`master`). This must be done by an administrator, as we use tag protection. Don't tag the new version on feature branches, just update the metadata for release.
+
+### How to test siteKey/apiKey outside SDK
+
+Use https://accounts.hcaptcha.com/demo?sitekey=XXX

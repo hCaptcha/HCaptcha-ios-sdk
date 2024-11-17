@@ -1,14 +1,11 @@
 //
 //  ViewController.swift
-//  HCaptcha
+//  HCaptacha_UIKitExample
 //
-//  Created by Flávio Caetano on 03/22/17.
-//  Copyright © 2018 HCaptcha. All rights reserved.
+//  Copyright © 2024 HCaptcha. All rights reserved.
 //
 
 import HCaptcha
-import RxCocoa
-import RxSwift
 import UIKit
 import WebKit
 
@@ -19,20 +16,13 @@ class ViewController: UIViewController {
     }
 
     private var hcaptcha: HCaptcha!
-    private var disposeBag = DisposeBag()
 
     private var locale: Locale?
     private var challengeShown: Bool = false
 
-    /// Don't init SDK to avoid unnecessary API calls and simplify debugging if the application used as a host for tests
-    private var unitTesting: Bool {
-        return ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
-    }
-
     @IBOutlet private weak var label: UILabel!
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
     @IBOutlet private weak var localeSegmentedControl: UISegmentedControl!
-    @IBOutlet private weak var apiSegmentedControl: UISegmentedControl!
     @IBOutlet private weak var validateButton: UIButton!
     @IBOutlet private weak var resetButton: UIButton!
 
@@ -53,14 +43,6 @@ class ViewController: UIViewController {
     }
 
     @IBAction private func didPressVerifyButton(button: UIButton) {
-        if self.apiSegmentedControl.selectedSegmentIndex == 0 {
-            self.verifyRxApi()
-        } else {
-            self.verifyRegularApi()
-        }
-    }
-
-    private func verifyRegularApi() {
         hcaptcha.validate(on: self.view) { result in
             do {
                 self.label.text = try result.dematerialize()
@@ -74,86 +56,6 @@ class ViewController: UIViewController {
         }
     }
 
-    // swiftlint:disable function_body_length
-    private func verifyRxApi() {
-        disposeBag = DisposeBag()
-
-        hcaptcha.rx.didFinishLoading
-            .debug("did finish loading")
-            .subscribe()
-            .disposed(by: disposeBag)
-
-        hcaptcha.rx.events()
-            .debug("events")
-            .subscribe { [weak self] (event, data) in
-                if event == .error {
-                    let error = data as? HCaptchaError
-                    print("onEvent error: \(String(describing: error))")
-                }
-
-                if event == .open {
-                    self?.challengeShown = true
-                    /// redrawView call is not required, included for demo purposes
-                    self?.hcaptcha.redrawView()
-                }
-
-                let alertController = UIAlertController(title: "On Event",
-                                                        message: event.rawValue,
-                                                        preferredStyle: .alert)
-                self?.present(alertController, animated: true) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        alertController.dismiss(animated: true, completion: nil)
-                    }
-                }
-            }
-            .disposed(by: disposeBag)
-
-        let validate = hcaptcha.rx.validate(on: view, resetOnError: false)
-            .catch { error in
-                return .just("Error \(error)")
-            }
-            .debug("validate")
-            .share()
-
-        let isLoading = validate
-            .map { _ in false }
-            .startWith(true)
-            .share(replay: 1)
-
-        isLoading
-            .bind(to: spinner.rx.isAnimating)
-            .disposed(by: disposeBag)
-
-        let isEnabled = isLoading
-            .map { !$0 }
-            .catchAndReturn(false)
-            .share(replay: 1)
-
-        isEnabled
-            .bind(to: validateButton.rx.isEnabled)
-            .disposed(by: disposeBag)
-
-        validate
-            .map { [weak self] _ in
-                self?.view.viewWithTag(Constants.webViewTag)
-            }
-            .subscribe(onNext: { subview in
-                self.challengeShown = false
-                subview?.removeFromSuperview()
-            })
-            .disposed(by: disposeBag)
-
-        validate
-            .bind(to: label.rx.text)
-            .disposed(by: disposeBag)
-
-        resetButton.rx.tap
-            .subscribe(onNext: { [weak hcaptcha] _ in
-                hcaptcha?.reset()
-            })
-            .disposed(by: disposeBag)
-    }
-
     @IBAction private func didPressStopButton(button: UIButton) {
         hcaptcha.stop()
     }
@@ -163,12 +65,8 @@ class ViewController: UIViewController {
     }
 
     private func setupHCaptcha() {
-        if unitTesting {
-            return
-        }
-
         // swiftlint:disable:next force_try
-        hcaptcha = try! HCaptcha(locale: self.locale, diagnosticLog: true)
+        hcaptcha = try! HCaptcha(apiKey: "00000000-0000-0000-0000-000000000000", locale: self.locale, diagnosticLog: true)
 
         hcaptcha.configureWebView { [weak self] webview in
             if self?.challengeShown == true {
@@ -210,3 +108,4 @@ class ViewController: UIViewController {
         )
     }
 }
+

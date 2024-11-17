@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,19 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RDW-bD-rSo">
-                                <rect key="frame" x="50" y="363.5" width="275" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Bt8-Ou-ht2"/>
-                                </constraints>
-                                <state key="normal" title="Validate"/>
-                                <connections>
-                                    <action selector="didPressVerifyButtonWithButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ggy-zg-Lzj"/>
-                                </connections>
-                            </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="jHc-GP-v1Z">
-                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
-                            </activityIndicatorView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o6f-cL-1PF">
                                 <rect key="frame" x="20" y="333.5" width="335" height="0.0"/>
                                 <accessibility key="accessibilityConfiguration" identifier="resultLabel"/>
@@ -39,31 +26,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kq2-ci-l1u" userLabel="API">
-                                <rect key="frame" x="108" y="433.5" width="159" height="32"/>
-                                <segments>
-                                    <segment title="Rx"/>
-                                    <segment title="Regular"/>
-                                </segments>
-                            </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzK-em-8dU" userLabel="Reset">
-                                <rect key="frame" x="50" y="564.5" width="275" height="34.5"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Reset"/>
-                                <connections>
-                                    <action selector="didPressResetButtonWithButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="m9z-aL-2Ax"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nEH-8i-SaF" userLabel="Stop">
-                                <rect key="frame" x="50" y="609" width="275" height="34"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Stop"/>
-                                <connections>
-                                    <action selector="didPressStopButtonWithButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kju-bo-2Kv"/>
-                                </connections>
-                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="jHc-GP-v1Z">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
                             <segmentedControl clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9VI-dQ-4wQ">
-                                <rect key="frame" x="108" y="482.5" width="159" height="32"/>
+                                <rect key="frame" x="108" y="491.5" width="159" height="32"/>
                                 <segments>
                                     <segment title="Nil Locale"/>
                                     <segment title="Chinese"/>
@@ -72,35 +39,57 @@
                                     <action selector="didPressLocaleSegmentedControl:" destination="vXZ-lx-hvc" eventType="valueChanged" id="gad-39-aSJ"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RDW-bD-rSo">
+                                <rect key="frame" x="0.0" y="542.5" width="375" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Bt8-Ou-ht2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Validate"/>
+                                <connections>
+                                    <action selector="didPressVerifyButtonWithButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ggy-zg-Lzj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzK-em-8dU" userLabel="Reset">
+                                <rect key="frame" x="187.5" y="612.5" width="187.5" height="34.5"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Reset"/>
+                                <connections>
+                                    <action selector="didPressResetButtonWithButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="m9z-aL-2Ax"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nEH-8i-SaF" userLabel="Stop">
+                                <rect key="frame" x="0.0" y="612.5" width="187.5" height="34.5"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Stop"/>
+                                <connections>
+                                    <action selector="didPressStopButtonWithButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kju-bo-2Kv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="o6f-cL-1PF" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="0dV-t0-W0Y"/>
-                            <constraint firstAttribute="trailing" secondItem="RDW-bD-rSo" secondAttribute="trailing" constant="50" id="1Lj-Ox-Kl4"/>
+                            <constraint firstAttribute="trailing" secondItem="RDW-bD-rSo" secondAttribute="trailing" id="1Lj-Ox-Kl4"/>
                             <constraint firstItem="nEH-8i-SaF" firstAttribute="height" secondItem="lzK-em-8dU" secondAttribute="height" id="3pm-RQ-D7A"/>
-                            <constraint firstItem="kq2-ci-l1u" firstAttribute="width" secondItem="9VI-dQ-4wQ" secondAttribute="width" id="AKK-eB-CKO"/>
                             <constraint firstItem="9VI-dQ-4wQ" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Aii-oY-Avx"/>
-                            <constraint firstItem="lzK-em-8dU" firstAttribute="trailing" secondItem="RDW-bD-rSo" secondAttribute="trailing" id="Djx-Uy-pGB"/>
-                            <constraint firstItem="lzK-em-8dU" firstAttribute="leading" secondItem="RDW-bD-rSo" secondAttribute="leading" id="Gaz-BQ-Ops"/>
+                            <constraint firstItem="lzK-em-8dU" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailing" id="Djx-Uy-pGB"/>
                             <constraint firstItem="o6f-cL-1PF" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" priority="750" id="NMD-ir-PXe"/>
-                            <constraint firstItem="lzK-em-8dU" firstAttribute="width" secondItem="RDW-bD-rSo" secondAttribute="width" id="QFp-mX-khG"/>
-                            <constraint firstItem="nEH-8i-SaF" firstAttribute="top" secondItem="lzK-em-8dU" secondAttribute="bottom" constant="10" id="S28-yG-cOb"/>
-                            <constraint firstItem="RDW-bD-rSo" firstAttribute="top" secondItem="o6f-cL-1PF" secondAttribute="bottom" constant="30" id="TZe-z9-MZS"/>
+                            <constraint firstItem="RDW-bD-rSo" firstAttribute="top" secondItem="9VI-dQ-4wQ" secondAttribute="bottom" constant="20" id="Pzo-SQ-gFe"/>
+                            <constraint firstItem="lzK-em-8dU" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" multiplier="0.5" id="QFp-mX-khG"/>
+                            <constraint firstItem="RDW-bD-rSo" firstAttribute="bottom" secondItem="lzK-em-8dU" secondAttribute="top" constant="-20" id="TZe-z9-MZS"/>
                             <constraint firstItem="jHc-GP-v1Z" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="VOe-WJ-FKo"/>
-                            <constraint firstItem="nEH-8i-SaF" firstAttribute="width" secondItem="lzK-em-8dU" secondAttribute="width" id="WBm-xf-WfJ"/>
+                            <constraint firstItem="lzK-em-8dU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nEH-8i-SaF" secondAttribute="trailing" id="X56-fq-iPR"/>
                             <constraint firstItem="jHc-GP-v1Z" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="XkT-zr-eUO"/>
-                            <constraint firstItem="kq2-ci-l1u" firstAttribute="top" secondItem="RDW-bD-rSo" secondAttribute="bottom" constant="20" id="Y4H-6k-gDx"/>
+                            <constraint firstItem="nEH-8i-SaF" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" multiplier="0.5" id="a4O-RL-6jV"/>
                             <constraint firstAttribute="trailing" secondItem="o6f-cL-1PF" secondAttribute="trailing" constant="20" id="c74-nm-rgi"/>
-                            <constraint firstItem="nEH-8i-SaF" firstAttribute="leading" secondItem="lzK-em-8dU" secondAttribute="leading" id="eLV-Zr-ouZ"/>
-                            <constraint firstItem="9VI-dQ-4wQ" firstAttribute="top" secondItem="kq2-ci-l1u" secondAttribute="bottom" constant="18" id="hUz-NG-iNA"/>
-                            <constraint firstItem="RDW-bD-rSo" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="50" id="iXO-hP-XZ7"/>
-                            <constraint firstItem="kq2-ci-l1u" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="ice-pp-mVe"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nEH-8i-SaF" secondAttribute="trailing" constant="20" symbolic="YES" id="s0Q-93-b0r"/>
-                            <constraint firstItem="lzK-em-8dU" firstAttribute="top" secondItem="kq2-ci-l1u" secondAttribute="bottom" constant="100" id="v0S-Ga-Y7X"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="nEH-8i-SaF" secondAttribute="bottom" constant="20" id="cXQ-Qd-xnq"/>
+                            <constraint firstItem="nEH-8i-SaF" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="eLV-Zr-ouZ"/>
+                            <constraint firstItem="RDW-bD-rSo" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="iXO-hP-XZ7"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="lzK-em-8dU" secondAttribute="bottom" constant="20" id="qKc-1N-1di"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="apiSegmentedControl" destination="kq2-ci-l1u" id="Qjg-vy-uma"/>
                         <outlet property="label" destination="o6f-cL-1PF" id="KQV-3X-RKr"/>
                         <outlet property="localeSegmentedControl" destination="9VI-dQ-4wQ" id="jne-ST-NXq"/>
                         <outlet property="resetButton" destination="lzK-em-8dU" id="9BO-5x-8q6"/>

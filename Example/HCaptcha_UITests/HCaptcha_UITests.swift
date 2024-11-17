@@ -8,7 +8,7 @@
 
 import Foundation
 @testable import HCaptcha
-@testable import HCaptcha_Example
+@testable import HCaptcha_UIKit_Example
 import XCTest
 
 class HCaptcha_UITests: XCTestCase {
@@ -23,24 +23,8 @@ class HCaptcha_UITests: XCTestCase {
 
     func test__Simple__Validate__Rx() {
         let app = XCUIApplication()
-        app.segmentedControls.buttons["Rx"].tap()
         app.buttons["Validate"].tap()
 
-        verifyValidation()
-    }
-
-    func test__Simple__Validate__Regular() {
-        let app = XCUIApplication()
-        app.segmentedControls.buttons["Regular"].tap()
-        app.buttons["Validate"].tap()
-
-        verifyValidation()
-    }
-
-    // MARK: Private Methods
-
-    private func verifyValidation() {
-        let app = XCUIApplication()
         let webview = app.staticTexts.element(matching: .any, identifier: "webview")
 
         XCTAssertTrue(webview.waitForExistence(timeout: 10))

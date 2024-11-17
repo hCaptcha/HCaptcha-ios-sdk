@@ -3,7 +3,11 @@ platform :ios, 12.0
 use_frameworks!
 inhibit_all_warnings!
 
-target 'HCaptcha_Example' do
+target 'HCaptcha_UIKit_Example' do
+  pod 'HCaptcha', :path => '../'
+end
+
+target 'HCaptcha_RxSwift_Example' do
   pod 'HCaptcha', :path => '../'
   pod 'HCaptcha/RxSwift', :path => '../'
   pod 'RxCocoa', '~> 6.2.0'
