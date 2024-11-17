@@ -457,39 +457,6 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         XCTAssertEqual(result?.token, apiKey)
     }
 
-    func test__Validate__Should_Skip_For_Tests() {
-        let exp = expectation(description: "did skip validation")
-
-        let manager = HCaptchaWebViewManager()
-        manager.shouldSkipForTests = true
-
-        manager.completion = { result in
-            XCTAssertEqual(result.token, "")
-            exp.fulfill()
-        }
-
-        manager.validate(on: presenterView)
-
-        waitForExpectations(timeout: 1)
-    }
-
-    // MARK: Force Challenge Visible
-
-    func test__Force_Visible_Challenge() {
-        let manager = HCaptchaWebViewManager()
-
-        // Initial value
-        XCTAssertFalse(manager.forceVisibleChallenge)
-
-        // Set True
-        manager.forceVisibleChallenge = true
-        XCTAssertEqual(manager.webView.customUserAgent, "bot/2.1")
-
-        // Set False
-        manager.forceVisibleChallenge = false
-        XCTAssertNotEqual(manager.webView.customUserAgent?.isEmpty, false)
-    }
-
     // MARK: On Did Finish Loading
 
     func test__Did_Finish_Loading__Immediate() {
@@ -604,7 +571,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             }
         }
 
-        let manager = HCaptchaWebViewManager(messageBody: "{token: key, action: \"openExternalPage\"}",
+        let manager = HCaptchaWebViewManager(messageBody: "{action: \"openExternalPage\"}",
                                              apiKey: apiKey,
                                              urlOpener: TestURLOpener(exp1, exp2))
         manager.configureWebView { _ in
@@ -647,6 +614,36 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             XCTAssertEqual(HCaptchaError.htmlLoadError, response.error)
             exp.fulfill()
         }
+
+        waitForExpectations(timeout: 10)
+    }
+
+    func test__Validate_Passive_Key_On_Nil_View() {
+        let exp = expectation(description: "wait for completion")
+
+        let manager = HCaptchaWebViewManager(messageBody: "{token: \"success-token\"}", passiveApiKey: true)
+        manager.shouldResetOnError = false
+        manager.completion = { response in
+            XCTAssertEqual(try? response.dematerialize(), "success-token")
+            exp.fulfill()
+        }
+        manager.validate(on: nil)
+
+        waitForExpectations(timeout: 10)
+    }
+
+    func test__Validate_Non_Passive_Key_On_Nil_View() {
+        let exp = expectation(description: "didLoad never called")
+
+        let manager = HCaptchaWebViewManager(messageBody: "{token: \"should-not-be-delivered\"}", passiveApiKey: false)
+        manager.shouldResetOnError = false
+
+        manager.completion = { response in
+            XCTAssertEqual(HCaptchaError.failedSetup, response.error)
+            exp.fulfill()
+        }
+
+        manager.validate(on: nil)
 
         waitForExpectations(timeout: 10)
     }

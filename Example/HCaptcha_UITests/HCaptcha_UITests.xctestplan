@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "CB218DAD-A7CD-4618-9467-7D9FB804023E",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:HCaptcha.xcodeproj",
+      "identifier" : "F28FAC9B200E425600E14987",
+      "name" : "HCaptcha_UITests"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:HCaptcha.xcodeproj",
+        "identifier" : "F28FAC9B200E425600E14987",
+        "name" : "HCaptcha_UITests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -139,15 +139,15 @@ public class HCaptcha: NSObject {
      Starts the challenge validation
     */
     @objc
-    public func validate(on view: UIView, resetOnError: Bool = true, completion: @escaping (HCaptchaResult) -> Void) {
-        Log.debug(".validate on: \(view) resetOnError: \(resetOnError)")
+    public func validate(on view: UIView? = nil, resetOnError: Bool = true,
+                         completion: @escaping (HCaptchaResult) -> Void) {
+        Log.debug(".validate on: \(String(describing: view)) resetOnError: \(resetOnError)")
 
         manager.shouldResetOnError = resetOnError
         manager.completion = completion
 
         manager.validate(on: view)
     }
-
 
     /// Stops the execution of the webview
     @objc
@@ -209,34 +209,6 @@ public class HCaptcha: NSObject {
     public func redrawView() {
         manager.configureWebView?(manager.webView)
     }
-
-    // MARK: - Development
-
-#if DEBUG
-    /// Forces the challenge widget to be explicitly displayed.
-    @objc
-    public var forceVisibleChallenge: Bool {
-        get { return manager.forceVisibleChallenge }
-        set {
-            manager.forceVisibleChallenge = newValue
-        }
-    }
-
-    /**
-     Allows validation stubbing for testing
-
-     When this property is set to `true`, every call to `validate()` will immediately be resolved with `.token("")`.
-     
-     Use only when testing your application.
-    */
-    @objc
-    public var shouldSkipForTests: Bool {
-        get { return manager.shouldSkipForTests }
-        set {
-            manager.shouldSkipForTests = newValue
-        }
-    }
-#endif
 
     // MARK: - Objective-C 'convenience' inits
 

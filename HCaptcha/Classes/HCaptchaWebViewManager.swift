@@ -21,23 +21,6 @@ internal class HCaptchaWebViewManager: NSObject {
 
     fileprivate let webViewInitSize = CGSize(width: 1, height: 1)
 
-#if DEBUG
-    /// Forces the challenge to be explicitly displayed.
-    var forceVisibleChallenge = false {
-        didSet {
-            // Also works on iOS < 9
-            webView.performSelector(
-                onMainThread: "_setCustomUserAgent:",
-                with: forceVisibleChallenge ? Constants.BotUserAgent : nil,
-                waitUntilDone: true
-            )
-        }
-    }
-
-    /// Allows validation stubbing for testing
-    public var shouldSkipForTests = false
-#endif
-
     /// True if validation  token was dematerialized
     internal var resultHandled: Bool = false
 
@@ -165,17 +148,16 @@ internal class HCaptchaWebViewManager: NSObject {
 
      Starts the challenge validation
      */
-    func validate(on view: UIView) {
-        Log.debug("WebViewManager.validate on: \(view)")
+    func validate(on view: UIView?) {
+        Log.debug("WebViewManager.validate on: \(String(describing: view))")
         resultHandled = false
 
-#if DEBUG
-        guard !shouldSkipForTests else {
-            completion?(HCaptchaResult(self, token: ""))
-            return
-        }
-#endif
         if !passiveApiKey {
+            guard let view = view else {
+                completion?(HCaptchaResult(self, error: .failedSetup))
+                return
+            }
+
             view.addSubview(webView)
             if self.didFinishLoading && (webView.bounds.size == CGSize.zero || webView.bounds.size == webViewInitSize) {
                 self.doConfigureWebView()

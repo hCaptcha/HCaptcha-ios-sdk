@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1340"
-   version = "1.3">
+   LastUpgradeVersion = "1600"
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "YES"
+      buildArchitectures = "Automatic">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -14,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E626A7FA2890568A0069D449"
-               BuildableName = "HCaptcha_SwiftUI_Example.app"
-               BlueprintName = "HCaptcha_SwiftUI_Example"
+               BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+               BuildableName = "HCaptcha_RxSwift_Example.app"
+               BlueprintName = "HCaptcha_RxSwift_Example"
                ReferencedContainer = "container:HCaptcha.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -27,28 +28,15 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F2ECCF751E9FC47B0097B199"
-               BuildableName = "HCaptcha_Tests.xctest"
-               BlueprintName = "HCaptcha_Tests"
-               ReferencedContainer = "container:HCaptcha.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F28FAC9B200E425600E14987"
-               BuildableName = "HCaptcha_UITests.xctest"
-               BlueprintName = "HCaptcha_UITests"
-               ReferencedContainer = "container:HCaptcha.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
+      <TestPlans>
+         <TestPlanReference
+            reference = "container:HCaptcha_UITests/HCaptcha_UITests.xctestplan">
+         </TestPlanReference>
+         <TestPlanReference
+            reference = "container:HCaptcha_Tests/HCaptcha_Tests.xctestplan"
+            default = "YES">
+         </TestPlanReference>
+      </TestPlans>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -64,9 +52,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E626A7FA2890568A0069D449"
-            BuildableName = "HCaptcha_SwiftUI_Example.app"
-            BlueprintName = "HCaptcha_SwiftUI_Example"
+            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+            BuildableName = "HCaptcha_RxSwift_Example.app"
+            BlueprintName = "HCaptcha_RxSwift_Example"
             ReferencedContainer = "container:HCaptcha.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -81,9 +69,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E626A7FA2890568A0069D449"
-            BuildableName = "HCaptcha_SwiftUI_Example.app"
-            BlueprintName = "HCaptcha_SwiftUI_Example"
+            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+            BuildableName = "HCaptcha_RxSwift_Example.app"
+            BlueprintName = "HCaptcha_RxSwift_Example"
             ReferencedContainer = "container:HCaptcha.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

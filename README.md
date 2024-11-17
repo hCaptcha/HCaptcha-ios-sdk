@@ -151,7 +151,7 @@ Note: caller code is responsible for hiding the `WebView` after challenge proces
 
    ```
 
-1. `RxSwift` API (check [the example](./Example/HCaptcha/ViewController.swift) for more details):
+1. `RxSwift` API (check [the example](./Example/RxSwift-Example/ViewController.swift) for more details):
    ```swift
    ...
    hcaptcha?.configureWebView { [weak self] webview in
@@ -342,7 +342,7 @@ hcaptcha?.configureWebView { [weak self] webview in
 hcaptcha.onEvent { (event, data) in
     if event == .open {
         visualChallengeShown = true
-        hcaptcha.redrawView*()
+        hcaptcha.redrawView()
     } else if event == .error {
         let error = data as? HCaptchaError
         print("onEvent error: \(String(describing: error))")
@@ -357,12 +357,19 @@ hcaptcha.validate(on: view, resetOnError: false) { result in
 
 ### SwiftUI Example
 
-`HCaptcha` was originally designed to be used with UIKit. But you can easily use it with `SwiftUI` as well. Check out the [SwiftUI Example](./Example/SwiftUI)
+`HCaptcha` was originally designed to be used with UIKit. But you can easily use it with `SwiftUI` as well. Check out the [SwiftUI Example](./Example/SwiftUI-Example/ContentView.swift)
 
 ### Objective-C Example
 
-`HCaptcha` can be used from Objective-C code. Check out the [Example Project](./Example/ObjC)
+`HCaptcha` can be used from Objective-C code. Check out the [Example Project](./Example/ObjC-Example/ViewController.m)
 
+### Passive API Key Example
+
+`HCaptcha` allows verification that doesn't require any interaction from the user's side, i.e., [Passive Site Keys](https://docs.hcaptcha.com/faq#what-are-the-difficulty-levels-for-the-challenges-and-how-are-they-selected).
+
+Using the `passiveApiKey` option with Passive sitekeys provides performance improvements in SDK runtime, at the cost of less flexibility if you want to change the sitekey mode in the future without a code update.
+
+Check out the [Example](./Example/Passive-Example/ContentView.swift) for more details.
 
 ### Compiled size: impact on including in your app
 

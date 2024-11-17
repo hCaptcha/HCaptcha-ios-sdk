@@ -39,7 +39,7 @@ platform :ios do
     scan(
       build_for_testing: true,
       devices: self.select_similar_simulator(devices),
-      scheme: "HCaptcha-Example",
+      scheme: "HCaptcha-RxSwift-Example",
       workspace: "Example/HCaptcha.xcworkspace",
       code_coverage: true,
     )
@@ -47,7 +47,7 @@ platform :ios do
     scan(
       test_without_building: true,
       devices: self.select_similar_simulator(devices),
-      scheme: "HCaptcha-Example",
+      scheme: "HCaptcha-RxSwift-Example",
       workspace: "Example/HCaptcha.xcworkspace",
       code_coverage: true,
       skip_testing: ["HCaptcha_Tests/HCaptcha__Bench"],
@@ -56,7 +56,7 @@ platform :ios do
     scan(
       test_without_building: true,
       devices: self.select_similar_simulator(devices),
-      scheme: "HCaptcha-Example",
+      scheme: "HCaptcha-RxSwift-Example",
       workspace: "Example/HCaptcha.xcworkspace",
       code_coverage: true,
       disable_concurrent_testing: true,
@@ -234,7 +234,8 @@ platform :ios do
 
   desc "Build samples"
   lane :samples_build do
-    ["HCaptcha-Example",
+    ["HCaptcha-UIKit-Example",
+     "HCaptcha-RxSwift-Example",
      "HCaptcha-Objc-Example",
      "HCaptcha-SwiftUI-Example"].each do |scheme|
       gym(

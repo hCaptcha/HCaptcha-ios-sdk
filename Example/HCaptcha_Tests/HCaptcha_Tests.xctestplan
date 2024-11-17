@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "2EA4A03C-65F4-4972-AEAC-B04EC627DAAD",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:HCaptcha.xcodeproj",
+        "identifier" : "F2ECCF751E9FC47B0097B199",
+        "name" : "HCaptcha_Tests"
+      }
+    }
+  ],
+  "version" : 1
+}
