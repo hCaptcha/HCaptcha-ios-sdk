@@ -1,4 +1,4 @@
- //
+//
 //  ContentView.swift
 //  HCaptcha_PassiveExample
 //
@@ -41,8 +41,8 @@ struct ContentView: View {
         return await withCheckedContinuation { continuation in
             hcaptcha.validate { result in
                 do {
-                    let token = try result.dematerialize()
-                    continuation.resume(returning: token)
+                    let result = try result.dematerialize()
+                    continuation.resume(returning: result)
                 } catch let error {
                     continuation.resume(returning: error.localizedDescription)
                 }
