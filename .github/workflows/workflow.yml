@@ -49,7 +49,7 @@ jobs:
 
       - run: |
           bundle exec fastlane test
-        timeout-minutes: 15
+        timeout-minutes: 25
 
       - if: github.event_name == 'push'
         run: |
