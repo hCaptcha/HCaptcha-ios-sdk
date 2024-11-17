@@ -13,7 +13,7 @@ import RxCocoa
 import RxSwift
 import XCTest
 
-// FIXME these test doesn't work in parallel mode for some reason
+// these test doesn't work in parallel mode for some reason
 class HCaptcha_Rx__Tests: XCTestCase {
 
     fileprivate var apiKey: String!

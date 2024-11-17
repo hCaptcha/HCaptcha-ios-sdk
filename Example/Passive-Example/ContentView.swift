@@ -1,4 +1,4 @@
-//
+ //
 //  ContentView.swift
 //  HCaptcha_PassiveExample
 //
@@ -43,8 +43,8 @@ struct ContentView: View {
                 do {
                     let token = try result.dematerialize()
                     continuation.resume(returning: token)
-                } catch let e {
-                    continuation.resume(returning: e.localizedDescription)
+                } catch let error {
+                    continuation.resume(returning: error.localizedDescription)
                 }
             }
         }
