@@ -1,3 +1,8 @@
+# 2.9.2
+
+- Fix: recursive calls in convenience initializers
+- Feat: allow skipping the UIView argument in `verify` when `passiveApiKey=true`
+
 # 2.9.1
 
 - Fix: performance issue on building a timestamp prefix in `print` (`HCaptchaLog`)
