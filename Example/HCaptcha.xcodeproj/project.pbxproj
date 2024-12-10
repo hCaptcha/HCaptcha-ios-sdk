@@ -29,6 +29,7 @@
 		E651460F277A09C20079668A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65146042779E5380079668A /* Main.storyboard */; };
 		E6514610277A09C60079668A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		E6586CCF2893DBCA0051EFE7 /* HCaptcha in Frameworks */ = {isa = PBXBuildFile; productRef = E6586CCE2893DBCA0051EFE7 /* HCaptcha */; };
+		E68472802CFF91B500779F6A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E684727E2CFF91B500779F6A /* Info.plist */; };
 		E6A23A0E2CEA1AC50071D531 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A23A0C2CEA1AC50071D531 /* ViewController.swift */; };
 		E6A23A192CEA22190071D531 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		E6A23A1A2CEA29F40071D531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Assets.xcassets */; };
@@ -125,12 +126,12 @@
 		E65145EB2779AE830079668A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E65145F02779AE830079668A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		E65145F12779AE830079668A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		E65145FB2779AE850079668A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E65145FC2779AE850079668A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E65146042779E5380079668A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		E684727E2CFF91B500779F6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6A239E62CEA15E50071D531 /* HCaptcha_UIKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_UIKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6A23A0C2CEA1AC50071D531 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E6A23A392CEA6D480071D531 /* HCaptacha_PassiveExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptacha_PassiveExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6A23A392CEA6D480071D531 /* HCaptcha_PassiveExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_PassiveExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6A23A4A2CEA6DA70071D531 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E6A23A4B2CEA6DA70071D531 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		E6A23A542CEA78430071D531 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -251,7 +252,7 @@
 				E65145E82779AE830079668A /* HCaptcha_Objc_Example.app */,
 				E626A7FB2890568A0069D449 /* HCaptcha_SwiftUI_Example.app */,
 				E6A239E62CEA15E50071D531 /* HCaptcha_UIKit_Example.app */,
-				E6A23A392CEA6D480071D531 /* HCaptacha_PassiveExample.app */,
+				E6A23A392CEA6D480071D531 /* HCaptcha_PassiveExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -323,12 +324,12 @@
 		E65145E92779AE830079668A /* ObjC-Example */ = {
 			isa = PBXGroup;
 			children = (
+				E684727E2CFF91B500779F6A /* Info.plist */,
 				E65146042779E5380079668A /* Main.storyboard */,
 				E65145EA2779AE830079668A /* AppDelegate.h */,
 				E65145EB2779AE830079668A /* AppDelegate.m */,
 				E65145F02779AE830079668A /* ViewController.h */,
 				E65145F12779AE830079668A /* ViewController.m */,
-				E65145FB2779AE850079668A /* Info.plist */,
 				E65145FC2779AE850079668A /* main.m */,
 			);
 			path = "ObjC-Example";
@@ -514,9 +515,9 @@
 			productReference = E6A239E62CEA15E50071D531 /* HCaptcha_UIKit_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E6A23A382CEA6D480071D531 /* HCaptacha_PassiveExample */ = {
+		E6A23A382CEA6D480071D531 /* HCaptcha_PassiveExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E6A23A462CEA6D4C0071D531 /* Build configuration list for PBXNativeTarget "HCaptacha_PassiveExample" */;
+			buildConfigurationList = E6A23A462CEA6D4C0071D531 /* Build configuration list for PBXNativeTarget "HCaptcha_PassiveExample" */;
 			buildPhases = (
 				E6A23A352CEA6D480071D531 /* Sources */,
 				E6A23A362CEA6D480071D531 /* Frameworks */,
@@ -526,12 +527,12 @@
 			);
 			dependencies = (
 			);
-			name = HCaptacha_PassiveExample;
+			name = HCaptcha_PassiveExample;
 			packageProductDependencies = (
 				E6A23A522CEA73790071D531 /* HCaptcha */,
 			);
 			productName = HCaptacha_PassiveExample;
-			productReference = E6A23A392CEA6D480071D531 /* HCaptacha_PassiveExample.app */;
+			productReference = E6A23A392CEA6D480071D531 /* HCaptcha_PassiveExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F28FAC9B200E425600E14987 /* HCaptcha_UITests */ = {
@@ -638,7 +639,7 @@
 				E626A7FA2890568A0069D449 /* HCaptcha_SwiftUI_Example */,
 				607FACCF1AFB9204008FA782 /* HCaptcha_RxSwift_Example */,
 				E65145E72779AE830079668A /* HCaptcha_Objc_Example */,
-				E6A23A382CEA6D480071D531 /* HCaptacha_PassiveExample */,
+				E6A23A382CEA6D480071D531 /* HCaptcha_PassiveExample */,
 				F2ECCF751E9FC47B0097B199 /* HCaptcha_Tests */,
 				F28FAC9B200E425600E14987 /* HCaptcha_UITests */,
 			);
@@ -669,6 +670,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E68472802CFF91B500779F6A /* Info.plist in Resources */,
 				E651460C2779E9D30079668A /* LaunchScreen.xib in Resources */,
 				E6A23A2D2CEA48BA0071D531 /* Assets.xcassets in Resources */,
 				E651460F277A09C20079668A /* Main.storyboard in Resources */,
@@ -1473,6 +1475,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Passive-Example/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1516,6 +1519,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Passive-Example/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1689,7 +1693,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E6A23A462CEA6D4C0071D531 /* Build configuration list for PBXNativeTarget "HCaptacha_PassiveExample" */ = {
+		E6A23A462CEA6D4C0071D531 /* Build configuration list for PBXNativeTarget "HCaptcha_PassiveExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E6A23A442CEA6D4C0071D531 /* Debug */,

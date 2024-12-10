@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E6A23A382CEA6D480071D531"
-               BuildableName = "HCaptacha_PassiveExample.app"
-               BlueprintName = "HCaptacha_PassiveExample"
+               BuildableName = "HCaptcha_PassiveExample.app"
+               BlueprintName = "HCaptcha_PassiveExample"
                ReferencedContainer = "container:HCaptcha.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E6A23A382CEA6D480071D531"
-            BuildableName = "HCaptacha_PassiveExample.app"
-            BlueprintName = "HCaptacha_PassiveExample"
+            BuildableName = "HCaptcha_PassiveExample.app"
+            BlueprintName = "HCaptcha_PassiveExample"
             ReferencedContainer = "container:HCaptcha.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E6A23A382CEA6D480071D531"
-            BuildableName = "HCaptacha_PassiveExample.app"
-            BlueprintName = "HCaptacha_PassiveExample"
+            BuildableName = "HCaptcha_PassiveExample.app"
+            BlueprintName = "HCaptcha_PassiveExample"
             ReferencedContainer = "container:HCaptcha.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
