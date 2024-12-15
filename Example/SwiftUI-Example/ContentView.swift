@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  HCaptcha_SwiftUI_Example
 //
-//  Copyright © 2022 HCaptcha. MIT License.
+//  Copyright © 2024 HCaptcha. MIT License.
 //
 
 import SwiftUI
@@ -10,11 +10,11 @@ import HCaptcha
 
 // Wrapper-view to provide UIView instance
 struct UIViewWrapperView: UIViewRepresentable {
-    var uiview = UIView()
+    var uiView = UIView()
 
     func makeUIView(context: Context) -> UIView {
-        uiview.backgroundColor = .gray
-        return uiview
+        uiView.backgroundColor = .gray
+        return uiView
     }
 
     func updateUIView(_ view: UIView, context: Context) {
@@ -22,10 +22,32 @@ struct UIViewWrapperView: UIViewRepresentable {
     }
 }
 
+class HCaptchaViewModel: ObservableObject {
+    let hcaptcha: HCaptcha!
+
+    init() {
+        self.hcaptcha = try? HCaptcha()
+    }
+
+    func configure(_ hostView: UIViewWrapperView) {
+        hcaptcha.configureWebView { webview in
+            webview.frame = hostView.uiView.bounds
+        }
+        hcaptcha.onEvent { (event, _) in
+            print("HCaptcha onEvent \(event.rawValue)")
+        }
+    }
+
+    func validate(_ hostView: UIViewWrapperView) {
+        hcaptcha.validate(on: hostView.uiView) { result in
+            print("HCaptcha result \(try? result.dematerialize())")
+        }
+    }
+}
+
 // Example of hCaptcha usage
 struct HCaptchaView: View {
-    private(set) var hcaptcha: HCaptcha!
-
+    @StateObject var model = HCaptchaViewModel()
     let placeholder = UIViewWrapperView()
 
     var body: some View {
@@ -33,23 +55,11 @@ struct HCaptchaView: View {
             placeholder.frame(width: 640, height: 640, alignment: .center)
             Button(
                 "validate",
-                action: { showCaptcha(placeholder.uiview) }
+                action: { model.validate(placeholder) }
             ).padding()
         }
-    }
-
-    func showCaptcha(_ view: UIView) {
-        hcaptcha.validate(on: view) { result in
-            print(result)
-        }
-    }
-
-
-    init() {
-        hcaptcha = try? HCaptcha()
-        let hostView = self.placeholder.uiview
-        hcaptcha.configureWebView { webview in
-            webview.frame = hostView.bounds
+        .onAppear {
+            model.configure(placeholder)
         }
     }
 }
