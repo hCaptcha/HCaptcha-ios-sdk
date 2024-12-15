@@ -14,7 +14,8 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:HCaptcha_Tests/HCaptcha_Tests.xctestplan">
+            reference = "container:HCaptcha_Tests/HCaptcha_Tests.xctestplan"
+            default = "YES">
          </TestPlanReference>
       </TestPlans>
       <Testables>

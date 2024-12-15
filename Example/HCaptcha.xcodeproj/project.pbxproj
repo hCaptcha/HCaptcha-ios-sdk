@@ -29,7 +29,6 @@
 		E651460F277A09C20079668A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65146042779E5380079668A /* Main.storyboard */; };
 		E6514610277A09C60079668A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		E6586CCF2893DBCA0051EFE7 /* HCaptcha in Frameworks */ = {isa = PBXBuildFile; productRef = E6586CCE2893DBCA0051EFE7 /* HCaptcha */; };
-		E68472802CFF91B500779F6A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E684727E2CFF91B500779F6A /* Info.plist */; };
 		E6A23A0E2CEA1AC50071D531 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A23A0C2CEA1AC50071D531 /* ViewController.swift */; };
 		E6A23A192CEA22190071D531 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		E6A23A1A2CEA29F40071D531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Assets.xcassets */; };
@@ -97,7 +96,6 @@
 		1CF662E463D56A0421D8A84A /* Pods-HCaptcha_RxSwift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_RxSwift_Example.debug.xcconfig"; path = "Target Support Files/Pods-HCaptcha_RxSwift_Example/Pods-HCaptcha_RxSwift_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		4D10E8098B5018907486C310 /* Pods_HCaptcha_UIKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HCaptcha_UIKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* HCaptcha_RxSwift_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_RxSwift_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -115,6 +113,8 @@
 		C4CC6777C1126E7650593DB0 /* Pods-HCaptcha_UIKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_UIKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-HCaptcha_UIKit_Example/Pods-HCaptcha_UIKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		C8537003ECC47117AF54DCA9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		DE831E3AC800884C050910DF /* Pods-HCaptcha_UIKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_UIKit_Example.release.xcconfig"; path = "Target Support Files/Pods-HCaptcha_UIKit_Example/Pods-HCaptcha_UIKit_Example.release.xcconfig"; sourceTree = "<group>"; };
+		E605B7682D0ECBB9008EA9C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E605B76C2D0ED712008EA9C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E626A7FB2890568A0069D449 /* HCaptcha_SwiftUI_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_SwiftUI_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E626A7FF2890568A0069D449 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E626A809289056E00069D449 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -128,7 +128,6 @@
 		E65145F12779AE830079668A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E65145FC2779AE850079668A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E65146042779E5380079668A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		E684727E2CFF91B500779F6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6A239E62CEA15E50071D531 /* HCaptcha_UIKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_UIKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6A23A0C2CEA1AC50071D531 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E6A23A392CEA6D480071D531 /* HCaptcha_PassiveExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_PassiveExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -265,14 +264,6 @@
 			path = "RxSwift-Example";
 			sourceTree = "<group>";
 		};
-		607FACD31AFB9204008FA782 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				607FACD41AFB9204008FA782 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +298,7 @@
 		E626A7FC2890568A0069D449 /* SwiftUI-Example */ = {
 			isa = PBXGroup;
 			children = (
+				E605B76C2D0ED712008EA9C8 /* Info.plist */,
 				E626A809289056E00069D449 /* App.swift */,
 				E626A7FF2890568A0069D449 /* ContentView.swift */,
 			);
@@ -324,7 +316,6 @@
 		E65145E92779AE830079668A /* ObjC-Example */ = {
 			isa = PBXGroup;
 			children = (
-				E684727E2CFF91B500779F6A /* Info.plist */,
 				E65146042779E5380079668A /* Main.storyboard */,
 				E65145EA2779AE830079668A /* AppDelegate.h */,
 				E65145EB2779AE830079668A /* AppDelegate.m */,
@@ -346,12 +337,12 @@
 		E6A23A182CEA20130071D531 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				E6A23A542CEA78430071D531 /* BaseViewController.swift */,
-				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Assets.xcassets */,
+				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				E6A23A542CEA78430071D531 /* BaseViewController.swift */,
+				E605B7682D0ECBB9008EA9C8 /* Info.plist */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
-				607FACD31AFB9204008FA782 /* Supporting Files */,
+				607FACD91AFB9204008FA782 /* Main.storyboard */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -360,10 +351,10 @@
 			isa = PBXGroup;
 			children = (
 				E6A23A0D2CEA1AC50071D531 /* UIKit-Example */,
-				E626A7FC2890568A0069D449 /* SwiftUI-Example */,
-				E65145E92779AE830079668A /* ObjC-Example */,
 				607FACD21AFB9204008FA782 /* RxSwift-Example */,
+				E626A7FC2890568A0069D449 /* SwiftUI-Example */,
 				E6A23A4C2CEA6DA70071D531 /* Passive-Example */,
+				E65145E92779AE830079668A /* ObjC-Example */,
 				E6A23A182CEA20130071D531 /* Shared */,
 			);
 			name = Examples;
@@ -583,8 +574,9 @@
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1600;
 				ORGANIZATIONNAME = HCaptcha;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
@@ -623,10 +615,9 @@
 			};
 			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "HCaptcha" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -636,8 +627,8 @@
 			projectRoot = "";
 			targets = (
 				E6A239E52CEA15E50071D531 /* HCaptcha_UIKit_Example */,
-				E626A7FA2890568A0069D449 /* HCaptcha_SwiftUI_Example */,
 				607FACCF1AFB9204008FA782 /* HCaptcha_RxSwift_Example */,
+				E626A7FA2890568A0069D449 /* HCaptcha_SwiftUI_Example */,
 				E65145E72779AE830079668A /* HCaptcha_Objc_Example */,
 				E6A23A382CEA6D480071D531 /* HCaptcha_PassiveExample */,
 				F2ECCF751E9FC47B0097B199 /* HCaptcha_Tests */,
@@ -670,7 +661,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E68472802CFF91B500779F6A /* Info.plist in Resources */,
 				E651460C2779E9D30079668A /* LaunchScreen.xib in Resources */,
 				E6A23A2D2CEA48BA0071D531 /* Assets.xcassets in Resources */,
 				E651460F277A09C20079668A /* Main.storyboard in Resources */,
@@ -1083,6 +1073,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1139,6 +1130,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1172,12 +1164,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 58EEZG76L8;
+				DONT_GENERATE_INFOPLIST_FILE = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				GENERATE_PKGINFO_FILE = YES;
 				INFOPLIST_FILE = Shared/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.HCaptcha-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1192,12 +1189,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				DONT_GENERATE_INFOPLIST_FILE = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				GENERATE_PKGINFO_FILE = YES;
 				INFOPLIST_FILE = Shared/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.HCaptcha-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1225,7 +1227,7 @@
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Shared/Info.plist;
+				INFOPLIST_FILE = "SwiftUI-Example/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1266,7 +1268,7 @@
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Shared/Info.plist;
+				INFOPLIST_FILE = "SwiftUI-Example/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1304,7 +1306,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Shared/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1323,7 +1325,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.HCaptcha-Objc-Example.HCaptcha-Objc-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1345,7 +1346,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Shared/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1363,7 +1364,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.flaviocaetano.HCaptcha-Objc-Example.HCaptcha-Objc-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_SWIFT_SYMBOLS = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1388,7 +1388,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Shared/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1431,7 +1431,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Shared/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1475,13 +1475,13 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Passive-Example/Info.plist";
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1519,13 +1519,13 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Passive-Example/Info.plist";
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
