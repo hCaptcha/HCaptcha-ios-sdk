@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>HCaptchaDomain</key>
+	<string>http://localhost</string>
+	<key>HCaptchaKey</key>
+	<string>a5f74b19-9e45-40e0-b45d-47ff91b7a6c2</string>
+</dict>
+</plist>

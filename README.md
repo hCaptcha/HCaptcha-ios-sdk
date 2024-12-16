@@ -10,22 +10,26 @@
 
 -----
 
-- [HCaptcha](#hcaptcha)
-  * [Installation](#installation)
-      - [Cocoapods](#cocoapods)
-      - [SPM](#spm)
-  * [Requirements](#requirements)
-  * [Usage](#usage)
-      - [Change widget theme](#change-widget-theme)
-      - [More params for Enterprise (optional)](#more-params-for-enterprise-optional)
-    + [Enabling the visible checkbox flow](#enabling-the-visible-checkbox-flow)
-    + [Using landscape instead of portrait orientation](#using-landscape-instead-of-portrait-orientation)
-    + [SDK Events](#sdk-events)
-    + [Disable new token fetch on expiry](#disable-new-token-fetch-on-expiry)
-    + [Change hCaptcha frame](#change-hcaptcha-frame)
-  * [Known issues](#known-issues)
-  * [License](#license)
-  * [Troubleshooting](#troubleshooting)
+- [Installation](#installation)
+   * [Cocoapods](#cocoapods)
+   * [Carthage](#carthage)
+   * [SPM](#spm)
+- [Requirements](#requirements)
+- [Pre-requisites](#pre-requisites)
+- [Examples](#examples)
+- [Use cases](#use-cases)
+   * [Setting the host override (optional)](#setting-the-host-override-optional)
+   * [Change widget theme](#change-widget-theme)
+   * [Alternate endpoint (optional)](#alternate-endpoint-optional)
+   * [More params for Enterprise (optional)](#more-params-for-enterprise-optional)
+   * [Enabling the visible checkbox flow](#enabling-the-visible-checkbox-flow)
+   * [Using landscape instead of portrait orientation](#using-landscape-instead-of-portrait-orientation)
+   * [SDK Events](#sdk-events)
+   * [Disable new token fetch on expiry](#disable-new-token-fetch-on-expiry)
+- [Compiled size](#compiled-size-impact-on-including-in-your-app)
+- [Known issues](#known-issues)
+- [License](#license)
+- [Troubleshooting](#troubleshooting)
 
 Add [hCaptcha](https://www.hcaptcha.com/) to your project. This library automatically handles hCaptcha's events and returns a validation token, presenting the challenge via a modal if needed.
 
@@ -39,14 +43,14 @@ HCaptcha is available through [CocoaPods](http://cocoapods.org) and packaged for
 
 To install it, simply add the following line to your dependencies file:
 
-#### Cocoapods
+### Cocoapods
 ``` ruby
 pod "HCaptcha"
 # or
 pod "HCaptcha/RxSwift"
 ```
 
-#### Carthage
+### Carthage
 ``` ruby
 github "hCaptcha/HCaptcha-ios-sdk"
 ```
@@ -58,7 +62,7 @@ Known issues:
  - Carthage has a `RxSwift` build issue, also avoidable via `--no-use-binaries` - https://github.com/Carthage/Carthage/issues/3243
 
 
-#### SPM
+### SPM
 Standard SPM formula: uses [Package.swift](./Package.swift)
 
 ## Requirements
@@ -68,41 +72,16 @@ Standard SPM formula: uses [Package.swift](./Package.swift)
 | iOS      | :white_check_mark: >= 12.0 |
 | WatchOS  | :heavy_multiplication_x:   |
 
-## Usage
+## Pre-requisites
 
-hCaptcha sitekeys can be specified as Info.plist keys or can be passed as parameters when instantiating `HCaptcha()`.
+Once you have the hCaptcha `apiKey` (also referred to as `sitekey`, which can be obtained at [`https://dashboard.hcaptcha.com/sites`](https://dashboard.hcaptcha.com/sites)),
+
+the hCaptcha `apiKey` can be specified in `Info.plist` keys or can be passed as parameters when instantiating `HCaptcha()`.
 
 For the Info.plist configuration, add `HCaptchaKey` (sitekey) and `HCaptchaDomain` (with a protocol, i.e. https://) to your Info.plist.
 
 - `HCaptchaKey` is your hCaptcha sitekey.
 - `HCaptchaDomain` should be a string like `https://www.your.com`
-
-With these values set, run:
-
-``` swift
-let hcaptcha = try? HCaptcha()
-
-override func viewDidLoad() {
-    super.viewDidLoad()
-
-    hcaptcha?.configureWebView { [weak self] webview in
-        webview.frame = self?.view.bounds ?? CGRect.zero
-    }
-}
-
-
-func validate() {
-    hcaptcha?.validate(on: view) { [weak self] (result: HCaptchaResult) in
-        print(try? result.dematerialize())
-    }
-}
-```
-
-**Note**: in case you need to show hCaptcha above `UIVisualEffectView` make sure to pass `visualEffectView.contentView` instead `visualEffectView`. Per Apple's documentation:
-
-> After you add the visual effect view to the view hierarchy, add any subviews to the contentView property of the visual effect view. Do not add subviews directly to the visual effect view itself.
-
-More details [here](https://github.com/hCaptcha/HCaptcha-ios-sdk/issues/50).
 
 If you prefer to keep the information out of the Info.plist, you can instead use:
 
@@ -120,61 +99,19 @@ let hcaptcha = try? HCaptcha(
 - in most cases `baseURL` can be `http://localhost`. This value is mainly used for your convenience in analytics.
 - `baseURL` should match `HCaptchaDomain` if specified; it controls the URI used to initialize the hCaptcha session. Example: `https://www.your.com`
 
+## Examples
 
-You can also install the reactive subpod and use it with RxSwift:
+If you are looking for a complete example please check links below:
 
-``` swift
-hcaptcha.rx.validate(on: view)
-    .subscribe(onNext: { (token: String) in
-        // Do something
-    })
-```
+- [UIKit Example](./Example/UIKit-Example/README.md)
+- [SwiftUI Example](./Example/SwiftUI-Example/README.md)
+- [RxSwift Example](./Example/RxSwift-Example/README.md)
+- [SwiftUI Passive Example](./Example/Passive-Example/README.md)
+- [Objective-C Example](./Example/ObjC-Example/README.md)
 
-Note: caller code is responsible for hiding the `WebView` after challenge processing. This is illustrated in the Example app, and can be achieved with:
+## Use cases
 
-1. Regular Swift API:
-   ```swift
-   ...
-   var captchaWebView: WKWebView?
-   ...
-
-   hcaptcha?.configureWebView { [weak self] webview in
-       self?.captchaWebView = webview
-   }
-   ...
-
-   hcaptcha.validate(on: view) { result in
-       ...
-
-       captchaWebView?.removeFromSuperview()
-   }
-
-   ```
-
-1. `RxSwift` API (check [the example](./Example/RxSwift-Example/ViewController.swift) for more details):
-   ```swift
-   ...
-   hcaptcha?.configureWebView { [weak self] webview in
-       webview.tag = "hCaptchaViewTag"
-   }
-   ...
-
-   let disposeBag = DisposeBag()
-   let validate = hcaptcha.rx.validate(on: view)
-   ...
-
-   validate
-       .map { [weak self] _ in
-           self?.view.viewWithTag("hCaptchaViewTag")
-       }
-       .subscribe(onNext: { webview in
-           webview?.removeFromSuperview()
-       })
-       .disposed(by: disposeBag)
-   ```
-
-
-#### Setting the host override (optional)
+### Setting the host override (optional)
 
 Since this SDK uses local resources, you may want to set a host override for better tracking and enforcement of siteverify parameters.
 
@@ -192,7 +129,7 @@ let hcaptcha = try? HCaptcha(
 
 Note: this should be the **bare** host, i.e. not including a protocol prefix like https://.
 
-#### Change widget theme
+### Change widget theme
 
 The SDK supports three built-in themes: `light`, `dark`, and `contrast`
 
@@ -208,7 +145,7 @@ let hcaptcha = try? HCaptcha(
 
 For Enterprise sitekeys we also support custom themes via the `customTheme` parameter, described below.
 
-#### Alternate endpoint (optional)
+### Alternate endpoint (optional)
 
 If you are an Enterprise user with first-party hosting access, you can use your own endpoint (i.e. verify.your.com).
 
@@ -224,7 +161,7 @@ let hcaptcha = try? HCaptcha(
 ...
 ```
 
-#### More params for Enterprise (optional)
+### More params for Enterprise (optional)
 
 Enterprise params like:
 
@@ -274,37 +211,10 @@ This SDK allows you to receive interaction events, for your analytics via the `o
  - `close` fires when the user dismisses a challenge.
  - `error` fires when an internal error happens during challenge verification, for example a network error. Details about the error will be provided by the `data` param, as in the example below. Note: This event is not intended for error handling, but only for analytics purposes. For error handling please see the `validate` API call docs.
 
-You can implement this with the code below:
+You can check the implementation details in:
 
-``` swift
-let hcaptcha = try? HCaptcha(...)
-...
-hcaptcha.onEvent { (event, data) in
-    if event == .open {
-        ...
-    } else if event == .error {
-        let error = data as? HCaptchaError
-        print("onEvent error: \(String(describing: error))")
-        ...
-    }
-}
-```
-
-For `RxSwift`:
-
-```swift
-let hcaptcha = try? HCaptcha(...)
-...
-hcaptcha.rx.events()
-    .subscribe { [weak self] rxevent in
-        let event = rxevent.element?.0
-
-        if event == .open {
-            ...
-        }
-    }
-    ...
-```
+- [UIKit Example](./Example/UIKit-Example/README.md)
+- [SwiftUI Example](./Example/SwiftUI-Example/README.md)
 
 ### Disable new token fetch on expiry
 
@@ -316,62 +226,7 @@ hcaptcha.validate(on: view, resetOnError: false) { result in
    }
 ```
 
-### Change hCaptcha frame
-
-If you are customizing display beyond the defaults and need to resize or change the hCaptcha layout, for example after a visual challenge appears, you can use the following approach to trigger a redraw of the view:
-
-``` swift
-let hcaptcha = try? HCaptcha(...)
-var visualChallengeShown = false
-...
-hcaptcha?.configureWebView { [weak self] webview in
-    webview.tag = "hCaptchaViewTag"
-    if visualChallengeShown {
-        let padding = 10
-        webview.frame = CGRect(
-            x: padding,
-            y: padding,
-            width: view.frame.size.width - 2 * padding,
-            height: targetHeight - 2 * padding
-        )
-    } else {
-        webview.frame = self?.view.bounds ?? CGRect.zero
-    }
-}
-...
-hcaptcha.onEvent { (event, data) in
-    if event == .open {
-        visualChallengeShown = true
-        hcaptcha.redrawView()
-    } else if event == .error {
-        let error = data as? HCaptchaError
-        print("onEvent error: \(String(describing: error))")
-        ...
-    }
-}
-...
-hcaptcha.validate(on: view, resetOnError: false) { result in
-    visualChallengeShown = false
-}
-```
-
-### SwiftUI Example
-
-`HCaptcha` was originally designed to be used with UIKit. But you can easily use it with `SwiftUI` as well. Check out the [SwiftUI Example](./Example/SwiftUI-Example/ContentView.swift)
-
-### Objective-C Example
-
-`HCaptcha` can be used from Objective-C code. Check out the [Example Project](./Example/ObjC-Example/ViewController.m)
-
-### Passive Sitekey Example
-
-HCaptcha Enterprise supports verification with no interaction from the user: [Passive Site Keys](https://docs.hcaptcha.com/faq#what-are-the-difficulty-levels-for-the-challenges-and-how-are-they-selected).
-
-Using the `passiveApiKey` option with Passive sitekeys provides performance improvements in SDK token generation time, at the cost of less flexibility if you want to change the sitekey mode in the future without a code update.
-
-Check out the [Example](./Example/Passive-Example/ContentView.swift) for more details.
-
-### Compiled size: impact on including in your app
+## Compiled size: impact on including in your app
 
 HCaptcha pod size: **140** KB as of Jan 2024. You can always see the latest number in the CI logs by searching for the "pod size" string.
 
@@ -404,7 +259,7 @@ A: There are several ways this can happen:
 
 - You may have unintentionally added a transparent overlay over the SDK's view layer. This can be checked with [the view debugger](https://developer.apple.com/documentation/xcode/diagnosing-and-resolving-bugs-in-your-running-app#Inspect-and-resolve-appearance-and-layout-issues)
 
-### Inspiration
+## Inspiration
 
 Originally forked from fjcaetano's ReCaptcha IOS SDK, licensed under MIT.
 
