@@ -8,7 +8,7 @@ Because `HCaptcha` is a pure Swift library, it exposes its API through the `@obj
 
 The `@objc` attribute makes Swift methods, properties, and classes available to Objective-C code. By marking a Swift method or class with `@objc`, it is automatically bridged to Objective-C, allowing for interoperability between Swift and Objective-C. 
 
-Also because `Objective-C` doesn't support optional arguments, the most popular constructors of `HCaptcha` available in `Objective-C`
+Also because `Objective-C` doesn't support optional arguments, the most popular constructors of `HCaptcha` are available in `Objective-C`
 
 The full code is in [ViewController.m](./ViewController.m).
 

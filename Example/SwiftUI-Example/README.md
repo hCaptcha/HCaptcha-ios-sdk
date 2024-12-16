@@ -2,7 +2,7 @@
 
 Once [installation is complete](../../README.md#installation) and [pre-requisites are met](../../README.md#installation), we are ready to proceed with the actual implementation:
 
-While `HCaptcha` was originally designed to be used with UIKit, but you can easily use it with `SwiftUI` as well. Check out the [SwiftUI Example](./ContentView.swift).
+While `HCaptcha` was originally designed for UIKit, you can easily use it with `SwiftUI` as well. Check out the [SwiftUI Example](./ContentView.swift).
 
 To integrate `UIKit` components into a `SwiftUI` project, you can use `UIViewRepresentable`. This protocol allows you to wrap a `UIKit` view and make it compatible with `SwiftUI`. 
 
