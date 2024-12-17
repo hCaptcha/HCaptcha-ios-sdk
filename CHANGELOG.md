@@ -1,3 +1,7 @@
+# 2.9.3
+
+- Feat: Carthage BUILD_LIBRARY_FOR_DISTRIBUTION = YES
+
 # 2.9.2
 
 - Fix: recursive calls in convenience initializers
