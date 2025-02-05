@@ -137,6 +137,9 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
     /// A time before throw the `.htmlLoadError` if HCaptcha is not loaded
     let loadingTimeout: TimeInterval
 
+    /// A debug property
+    let disablePat: Bool?
+
     /// Return actual theme value based on init params. It must return valid JS object.
     var actualTheme: String {
         self.customTheme ?? "\"\(theme)\""
@@ -209,7 +212,8 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
                 theme: String,
                 customTheme: String?,
                 locale: Locale?,
-                loadingTimeout: TimeInterval = 5.0) throws {
+                loadingTimeout: TimeInterval = 5.0,
+                disablePat: Bool?) throws {
         guard let apiKey = apiKey ?? infoPlistKey else {
             throw HCaptchaError.apiKeyNotFound
         }
@@ -248,6 +252,7 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
         self.customTheme = customTheme
         self.locale = locale
         self.loadingTimeout = loadingTimeout
+        self.disablePat = disablePat
     }
 
     /**
@@ -282,6 +287,9 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
         }
         if customTheme != nil {
             queryItems.append(URLQueryItem(name: "custom", value: String(true)))
+        }
+        if let disablePat = disablePat, disablePat {
+            queryItems.append(URLQueryItem(name: "pat", value: "off"))
         }
 
         result.percentEncodedQuery = queryItems.map {
