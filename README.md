@@ -25,6 +25,7 @@
    * [Enabling the visible checkbox flow](#enabling-the-visible-checkbox-flow)
    * [Using landscape instead of portrait orientation](#using-landscape-instead-of-portrait-orientation)
    * [SDK Events](#sdk-events)
+   * [Token expiration](#token-expiration)
    * [Disable new token fetch on expiry](#disable-new-token-fetch-on-expiry)
 - [Compiled size](#compiled-size-impact-on-including-in-your-app)
 - [Known issues](#known-issues)
@@ -215,6 +216,17 @@ You can check the implementation details in:
 
 - [UIKit Example](./Example/UIKit-Example/README.md)
 - [SwiftUI Example](./Example/SwiftUI-Example/README.md)
+
+### Token expiration
+
+Each emitted token has an expiration time. Once this time is reached, you will receive a `.sessionTimeout` error or an `.expired` event in the `onEvent` closure, if it is set.
+
+However, this `error`/`event` will not be emitted in the following cases:
+
+- `HCaptchaResult.dematerialize()` is called; in this case, the token is considered consumed.
+- `HCaptcha.stop()` is called; in this case, the SDK stops all processing, and no errors or events will be emitted.
+
+Note that Enterprise customers have additional options: please contact support for guidance if necessary.
 
 ### Disable new token fetch on expiry
 
