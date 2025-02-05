@@ -226,6 +226,8 @@ However, this `error`/`event` will not be emitted in the following cases:
 - `HCaptchaResult.dematerialize()` is called; in this case, the token is considered consumed.
 - `HCaptcha.stop()` is called; in this case, the SDK stops all processing, and no errors or events will be emitted.
 
+Note that Enterprise customers have additional options: please contact support for guidance if necessary.
+
 ### Disable new token fetch on expiry
 
 By default the SDK will automatically fetch a new token upon expiry once you have requested a token via `validate`. This behavior can be adjusted by passing `resetOnError: false` to the `validate` call:
