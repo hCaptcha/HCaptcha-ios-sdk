@@ -133,7 +133,7 @@ class HCaptcha_Rx__Tests: XCTestCase {
             let reset = obs.do(onNext: hcaptcha.reset).subscribe()
 
             let result: [Void] = try obs
-                .toBlocking()
+                .toBlocking(timeout: 5)
                 .toArray()
 
             XCTAssertEqual(result.count, 2)
