@@ -76,7 +76,8 @@ public class HCaptcha: NSObject {
         host: String? = nil,
         theme: String = "light",
         customTheme: String? = nil,
-        diagnosticLog: Bool = false
+        diagnosticLog: Bool = false,
+        disablePat: Bool = false
     ) throws {
         Log.minLevel = diagnosticLog ? .debug : .warning
 
@@ -102,7 +103,8 @@ public class HCaptcha: NSObject {
                                         host: host,
                                         theme: theme,
                                         customTheme: customTheme,
-                                        locale: locale)
+                                        locale: locale,
+                                        disablePat: disablePat)
 
         Log.debug(".init with: \(config)")
 
