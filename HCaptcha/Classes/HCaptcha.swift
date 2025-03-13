@@ -63,7 +63,7 @@ public class HCaptcha: NSObject {
         apiKey: String? = nil,
         passiveApiKey: Bool = false,
         baseURL: URL? = nil,
-        locale: Locale? = nil,
+        locale: Locale? = Locale.current,
         size: HCaptchaSize = .invisible,
         orientation: HCaptchaOrientation = .portrait,
         jsSrc: URL = URL(string: "https://js.hcaptcha.com/1/api.js")!,

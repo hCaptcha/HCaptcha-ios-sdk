@@ -112,6 +112,20 @@ If you are looking for a complete example please check links below:
 
 ## Use cases
 
+### Change the locale
+
+By default, `Locale.current` used, but this behavior can be changed by explicitly passing the `locale` parameter to `HCaptcha`:
+
+``` swift
+let hcaptcha = try? HCaptcha(
+    ...
+    locale: Locale(identifier: "zh-CN"),
+    ...
+)
+
+...
+```
+
 ### Setting the host override (optional)
 
 Since this SDK uses local resources, you may want to set a host override for better tracking and enforcement of siteverify parameters.
@@ -144,7 +158,7 @@ let hcaptcha = try? HCaptcha(
 ...
 ```
 
-For Enterprise sitekeys we also support custom themes via the `customTheme` parameter, described below.
+For Enterprise sitekeys we also support custom themes via the [`customTheme` parameter](https://docs.hcaptcha.com/enterprise/feature_theme/), described below.
 
 ### Alternate endpoint (optional)
 
@@ -171,7 +185,7 @@ Enterprise params like:
  - `assethost` (string)
  - `imghost` (string)
  - `sentry` (bool)
- - `customTheme` (string representation of JS Object or JSON; see Enterprise docs)
+ - `customTheme` (string representation of JS Object or JSON; see [Enterprise docs](https://docs.hcaptcha.com/enterprise/feature_theme))
 
 Can be passed via `HCaptcha(...)`
 
@@ -274,4 +288,3 @@ A: There are several ways this can happen:
 ## Inspiration
 
 Originally forked from fjcaetano's ReCaptcha IOS SDK, licensed under MIT.
-
