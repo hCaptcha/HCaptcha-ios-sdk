@@ -114,7 +114,7 @@ If you are looking for a complete example please check links below:
 
 ### Change the locale
 
-By default, `Locale.current` used, but this behavior can be changed by explicitly passing the `locale` parameter to `HCaptcha`:
+By default, `Locale.current` is used to automatically set the language for the SDK, but this behavior can be changed by explicitly passing the `locale` parameter to `HCaptcha`:
 
 ``` swift
 let hcaptcha = try? HCaptcha(
