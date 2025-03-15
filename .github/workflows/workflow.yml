@@ -189,13 +189,13 @@ jobs:
       - id: diff_size
         run: echo "value=$((${{ steps.pr_size.outputs.value }} - ${{ steps.main_size.outputs.value }}))" >> $GITHUB_OUTPUT
 
-      - uses: peter-evans/find-comment@v3
+      - uses: peter-evans/find-comment@3eae4d3
         id: find_comment
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body-includes: Cocoapods size report
 
-      - uses: peter-evans/create-or-update-comment@v4
+      - uses: peter-evans/create-or-update-comment@71345be
         with:
           body: |
             Cocoapods size report:
