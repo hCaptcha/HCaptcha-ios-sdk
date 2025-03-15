@@ -40,13 +40,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-carthage-v2
 
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@922ebc4
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
-      - run: |
-          bundle exec fastlane test
+      - run: bundle exec fastlane test
         timeout-minutes: 25
 
       - if: github.event_name == 'push'
@@ -70,7 +69,7 @@ jobs:
       - name: Use Xcode ${{ env.XCODE_VERSION }}
         run: sudo xcode-select -switch /Applications/Xcode_${XCODE_VERSION}.app
 
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@922ebc4
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
@@ -91,7 +90,7 @@ jobs:
       - name: Use Xcode ${{ env.XCODE_VERSION }}
         run: sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
 
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@922ebc4
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
@@ -122,7 +121,7 @@ jobs:
       - name: Use Xcode ${{ env.XCODE_VERSION }}
         run: sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
 
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@922ebc4
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
@@ -141,7 +140,7 @@ jobs:
       - name: Use Xcode ${{ env.XCODE_VERSION }}
         run: sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
 
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@922ebc4
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
@@ -175,7 +174,7 @@ jobs:
       - name: Use Xcode ${{ env.XCODE_VERSION }}
         run: sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
 
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@922ebc4
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
@@ -235,7 +234,7 @@ jobs:
       - name: Use Xcode ${{ env.XCODE_VERSION }}
         run: sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
 
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@922ebc4
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
@@ -261,7 +260,7 @@ jobs:
       - name: Use Xcode ${{ env.XCODE_VERSION }}
         run: sudo xcode-select -switch /Applications/Xcode_${XCODE_VERSION}.app
 
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@922ebc4
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
