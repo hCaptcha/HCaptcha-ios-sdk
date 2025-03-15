@@ -40,7 +40,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-carthage-v2
 
-      - uses: ruby/setup-ruby@922ebc4
+      - uses: ruby/setup-ruby@922ebc4c5262cd14e07bb0e1db020984b6c064fe
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
@@ -69,7 +69,7 @@ jobs:
       - name: Use Xcode ${{ env.XCODE_VERSION }}
         run: sudo xcode-select -switch /Applications/Xcode_${XCODE_VERSION}.app
 
-      - uses: ruby/setup-ruby@922ebc4
+      - uses: ruby/setup-ruby@922ebc4c5262cd14e07bb0e1db020984b6c064fe
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
@@ -90,7 +90,7 @@ jobs:
       - name: Use Xcode ${{ env.XCODE_VERSION }}
         run: sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
 
-      - uses: ruby/setup-ruby@922ebc4
+      - uses: ruby/setup-ruby@922ebc4c5262cd14e07bb0e1db020984b6c064fe
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
@@ -121,7 +121,7 @@ jobs:
       - name: Use Xcode ${{ env.XCODE_VERSION }}
         run: sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
 
-      - uses: ruby/setup-ruby@922ebc4
+      - uses: ruby/setup-ruby@922ebc4c5262cd14e07bb0e1db020984b6c064fe
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
@@ -140,7 +140,7 @@ jobs:
       - name: Use Xcode ${{ env.XCODE_VERSION }}
         run: sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
 
-      - uses: ruby/setup-ruby@922ebc4
+      - uses: ruby/setup-ruby@922ebc4c5262cd14e07bb0e1db020984b6c064fe
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
@@ -174,7 +174,7 @@ jobs:
       - name: Use Xcode ${{ env.XCODE_VERSION }}
         run: sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
 
-      - uses: ruby/setup-ruby@922ebc4
+      - uses: ruby/setup-ruby@922ebc4c5262cd14e07bb0e1db020984b6c064fe
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
@@ -189,13 +189,13 @@ jobs:
       - id: diff_size
         run: echo "value=$((${{ steps.pr_size.outputs.value }} - ${{ steps.main_size.outputs.value }}))" >> $GITHUB_OUTPUT
 
-      - uses: peter-evans/find-comment@3eae4d3
+      - uses: peter-evans/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e
         id: find_comment
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body-includes: Cocoapods size report
 
-      - uses: peter-evans/create-or-update-comment@71345be
+      - uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043
         with:
           body: |
             Cocoapods size report:
@@ -234,7 +234,7 @@ jobs:
       - name: Use Xcode ${{ env.XCODE_VERSION }}
         run: sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
 
-      - uses: ruby/setup-ruby@922ebc4
+      - uses: ruby/setup-ruby@922ebc4c5262cd14e07bb0e1db020984b6c064fe
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
@@ -260,7 +260,7 @@ jobs:
       - name: Use Xcode ${{ env.XCODE_VERSION }}
         run: sudo xcode-select -switch /Applications/Xcode_${XCODE_VERSION}.app
 
-      - uses: ruby/setup-ruby@922ebc4
+      - uses: ruby/setup-ruby@922ebc4c5262cd14e07bb0e1db020984b6c064fe
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
