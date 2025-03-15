@@ -118,8 +118,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Use Xcode ${{ env.XCODE_VERSION }}
-        run: sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
+      - name: Use Xcode ${{ matrix.xcode }}
+        run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
       - uses: ruby/setup-ruby@922ebc4c5262cd14e07bb0e1db020984b6c064fe
         with:
@@ -231,8 +231,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Use Xcode ${{ env.XCODE_VERSION }}
-        run: sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
+      - name: Use Xcode ${{ matrix.xcode }}
+        run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
       - uses: ruby/setup-ruby@922ebc4c5262cd14e07bb0e1db020984b6c064fe
         with:
