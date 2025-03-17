@@ -45,12 +45,14 @@ platform :ios do
     )
 
     50.times do |i|
+      puts "Running tests #{i} time"
       scan(
         test_without_building: true,
         devices: self.select_similar_simulator(devices),
         scheme: "HCaptcha-RxSwift-Example",
         workspace: "Example/HCaptcha.xcworkspace",
         code_coverage: true,
+        disable_concurrent_testing: true,
         skip_testing: ["HCaptcha_Tests/HCaptcha__Bench"],
       )
     end
