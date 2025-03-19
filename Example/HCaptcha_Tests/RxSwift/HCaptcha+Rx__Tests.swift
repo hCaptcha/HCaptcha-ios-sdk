@@ -90,6 +90,8 @@ class HCaptcha_Rx__Tests: XCTestCase {
             exp.fulfill()
         }
 
+        waitForExpectations(timeout: 5)
+
         do {
             // Validate
             _ = try hcaptcha.rx.validate(on: presenterView, resetOnError: false)
@@ -101,7 +103,6 @@ class HCaptcha_Rx__Tests: XCTestCase {
         catch let error {
             XCTAssertEqual(error as? HCaptchaError, .wrongMessageFormat)
         }
-        waitForExpectations(timeout: 0)
     }
 
     // MARK: - Did Finish Loading

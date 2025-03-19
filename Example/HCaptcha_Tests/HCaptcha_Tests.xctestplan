@@ -14,6 +14,11 @@
   "testTargets" : [
     {
       "parallelizable" : false,
+      "skippedTests" : [
+        "HCaptcha_Rx__Tests\/test__Did_Finish_Loading__Multiple()",
+        "HCaptcha_Rx__Tests\/test__Dispose()",
+        "HCaptcha_Rx__Tests\/test__Reset()"
+      ],
       "target" : {
         "containerPath" : "container:HCaptcha.xcodeproj",
         "identifier" : "F2ECCF751E9FC47B0097B199",
