@@ -1,6 +1,7 @@
 # 2.9.4
 
 - Feat: use `Locale.current` as default value for `locale` param in `HCaptcha` constructor
+- Fix: keep ABI compatibility with 2.9.2 #180
 
 # 2.9.3
 
