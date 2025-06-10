@@ -29,6 +29,7 @@
 		E651460F277A09C20079668A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E65146042779E5380079668A /* Main.storyboard */; };
 		E6514610277A09C60079668A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		E6586CCF2893DBCA0051EFE7 /* HCaptcha in Frameworks */ = {isa = PBXBuildFile; productRef = E6586CCE2893DBCA0051EFE7 /* HCaptcha */; };
+		E68790E12DF8C60900F2A70F /* TestURLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68790E02DF8C60900F2A70F /* TestURLOpener.swift */; };
 		E6A23A0E2CEA1AC50071D531 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A23A0C2CEA1AC50071D531 /* ViewController.swift */; };
 		E6A23A192CEA22190071D531 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		E6A23A1A2CEA29F40071D531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Assets.xcassets */; };
@@ -128,6 +129,7 @@
 		E65145F12779AE830079668A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E65145FC2779AE850079668A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E65146042779E5380079668A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		E68790E02DF8C60900F2A70F /* TestURLOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestURLOpener.swift; sourceTree = "<group>"; };
 		E6A239E62CEA15E50071D531 /* HCaptcha_UIKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_UIKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6A23A0C2CEA1AC50071D531 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E6A23A392CEA6D480071D531 /* HCaptcha_PassiveExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_PassiveExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -416,6 +418,7 @@
 		F2ECCF941EA00A4A0097B199 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E68790E02DF8C60900F2A70F /* TestURLOpener.swift */,
 				F2ECCF951EA00A5B0097B199 /* HCaptchaWebViewManager+Helpers.swift */,
 				9C766C7826CB814A00E0A592 /* HCaptchaConfig+Helpers.swift */,
 				F288E9441F9537760018688D /* HCaptchaError+Equatable.swift */,
@@ -997,6 +1000,7 @@
 				F2ECCF8A1E9FCEFE0097B199 /* HCaptchaDecoder__Tests.swift in Sources */,
 				9C766C7926CB814A00E0A592 /* HCaptchaConfig+Helpers.swift in Sources */,
 				E62A74212771290A00973B5E /* HCaptcha__Config__Tests.swift in Sources */,
+				E68790E12DF8C60900F2A70F /* TestURLOpener.swift in Sources */,
 				9C5125BE26CB9A3A0094B023 /* HCaptchaWebViewManager__HTML__Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

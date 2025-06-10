@@ -552,25 +552,6 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         let exp1 = expectation(description: "_target link should be checked")
         let exp2 = expectation(description: "_target link should be opened")
 
-        class TestURLOpener: HCaptchaURLOpener {
-            private let canOpenExpectation: XCTestExpectation
-            private let openExpectation: XCTestExpectation
-
-            init(_ canOpen: XCTestExpectation, _ open: XCTestExpectation) {
-                self.canOpenExpectation = canOpen
-                self.openExpectation = open
-            }
-
-            func canOpenURL(_ url: URL) -> Bool {
-                canOpenExpectation.fulfill()
-                return true
-            }
-
-            func openURL(_ url: URL) {
-                openExpectation.fulfill()
-            }
-        }
-
         let manager = HCaptchaWebViewManager(messageBody: "{action: \"openExternalPage\"}",
                                              apiKey: apiKey,
                                              urlOpener: TestURLOpener(exp1, exp2))
@@ -646,5 +627,22 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         manager.validate(on: nil)
 
         waitForExpectations(timeout: 10)
+    }
+
+    func test__Sms_open() {
+        let exp0 = expectation(description: "should call configureWebView")
+        let exp1 = expectation(description: "sms link should be checked")
+        let exp2 = expectation(description: "sms link should be opened")
+
+        let manager = HCaptchaWebViewManager(messageBody: "{action: \"sms\"}",
+                                             apiKey: apiKey,
+                                             urlOpener: TestURLOpener(exp1, exp2))
+        manager.configureWebView { _ in
+            exp0.fulfill()
+        }
+        wait(for: [exp0], timeout: 5)
+        manager.validate(on: presenterView)
+
+        wait(for: [exp1, exp2], timeout: 5)
     }
 }
