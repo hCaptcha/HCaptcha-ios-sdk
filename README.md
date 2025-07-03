@@ -193,7 +193,7 @@ Please see the [hCaptcha Enterprise documentation](https://docs.hcaptcha.com/ent
 
 ### Enabling the visible checkbox flow
 
-This iOS SDK assumes by default that you want an "invisible" checkbox, i.e. that triggering the hCaptcha flow from within your app should either return a token or show the user a challenge directly.
+This iOS SDK assumes by default that you want an "invisible" checkbox, i.e. that triggering the hCaptcha flow from within your app should either return a token or show the user a challenge directly. (Note: "invisible" refers to the *checkbox*. If you want no or few visual challenges, choose Passive or 99.9% Passive as the behavior type for the sitekey in the hCaptcha dashboard.)
 
 If you instead want the classic "normal" or "compact" checkbox behavior of showing a checkbox to tick and then either closing or showing a challenge, you can pass `size` to the HCaptcha initializer.
 
