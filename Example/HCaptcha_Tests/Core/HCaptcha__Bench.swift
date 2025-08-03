@@ -10,15 +10,8 @@ import XCTest
 @testable import HCaptcha
 
 class HCaptcha__Bench: XCTestCase {
-    var testTimeout: TimeInterval = 5 // Default timeout value
-
     override func setUp() {
         super.setUp()
-
-        // Set timeout value based on CI environment
-        if ProcessInfo.processInfo.environment["CI"] != nil {
-            testTimeout = 20
-        }
 
         HCaptchaHtml.template = """
             <html>
@@ -77,7 +70,7 @@ class HCaptcha__Bench: XCTestCase {
                 self.stopMeasuring()
                 exp.fulfill()
             })
-            waitForExpectations(timeout: testTimeout)
+            waitForExpectations(timeout: TestTimeouts.long)
         })
     }
 
@@ -91,7 +84,7 @@ class HCaptcha__Bench: XCTestCase {
                 self.stopMeasuring()
                 exp.fulfill()
             })
-            waitForExpectations(timeout: testTimeout)
+            waitForExpectations(timeout: TestTimeouts.long)
         })
     }
 }

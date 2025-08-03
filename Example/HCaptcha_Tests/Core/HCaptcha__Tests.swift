@@ -95,7 +95,7 @@ class HCaptcha__Tests: XCTestCase {
                 XCTFail("Should not be called")
             }
         }
-        wait(for: [exp], timeout: 10)
+        wait(for: [exp], timeout: TestTimeouts.standard)
     }
 
     func test__reconfigure() {
@@ -119,7 +119,7 @@ class HCaptcha__Tests: XCTestCase {
                 XCTFail("Should not be called")
             }
         }
-        wait(for: [exp], timeout: 10)
+        wait(for: [exp], timeout: TestTimeouts.standard)
     }
 
     func test__passiveSiteKey_configure_not_called() {
@@ -138,7 +138,7 @@ class HCaptcha__Tests: XCTestCase {
             XCTAssertEqual("some_token", result.token)
             tokenRecieved.fulfill()
         }
-        wait(for: [loaded, tokenRecieved], timeout: 10)
+        wait(for: [loaded, tokenRecieved], timeout: TestTimeouts.standard)
     }
 
     func test__convenience_inits_is_not_recursive() throws {

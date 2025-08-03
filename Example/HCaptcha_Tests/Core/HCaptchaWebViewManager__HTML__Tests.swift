@@ -57,6 +57,6 @@ extension HCaptchaWebViewManager__HTML__Tests: WKNavigationDelegate {
 extension HCaptchaWebViewManager__HTML__Tests {
     func waitForWebViewContent(manager: HCaptchaWebViewManager) {
         manager.webView.navigationDelegate = self
-        wait(for: [webViewContentIsAvailable], timeout: 5)
+        wait(for: [webViewContentIsAvailable], timeout: TestTimeouts.standard)
     }
 }

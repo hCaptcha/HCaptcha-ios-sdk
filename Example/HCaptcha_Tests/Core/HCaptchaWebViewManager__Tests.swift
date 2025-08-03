@@ -49,7 +49,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             exp1.fulfill()
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
 
 
         // Verify
@@ -68,7 +68,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             exp2.fulfill()
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
 
 
         // Verify
@@ -91,7 +91,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             XCTFail("should not call completion")
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
     }
 
 
@@ -111,7 +111,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             exp1.fulfill()
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
 
         // Verify
         XCTAssertNotNil(result)
@@ -135,7 +135,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             exp1.fulfill()
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
 
         // Verify
         XCTAssertNotNil(result)
@@ -165,7 +165,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             exp.fulfill()
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
     }
 
     func test__Configure_Web_View() {
@@ -182,7 +182,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             XCTFail("should not call completion")
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
     }
 
     func test__Configure_Web_View__Called_Once() {
@@ -204,11 +204,11 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             XCTFail("should not call completion")
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
 
         let exp1 = expectation(description: "waiting for extra calls")
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: exp1.fulfill)
-        waitForExpectations(timeout: 2)
+        waitForExpectations(timeout: TestTimeouts.short)
 
         XCTAssertEqual(count, 1)
     }
@@ -227,7 +227,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             XCTFail("should not call completion")
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
 
         // Reset and ensure it calls again
         let exp1 = expectation(description: "configure webview 1")
@@ -238,7 +238,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         }
 
         manager.reset()
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
     }
 
     func test__Configure_Web_View__Handle_rqdata_Without_JS_Error() {
@@ -260,7 +260,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             XCTFail("should not call completion")
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
     }
 
     // MARK: Stop
@@ -283,7 +283,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             exp.fulfill()
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
     }
 
     func test__Reset_After_Stop() {
@@ -318,7 +318,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             exp2.fulfill()
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
     }
 
     // MARK: Setup
@@ -339,7 +339,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             exp1.fulfill()
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
 
         XCTAssertNotNil(result)
         XCTAssertNil(result?.error)
@@ -362,7 +362,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             exp1.fulfill()
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
 
         XCTAssertNotNil(result)
         XCTAssertNil(result!.error)
@@ -388,7 +388,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             exp1.fulfill()
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
 
         let exp2 = expectation(description: "should call configureWebView #2")
         manager.configureWebView { _ in
@@ -407,7 +407,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             exp3.fulfill()
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
 
         XCTAssertNil(result3?.error)
         XCTAssertEqual(result3?.token, apiKey)
@@ -451,7 +451,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             exp2.fulfill()
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
 
         XCTAssertNil(result?.error)
         XCTAssertEqual(result?.token, apiKey)
@@ -469,7 +469,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             manager.onDidFinishLoading = exp.fulfill
         }
 
-        waitForExpectations(timeout: 5)
+        waitForExpectations(timeout: TestTimeouts.short)
     }
 
     func test__Did_Finish_Loading__Delayed() {
@@ -488,7 +488,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         manager.onDidFinishLoading = exp.fulfill
         manager.reset()
 
-        waitForExpectations(timeout: 5)
+        waitForExpectations(timeout: TestTimeouts.short)
     }
 
     func test__OnEvent_Open_Callback() {
@@ -513,7 +513,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             exp2.fulfill()
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
 
         XCTAssertNotNil(result)
         XCTAssertNil(result?.error)
@@ -543,7 +543,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
                 XCTFail("should not validate")
             }
 
-            waitForExpectations(timeout: 5)
+            waitForExpectations(timeout: TestTimeouts.short)
         }
     }
 
@@ -558,10 +558,10 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         manager.configureWebView { _ in
             exp0.fulfill()
         }
-        wait(for: [exp0], timeout: 5)
+        wait(for: [exp0], timeout: TestTimeouts.short)
         manager.validate(on: presenterView)
 
-        wait(for: [exp1, exp2], timeout: 5)
+        wait(for: [exp1, exp2], timeout: TestTimeouts.short)
     }
 
     func test__Invalid_HTML() {
@@ -579,7 +579,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             exp.fulfill()
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
     }
 
     func test__HTML_Load_Error_Timeout() {
@@ -596,7 +596,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             exp.fulfill()
         }
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
     }
 
     func test__Validate_Passive_Key_On_Nil_View() {
@@ -610,7 +610,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         }
         manager.validate(on: nil)
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
     }
 
     func test__Validate_Non_Passive_Key_On_Nil_View() {
@@ -626,7 +626,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         manager.validate(on: nil)
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
     }
 
     func test__Sms_open() {
@@ -640,9 +640,9 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         manager.configureWebView { _ in
             exp0.fulfill()
         }
-        wait(for: [exp0], timeout: 5)
+        wait(for: [exp0], timeout: TestTimeouts.standard)
         manager.validate(on: presenterView)
 
-        wait(for: [exp1, exp2], timeout: 5)
+        wait(for: [exp1, exp2], timeout: TestTimeouts.standard)
     }
 }
