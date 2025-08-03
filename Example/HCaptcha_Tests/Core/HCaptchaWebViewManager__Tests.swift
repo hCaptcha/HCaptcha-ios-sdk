@@ -208,7 +208,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         let exp1 = expectation(description: "waiting for extra calls")
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: exp1.fulfill)
-        waitForExpectations(timeout: TestTimeouts.short)
+        waitForExpectations(timeout: TestTimeouts.standard)
 
         XCTAssertEqual(count, 1)
     }
