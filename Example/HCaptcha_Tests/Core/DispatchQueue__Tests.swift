@@ -30,7 +30,7 @@ class DispatchQueue__Tests: XCTestCase {
             exp0.fulfill()
         }
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: TestTimeouts.short)
 
         // Does not execute first closure
         let exp1 = expectation(description: "did call last closure")
@@ -43,7 +43,7 @@ class DispatchQueue__Tests: XCTestCase {
             action: exp1.fulfill
         )
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: TestTimeouts.short)
     }
 
     func test__Throttle_Context() {
@@ -57,7 +57,7 @@ class DispatchQueue__Tests: XCTestCase {
             action: exp0.fulfill
         )
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: TestTimeouts.short)
 
         // Does not execute first closure
         let exp1 = expectation(description: "execute on valid context")
@@ -81,7 +81,7 @@ class DispatchQueue__Tests: XCTestCase {
             action: exp2.fulfill
         )
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: TestTimeouts.short)
     }
 
     // MARK: Debounce
@@ -99,7 +99,7 @@ class DispatchQueue__Tests: XCTestCase {
             XCTFail("Shouldn't be called")
         }
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: TestTimeouts.short)
 
         // Executes closure after previous has timed out
         let exp1 = expectation(description: "did call closure")
@@ -110,7 +110,7 @@ class DispatchQueue__Tests: XCTestCase {
             )
         }
 
-        waitForExpectations(timeout: 3)
+        waitForExpectations(timeout: TestTimeouts.standard)
     }
 
     func test__Debounce_Context() {
@@ -137,7 +137,7 @@ class DispatchQueue__Tests: XCTestCase {
             action: exp1.fulfill
         )
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: TestTimeouts.short)
 
         // Executes closure after previous has timed out
         let exp2 = expectation(description: "did call closure")
@@ -149,7 +149,7 @@ class DispatchQueue__Tests: XCTestCase {
             )
         }
 
-        waitForExpectations(timeout: 5)
+        waitForExpectations(timeout: TestTimeouts.standard)
     }
 
     // MARK: Once

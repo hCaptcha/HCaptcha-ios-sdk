@@ -46,7 +46,7 @@ class HCaptchaDecoder__Tests: XCTestCase {
         let err = HCaptchaError.random()
         decoder.send(error: err)
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: TestTimeouts.short)
 
 
         // Check
@@ -69,7 +69,7 @@ class HCaptchaDecoder__Tests: XCTestCase {
         let message = MockMessage(message: "foobar")
         decoder.send(message: message)
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: TestTimeouts.short)
 
 
         // Check
@@ -91,7 +91,7 @@ class HCaptchaDecoder__Tests: XCTestCase {
         let message = MockMessage(message: ["action": "bar"])
         decoder.send(message: message)
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: TestTimeouts.short)
 
 
         // Check
@@ -113,7 +113,7 @@ class HCaptchaDecoder__Tests: XCTestCase {
         let message = MockMessage(message: ["action": "showHCaptcha"])
         decoder.send(message: message)
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: TestTimeouts.short)
 
 
         // Check
@@ -136,7 +136,7 @@ class HCaptchaDecoder__Tests: XCTestCase {
         let message = MockMessage(message: ["token": token])
         decoder.send(message: message)
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: TestTimeouts.short)
 
 
         // Check
@@ -158,7 +158,7 @@ class HCaptchaDecoder__Tests: XCTestCase {
         let message = MockMessage(message: ["action": "didLoad"])
         decoder.send(message: message)
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: TestTimeouts.short)
 
 
         // Check
@@ -178,7 +178,7 @@ class HCaptchaDecoder__Tests: XCTestCase {
         let message = MockMessage(message: ["error": 29])
         decoder.send(message: message)
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: TestTimeouts.short)
 
         // Check
         XCTAssertEqual(result, .error(.failedSetup))
@@ -197,7 +197,7 @@ class HCaptchaDecoder__Tests: XCTestCase {
         let message = MockMessage(message: ["error": 15])
         decoder.send(message: message)
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: TestTimeouts.short)
 
         // Check
         XCTAssertEqual(result, .error(.sessionTimeout))
@@ -216,7 +216,7 @@ class HCaptchaDecoder__Tests: XCTestCase {
         let message = MockMessage(message: ["error": 31])
         decoder.send(message: message)
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: TestTimeouts.short)
 
         // Check
         XCTAssertEqual(result, .error(.rateLimit))
@@ -235,7 +235,7 @@ class HCaptchaDecoder__Tests: XCTestCase {
         let message = MockMessage(message: ["error": 26])
         decoder.send(message: message)
 
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: TestTimeouts.short)
 
         // Check
         XCTAssertEqual(result, .error(.wrongMessageFormat))

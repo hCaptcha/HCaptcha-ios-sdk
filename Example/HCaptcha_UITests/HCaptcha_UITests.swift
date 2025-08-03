@@ -27,6 +27,6 @@ class HCaptcha_UITests: XCTestCase {
 
         let webview = app.staticTexts.element(matching: .any, identifier: "webview")
 
-        XCTAssertTrue(webview.waitForExistence(timeout: 10))
+        XCTAssertTrue(webview.waitForExistence(timeout: TestTimeouts.standard))
     }
 }

@@ -1,3 +1,7 @@
+# 2.9.5
+
+- Feat: handle sms: schema in WKWebView
+
 # 2.9.4
 
 - Feat: use `Locale.current` as default value for `locale` param in `HCaptcha` constructor

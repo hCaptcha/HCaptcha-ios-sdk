@@ -37,6 +37,8 @@
               var messageToPost = ${message};
               if (messageToPost.action === "openExternalPage") {
                   document.getElementById("external-link").click();
+              } else if (messageToPost.action === "sms") {
+                  window.open("sms:+123-456-789?body=somebody-someone")
               }
               post(messageToPost);
               if (messageToPost && messageToPost.token || messageToPost.action === "showHCaptcha") {

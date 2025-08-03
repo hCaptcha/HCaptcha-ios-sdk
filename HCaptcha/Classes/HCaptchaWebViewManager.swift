@@ -324,6 +324,7 @@ fileprivate extension HCaptchaWebViewManager {
         webView.loadHTMLString(html, baseURL: url)
         if webView.navigationDelegate == nil {
             webView.navigationDelegate = self
+            webView.uiDelegate = self
         }
         loadingTimer?.invalidate()
         loadingTimer = Timer.scheduledTimer(withTimeInterval: self.loadingTimeout, repeats: false, block: { _ in
