@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'HCaptcha'
-  s.version          = '2.9.4'
+  s.version          = '2.9.5'
   s.summary          = 'HCaptcha for iOS'
   s.swift_version    = '5.0'
   
