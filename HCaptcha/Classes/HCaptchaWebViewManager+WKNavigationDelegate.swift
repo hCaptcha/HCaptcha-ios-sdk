@@ -19,7 +19,8 @@ extension HCaptchaWebViewManager: WKNavigationDelegate, WKUIDelegate {
         decisionHandler(WKNavigationActionPolicy.allow)
     }
 
-    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration,
+                 for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         if let url = navigationAction.request.url, url.scheme == "sms" && urlOpener.canOpenURL(url) {
             urlOpener.openURL(url)
         }
