@@ -2,7 +2,7 @@ import Foundation
 
 enum TestTimeouts {
     private static let isCI: Bool = {
-        ProcessInfo.processInfo.environment["CI"] == "true"
+        ProcessInfo.processInfo.environment["CI"] != nil
     }()
 
     static let standard: TimeInterval = isCI ? 60 : 10

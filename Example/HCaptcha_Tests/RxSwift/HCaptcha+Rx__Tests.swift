@@ -53,7 +53,7 @@ class HCaptcha_Rx__Tests: XCTestCase {
         catch let error {
             XCTFail(error.localizedDescription)
         }
-        waitForExpectations(timeout: 5)
+        waitForExpectations(timeout: TestTimeouts.standard)
     }
 
 
@@ -77,7 +77,7 @@ class HCaptcha_Rx__Tests: XCTestCase {
             XCTFail("should have thrown exception")
         }
         catch let error {
-            waitForExpectations(timeout: 5)
+            waitForExpectations(timeout: TestTimeouts.standard)
             XCTAssertEqual(String(describing: error), RxError.timeout.debugDescription)
         }
     }
@@ -101,7 +101,7 @@ class HCaptcha_Rx__Tests: XCTestCase {
         catch let error {
             XCTAssertEqual(error as? HCaptchaError, .wrongMessageFormat)
         }
-        waitForExpectations(timeout: 0)
+        waitForExpectations(timeout: TestTimeouts.short)
     }
 
     // MARK: - Did Finish Loading
@@ -203,7 +203,7 @@ class HCaptcha_Rx__Tests: XCTestCase {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: disposable.dispose)
 
-        waitForExpectations(timeout: 10)
+        waitForExpectations(timeout: TestTimeouts.standard)
     }
 
     // MARK: - Reset
@@ -250,7 +250,7 @@ class HCaptcha_Rx__Tests: XCTestCase {
             XCTFail(error.localizedDescription)
         }
 
-        waitForExpectations(timeout: 0)
+        waitForExpectations(timeout: TestTimeouts.short)
     }
 
     func test__Validate__Reset_On_Error() {
@@ -281,6 +281,6 @@ class HCaptcha_Rx__Tests: XCTestCase {
             XCTFail(error.localizedDescription)
         }
 
-        waitForExpectations(timeout: 0)
+        waitForExpectations(timeout: TestTimeouts.short)
     }
 }

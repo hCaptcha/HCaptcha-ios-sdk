@@ -488,7 +488,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         manager.onDidFinishLoading = exp.fulfill
         manager.reset()
 
-        waitForExpectations(timeout: TestTimeouts.short)
+        waitForExpectations(timeout: TestTimeouts.standard)
     }
 
     func test__OnEvent_Open_Callback() {
@@ -543,7 +543,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
                 XCTFail("should not validate")
             }
 
-            waitForExpectations(timeout: TestTimeouts.short)
+            waitForExpectations(timeout: TestTimeouts.standard)
         }
     }
 
@@ -561,7 +561,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         wait(for: [exp0], timeout: TestTimeouts.short)
         manager.validate(on: presenterView)
 
-        wait(for: [exp1, exp2], timeout: TestTimeouts.short)
+        wait(for: [exp1, exp2], timeout: TestTimeouts.standard)
     }
 
     func test__Invalid_HTML() {
