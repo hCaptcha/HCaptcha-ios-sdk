@@ -20,7 +20,8 @@ extension HCaptchaError: Equatable {
              (.sessionTimeout, .sessionTimeout),
              (.rateLimit, .rateLimit),
              (.invalidCustomTheme, .invalidCustomTheme),
-             (.networkError, .networkError):
+             (.networkError, .networkError),
+             (.invalidHostFormat, .invalidHostFormat):
             return true
         case (.unexpected(let lhe as NSError), .unexpected(let rhe as NSError)):
             return lhe == rhe
@@ -30,17 +31,19 @@ extension HCaptchaError: Equatable {
     }
 
     static func random() -> HCaptchaError {
-        switch arc4random_uniform(7) {
-        case 0: return .htmlLoadError
-        case 1: return .apiKeyNotFound
-        case 2: return .baseURLNotFound
-        case 3: return .wrongMessageFormat
-        case 4: return .failedSetup
-        case 5: return .sessionTimeout
-        case 6: return .rateLimit
-        case 7: return .invalidCustomTheme
-        case 8: return .networkError
-        default: return .unexpected(NSError())
-        }
+        let cases: [HCaptchaError] = [
+            .htmlLoadError,
+            .apiKeyNotFound,
+            .baseURLNotFound,
+            .wrongMessageFormat,
+            .failedSetup,
+            .sessionTimeout,
+            .rateLimit,
+            .invalidCustomTheme,
+            .invalidHostFormat,
+            .networkError,
+            .unexpected(NSError())
+        ]
+        return cases.randomElement()!
     }
 }
