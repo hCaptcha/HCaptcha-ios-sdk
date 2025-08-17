@@ -108,11 +108,8 @@ jobs:
         xcode: [ '15.4' ]
         experimental: [ false ]
         include:
-          - os: macos-13
-            xcode: '14.3.1'
-            experimental: false
           - os: macos-15
-            xcode: '16.1'
+            xcode: '16.4' # https://github.com/actions/runner-images/issues/12758
             experimental: true
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -221,11 +218,8 @@ jobs:
         xcode: [ '15.4' ]
         experimental: [ false ]
         include:
-          - os: macos-13
-            xcode: '14.3.1'
-            experimental: false
           - os: macos-15
-            xcode: '16.1'
+            xcode: '16.4' # https://github.com/actions/runner-images/issues/12758
             experimental: true
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
