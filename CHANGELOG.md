@@ -1,3 +1,8 @@
+# 2.9.6
+
+- Feat: upgrade RxSwift to 6.9.0
+- Fix: make invalid host fail-fast
+
 # 2.9.5
 
 - Feat: handle sms: schema in WKWebView
