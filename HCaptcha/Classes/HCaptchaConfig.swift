@@ -234,6 +234,10 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
             }
         }
 
+        if let host = host, host.localizedStandardContains("/") {
+            throw HCaptchaError.invalidHostFormat
+        }
+
         self.html = html
         self.apiKey = apiKey
         self.passiveApiKey = passiveApiKey ?? false

@@ -139,4 +139,51 @@ class HCaptcha__Config__Tests: XCTestCase {
         let actual = config!.actualEndpoint.absoluteString
         XCTAssertTrue(actual.contains("pat=off"))
     }
+
+    func test__Host_Validation__Valid_Hostnames() {
+        // Test valid hostnames
+        let validHosts = [
+            "example.com",
+            "subdomain.example.com",
+            "localhost",
+            "127.0.0.1",
+            "api.hcaptcha.com",
+            "test-host.com",
+            "host_with_underscores.com"
+        ]
+
+        for host in validHosts {
+            do {
+                let config = try HCaptchaConfig(host: host)
+                XCTAssertEqual(config.host, host)
+            } catch {
+                XCTFail("Valid host '\(host)' should not throw error: \(error)")
+            }
+        }
+    }
+
+    func test__Host_Validation__Invalid_URLs() {
+        // Test invalid URLs that should throw error
+        let invalidHosts = [
+            "https://example.com",
+            "http://api.hcaptcha.com",
+            "ftp://test.com",
+            "example.com/path",
+            "api.hcaptcha.com/api",
+            "https://example.com/path",
+            "http://localhost:8080",
+            "example.com:8080/path"
+        ]
+
+        for host in invalidHosts {
+            do {
+                _ = try HCaptchaConfig(host: host)
+                XCTFail("Invalid host '\(host)' should throw HCaptchaError.invalidHostFormat")
+            } catch let error as HCaptchaError {
+                XCTAssertEqual(error, HCaptchaError.invalidHostFormat)
+            } catch {
+                XCTFail("HCaptchaError.invalidHostFormat should be thrown, but got: \(error)")
+            }
+        }
+    }
 }

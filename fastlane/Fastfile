@@ -105,7 +105,8 @@ platform :ios do
       cache_builds: true,
       use_binaries: false,
       no_skip_current: false,
-      use_xcframeworks: true
+      use_xcframeworks: true,
+      verbose: Helper.is_ci?
     )
 
     carthage(
@@ -115,7 +116,8 @@ platform :ios do
       platform: "iOS",
       cache_builds: true,
       no_skip_current: true,
-      use_xcframeworks: true
+      use_xcframeworks: true,
+      verbose: Helper.is_ci?
     )
   end
 

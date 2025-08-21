@@ -44,6 +44,9 @@ public enum HCaptchaError: Error, CustomStringConvertible {
     /// Invalid custom theme passed
     case invalidCustomTheme
 
+    /// Invalid host format - host should be a hostname only, not a full URL
+    case invalidHostFormat
+
     public static func == (lhs: HCaptchaError, rhs: HCaptchaError) -> Bool {
         return lhs.description == rhs.description
     }
@@ -86,6 +89,9 @@ public enum HCaptchaError: Error, CustomStringConvertible {
 
         case .invalidCustomTheme:
             return "Invalid JSON or JSObject as customTheme"
+
+        case .invalidHostFormat:
+            return "Host parameter should be a hostname only (e.g., 'example.com'), not a full URL"
         }
     }
 }
