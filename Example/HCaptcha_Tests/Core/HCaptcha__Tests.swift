@@ -330,6 +330,19 @@ class HCaptcha__Tests: XCTestCase {
 
         wait(for: [exp], timeout: TestTimeouts.standard)
     }
+
+    // MARK: - User Journeys Tests
+
+    func test__userJourneys_enabled_without_impl_throws() {
+        do {
+            _ = try HCaptcha(userJourneys: true)
+            XCTFail("Expected journeyliticsNotAvailable error when Journeylitics impl is not linked")
+        } catch let error as HCaptchaError {
+            XCTAssertEqual(error, .journeyliticsNotAvailable)
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+    }
 }
 
 

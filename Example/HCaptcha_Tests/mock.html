@@ -27,6 +27,8 @@
           window.webkit.messageHandlers.hcaptcha.postMessage(value);
       };
 
+      var token = null;
+
       var execute = function(verifyParams) {
           if (shouldFail) {
               post({error: 15}); // .sessionTimeout
@@ -43,15 +45,16 @@
                   post({"log": "verifyParams: " + JSON.stringify(verifyParams)});
               }
 
+              var messageToPost = ${message};
               if (rqdata) {
                   post({"log": rqdata});
               }
-              var messageToPost = ${message};
               if (messageToPost.action === "openExternalPage") {
                   document.getElementById("external-link").click();
               } else if (messageToPost.action === "sms") {
                   window.open("sms:+123-456-789?body=somebody-someone")
               }
+              messageToPost.token = token || messageToPost.token;
               post(messageToPost);
               if (messageToPost && messageToPost.token || messageToPost.action === "showHCaptcha") {
                   setTimeout(function() {
@@ -105,6 +108,18 @@
               return null; // No validation errors
           } catch (e) {
               return 34; // verifyParamsParseError
+          }
+      };
+
+      // Mock hcaptcha.setData to accept userJourneys and immediately post a token
+      var hcaptcha = {
+          setData: function(containerId, data) {
+              try {
+                  if (data && data.userJourneys) {
+                      token = "journeys:setData";
+                  }
+              } catch (e) {
+              }
           }
       };
 

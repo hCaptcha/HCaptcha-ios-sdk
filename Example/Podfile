@@ -5,6 +5,7 @@ inhibit_all_warnings!
 
 target 'HCaptcha_UIKit_Example' do
   pod 'HCaptcha', :path => '../'
+  pod 'HCaptcha/Journeylitics', :path => '../'
 end
 
 target 'HCaptcha_RxSwift_Example' do
@@ -18,6 +19,8 @@ target 'HCaptcha_RxSwift_Example' do
 
     pod 'AppSwizzle', '~> 1.3'
     pod 'RxBlocking', '~> 6.9.0'
+
+    pod 'HCaptcha/Journeylitics', :path => '../'
   end
 
   target 'HCaptcha_UITests' do

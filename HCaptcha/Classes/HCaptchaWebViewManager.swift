@@ -5,6 +5,7 @@
 import Foundation
 import WebKit
 
+
 /** Handles comunications with the webview containing the HCaptcha challenge.
  */
 internal class HCaptchaWebViewManager: NSObject {
@@ -67,6 +68,7 @@ internal class HCaptchaWebViewManager: NSObject {
     /// The JS message recoder
     fileprivate var decoder: HCaptchaDecoder!
 
+
     /// Indicates if the script has already been loaded by the `webView`
     internal var didFinishLoading = false {
         didSet {
@@ -125,6 +127,8 @@ internal class HCaptchaWebViewManager: NSObject {
     /// Responsible for external link handling
     internal let urlOpener: HCaptchaURLOpener
 
+    internal var userJourneyString: String = "[]"
+
     /**
      - parameters:
          - `config`: HCaptcha config
@@ -140,6 +144,7 @@ internal class HCaptchaWebViewManager: NSObject {
         self.decoder = HCaptchaDecoder { [weak self] result in
             self?.handle(result: result)
         }
+
         DispatchQueue.global(qos: .userInitiated).async {
             let arguments = ["apiKey": config.apiKey,
                              "endpoint": config.actualEndpoint.absoluteString,
@@ -161,12 +166,14 @@ internal class HCaptchaWebViewManager: NSObject {
 
     /**
      - parameter view: The view that should present the webview.
+     - parameter journeyEvents: JSON string of journey events to pass to JavaScript
 
      Starts the challenge validation
      */
-    func validate(on view: UIView?) {
+    func validate(on view: UIView?, journeyEvents: String = "[]") {
         Log.debug("WebViewManager.validate on: \(String(describing: view))")
         resultHandled = false
+        userJourneyString = journeyEvents
 
         if !passiveApiKey {
             guard let view = view else {
@@ -357,6 +364,7 @@ fileprivate extension HCaptchaWebViewManager {
      - parameters:
          - command: The JavaScript command to be executed
          - didLoad: True if didLoad event already occured
+         - journeyEvents: JSON string of journey events to pass to JavaScript
 
      Executes the JS command that loads the HCaptcha challenge. This method has no effect if the webview hasn't
      finished loading.
@@ -381,7 +389,17 @@ fileprivate extension HCaptchaWebViewManager {
             }
             return
         }
-        webView.evaluateJavaScript(command.rawValue) { [weak self] _, error in
+
+        // For execute command, inject journey events into JavaScript
+        var jsCommand = command.rawValue
+        if command == .execute && userJourneyString != "[]" {
+            jsCommand = """
+            try { hcaptcha.setData("hcaptcha-container", { "userJourneys": \(userJourneyString) }); }  catch (_) {}
+            \(command.rawValue)
+            """
+        }
+
+        webView.evaluateJavaScript(jsCommand) { [weak self] _, error in
             if let error = error {
                 self?.decoder.send(error: .unexpected(error))
             }

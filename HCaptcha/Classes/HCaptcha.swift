@@ -77,9 +77,14 @@ public class HCaptcha: NSObject {
         theme: String = "light",
         customTheme: String? = nil,
         diagnosticLog: Bool = false,
-        disablePat: Bool = false
+        disablePat: Bool = false,
+        userJourneys: Bool = false
     ) throws {
         Log.minLevel = diagnosticLog ? .debug : .warning
+
+        if userJourneys {
+            guard HCaptchaJourneys.start() else { throw HCaptchaError.journeyliticsNotAvailable }
+        }
 
         let infoDict = Bundle.main.infoDictionary
 
@@ -104,7 +109,8 @@ public class HCaptcha: NSObject {
                                         theme: theme,
                                         customTheme: customTheme,
                                         locale: locale,
-                                        disablePat: disablePat)
+                                        disablePat: disablePat,
+                                        userJourneys: userJourneys)
 
         Log.debug(".init with: \(config)")
 
@@ -148,7 +154,8 @@ public class HCaptcha: NSObject {
         manager.shouldResetOnError = resetOnError
         manager.completion = completion
 
-        manager.validate(on: view)
+        let journeyEvents = HCaptchaJourneys.drainEventsAsJSONString()
+        manager.validate(on: view, journeyEvents: journeyEvents)
     }
 
     /**
@@ -175,7 +182,7 @@ public class HCaptcha: NSObject {
     @objc
     public func stop() {
         Log.debug(".stop")
-
+        HCaptchaJourneys.stop()
         manager.stop()
     }
 
@@ -292,7 +299,12 @@ public class HCaptcha: NSObject {
                             host: String?,
                             theme: String,
                             customTheme: String?,
-                            diagnosticLog: Bool) throws {
+                            diagnosticLog: Bool,
+                            userJourneys: Bool) throws {
+        if userJourneys {
+            guard HCaptchaJourneys.start() else { throw HCaptchaError.journeyliticsNotAvailable }
+        }
+
         try self.init(apiKey: apiKey,
                       passiveApiKey: passiveApiKey,
                       baseURL: baseURL,
@@ -310,6 +322,7 @@ public class HCaptcha: NSObject {
                       theme: theme,
                       customTheme: customTheme,
                       diagnosticLog: diagnosticLog,
-                      disablePat: false)
+                      disablePat: false,
+                      userJourneys: userJourneys)
     }
 }
