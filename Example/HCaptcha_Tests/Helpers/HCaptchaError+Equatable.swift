@@ -21,7 +21,8 @@ extension HCaptchaError: Equatable {
              (.rateLimit, .rateLimit),
              (.invalidCustomTheme, .invalidCustomTheme),
              (.networkError, .networkError),
-             (.invalidHostFormat, .invalidHostFormat):
+             (.invalidHostFormat, .invalidHostFormat),
+             (.journeyliticsNotAvailable, .journeyliticsNotAvailable):
             return true
         case (.unexpected(let lhe as NSError), .unexpected(let rhe as NSError)):
             return lhe == rhe
@@ -42,6 +43,7 @@ extension HCaptchaError: Equatable {
             .invalidCustomTheme,
             .invalidHostFormat,
             .networkError,
+            .journeyliticsNotAvailable,
             .unexpected(NSError())
         ]
         return cases.randomElement()!

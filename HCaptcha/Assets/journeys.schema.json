@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hcaptcha.com/schemas/ios/journeys.schema.json",
+  "title": "HCaptcha Journeys Events",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["k", "v", "ts", "m"],
+    "properties": {
+      "k": {
+        "type": "string",
+        "enum": ["screen", "click", "drag", "gesture", "edit"],
+        "description": "Event kind"
+      },
+      "v": { "type": "string", "description": "View type name" },
+      "ts": { "type": "integer", "minimum": 0, "description": "Timestamp (ms since epoch)" },
+      "m": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "Event metadata (minified keys)",
+        "properties": {
+          "i":  { "type": "string", "description": "id" },
+          "s":  { "type": "string", "description": "screen" },
+          "a":  { "type": "string", "description": "action" },
+          "val":{ "type": ["string","number"], "description": "value" },
+          "x":  { "type": "number", "description": "x coordinate" },
+          "y":  { "type": "number", "description": "y coordinate" },
+          "idx":{ "type": "integer", "description": "index" },
+          "sct":{ "type": "integer", "description": "section index" },
+          "t":  { "type": "string", "description": "target type" },
+          "c":  { "type": "string", "description": "control type" },
+          "g":  { "type": "string", "description": "gesture type" },
+          "st": { "type": "string", "enum": ["possible","began","changed","ended","cancelled","failed","unknown"], "description": "gesture state" },
+          "tap":{ "type": "integer", "description": "tap count" }
+        }
+      }
+    }
+  }
+}
