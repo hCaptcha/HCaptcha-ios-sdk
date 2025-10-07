@@ -21,8 +21,7 @@ public class HCaptchaVerifyParams: NSObject {
     @objc public let phonePrefix: String?
 
     /**
-     Optional full phone number in E.164 or local format as expected by JS.
-     When provided, JS will call hcaptcha.setPhoneNumber(value) if available.
+     Optional full phone number in E.164 format. Used in MFA flows.
      */
     @objc public let phoneNumber: String?
 
