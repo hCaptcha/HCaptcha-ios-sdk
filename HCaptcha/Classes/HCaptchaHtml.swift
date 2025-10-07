@@ -66,6 +66,28 @@ struct HCaptchaHtml {
                 post({ log: message });
               };
 
+              var setVerifyParams = function(params) {
+                try {
+                  console.log("setting verify params:", params);
+
+                  var phone = params.phoneNumber || params.mfa_phone;
+                  var prefix = params.phonePrefix || params.mfa_phoneprefix;
+
+                  if (phone || prefix) {
+                    var data = {};
+                    if (phone) data.mfa_phone = phone;
+                    if (prefix) data.mfa_phoneprefix = prefix;
+
+                    if (window.hCaptchaID) {
+                      hcaptcha.setData(window.hCaptchaID, data);
+                    }
+                  }
+                } catch (e) {
+                  console.log("failed to set verify params");
+                  post({ error: 34 });
+                }
+              };
+
               var execute = function() {
                 console.log("challenge executing");
 
@@ -123,7 +145,7 @@ struct HCaptchaHtml {
               var onloadCallback = function() {
                 try {
                   console.log("challenge onload starting");
-                  hcaptcha.render("hcaptcha-container", {
+                  window.hCaptchaID = hcaptcha.render("hcaptcha-container", {
                     "sitekey": "${apiKey}",
                     "size": "${size}",
                     "orientation": "${orientation}",

@@ -8,9 +8,22 @@ import WebKit
 /** Handles comunications with the webview containing the HCaptcha challenge.
  */
 internal class HCaptchaWebViewManager: NSObject {
-    enum JSCommand: String {
-        case execute = "execute();"
-        case reset = "reset();"
+    enum JSCommand {
+        case execute(HCaptchaVerifyParams? = nil)
+        case reset
+
+        var rawValue: String {
+            switch self {
+            case .execute(let verifyParams):
+                if let verifyParams = verifyParams, let jsonString = verifyParams.toJSONString() {
+                    return "execute(\(jsonString));"
+                } else {
+                    return "execute();"
+                }
+            case .reset:
+                return "reset();"
+            }
+        }
     }
 
     typealias Log = HCaptchaLogger
@@ -47,6 +60,9 @@ internal class HCaptchaWebViewManager: NSObject {
 
     /// If the HCaptcha should be reset when it errors
     var shouldResetOnError = true
+
+    /// Verification parameters (e.g., phone prefix/number for MFA flows)
+    var verifyParams: HCaptchaVerifyParams?
 
     /// The JS message recoder
     fileprivate var decoder: HCaptchaDecoder!
@@ -164,7 +180,7 @@ internal class HCaptchaWebViewManager: NSObject {
             }
         }
 
-        executeJS(command: .execute)
+        executeJS(command: .execute(verifyParams))
     }
 
     /// Stops the execution of the webview
@@ -267,7 +283,7 @@ fileprivate extension HCaptchaWebViewManager {
     private func didLoad() {
         Log.debug("WebViewManager.didLoad")
         if completion != nil {
-            executeJS(command: .execute, didLoad: true)
+            executeJS(command: .execute(), didLoad: true)
         }
         didFinishLoading = true
         loadingTimer?.invalidate()

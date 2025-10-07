@@ -139,7 +139,7 @@ public class HCaptcha: NSObject {
          - completion: A closure that receives a HCaptchaResult which may contain a valid result token.
 
      Starts the challenge validation
-    */
+     */
     @objc
     public func validate(on view: UIView? = nil, resetOnError: Bool = true,
                          completion: @escaping (HCaptchaResult) -> Void) {
@@ -147,6 +147,26 @@ public class HCaptcha: NSObject {
 
         manager.shouldResetOnError = resetOnError
         manager.completion = completion
+
+        manager.validate(on: view)
+    }
+
+    /**
+     - parameters:
+         - view: The view that should present the webview.
+         - verifyParams: Parameters supplied at verification time (e.g., phone prefix/number for MFA flows).
+         - completion: A closure that receives a HCaptchaResult which may contain a valid result token.
+
+     Starts the challenge validation with verification parameters
+     */
+    @objc
+    public func validate(on view: UIView? = nil, verifyParams: HCaptchaVerifyParams,
+                         completion: @escaping (HCaptchaResult) -> Void) {
+        Log.debug(".validate on: \(String(describing: view)) verifyParams: \(verifyParams)")
+
+        manager.completion = completion
+        manager.verifyParams = verifyParams
+        manager.shouldResetOnError = verifyParams.resetOnError
 
         manager.validate(on: view)
     }

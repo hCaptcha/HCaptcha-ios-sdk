@@ -15,6 +15,11 @@ import WebKit
 class ViewController: BaseViewController {
     var disposeBag = DisposeBag()
 
+    // Phone input UI elements - connected from storyboard
+    @IBOutlet weak var phoneTextField: UITextField!
+    @IBOutlet weak var phoneModeSwitch: UISwitch!
+    @IBOutlet weak var phoneModeLabel: UILabel!
+
     @IBAction private func didPressVerifyButton(button: UIButton) {
         disposeBag = DisposeBag()
 
@@ -23,12 +28,33 @@ class ViewController: BaseViewController {
             .subscribe()
             .disposed(by: disposeBag)
 
-        let validate = hcaptcha.rx.validate(on: view, resetOnError: false)
-            .catch { error in
-                return .just("Error \(error)")
+        // Create validate observable based on phone input
+        let validate: Observable<String>
+        if let phoneText = phoneTextField.text, !phoneText.isEmpty {
+            let verifyParams: HCaptchaVerifyParams
+            if phoneModeSwitch.isOn {
+                // Phone number mode
+                verifyParams = HCaptchaVerifyParams(phoneNumber: phoneText)
+            } else {
+                // Phone prefix mode
+                verifyParams = HCaptchaVerifyParams(phonePrefix: phoneText)
             }
-            .debug("validate")
-            .share()
+
+            validate = hcaptcha.rx.validate(on: view, verifyParams: verifyParams)
+                .catch { error in
+                    return .just("Error \(error)")
+                }
+                .debug("validate with phone params")
+                .share()
+        } else {
+            // Regular validation without phone params
+            validate = hcaptcha.rx.validate(on: view, resetOnError: false)
+                .catch { error in
+                    return .just("Error \(error)")
+                }
+                .debug("validate")
+                .share()
+        }
 
         let isLoading = validate
             .map { _ in false }
@@ -66,6 +92,30 @@ class ViewController: BaseViewController {
                 hcaptcha?.reset()
             })
             .disposed(by: disposeBag)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupPhoneInputUI()
+    }
+
+    private func setupPhoneInputUI() {
+        // Configure initial state
+        phoneModeLabel.text = "Prefix"
+        phoneTextField.placeholder = "Enter phone prefix (e.g., 44)"
+        phoneTextField.keyboardType = .numberPad
+    }
+
+    @IBAction private func phoneModeChanged(_ sender: UISwitch) {
+        if phoneModeSwitch.isOn {
+            phoneModeLabel.text = "Phone"
+            phoneTextField.placeholder = "Enter phone number (e.g., +1234567890)"
+            phoneTextField.keyboardType = .phonePad
+        } else {
+            phoneModeLabel.text = "Prefix"
+            phoneTextField.placeholder = "Enter phone prefix (e.g., 44)"
+            phoneTextField.keyboardType = .numberPad
+        }
     }
 
     override func setupHCaptcha() {

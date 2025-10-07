@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" customClass="ViewController" customModule="HCaptcha_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" customClass="ViewController" customModule="HCaptcha_RxSwift_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -19,6 +19,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="phone-input-stack">
+                                <rect key="frame" x="87.5" y="40" width="200" height="73"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="switch-stack">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prefix" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phone-mode-label">
+                                                <rect key="frame" x="0.0" y="0.0" width="143" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="phone-mode-switch">
+                                                <rect key="frame" x="151" y="0.0" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="phoneModeChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="phone-switch-action"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter prefix (e.g., 44)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="phone-text-field">
+                                        <rect key="frame" x="0.0" y="39" width="200" height="34"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o6f-cL-1PF">
                                 <rect key="frame" x="20" y="333.5" width="335" height="0.0"/>
                                 <accessibility key="accessibilityConfiguration" identifier="resultLabel"/>
@@ -86,12 +115,20 @@
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="nEH-8i-SaF" secondAttribute="bottom" constant="20" id="cXQ-Qd-xnq"/>
                             <constraint firstItem="nEH-8i-SaF" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="eLV-Zr-ouZ"/>
                             <constraint firstItem="RDW-bD-rSo" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="iXO-hP-XZ7"/>
+                            <constraint firstItem="phone-input-stack" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="phone-stack-centerX"/>
+                            <constraint firstItem="phone-input-stack" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="phone-stack-leading"/>
+                            <constraint firstItem="phone-input-stack" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" id="phone-stack-top"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="phone-input-stack" secondAttribute="trailing" constant="20" id="phone-stack-trailing"/>
+                            <constraint firstItem="phone-text-field" firstAttribute="width" constant="200" id="phone-textfield-width"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="lzK-em-8dU" secondAttribute="bottom" constant="20" id="qKc-1N-1di"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="label" destination="o6f-cL-1PF" id="KQV-3X-RKr"/>
                         <outlet property="localeSegmentedControl" destination="9VI-dQ-4wQ" id="jne-ST-NXq"/>
+                        <outlet property="phoneModeLabel" destination="phone-mode-label" id="phone-mode-label-outlet"/>
+                        <outlet property="phoneModeSwitch" destination="phone-mode-switch" id="phone-mode-switch-outlet"/>
+                        <outlet property="phoneTextField" destination="phone-text-field" id="phone-text-field-outlet"/>
                         <outlet property="resetButton" destination="lzK-em-8dU" id="9BO-5x-8q6"/>
                         <outlet property="spinner" destination="jHc-GP-v1Z" id="gRn-JW-FIK"/>
                         <outlet property="validateButton" destination="RDW-bD-rSo" id="zxd-fD-KiJ"/>
