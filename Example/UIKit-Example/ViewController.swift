@@ -12,11 +12,6 @@ import WebKit
 class ViewController: BaseViewController {
     private var challengeShown: Bool = false
 
-    // Phone input UI elements - connected from storyboard
-    @IBOutlet weak var phoneTextField: UITextField!
-    @IBOutlet weak var phoneModeSwitch: UISwitch!
-    @IBOutlet weak var phoneModeLabel: UILabel!
-
     @IBAction private func didPressVerifyButton(button: UIButton) {
         // Check if we should use verify params
         if let phoneText = phoneTextField.text, !phoneText.isEmpty {
@@ -53,29 +48,6 @@ class ViewController: BaseViewController {
         self.challengeShown = false
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupPhoneInputUI()
-    }
-
-    private func setupPhoneInputUI() {
-        // Configure initial state
-        phoneModeLabel.text = "Prefix"
-        phoneTextField.placeholder = "Enter prefix (e.g., 44)"
-        phoneTextField.keyboardType = .numberPad
-    }
-
-    @IBAction private func phoneModeChanged(_ sender: UISwitch) {
-        if phoneModeSwitch.isOn {
-            phoneModeLabel.text = "Phone"
-            phoneTextField.placeholder = "Enter phone (e.g., +1234567890)"
-            phoneTextField.keyboardType = .phonePad
-        } else {
-            phoneModeLabel.text = "Prefix"
-            phoneTextField.placeholder = "Enter prefix (e.g., 44)"
-            phoneTextField.keyboardType = .numberPad
-        }
-    }
 
     override func setupHCaptcha() {
         // swiftlint:disable:next force_try

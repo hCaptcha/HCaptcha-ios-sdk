@@ -214,6 +214,24 @@ class HCaptcha__Tests: XCTestCase {
         wait(for: [exp], timeout: TestTimeouts.standard)
     }
 
+    func test__validate__withVerifyParams__rqdata() {
+        // Given
+        let exp = expectation(description: "validate with rqdata")
+        let rqdata = "test-rqdata-string"
+        let verifyParams = HCaptchaVerifyParams(rqdata: rqdata)
+        let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager(messageBody: "{token: \"test_token\"}"))
+
+        // When
+        let view = UIApplication.shared.windows.first?.rootViewController?.view
+        hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
+            // Then
+            XCTAssertEqual(result.token, "test_token")
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+
     func test__validate__withVerifyParams__resetOnErrorFalse() {
         // Given
         let exp = expectation(description: "validate with resetOnError false")

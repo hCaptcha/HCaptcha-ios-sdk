@@ -101,6 +101,8 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
     let jsSrc: URL
 
     /// Custom supplied challenge data
+    /// - warning: Deprecated. Use `rqdata` in `HCaptchaVerifyParams` instead.
+    @available(*, deprecated, message: "Use rqdata in HCaptchaVerifyParams instead")
     let rqdata: String?
 
     /// Enable / Disable sentry error reporting.

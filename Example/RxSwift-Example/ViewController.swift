@@ -15,47 +15,57 @@ import WebKit
 class ViewController: BaseViewController {
     var disposeBag = DisposeBag()
 
-    // Phone input UI elements - connected from storyboard
-    @IBOutlet weak var phoneTextField: UITextField!
-    @IBOutlet weak var phoneModeSwitch: UISwitch!
-    @IBOutlet weak var phoneModeLabel: UILabel!
-
     @IBAction private func didPressVerifyButton(button: UIButton) {
         disposeBag = DisposeBag()
+        setupLoadingObservable()
+        let validate = createValidateObservable()
+        setupUIBindings(validate: validate)
+        setupResetButton()
+    }
 
+    private func setupLoadingObservable() {
         hcaptcha.rx.didFinishLoading
             .debug("did finish loading")
             .subscribe()
             .disposed(by: disposeBag)
+    }
 
-        // Create validate observable based on phone input
-        let validate: Observable<String>
+    private func createValidateObservable() -> Observable<String> {
         if let phoneText = phoneTextField.text, !phoneText.isEmpty {
-            let verifyParams: HCaptchaVerifyParams
-            if phoneModeSwitch.isOn {
-                // Phone number mode
-                verifyParams = HCaptchaVerifyParams(phoneNumber: phoneText)
-            } else {
-                // Phone prefix mode
-                verifyParams = HCaptchaVerifyParams(phonePrefix: phoneText)
-            }
-
-            validate = hcaptcha.rx.validate(on: view, verifyParams: verifyParams)
-                .catch { error in
-                    return .just("Error \(error)")
-                }
-                .debug("validate with phone params")
-                .share()
+            return createPhoneValidateObservable(phoneText: phoneText)
         } else {
-            // Regular validation without phone params
-            validate = hcaptcha.rx.validate(on: view, resetOnError: false)
-                .catch { error in
-                    return .just("Error \(error)")
-                }
-                .debug("validate")
-                .share()
+            return createRegularValidateObservable()
+        }
+    }
+
+    private func createPhoneValidateObservable(phoneText: String) -> Observable<String> {
+        let verifyParams: HCaptchaVerifyParams
+        if phoneModeSwitch.isOn {
+            // Phone number mode
+            verifyParams = HCaptchaVerifyParams(phoneNumber: phoneText, rqdata: "some_rq")
+        } else {
+            // Phone prefix mode
+            verifyParams = HCaptchaVerifyParams(phonePrefix: phoneText)
         }
 
+        return hcaptcha.rx.validate(on: view, verifyParams: verifyParams)
+            .catch { error in
+                return .just("Error \(error)")
+            }
+            .debug("validate with phone params")
+            .share()
+    }
+
+    private func createRegularValidateObservable() -> Observable<String> {
+        return hcaptcha.rx.validate(on: view, resetOnError: false)
+            .catch { error in
+                return .just("Error \(error)")
+            }
+            .debug("validate")
+            .share()
+    }
+
+    private func setupUIBindings(validate: Observable<String>) {
         let isLoading = validate
             .map { _ in false }
             .startWith(true)
@@ -86,7 +96,9 @@ class ViewController: BaseViewController {
         validate
             .bind(to: label.rx.text)
             .disposed(by: disposeBag)
+    }
 
+    private func setupResetButton() {
         resetButton.rx.tap
             .subscribe(onNext: { [weak hcaptcha] _ in
                 hcaptcha?.reset()
@@ -94,29 +106,6 @@ class ViewController: BaseViewController {
             .disposed(by: disposeBag)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupPhoneInputUI()
-    }
-
-    private func setupPhoneInputUI() {
-        // Configure initial state
-        phoneModeLabel.text = "Prefix"
-        phoneTextField.placeholder = "Enter phone prefix (e.g., 44)"
-        phoneTextField.keyboardType = .numberPad
-    }
-
-    @IBAction private func phoneModeChanged(_ sender: UISwitch) {
-        if phoneModeSwitch.isOn {
-            phoneModeLabel.text = "Phone"
-            phoneTextField.placeholder = "Enter phone number (e.g., +1234567890)"
-            phoneTextField.keyboardType = .phonePad
-        } else {
-            phoneModeLabel.text = "Prefix"
-            phoneTextField.placeholder = "Enter phone prefix (e.g., 44)"
-            phoneTextField.keyboardType = .numberPad
-        }
-    }
 
     override func setupHCaptcha() {
         // swiftlint:disable:next force_try

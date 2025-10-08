@@ -26,24 +26,40 @@ public class HCaptchaVerifyParams: NSObject {
     @objc public let phoneNumber: String?
 
     /**
+     Optional request data string to be passed to hCaptcha.
+     */
+    @objc public let rqdata: String?
+
+    /**
      If HCaptcha should be reset if it errors. Defaults to `true`.
      */
     @objc public let resetOnError: Bool
 
     /**
      - parameters:
-         - phonePrefix: Optional phone country calling code (without '+'), e.g., "44"
-         - phoneNumber: Optional full phone number in E.164 or local format
-         - resetOnError: If HCaptcha should be reset if it errors. Defaults to `true`
+     - phonePrefix: Optional phone country calling code (without '+'), e.g., "44"
+     - phoneNumber: Optional full phone number in E.164 or local format
+     - rqdata: Optional request data string to be passed to hCaptcha
+     - resetOnError: If HCaptcha should be reset if it errors. Defaults to `true`
 
      Initializes HCaptchaVerifyParams with the given parameters.
      */
     @objc
-    public init(phonePrefix: String? = nil, phoneNumber: String? = nil, resetOnError: Bool = true) {
+    public init(phonePrefix: String?,
+                phoneNumber: String?,
+                rqdata: String?,
+                resetOnErr: Bool) {
         self.phonePrefix = phonePrefix
         self.phoneNumber = phoneNumber
-        self.resetOnError = resetOnError
-        super.init()
+        self.rqdata = rqdata
+        self.resetOnError = resetOnErr
+    }
+
+    public convenience init(phonePrefix: String? = nil,
+                            phoneNumber: String? = nil,
+                            rqdata: String? = nil,
+                            resetOnError: Bool = true) {
+        self.init(phonePrefix: phonePrefix, phoneNumber: phoneNumber, rqdata: rqdata, resetOnErr: resetOnError)
     }
 
     /**
@@ -57,6 +73,9 @@ public class HCaptchaVerifyParams: NSObject {
         }
         if let phoneNumber = phoneNumber {
             dict["phoneNumber"] = phoneNumber
+        }
+        if let rqdata = rqdata {
+            dict["rqdata"] = rqdata
         }
         dict["resetOnError"] = resetOnError
         return dict

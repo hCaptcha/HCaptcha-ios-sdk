@@ -53,30 +53,22 @@ struct HCaptchaHtml {
                 window.webkit.messageHandlers.hcaptcha.postMessage(value);
               };
 
-              var getExecuteOpts = function() {
-                var opts;
-                var rqdata = "${rqdata}";
-                if (rqdata) {
-                  opts = {'rqdata': rqdata};
-                }
-                return opts;
-              };
-
               console.log = function(message) {
                 post({ log: message });
               };
 
               var setVerifyParams = function(params) {
+                console.log("setting verify params:", params);
                 try {
-                  console.log("setting verify params:", params);
-
                   var phone = params.phoneNumber || params.mfa_phone;
                   var prefix = params.phonePrefix || params.mfa_phoneprefix;
+                  var rqdata = params.rqdata || "${rqdata}";
 
-                  if (phone || prefix) {
+                  if (phone || prefix || rqdata) {
                     var data = {};
                     if (phone) data.mfa_phone = phone;
                     if (prefix) data.mfa_phoneprefix = prefix;
+                    if (rqdata) data.rqdata = rqdata;
 
                     if (window.hCaptchaID) {
                       hcaptcha.setData(window.hCaptchaID, data);
@@ -88,12 +80,17 @@ struct HCaptchaHtml {
                 }
               };
 
-              var execute = function() {
+              var execute = function(verifyParams) {
                 console.log("challenge executing");
 
                 try {
+                  // Set verify params if provided
+                  if (verifyParams) {
+                    setVerifyParams(verifyParams);
+                  }
+
                   if ("${size}" === 'invisible') {
-                    hcaptcha.execute(getExecuteOpts());
+                    hcaptcha.execute();
                   } else {
                     post({ action: "showHCaptcha" });
                   }

@@ -63,6 +63,40 @@ class HCaptchaVerifyParams__Tests: XCTestCase {
         XCTAssertTrue(params.resetOnError)
     }
 
+    func test__init__withRqdata() {
+        // Given
+        let rqdata = "test-rqdata-string"
+
+        // When
+        let params = HCaptchaVerifyParams(rqdata: rqdata)
+
+        // Then
+        XCTAssertNil(params.phonePrefix)
+        XCTAssertNil(params.phoneNumber)
+        XCTAssertEqual(params.rqdata, rqdata)
+        XCTAssertTrue(params.resetOnError)
+    }
+
+    func test__init__withAllValues() {
+        // Given
+        let phonePrefix = "44"
+        let phoneNumber = "1234567890"
+        let rqdata = "test-rqdata-string"
+        let resetOnError = false
+
+        // When
+        let params = HCaptchaVerifyParams(phonePrefix: phonePrefix,
+                                         phoneNumber: phoneNumber,
+                                         rqdata: rqdata,
+                                         resetOnError: resetOnError)
+
+        // Then
+        XCTAssertEqual(params.phonePrefix, phonePrefix)
+        XCTAssertEqual(params.phoneNumber, phoneNumber)
+        XCTAssertEqual(params.rqdata, rqdata)
+        XCTAssertFalse(params.resetOnError)
+    }
+
     func test__init__withResetOnError() {
         // Given
         let phonePrefix = "44"
@@ -77,20 +111,6 @@ class HCaptchaVerifyParams__Tests: XCTestCase {
         XCTAssertFalse(params.resetOnError)
     }
 
-    func test__init__withAllValues() {
-        // Given
-        let phonePrefix = "44"
-        let phoneNumber = "1234567890"
-        let resetOnError = false
-
-        // When
-        let params = HCaptchaVerifyParams(phonePrefix: phonePrefix, phoneNumber: phoneNumber, resetOnError: resetOnError)
-
-        // Then
-        XCTAssertEqual(params.phonePrefix, phonePrefix)
-        XCTAssertEqual(params.phoneNumber, phoneNumber)
-        XCTAssertFalse(params.resetOnError)
-    }
 
     // MARK: - toDictionary Tests
 
@@ -98,8 +118,12 @@ class HCaptchaVerifyParams__Tests: XCTestCase {
         // Given
         let phonePrefix = "44"
         let phoneNumber = "1234567890"
+        let rqdata = "test-rqdata"
         let resetOnError = false
-        let params = HCaptchaVerifyParams(phonePrefix: phonePrefix, phoneNumber: phoneNumber, resetOnError: resetOnError)
+        let params = HCaptchaVerifyParams(phonePrefix: phonePrefix,
+                                         phoneNumber: phoneNumber,
+                                         rqdata: rqdata,
+                                         resetOnError: resetOnError)
 
         // When
         let dict = params.toDictionary()
@@ -107,8 +131,9 @@ class HCaptchaVerifyParams__Tests: XCTestCase {
         // Then
         XCTAssertEqual(dict["phonePrefix"] as? String, phonePrefix)
         XCTAssertEqual(dict["phoneNumber"] as? String, phoneNumber)
+        XCTAssertEqual(dict["rqdata"] as? String, rqdata)
         XCTAssertEqual(dict["resetOnError"] as? Bool, resetOnError)
-        XCTAssertEqual(dict.count, 3)
+        XCTAssertEqual(dict.count, 4)
     }
 
     func test__toDictionary__withPartialValues() {
@@ -156,14 +181,35 @@ class HCaptchaVerifyParams__Tests: XCTestCase {
         XCTAssertEqual(dict.count, 2)
     }
 
+    func test__toDictionary__withOnlyRqdata() {
+        // Given
+        let rqdata = "test-rqdata-string"
+        let resetOnError = false
+        let params = HCaptchaVerifyParams(rqdata: rqdata, resetOnError: resetOnError)
+
+        // When
+        let dict = params.toDictionary()
+
+        // Then
+        XCTAssertNil(dict["phonePrefix"])
+        XCTAssertNil(dict["phoneNumber"])
+        XCTAssertEqual(dict["rqdata"] as? String, rqdata)
+        XCTAssertEqual(dict["resetOnError"] as? Bool, resetOnError)
+        XCTAssertEqual(dict.count, 2)
+    }
+
     // MARK: - toJSONString Tests
 
     func test__toJSONString__validJSON() {
         // Given
         let phonePrefix = "44"
         let phoneNumber = "1234567890"
+        let rqdata = "test-rqdata"
         let resetOnError = false
-        let params = HCaptchaVerifyParams(phonePrefix: phonePrefix, phoneNumber: phoneNumber, resetOnError: resetOnError)
+        let params = HCaptchaVerifyParams(phonePrefix: phonePrefix,
+                                         phoneNumber: phoneNumber,
+                                         rqdata: rqdata,
+                                         resetOnError: resetOnError)
 
         // When
         let jsonString = params.toJSONString()
@@ -172,10 +218,17 @@ class HCaptchaVerifyParams__Tests: XCTestCase {
         XCTAssertNotNil(jsonString)
 
         // Verify JSON structure
-        let data = jsonString!.data(using: .utf8)!
-        let json = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
+        guard let data = jsonString?.data(using: .utf8) else {
+            XCTFail("Failed to convert to data")
+            return
+        }
+        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            XCTFail("Failed to parse JSON")
+            return
+        }
         XCTAssertEqual(json["phonePrefix"] as? String, phonePrefix)
         XCTAssertEqual(json["phoneNumber"] as? String, phoneNumber)
+        XCTAssertEqual(json["rqdata"] as? String, rqdata)
         XCTAssertEqual(json["resetOnError"] as? Bool, resetOnError)
     }
 
@@ -190,8 +243,14 @@ class HCaptchaVerifyParams__Tests: XCTestCase {
         XCTAssertNotNil(jsonString)
 
         // Verify JSON structure
-        let data = jsonString!.data(using: .utf8)!
-        let json = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
+        guard let data = jsonString?.data(using: .utf8) else {
+            XCTFail("Failed to convert to data")
+            return
+        }
+        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            XCTFail("Failed to parse JSON")
+            return
+        }
         XCTAssertNil(json["phonePrefix"])
         XCTAssertNil(json["phoneNumber"])
         XCTAssertEqual(json["resetOnError"] as? Bool, true)
@@ -209,8 +268,14 @@ class HCaptchaVerifyParams__Tests: XCTestCase {
         XCTAssertNotNil(jsonString)
 
         // Verify JSON structure
-        let data = jsonString!.data(using: .utf8)!
-        let json = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
+        guard let data = jsonString?.data(using: .utf8) else {
+            XCTFail("Failed to convert to data")
+            return
+        }
+        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            XCTFail("Failed to parse JSON")
+            return
+        }
         XCTAssertEqual(json["phonePrefix"] as? String, phonePrefix)
         XCTAssertNil(json["phoneNumber"])
         XCTAssertEqual(json["resetOnError"] as? Bool, true)
@@ -256,8 +321,14 @@ class HCaptchaVerifyParams__Tests: XCTestCase {
         XCTAssertNotNil(jsonString)
 
         // Verify JSON structure
-        let data = jsonString!.data(using: .utf8)!
-        let json = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
+        guard let data = jsonString?.data(using: .utf8) else {
+            XCTFail("Failed to convert to data")
+            return
+        }
+        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            XCTFail("Failed to parse JSON")
+            return
+        }
         XCTAssertEqual(json["phonePrefix"] as? String, "")
         XCTAssertEqual(json["phoneNumber"] as? String, "")
         XCTAssertEqual(json["resetOnError"] as? Bool, true)
@@ -290,8 +361,14 @@ class HCaptchaVerifyParams__Tests: XCTestCase {
         XCTAssertNotNil(jsonString)
 
         // Verify JSON structure
-        let data = jsonString!.data(using: .utf8)!
-        let json = try! JSONSerialization.jsonObject(with: data) as! [String: Any]
+        guard let data = jsonString?.data(using: .utf8) else {
+            XCTFail("Failed to convert to data")
+            return
+        }
+        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            XCTFail("Failed to parse JSON")
+            return
+        }
         XCTAssertEqual(json["phonePrefix"] as? String, phonePrefix)
         XCTAssertEqual(json["phoneNumber"] as? String, phoneNumber)
         XCTAssertEqual(json["resetOnError"] as? Bool, true)
