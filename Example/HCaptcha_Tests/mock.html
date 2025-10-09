@@ -27,10 +27,22 @@
           window.webkit.messageHandlers.hcaptcha.postMessage(value);
       };
 
-      var execute = function() {
+      var execute = function(verifyParams) {
           if (shouldFail) {
               post({error: 15}); // .sessionTimeout
           } else {
+              // Validate verify params if provided
+              if (verifyParams) {
+                  var validationError = validateVerifyParams(verifyParams);
+                  if (validationError) {
+                      post({error: validationError});
+                      return;
+                  }
+
+                  // Log verify params for testing
+                  post({"log": "verifyParams: " + JSON.stringify(verifyParams)});
+              }
+
               if (rqdata) {
                   post({"log": rqdata});
               }
@@ -46,6 +58,53 @@
                       post({ action: "onOpen" });
                   }, 100);
               }
+          }
+      };
+
+      var validateVerifyParams = function(params) {
+          try {
+              // Check if params is an object
+              if (typeof params !== 'object' || params === null) {
+                  return 34; // verifyParamsParseError
+              }
+
+              // Validate phonePrefix if present
+              if (params.phonePrefix !== undefined) {
+                  if (typeof params.phonePrefix !== 'string') {
+                      return 34; // verifyParamsParseError
+                  }
+                  // Basic validation: should be 1-4 digits, optionally with + prefix
+                  var phonePrefixRegex = /^\+?[1-9]\d{0,3}$/;
+                  if (!phonePrefixRegex.test(params.phonePrefix)) {
+                      return 34; // verifyParamsParseError
+                  }
+              }
+
+              // Validate phoneNumber if present
+              if (params.phoneNumber !== undefined) {
+                  if (typeof params.phoneNumber !== 'string') {
+                      return 34; // verifyParamsParseError
+                  }
+                  // Basic validation: should be 7-15 digits, optionally with + prefix
+                  var phoneNumberRegex = /^\+?[1-9]\d{6,14}$/;
+                  if (!phoneNumberRegex.test(params.phoneNumber)) {
+                      return 34; // verifyParamsParseError
+                  }
+              }
+
+              // Validate resetOnError if present
+              if (params.resetOnError !== undefined && typeof params.resetOnError !== 'boolean') {
+                  return 34; // verifyParamsParseError
+              }
+
+              // At least one phone value should be present if verifyParams is provided
+              if (!params.phonePrefix && !params.phoneNumber) {
+                  return 34; // verifyParamsParseError
+              }
+
+              return null; // No validation errors
+          } catch (e) {
+              return 34; // verifyParamsParseError
           }
       };
 

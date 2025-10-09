@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		43C25BC32E3FC51600AB0A36 /* TestTimeouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C25BC22E3FC51600AB0A36 /* TestTimeouts.swift */; };
 		43C25BC42E3FC51600AB0A36 /* TestTimeouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C25BC22E3FC51600AB0A36 /* TestTimeouts.swift */; };
+		43DC08122E95B131003839A5 /* HCaptchaVerifyParams__Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08112E95B131003839A5 /* HCaptchaVerifyParams__Tests.swift */; };
 		50AC78913CD85915C922C6E7 /* Pods_HCaptcha_RxSwift_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A23EFF913417B4D093248E /* Pods_HCaptcha_RxSwift_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -98,6 +99,7 @@
 		15CF87684AC2F129E32CC71E /* Pods-HCaptcha_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_Example.debug.xcconfig"; path = "Target Support Files/Pods-HCaptcha_Example/Pods-HCaptcha_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		1CF662E463D56A0421D8A84A /* Pods-HCaptcha_RxSwift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_RxSwift_Example.debug.xcconfig"; path = "Target Support Files/Pods-HCaptcha_RxSwift_Example/Pods-HCaptcha_RxSwift_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		43C25BC22E3FC51600AB0A36 /* TestTimeouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTimeouts.swift; sourceTree = "<group>"; };
+		43DC08112E95B131003839A5 /* HCaptchaVerifyParams__Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaVerifyParams__Tests.swift; sourceTree = "<group>"; };
 		4D10E8098B5018907486C310 /* Pods_HCaptcha_UIKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HCaptcha_UIKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* HCaptcha_RxSwift_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_RxSwift_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 		F2ECCF821E9FC4AC0097B199 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				43DC08112E95B131003839A5 /* HCaptchaVerifyParams__Tests.swift */,
 				F2ECCF891E9FCEFE0097B199 /* HCaptchaDecoder__Tests.swift */,
 				F2ECCF8D1E9FE68C0097B199 /* HCaptchaWebViewManager__Tests.swift */,
 				9C5125BD26CB9A3A0094B023 /* HCaptchaWebViewManager__HTML__Tests.swift */,
@@ -999,6 +1002,7 @@
 				F2ECCF8E1E9FE68C0097B199 /* HCaptchaWebViewManager__Tests.swift in Sources */,
 				F231B3971FEC325A00F82943 /* DispatchQueue__Tests.swift in Sources */,
 				E64F97912895CD250044257C /* HCaptcha__Bench.swift in Sources */,
+				43DC08122E95B131003839A5 /* HCaptchaVerifyParams__Tests.swift in Sources */,
 				F231B39F1FED4A8C00F82943 /* HCaptchaDecoder+Helper.swift in Sources */,
 				F2E2685E1F7AEE3400CD876D /* HCaptcha__Tests.swift in Sources */,
 				F2ECCF931EA009360097B199 /* HCaptcha+Rx__Tests.swift in Sources */,

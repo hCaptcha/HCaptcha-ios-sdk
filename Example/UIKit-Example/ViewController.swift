@@ -13,19 +13,41 @@ class ViewController: BaseViewController {
     private var challengeShown: Bool = false
 
     @IBAction private func didPressVerifyButton(button: UIButton) {
-        hcaptcha.validate(on: self.view) { result in
-            do {
-                self.label.text = try result.dematerialize()
-            } catch let error as HCaptchaError {
-                self.label.text = error.description
-            } catch let error {
-                self.label.text = String(describing: error)
+        // Check if we should use verify params
+        if let phoneText = phoneTextField.text, !phoneText.isEmpty {
+            let verifyParams: HCaptchaVerifyParams
+            if phoneModeSwitch.isOn {
+                // Phone number mode
+                verifyParams = HCaptchaVerifyParams(phoneNumber: phoneText)
+            } else {
+                // Phone prefix mode
+                verifyParams = HCaptchaVerifyParams(phonePrefix: phoneText)
             }
-            let subview = self.view.viewWithTag(Constants.webViewTag)
-            subview?.removeFromSuperview()
-            self.challengeShown = false
+
+            hcaptcha.validate(on: self.view, verifyParams: verifyParams) { result in
+                self.handleResult(result)
+            }
+        } else {
+            // Regular validation without phone params
+            hcaptcha.validate(on: self.view) { result in
+                self.handleResult(result)
+            }
         }
     }
+
+    private func handleResult(_ result: HCaptchaResult) {
+        do {
+            self.label.text = try result.dematerialize()
+        } catch let error as HCaptchaError {
+            self.label.text = error.description
+        } catch let error {
+            self.label.text = String(describing: error)
+        }
+        let subview = self.view.viewWithTag(Constants.webViewTag)
+        subview?.removeFromSuperview()
+        self.challengeShown = false
+    }
+
 
     override func setupHCaptcha() {
         // swiftlint:disable:next force_try

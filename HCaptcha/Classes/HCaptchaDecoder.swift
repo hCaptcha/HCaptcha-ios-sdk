@@ -141,6 +141,9 @@ fileprivate extension HCaptchaDecoder.Result {
         case 30:
             return .error(.challengeClosed)
 
+        case 34:
+            return .error(.verifyParamsParseError)
+
         default:
             return .error(.wrongMessageFormat)
         }

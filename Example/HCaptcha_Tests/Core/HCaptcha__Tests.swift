@@ -156,6 +156,180 @@ class HCaptcha__Tests: XCTestCase {
                                       locale: Locale.current,
                                       size: .normal))
     }
+
+    // MARK: - Verify Params Tests
+
+    func test__validate__withVerifyParams__phonePrefix() {
+        // Given
+        let exp = expectation(description: "validate with phone prefix")
+        let phonePrefix = "44"
+        let verifyParams = HCaptchaVerifyParams(phonePrefix: phonePrefix)
+        let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager(messageBody: "{token: \"test_token\"}"))
+
+        // When
+        let view = UIApplication.shared.windows.first?.rootViewController?.view
+        hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
+            // Then
+            XCTAssertEqual(result.token, "test_token")
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+
+    func test__validate__withVerifyParams__phoneNumber() {
+        // Given
+        let exp = expectation(description: "validate with phone number")
+        let phoneNumber = "+1234567890"
+        let verifyParams = HCaptchaVerifyParams(phoneNumber: phoneNumber)
+        let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager(messageBody: "{token: \"test_token\"}"))
+
+        // When
+        let view = UIApplication.shared.windows.first?.rootViewController?.view
+        hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
+            // Then
+            XCTAssertEqual(result.token, "test_token")
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+
+    func test__validate__withVerifyParams__bothPhoneValues() {
+        // Given
+        let exp = expectation(description: "validate with both phone values")
+        let phonePrefix = "44"
+        let phoneNumber = "1234567890"
+        let verifyParams = HCaptchaVerifyParams(phonePrefix: phonePrefix, phoneNumber: phoneNumber)
+        let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager(messageBody: "{token: \"test_token\"}"))
+
+        // When
+        let view = UIApplication.shared.windows.first?.rootViewController?.view
+        hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
+            // Then
+            XCTAssertEqual(result.token, "test_token")
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+
+    func test__validate__withVerifyParams__rqdata() {
+        // Given
+        let exp = expectation(description: "validate with rqdata")
+        let rqdata = "test-rqdata-string"
+        let verifyParams = HCaptchaVerifyParams(rqdata: rqdata)
+        let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager(messageBody: "{token: \"test_token\"}"))
+
+        // When
+        let view = UIApplication.shared.windows.first?.rootViewController?.view
+        hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
+            // Then
+            XCTAssertEqual(result.token, "test_token")
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+
+    func test__validate__withVerifyParams__resetOnErrorFalse() {
+        // Given
+        let exp = expectation(description: "validate with resetOnError false")
+        let phonePrefix = "44"
+        let verifyParams = HCaptchaVerifyParams(phonePrefix: phonePrefix, resetOnError: false)
+        let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager(messageBody: "{token: \"test_token\"}"))
+
+        // When
+        let view = UIApplication.shared.windows.first?.rootViewController?.view
+        hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
+            // Then
+            XCTAssertEqual(result.token, "test_token")
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+
+    func test__validate__withVerifyParams__nilValues() {
+        // Given
+        let exp = expectation(description: "validate with nil phone values")
+        let verifyParams = HCaptchaVerifyParams()
+        let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager(messageBody: "{token: \"test_token\"}"))
+
+        // When
+        let view = UIApplication.shared.windows.first?.rootViewController?.view
+        hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
+            // Then
+            XCTAssertEqual(result.token, "test_token")
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+
+    func test__validate__withVerifyParams__callsManagerCorrectly() {
+        // Given
+        let exp = expectation(description: "manager receives verify params")
+        let phonePrefix = "44"
+        let verifyParams = HCaptchaVerifyParams(phonePrefix: phonePrefix)
+
+        // Create a mock manager that we can inspect
+        class MockManager: HCaptchaWebViewManager {
+            var receivedVerifyParams: HCaptchaVerifyParams?
+            var receivedResetOnError: Bool?
+
+            override func validate(on view: UIView?) {
+                receivedVerifyParams = self.verifyParams
+                receivedResetOnError = self.shouldResetOnError
+                super.validate(on: view)
+            }
+        }
+
+        let mockManager = MockManager(messageBody: "{token: \"test_token\"}")
+        let hcaptcha = HCaptcha(manager: mockManager)
+
+        // When
+        let view = UIApplication.shared.windows.first?.rootViewController?.view
+        hcaptcha.validate(on: view, verifyParams: verifyParams) { _ in
+            // Then
+            XCTAssertEqual(mockManager.receivedVerifyParams?.phonePrefix, phonePrefix)
+            XCTAssertTrue(mockManager.receivedResetOnError ?? false)
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+
+    func test__validate__withVerifyParams__setsResetOnError() {
+        // Given
+        let exp = expectation(description: "resetOnError is set correctly")
+        let phonePrefix = "44"
+        let resetOnError = false
+        let verifyParams = HCaptchaVerifyParams(phonePrefix: phonePrefix, resetOnError: resetOnError)
+
+        // Create a mock manager that we can inspect
+        class MockManager: HCaptchaWebViewManager {
+            var receivedResetOnError: Bool?
+
+            override func validate(on view: UIView?) {
+                receivedResetOnError = self.shouldResetOnError
+                super.validate(on: view)
+            }
+        }
+
+        let mockManager = MockManager(messageBody: "{token: \"test_token\"}")
+        let hcaptcha = HCaptcha(manager: mockManager)
+
+        // When
+        let view = UIApplication.shared.windows.first?.rootViewController?.view
+        hcaptcha.validate(on: view, verifyParams: verifyParams) { _ in
+            // Then
+            XCTAssertEqual(mockManager.receivedResetOnError, resetOnError)
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: TestTimeouts.standard)
+    }
 }
 
 

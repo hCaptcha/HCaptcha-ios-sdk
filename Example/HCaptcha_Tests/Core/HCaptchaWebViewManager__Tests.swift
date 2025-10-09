@@ -645,4 +645,173 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         wait(for: [exp1, exp2], timeout: TestTimeouts.standard)
     }
+
+    // MARK: - Verify Params Tests
+
+    func test__JSCommand_execute__withVerifyParams() {
+        // Given
+        let phonePrefix = "44"
+        let phoneNumber = "1234567890"
+        let verifyParams = HCaptchaVerifyParams(phonePrefix: phonePrefix, phoneNumber: phoneNumber, resetOnError: false)
+        let command = HCaptchaWebViewManager.JSCommand.execute(verifyParams)
+
+        // When
+        let rawValue = command.rawValue
+
+        // Then
+        XCTAssertTrue(rawValue.contains("execute("))
+        XCTAssertTrue(rawValue.contains("\"phonePrefix\":\"44\""))
+        XCTAssertTrue(rawValue.contains("\"phoneNumber\":\"1234567890\""))
+        XCTAssertTrue(rawValue.contains("\"resetOnError\":false"))
+        XCTAssertTrue(rawValue.hasSuffix(");"))
+    }
+
+    func test__JSCommand_execute__withNilVerifyParams() {
+        // Given
+        let command = HCaptchaWebViewManager.JSCommand.execute(nil)
+
+        // When
+        let rawValue = command.rawValue
+
+        // Then
+        XCTAssertEqual(rawValue, "execute();")
+    }
+
+    func test__JSCommand_execute__withPhonePrefixOnly() {
+        // Given
+        let phonePrefix = "44"
+        let verifyParams = HCaptchaVerifyParams(phonePrefix: phonePrefix)
+        let command = HCaptchaWebViewManager.JSCommand.execute(verifyParams)
+
+        // When
+        let rawValue = command.rawValue
+
+        // Then
+        XCTAssertTrue(rawValue.contains("execute("))
+        XCTAssertTrue(rawValue.contains("\"phonePrefix\":\"44\""))
+        XCTAssertTrue(rawValue.contains("\"resetOnError\":true"))
+        XCTAssertFalse(rawValue.contains("phoneNumber"))
+        XCTAssertTrue(rawValue.hasSuffix(");"))
+    }
+
+    func test__JSCommand_execute__withPhoneNumberOnly() {
+        // Given
+        let phoneNumber = "+1234567890"
+        let verifyParams = HCaptchaVerifyParams(phoneNumber: phoneNumber)
+        let command = HCaptchaWebViewManager.JSCommand.execute(verifyParams)
+
+        // When
+        let rawValue = command.rawValue
+
+        // Then
+        XCTAssertTrue(rawValue.contains("execute("))
+        XCTAssertTrue(rawValue.contains("\"phoneNumber\":\"+1234567890\""))
+        XCTAssertTrue(rawValue.contains("\"resetOnError\":true"))
+        XCTAssertFalse(rawValue.contains("phonePrefix"))
+        XCTAssertTrue(rawValue.hasSuffix(");"))
+    }
+
+    func test__validate__withVerifyParams__setsVerifyParams() {
+        // Given
+        let exp = expectation(description: "verify params are set correctly")
+        let phonePrefix = "44"
+        let phoneNumber = "1234567890"
+        let resetOnError = false
+        let verifyParams = HCaptchaVerifyParams(phonePrefix: phonePrefix,
+                                         phoneNumber: phoneNumber,
+                                         resetOnError: resetOnError)
+        let manager = HCaptchaWebViewManager(messageBody: "{token: \"test_token\"}")
+
+        // When
+        manager.verifyParams = verifyParams
+        manager.shouldResetOnError = resetOnError
+
+        // Then
+        XCTAssertEqual(manager.verifyParams?.phonePrefix, phonePrefix)
+        XCTAssertEqual(manager.verifyParams?.phoneNumber, phoneNumber)
+        XCTAssertEqual(manager.verifyParams?.resetOnError, resetOnError)
+        XCTAssertEqual(manager.shouldResetOnError, resetOnError)
+        exp.fulfill()
+
+        waitForExpectations(timeout: TestTimeouts.standard)
+    }
+
+    func test__validate__withVerifyParams__setsManagerProperties() {
+        // Given
+        let phonePrefix = "44"
+        let resetOnError = false
+        let verifyParams = HCaptchaVerifyParams(phonePrefix: phonePrefix,
+                                         resetOnError: resetOnError)
+        let manager = HCaptchaWebViewManager(messageBody: "{token: \"test_token\"}")
+
+        // When
+        manager.verifyParams = verifyParams
+        manager.shouldResetOnError = resetOnError
+
+        // Then
+        XCTAssertEqual(manager.verifyParams?.phonePrefix, phonePrefix)
+        XCTAssertEqual(manager.verifyParams?.resetOnError, resetOnError)
+        XCTAssertEqual(manager.shouldResetOnError, resetOnError)
+    }
+
+    func test__JSCommand_execute__withEmptyVerifyParams() {
+        // Given
+        let verifyParams = HCaptchaVerifyParams() // Empty params
+        let command = HCaptchaWebViewManager.JSCommand.execute(verifyParams)
+
+        // When
+        let rawValue = command.rawValue
+
+        // Then
+        XCTAssertTrue(rawValue.contains("execute("))
+        XCTAssertTrue(rawValue.contains("\"resetOnError\":true"))
+        XCTAssertFalse(rawValue.contains("phonePrefix"))
+        XCTAssertFalse(rawValue.contains("phoneNumber"))
+        XCTAssertTrue(rawValue.hasSuffix(");"))
+    }
+
+    func test__JSCommand_execute__withBothPhoneValues() {
+        // Given
+        let phonePrefix = "44"
+        let phoneNumber = "1234567890"
+        let verifyParams = HCaptchaVerifyParams(phonePrefix: phonePrefix, phoneNumber: phoneNumber, resetOnError: false)
+        let command = HCaptchaWebViewManager.JSCommand.execute(verifyParams)
+
+        // When
+        let rawValue = command.rawValue
+
+        // Then
+        XCTAssertTrue(rawValue.contains("execute("))
+        XCTAssertTrue(rawValue.contains("\"phonePrefix\":\"44\""))
+        XCTAssertTrue(rawValue.contains("\"phoneNumber\":\"1234567890\""))
+        XCTAssertTrue(rawValue.contains("\"resetOnError\":false"))
+        XCTAssertTrue(rawValue.hasSuffix(");"))
+    }
+
+    func test__JSCommand_execute__withRqdata() {
+        // Given
+        let rqdata = "test-rqdata-string"
+        let verifyParams = HCaptchaVerifyParams(rqdata: rqdata, resetOnError: false)
+        let command = HCaptchaWebViewManager.JSCommand.execute(verifyParams)
+
+        // When
+        let rawValue = command.rawValue
+
+        // Then
+        XCTAssertTrue(rawValue.contains("execute("))
+        XCTAssertTrue(rawValue.contains("\"rqdata\":\"test-rqdata-string\""))
+        XCTAssertTrue(rawValue.contains("\"resetOnError\":false"))
+        XCTAssertTrue(rawValue.hasSuffix(");"))
+    }
+
+    func test__JSCommand_reset() {
+        // Given
+        let command = HCaptchaWebViewManager.JSCommand.reset
+
+        // When
+        let rawValue = command.rawValue
+
+        // Then
+        XCTAssertEqual(rawValue, "reset();")
+    }
 }

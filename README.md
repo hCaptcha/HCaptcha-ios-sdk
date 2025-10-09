@@ -180,7 +180,6 @@ let hcaptcha = try? HCaptcha(
 
 Enterprise params like:
 
- - `rqdata` (string)
  - `reportapi` (string)
  - `assethost` (string)
  - `imghost` (string)
@@ -190,6 +189,8 @@ Enterprise params like:
 Can be passed via `HCaptcha(...)`
 
 Please see the [hCaptcha Enterprise documentation](https://docs.hcaptcha.com/enterprise/) for more details.
+
+**Note**: The `rqdata` parameter has been moved from `HCaptchaConfig` to `HCaptchaVerifyParams` for better API consistency. The old `rqdata` property in `HCaptchaConfig` is now deprecated, and will be removed in the next major version.
 
 ### Enabling the visible checkbox flow
 
@@ -246,11 +247,38 @@ Note that Enterprise customers have additional options: please contact support f
 
 By default the SDK will automatically fetch a new token upon expiry once you have requested a token via `validate`. This behavior can be adjusted by passing `resetOnError: false` to the `validate` call:
 
-```
+```swift
 hcaptcha.validate(on: view, resetOnError: false) { result in
-       ...
-   }
+    // Handle result
+}
 ```
+
+### MFA Phone Support
+
+The SDK supports phone prefix and phone number parameters for MFA (Multi-Factor Authentication) flows. You can pass these parameters when calling the `validate` method:
+
+```swift
+// Using phone prefix (country code without '+')
+let verifyParams = HCaptchaVerifyParams(phonePrefix: "44")
+hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
+    // Handle result
+}
+
+...
+
+// Using phone number (full E.164 format)
+let verifyParams = HCaptchaVerifyParams(phoneNumber: "+44123456789")
+hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
+    // Handle result
+}
+
+...
+
+hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
+    // Handle result
+}
+```
+
 
 ## Compiled size: impact on including in your app
 

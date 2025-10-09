@@ -17,19 +17,55 @@ class ViewController: BaseViewController {
 
     @IBAction private func didPressVerifyButton(button: UIButton) {
         disposeBag = DisposeBag()
+        setupLoadingObservable()
+        let validate = createValidateObservable()
+        setupUIBindings(validate: validate)
+        setupResetButton()
+    }
 
+    private func setupLoadingObservable() {
         hcaptcha.rx.didFinishLoading
             .debug("did finish loading")
             .subscribe()
             .disposed(by: disposeBag)
+    }
 
-        let validate = hcaptcha.rx.validate(on: view, resetOnError: false)
+    private func createValidateObservable() -> Observable<String> {
+        if let phoneText = phoneTextField.text, !phoneText.isEmpty {
+            return createPhoneValidateObservable(phoneText: phoneText)
+        } else {
+            return createRegularValidateObservable()
+        }
+    }
+
+    private func createPhoneValidateObservable(phoneText: String) -> Observable<String> {
+        let verifyParams: HCaptchaVerifyParams
+        if phoneModeSwitch.isOn {
+            // Phone number mode
+            verifyParams = HCaptchaVerifyParams(phoneNumber: phoneText, rqdata: "some_rq")
+        } else {
+            // Phone prefix mode
+            verifyParams = HCaptchaVerifyParams(phonePrefix: phoneText)
+        }
+
+        return hcaptcha.rx.validate(on: view, verifyParams: verifyParams)
+            .catch { error in
+                return .just("Error \(error)")
+            }
+            .debug("validate with phone params")
+            .share()
+    }
+
+    private func createRegularValidateObservable() -> Observable<String> {
+        return hcaptcha.rx.validate(on: view, resetOnError: false)
             .catch { error in
                 return .just("Error \(error)")
             }
             .debug("validate")
             .share()
+    }
 
+    private func setupUIBindings(validate: Observable<String>) {
         let isLoading = validate
             .map { _ in false }
             .startWith(true)
@@ -60,13 +96,16 @@ class ViewController: BaseViewController {
         validate
             .bind(to: label.rx.text)
             .disposed(by: disposeBag)
+    }
 
+    private func setupResetButton() {
         resetButton.rx.tap
             .subscribe(onNext: { [weak hcaptcha] _ in
                 hcaptcha?.reset()
             })
             .disposed(by: disposeBag)
     }
+
 
     override func setupHCaptcha() {
         // swiftlint:disable:next force_try

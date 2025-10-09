@@ -1,3 +1,7 @@
+# 2.10.0
+
+- Feat: Add phone prefix/number support for MFA flows
+
 # 2.9.6
 
 - Feat: upgrade RxSwift to 6.9.0

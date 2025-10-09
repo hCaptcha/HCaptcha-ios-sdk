@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F833B7F271DC69C00E4DAB2 /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */; };
 		1F833B80271DC69C00E4DAB2 /* RxSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		43DC08142E971586003839A5 /* HCaptchaVerifyParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08132E971586003839A5 /* HCaptchaVerifyParams.swift */; };
 		E614B37B2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E614B37A2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift */; };
 		E634944A2828856300130AC5 /* HCaptchaEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63494492828856300130AC5 /* HCaptchaEvent.swift */; };
 		E64C60082B7DFBE900D203F4 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E64C60072B7DFBE900D203F4 /* PrivacyInfo.xcprivacy */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
+		43DC08132E971586003839A5 /* HCaptchaVerifyParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaVerifyParams.swift; sourceTree = "<group>"; };
 		E614B37A2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HCaptchaWebViewManager+WKNavigationDelegate.swift"; sourceTree = "<group>"; };
 		E63494492828856300130AC5 /* HCaptchaEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaEvent.swift; sourceTree = "<group>"; };
 		E64C60072B7DFBE900D203F4 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				E65145E227786BDB0079668A /* HCaptchaConfig.swift */,
 				F24EA1D81F9683F5001DEC17 /* HCaptchaDecoder.swift */,
 				E6DB9EA727B15954008F0327 /* HCaptchaDebugInfo.swift */,
+				43DC08132E971586003839A5 /* HCaptchaVerifyParams.swift */,
 				F24EA1D91F9683F5001DEC17 /* HCaptchaWebViewManager.swift */,
 				E614B37A2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift */,
 				F24EA1DA1F9683F5001DEC17 /* String+Dict.swift */,
@@ -333,6 +336,7 @@
 				F2AE8614204F3B42002E28D7 /* HCaptchaResult.swift in Sources */,
 				F24EA1E61F968403001DEC17 /* HCaptcha.swift in Sources */,
 				F24EA1E31F968403001DEC17 /* HCaptchaWebViewManager.swift in Sources */,
+				43DC08142E971586003839A5 /* HCaptchaVerifyParams.swift in Sources */,
 				F24EA1E41F968403001DEC17 /* String+Dict.swift in Sources */,
 				F231B39A1FEC51C800F82943 /* DispatchQueue+Throttle.swift in Sources */,
 				E6DB9EA827B15954008F0327 /* HCaptchaDebugInfo.swift in Sources */,

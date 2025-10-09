@@ -35,19 +35,51 @@ public extension Reactive where Base: HCaptcha {
      - parameters:
         - view: The view that should present the webview.
         - resetOnError: If HCaptcha should be reset if it errors. Defaults to `true`
-     
+
      Starts the challenge validation uppon subscription.
 
      The stream's element is a String with the validation token.
 
      Sends `stop()` uppon disposal.
-     
+
      - See: `HCaptcha.validate(on:resetOnError:completion:)`
      - See: `HCaptcha.stop()`
      */
     func validate(on view: UIView, resetOnError: Bool = true) -> Observable<String> {
         return Single<String>.create { [weak base] single in
             base?.validate(on: view, resetOnError: resetOnError) { result in
+                do {
+                    single(.success(try result.dematerialize()))
+                } catch {
+                    single(.failure(error))
+                }
+            }
+
+            return Disposables.create { [weak base] in
+                base?.stop()
+            }
+        }
+        .asObservable()
+    }
+
+    /**
+     - parameters:
+        - view: The view that should present the webview.
+        - verifyParams: Parameters supplied at verification time (e.g., phone prefix/number for MFA flows).
+        - resetOnError: If HCaptcha should be reset if it errors. Defaults to `true`
+
+     Starts the challenge validation with verification parameters uppon subscription.
+
+     The stream's element is a String with the validation token.
+
+     Sends `stop()` uppon disposal.
+
+     - See: `HCaptcha.validate(on:verifyParams:completion:)`
+     - See: `HCaptcha.stop()`
+     */
+    func validate(on view: UIView, verifyParams: HCaptchaVerifyParams) -> Observable<String> {
+        return Single<String>.create { [weak base] single in
+            base?.validate(on: view, verifyParams: verifyParams) { result in
                 do {
                     single(.success(try result.dematerialize()))
                 } catch {
