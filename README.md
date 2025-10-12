@@ -279,6 +279,7 @@ hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
 }
 ```
 
+**Note**: If you update verify parameters and call `validate` a second time, call `reset()` before the second validation to ensure updated parameters are recognized by hCaptcha.
 
 ## Compiled size: impact on including in your app
 
