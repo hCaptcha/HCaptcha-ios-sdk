@@ -9,7 +9,7 @@ import WebKit
 /** Handles comunications with the webview containing the HCaptcha challenge.
  */
 internal class HCaptchaWebViewManager: NSObject {
-    enum JSCommand {
+    enum JSCommand: Equatable{
         case execute(HCaptchaVerifyParams? = nil)
         case reset
 
@@ -25,6 +25,15 @@ internal class HCaptchaWebViewManager: NSObject {
                 return "reset();"
             }
         }
+
+        static func == (lhs: HCaptchaWebViewManager.JSCommand, rhs: HCaptchaWebViewManager.JSCommand) -> Bool {
+            if case .execute(let lhsParams) = lhs, case .execute(let rhsParams) = rhs {
+                return lhsParams?.toJSONString() == rhsParams?.toJSONString()
+            } else {
+                return lhs.rawValue == rhs.rawValue
+            }
+        }
+
     }
 
     typealias Log = HCaptchaLogger
@@ -59,8 +68,6 @@ internal class HCaptchaWebViewManager: NSObject {
     /// The dispatch token used to ensure `configureWebView` is only called once.
     var configureWebViewDispatchToken = UUID()
 
-    /// If the HCaptcha should be reset when it errors
-    var shouldResetOnError = true
 
     /// Verification parameters (e.g., phone prefix/number for MFA flows)
     var verifyParams: HCaptchaVerifyParams?
@@ -127,7 +134,6 @@ internal class HCaptchaWebViewManager: NSObject {
     /// Responsible for external link handling
     internal let urlOpener: HCaptchaURLOpener
 
-    internal var userJourneyString: String = "[]"
 
     /**
      - parameters:
@@ -166,14 +172,12 @@ internal class HCaptchaWebViewManager: NSObject {
 
     /**
      - parameter view: The view that should present the webview.
-     - parameter journeyEvents: JSON string of journey events to pass to JavaScript
 
      Starts the challenge validation
      */
-    func validate(on view: UIView?, journeyEvents: String = "[]") {
+    func validate(on view: UIView?) {
         Log.debug("WebViewManager.validate on: \(String(describing: view))")
         resultHandled = false
-        userJourneyString = journeyEvents
 
         if !passiveApiKey {
             guard let view = view else {
@@ -272,7 +276,7 @@ fileprivate extension HCaptchaWebViewManager {
         loadingTimer?.invalidate()
         loadingTimer = nil
         if error == .sessionTimeout {
-            if shouldResetOnError, let view = webView.superview {
+            if verifyParams?.resetOnError == true, let view = webView.superview {
                 reset()
                 validate(on: view)
             } else {
@@ -390,14 +394,8 @@ fileprivate extension HCaptchaWebViewManager {
             return
         }
 
-        // For execute command, inject journey events into JavaScript
-        var jsCommand = command.rawValue
-        if command == .execute && userJourneyString != "[]" {
-            jsCommand = """
-            try { hcaptcha.setData("hcaptcha-container", { "userJourneys": \(userJourneyString) }); }  catch (_) {}
-            \(command.rawValue)
-            """
-        }
+        // Execute the JavaScript command
+        let jsCommand = command.rawValue
 
         webView.evaluateJavaScript(jsCommand) { [weak self] _, error in
             if let error = error {

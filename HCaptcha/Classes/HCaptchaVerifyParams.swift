@@ -36,30 +36,49 @@ public class HCaptchaVerifyParams: NSObject {
     @objc public let resetOnError: Bool
 
     /**
+     Optional user journey events for analytics tracking.
+     */
+    @objc internal var userJourneys: Any?
+
+    /**
      - parameters:
      - phonePrefix: Optional phone country calling code (without '+'), e.g., "44"
      - phoneNumber: Optional full phone number in E.164 or local format
      - rqdata: Optional request data string to be passed to hCaptcha
+     - userJourneys: Optional user journey events for analytics tracking (Any type that will be JSON serialized)
      - resetOnError: If HCaptcha should be reset if it errors. Defaults to `true`
 
      Initializes HCaptchaVerifyParams with the given parameters.
      */
     @objc
-    public init(phonePrefix: String?,
+    internal init(phonePrefix: String?,
                 phoneNumber: String?,
                 rqdata: String?,
+                userJourneys: Any?,
                 resetOnErr: Bool) {
         self.phonePrefix = phonePrefix
         self.phoneNumber = phoneNumber
         self.rqdata = rqdata
+        self.userJourneys = userJourneys
         self.resetOnError = resetOnErr
     }
 
+    internal convenience init(phonePrefix: String? = nil,
+                            phoneNumber: String? = nil,
+                            rqdata: String? = nil,
+                            userJourneys: Any? = nil,
+                            resetOnError: Bool = true) {
+        self.init(phonePrefix: phonePrefix, phoneNumber: phoneNumber, rqdata: rqdata, userJourneys: userJourneys, resetOnErr: resetOnError)
+    }
+
+    /**
+     Convenience initializer for backward compatibility (without userJourneys parameter)
+     */
     public convenience init(phonePrefix: String? = nil,
                             phoneNumber: String? = nil,
                             rqdata: String? = nil,
                             resetOnError: Bool = true) {
-        self.init(phonePrefix: phonePrefix, phoneNumber: phoneNumber, rqdata: rqdata, resetOnErr: resetOnError)
+        self.init(phonePrefix: phonePrefix, phoneNumber: phoneNumber, rqdata: rqdata, userJourneys: nil, resetOnErr: resetOnError)
     }
 
     /**
@@ -69,13 +88,16 @@ public class HCaptchaVerifyParams: NSObject {
     public func toDictionary() -> [String: Any] {
         var dict: [String: Any] = [:]
         if let phonePrefix = phonePrefix {
-            dict["phonePrefix"] = phonePrefix
+            dict["mfa_phoneprefix"] = phonePrefix
         }
         if let phoneNumber = phoneNumber {
-            dict["phoneNumber"] = phoneNumber
+            dict["mfa_phonenumber"] = phoneNumber
         }
         if let rqdata = rqdata {
             dict["rqdata"] = rqdata
+        }
+        if let userJourneys = userJourneys {
+            dict["user_journeys"] = userJourneys
         }
         dict["resetOnError"] = resetOnError
         return dict

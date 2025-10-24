@@ -11,7 +11,7 @@ import XCTest
 class HCaptcha__Journey__Tests: XCTestCase {
     func test__setData_called_injects_journeys() {
         let exp = expectation(description: "journeys setData -> token posted")
-        let manager = HCaptchaWebViewManager(messageBody: "{action: \"setData\", token: \"to_be_overwritten\"}")
+        let manager = HCaptchaWebViewManager(messageBody: "{action: \"setData\", token: \"journeys:setData\"}")
         manager.completion = { result in
             if let token = result.token, token == "journeys:setData" {
                 exp.fulfill()
@@ -19,8 +19,11 @@ class HCaptcha__Journey__Tests: XCTestCase {
         }
 
         let view = UIApplication.shared.windows.first!.rootViewController!.view!
-        let journeyJSON = #"[{"k":"click","ts":1,"v":"View","m":{}}]"#
-        manager.validate(on: view, journeyEvents: journeyJSON)
+        // Create journey events as raw data (array of dictionaries)
+        let journeyEvents: [Any] = [["k": "click", "ts": 1, "v": "View", "m": [:]]]
+        let verifyParams = HCaptchaVerifyParams(userJourneys: journeyEvents)
+        manager.verifyParams = verifyParams
+        manager.validate(on: view)
 
         wait(for: [exp], timeout: TestTimeouts.standard)
     }
@@ -35,8 +38,11 @@ class HCaptcha__Journey__Tests: XCTestCase {
         }
 
         let view = UIApplication.shared.windows.first!.rootViewController!.view!
-        let journeyJSON = "korrupted!=!DATA"
-        manager.validate(on: view, journeyEvents: journeyJSON)
+        // Create invalid journey events data to test error handling
+        let invalidJourneyEvents: [Any] = ["korrupted!=!DATA"]
+        let verifyParams = HCaptchaVerifyParams(userJourneys: invalidJourneyEvents)
+        manager.verifyParams = verifyParams
+        manager.validate(on: view)
 
         wait(for: [exp], timeout: TestTimeouts.standard)
     }

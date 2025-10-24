@@ -87,7 +87,7 @@ extension HCaptchaWebViewManager {
     }
 
     func validate(on view: UIView, resetOnError: Bool = true, completion: @escaping (HCaptchaResult) -> Void) {
-        self.shouldResetOnError = resetOnError
+        self.verifyParams = HCaptchaVerifyParams(resetOnError: resetOnError)
         self.completion = completion
 
         validate(on: view)
