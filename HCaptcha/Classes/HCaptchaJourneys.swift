@@ -22,14 +22,23 @@ public enum HCaptchaJourneys {
         _ = (impl as AnyObject).perform(sel)
     }
 
-    /// Returns collected events as a JSON string ("[]" when unavailable/empty).
-    public static func drainEventsAsJSONString() -> String {
-        guard let impl = NSClassFromString("HCaptchaJourneysImpl") else { return "[]" }
+    /// Returns collected events as raw data ([] when unavailable/empty).
+    public static func drainEvents() -> [Any] {
+        guard let impl = NSClassFromString("HCaptchaJourneysImpl") else { return [] }
         let sel = NSSelectorFromString("drainEvents")
         guard let unmanaged = (impl as AnyObject).perform(sel),
               let anyObj = unmanaged.takeUnretainedValue() as? [Any],
-              JSONSerialization.isValidJSONObject(anyObj),
-              let data = try? JSONSerialization.data(withJSONObject: anyObj, options: []),
+              JSONSerialization.isValidJSONObject(anyObj) else {
+            return []
+        }
+        return anyObj
+    }
+    
+    /// Returns collected events as a JSON string ("[]" when unavailable/empty).
+    /// @deprecated Use drainEvents() instead for better performance
+    public static func drainEventsAsJSONString() -> String {
+        let events = drainEvents()
+        guard let data = try? JSONSerialization.data(withJSONObject: events, options: []),
               let json = String(data: data, encoding: .utf8) else {
             return "[]"
         }

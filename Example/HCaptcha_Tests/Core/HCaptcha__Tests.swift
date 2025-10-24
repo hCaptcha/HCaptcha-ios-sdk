@@ -280,7 +280,7 @@ class HCaptcha__Tests: XCTestCase {
 
             override func validate(on view: UIView?) {
                 receivedVerifyParams = self.verifyParams
-                receivedResetOnError = self.shouldResetOnError
+                receivedResetOnError = self.verifyParams?.resetOnError ?? true
                 super.validate(on: view)
             }
         }
@@ -312,7 +312,7 @@ class HCaptcha__Tests: XCTestCase {
             var receivedResetOnError: Bool?
 
             override func validate(on view: UIView?) {
-                receivedResetOnError = self.shouldResetOnError
+                receivedResetOnError = self.verifyParams?.resetOnError ?? true
                 super.validate(on: view)
             }
         }

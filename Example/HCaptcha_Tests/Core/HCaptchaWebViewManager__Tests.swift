@@ -569,7 +569,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         let manager = HCaptchaWebViewManager(messageBody: "{ invalid json",
                                              apiKey: apiKey)
-        manager.shouldResetOnError = false
+        manager.verifyParams = HCaptchaVerifyParams(resetOnError: false)
         manager.configureWebView { _ in
             XCTFail("should not ask to configure the webview")
         }
@@ -586,7 +586,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         let exp = expectation(description: "didLoad never called")
 
         let manager = HCaptchaWebViewManager(html: "<html>", apiKey: apiKey, loadingTimeout: 0.5)
-        manager.shouldResetOnError = false
+        manager.verifyParams = HCaptchaVerifyParams(resetOnError: false)
         manager.configureWebView { _ in
             XCTFail("should not ask to configure the webview")
         }
@@ -603,7 +603,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         let exp = expectation(description: "wait for completion")
 
         let manager = HCaptchaWebViewManager(messageBody: "{token: \"success-token\"}", passiveApiKey: true)
-        manager.shouldResetOnError = false
+        manager.verifyParams = HCaptchaVerifyParams(resetOnError: false)
         manager.completion = { response in
             XCTAssertEqual(try? response.dematerialize(), "success-token")
             exp.fulfill()
@@ -617,7 +617,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         let exp = expectation(description: "didLoad never called")
 
         let manager = HCaptchaWebViewManager(messageBody: "{token: \"should-not-be-delivered\"}", passiveApiKey: false)
-        manager.shouldResetOnError = false
+        manager.verifyParams = HCaptchaVerifyParams(resetOnError: false)
 
         manager.completion = { response in
             XCTAssertEqual(HCaptchaError.failedSetup, response.error)
@@ -660,8 +660,8 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         // Then
         XCTAssertTrue(rawValue.contains("execute("))
-        XCTAssertTrue(rawValue.contains("\"phonePrefix\":\"44\""))
-        XCTAssertTrue(rawValue.contains("\"phoneNumber\":\"1234567890\""))
+        XCTAssertTrue(rawValue.contains("\"mfa_phoneprefix\":\"44\""))
+        XCTAssertTrue(rawValue.contains("\"mfa_phonenumber\":\"1234567890\""))
         XCTAssertTrue(rawValue.contains("\"resetOnError\":false"))
         XCTAssertTrue(rawValue.hasSuffix(");"))
     }
@@ -688,7 +688,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         // Then
         XCTAssertTrue(rawValue.contains("execute("))
-        XCTAssertTrue(rawValue.contains("\"phonePrefix\":\"44\""))
+        XCTAssertTrue(rawValue.contains("\"mfa_phoneprefix\":\"44\""))
         XCTAssertTrue(rawValue.contains("\"resetOnError\":true"))
         XCTAssertFalse(rawValue.contains("phoneNumber"))
         XCTAssertTrue(rawValue.hasSuffix(");"))
@@ -705,7 +705,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         // Then
         XCTAssertTrue(rawValue.contains("execute("))
-        XCTAssertTrue(rawValue.contains("\"phoneNumber\":\"+1234567890\""))
+        XCTAssertTrue(rawValue.contains("\"mfa_phonenumber\":\"+1234567890\""))
         XCTAssertTrue(rawValue.contains("\"resetOnError\":true"))
         XCTAssertFalse(rawValue.contains("phonePrefix"))
         XCTAssertTrue(rawValue.hasSuffix(");"))
@@ -724,13 +724,12 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         // When
         manager.verifyParams = verifyParams
-        manager.shouldResetOnError = resetOnError
 
         // Then
         XCTAssertEqual(manager.verifyParams?.phonePrefix, phonePrefix)
         XCTAssertEqual(manager.verifyParams?.phoneNumber, phoneNumber)
         XCTAssertEqual(manager.verifyParams?.resetOnError, resetOnError)
-        XCTAssertEqual(manager.shouldResetOnError, resetOnError)
+        XCTAssertEqual(manager.verifyParams?.resetOnError, resetOnError)
         exp.fulfill()
 
         waitForExpectations(timeout: TestTimeouts.standard)
@@ -746,12 +745,11 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         // When
         manager.verifyParams = verifyParams
-        manager.shouldResetOnError = resetOnError
 
         // Then
         XCTAssertEqual(manager.verifyParams?.phonePrefix, phonePrefix)
         XCTAssertEqual(manager.verifyParams?.resetOnError, resetOnError)
-        XCTAssertEqual(manager.shouldResetOnError, resetOnError)
+        XCTAssertEqual(manager.verifyParams?.resetOnError, resetOnError)
     }
 
     func test__JSCommand_execute__withEmptyVerifyParams() {
@@ -782,8 +780,8 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         // Then
         XCTAssertTrue(rawValue.contains("execute("))
-        XCTAssertTrue(rawValue.contains("\"phonePrefix\":\"44\""))
-        XCTAssertTrue(rawValue.contains("\"phoneNumber\":\"1234567890\""))
+        XCTAssertTrue(rawValue.contains("\"mfa_phoneprefix\":\"44\""))
+        XCTAssertTrue(rawValue.contains("\"mfa_phonenumber\":\"1234567890\""))
         XCTAssertTrue(rawValue.contains("\"resetOnError\":false"))
         XCTAssertTrue(rawValue.hasSuffix(");"))
     }

@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="phone-input-stack">
-                                <rect key="frame" x="87.5" y="40" width="200" height="73"/>
+                                <rect key="frame" x="87.5" y="40" width="200" height="112"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="switch-stack">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="31"/>
@@ -46,6 +46,23 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Kz5-pA-9LH">
+                                        <rect key="frame" x="0.0" y="81" width="200" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Journey" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICQ-dk-DIx">
+                                                <rect key="frame" x="0.0" y="0.0" width="143" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zzi-E9-x7E">
+                                                <rect key="frame" x="151" y="0.0" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="journeySwitchChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="icD-gh-29P"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o6f-cL-1PF">
@@ -130,6 +147,7 @@
                         <outlet property="phoneModeSwitch" destination="phone-mode-switch" id="phone-mode-switch-outlet"/>
                         <outlet property="phoneTextField" destination="phone-text-field" id="phone-text-field-outlet"/>
                         <outlet property="resetButton" destination="lzK-em-8dU" id="9BO-5x-8q6"/>
+                        <outlet property="journeySwitch" destination="zzi-E9-x7E" id="journey-switch-outlet"/>
                         <outlet property="spinner" destination="jHc-GP-v1Z" id="gRn-JW-FIK"/>
                         <outlet property="validateButton" destination="RDW-bD-rSo" id="zxd-fD-KiJ"/>
                     </connections>
