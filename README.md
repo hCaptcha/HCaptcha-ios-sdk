@@ -27,6 +27,8 @@
    * [SDK Events](#sdk-events)
    * [Token expiration](#token-expiration)
    * [Disable new token fetch on expiry](#disable-new-token-fetch-on-expiry)
+   * [MFA Phone Support](#mfa-phone-support)
+   * [Testing Examples with SPM](#testing-examples-with-spm)
 - [Compiled size](#compiled-size-impact-on-including-in-your-app)
 - [Known issues](#known-issues)
 - [License](#license)
@@ -280,6 +282,19 @@ hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
 ```
 
 **Note**: If you update verify parameters and call `validate` a second time, call `reset()` before the second validation to ensure updated parameters are consumed by the SDK.
+
+### Testing Examples with SPM
+
+If `CocoaPods` for some reason is inaccessible to you, you can test the app with `SPM` only. It will require some changes in the `Xcode` project:
+
+**Note**: Make sure to open `Example/HCaptcha.xcodeproj` and not the workspace file.
+
+In `Xcode`:
+
+1. In `Project Navigator`: from `Frameworks` and Configuration references (red links)
+2. Select project (`Project Navigator`) -> Select target (one of our example apps `UIKit-Example` or `SwiftUI-Examples` or another) -> Select `Build Phases` tab -> remove all phases that start with `[CP]` prefix
+3. `File` -> `Add Package Dependencies...` -> `Add local...` -> select root of the repo
+4. Select project (`Project Navigator`) -> Select target (one of our example apps `UIKit-Example` or `SwiftUI-Examples` or another) -> Select `General` tab -> Go to `Frameworks, Libraries and Embedded Content` -> `+` -> select `HCaptcha`
 
 ## Compiled size: impact on including in your app
 
