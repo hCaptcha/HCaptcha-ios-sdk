@@ -215,8 +215,18 @@ final class JourneyliticsHooks__Tests: XCTestCase {
 
         UIApplication.jl_installHook()
         let target = SpyActionTarget()
-        let item = UIBarButtonItem(title: "Tap", style: .plain, target: target, action: #selector(SpyActionTarget.barTapped(_:)))
-        _ = UIApplication.shared.sendAction(#selector(SpyActionTarget.barTapped(_:)), to: target, from: item, for: nil)
+        let item = UIBarButtonItem(
+            title: "Tap",
+            style: .plain,
+            target: target,
+            action: #selector(SpyActionTarget.barTapped(_:))
+        )
+        _ = UIApplication.shared.sendAction(
+            #selector(SpyActionTarget.barTapped(_:)),
+            to: target,
+            from: item,
+            for: nil
+        )
 
         XCTAssertTrue(target.barInvoked)
         guard let event = recorder.events.last else { return XCTFail("No events recorded") }
@@ -327,7 +337,9 @@ private final class SpyTableDelegate: NSObject, UITableViewDelegate {
 
 private final class SpyCollectionDelegate: NSObject, UICollectionViewDelegate {
     var lastSelected: IndexPath?
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) { lastSelected = indexPath }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        lastSelected = indexPath
+    }
 }
 
 private final class SpySearchDelegate: NSObject, UISearchBarDelegate {

@@ -109,7 +109,12 @@ class ViewController: BaseViewController {
 
     override func setupHCaptcha() {
         // swiftlint:disable:next force_try
-        hcaptcha = try! HCaptcha(apiKey: "00000000-0000-0000-0000-000000000000", locale: locale, diagnosticLog: true, userJourneys: journeySwitch.isOn)
+        hcaptcha = try! HCaptcha(
+            apiKey: "00000000-0000-0000-0000-000000000000",
+            locale: locale,
+            diagnosticLog: true,
+            userJourneys: journeySwitch.isOn
+        )
 
         hcaptcha.configureWebView { [weak self] webview in
             webview.frame = self?.view.bounds ?? CGRect.zero
