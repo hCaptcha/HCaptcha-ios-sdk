@@ -15,6 +15,7 @@ final class JourneyliticsHooks__Tests: XCTestCase {
         let config = JourneyliticsConfig(sinks: [recorder])
         // Start core
         let core = JLCore.shared
+        core.stop()
         core.startIfNeeded(configuration: config)
 
         // When we simulate a scroll event via the proxy
@@ -53,6 +54,7 @@ final class JourneyliticsHooks__Tests: XCTestCase {
         let recorder = RecordingSink()
         let config = JourneyliticsConfig(sinks: [recorder])
         let core = JLCore.shared
+        core.stop()
         core.startIfNeeded(configuration: config)
 
         let table = UITableView()
@@ -61,13 +63,14 @@ final class JourneyliticsHooks__Tests: XCTestCase {
 
         guard let event = recorder.events.last else { return XCTFail("No events recorded") }
         XCTAssertEqual(event.kind, .click)
-        XCTAssertEqual(event.metadata[FieldKey.index.jsonKey] as? String, "7")
+        XCTAssertEqual(event.metadata[FieldKey.index.jsonKey] as? Int, 7)
     }
 
     func test__UICollectionView_emits_section_and_idx_on_selection() {
         let recorder = RecordingSink()
         let config = JourneyliticsConfig(sinks: [recorder])
         let core = JLCore.shared
+        core.stop()
         core.startIfNeeded(configuration: config)
 
         let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -76,8 +79,8 @@ final class JourneyliticsHooks__Tests: XCTestCase {
 
         guard let event = recorder.events.last else { return XCTFail("No events recorded") }
         XCTAssertEqual(event.kind, .click)
-        XCTAssertEqual(event.metadata[FieldKey.index.jsonKey] as? String, "3")
-        XCTAssertEqual(event.metadata[FieldKey.section.jsonKey] as? String, "2")
+        XCTAssertEqual(event.metadata[FieldKey.index.jsonKey] as? Int, 3)
+        XCTAssertEqual(event.metadata[FieldKey.section.jsonKey] as? Int, 2)
     }
 
     func test__UIControl_sendAction_forwards_and_emits_when_enabled() {

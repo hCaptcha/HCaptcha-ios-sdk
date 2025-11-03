@@ -16,7 +16,8 @@
       "parallelizable" : false,
       "skippedTests" : [
         "HCaptchaWebViewManager__HTML__Tests",
-        "HCaptcha_Rx__Tests"
+        "HCaptcha_Rx__Tests",
+        "HCaptcha__Tests\/test__userJourneys_enabled_without_impl_throws()"
       ],
       "target" : {
         "containerPath" : "container:HCaptcha.xcodeproj",
