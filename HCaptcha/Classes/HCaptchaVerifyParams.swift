@@ -52,10 +52,10 @@ public class HCaptchaVerifyParams: NSObject {
      */
     @objc
     internal init(phonePrefix: String?,
-                phoneNumber: String?,
-                rqdata: String?,
-                userJourneys: Any?,
-                resetOnErr: Bool) {
+                  phoneNumber: String?,
+                  rqdata: String?,
+                  userJourneys: Any?,
+                  resetOnErr: Bool) {
         self.phonePrefix = phonePrefix
         self.phoneNumber = phoneNumber
         self.rqdata = rqdata
@@ -64,11 +64,17 @@ public class HCaptchaVerifyParams: NSObject {
     }
 
     internal convenience init(phonePrefix: String? = nil,
-                            phoneNumber: String? = nil,
-                            rqdata: String? = nil,
-                            userJourneys: Any? = nil,
-                            resetOnError: Bool = true) {
-        self.init(phonePrefix: phonePrefix, phoneNumber: phoneNumber, rqdata: rqdata, userJourneys: userJourneys, resetOnErr: resetOnError)
+                              phoneNumber: String? = nil,
+                              rqdata: String? = nil,
+                              userJourneys: Any? = nil,
+                              resetOnError: Bool = true) {
+        self.init(
+            phonePrefix: phonePrefix,
+            phoneNumber: phoneNumber,
+            rqdata: rqdata,
+            userJourneys: userJourneys,
+            resetOnErr: resetOnError
+        )
     }
 
     /**
@@ -78,7 +84,13 @@ public class HCaptchaVerifyParams: NSObject {
                             phoneNumber: String? = nil,
                             rqdata: String? = nil,
                             resetOnError: Bool = true) {
-        self.init(phonePrefix: phonePrefix, phoneNumber: phoneNumber, rqdata: rqdata, userJourneys: nil, resetOnErr: resetOnError)
+        self.init(
+            phonePrefix: phonePrefix,
+            phoneNumber: phoneNumber,
+            rqdata: rqdata,
+            userJourneys: nil,
+            resetOnErr: resetOnError
+        )
     }
 
     /**

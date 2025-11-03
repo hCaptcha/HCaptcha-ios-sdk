@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1F833B7F271DC69C00E4DAB2 /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */; };
 		1F833B80271DC69C00E4DAB2 /* RxSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		43C3B8F62EB973A500705F63 /* HCaptcha_Journeylitics.h in Headers */ = {isa = PBXBuildFile; fileRef = 43C3B8F42EB973A500705F63 /* HCaptcha_Journeylitics.h */; };
+		43C3B8FA2EBA065F00705F63 /* HCaptchaWebViewManager+JSCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C3B8F72EBA065F00705F63 /* HCaptchaWebViewManager+JSCommand.swift */; };
+		43C3B8FC2EBA07C900705F63 /* HCaptchaWebViewManager+Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C3B8FB2EBA07C900705F63 /* HCaptchaWebViewManager+Private.swift */; };
 		43DC08142E971586003839A5 /* HCaptchaVerifyParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08132E971586003839A5 /* HCaptchaVerifyParams.swift */; };
 		43DC08392EA819C2003839A5 /* UISearchBar+JL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC082C2EA819C2003839A5 /* UISearchBar+JL.swift */; };
 		43DC083A2EA819C2003839A5 /* JourneyliticsCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08232EA819C2003839A5 /* JourneyliticsCore.swift */; };
@@ -75,6 +78,9 @@
 
 /* Begin PBXFileReference section */
 		1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
+		43C3B8F42EB973A500705F63 /* HCaptcha_Journeylitics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCaptcha_Journeylitics.h; sourceTree = "<group>"; };
+		43C3B8F72EBA065F00705F63 /* HCaptchaWebViewManager+JSCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HCaptchaWebViewManager+JSCommand.swift"; sourceTree = "<group>"; };
+		43C3B8FB2EBA07C900705F63 /* HCaptchaWebViewManager+Private.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HCaptchaWebViewManager+Private.swift"; sourceTree = "<group>"; };
 		43DC08132E971586003839A5 /* HCaptchaVerifyParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaVerifyParams.swift; sourceTree = "<group>"; };
 		43DC081A2EA8199F003839A5 /* HCaptcha_Journeylitics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HCaptcha_Journeylitics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43DC08232EA819C2003839A5 /* JourneyliticsCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyliticsCore.swift; sourceTree = "<group>"; };
@@ -122,10 +128,6 @@
 		F2AE8613204F3B41002E28D7 /* HCaptchaResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		43DC081B2EA8199F003839A5 /* HCaptcha_Journeylitics */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = HCaptcha_Journeylitics; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
 		43DC08172EA8199F003839A5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -152,6 +154,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		43C3B8F52EB973A500705F63 /* HCaptcha_Journeylitics */ = {
+			isa = PBXGroup;
+			children = (
+				43C3B8F42EB973A500705F63 /* HCaptcha_Journeylitics.h */,
+			);
+			path = HCaptcha_Journeylitics;
+			sourceTree = "<group>";
+		};
 		43DC08252EA819C2003839A5 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,7 +225,7 @@
 				F206BACF1F8D3E2800A25807 /* Cartfile */,
 				F206BAB21F8D3DE900A25807 /* HCaptcha-Carthage */,
 				F206BB1A1F8D4DBC00A25807 /* HCaptcha_RxSwift */,
-				43DC081B2EA8199F003839A5 /* HCaptcha_Journeylitics */,
+				43C3B8F52EB973A500705F63 /* HCaptcha_Journeylitics */,
 				F206BAB11F8D3DE900A25807 /* Products */,
 				F206BAD11F8D3E7600A25807 /* Frameworks */,
 				F24EA1D41F967F21001DEC17 /* Recovered References */,
@@ -287,6 +297,8 @@
 				E6DB9EA727B15954008F0327 /* HCaptchaDebugInfo.swift */,
 				43DC08132E971586003839A5 /* HCaptchaVerifyParams.swift */,
 				F24EA1D91F9683F5001DEC17 /* HCaptchaWebViewManager.swift */,
+				43C3B8F72EBA065F00705F63 /* HCaptchaWebViewManager+JSCommand.swift */,
+				43C3B8FB2EBA07C900705F63 /* HCaptchaWebViewManager+Private.swift */,
 				E614B37A2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift */,
 				F24EA1DA1F9683F5001DEC17 /* String+Dict.swift */,
 				F24EA1DB1F9683F5001DEC17 /* HCaptchaError.swift */,
@@ -316,6 +328,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43C3B8F62EB973A500705F63 /* HCaptcha_Journeylitics.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,9 +363,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				43DC081B2EA8199F003839A5 /* HCaptcha_Journeylitics */,
 			);
 			name = HCaptcha_Journeylitics;
 			packageProductDependencies = (
@@ -423,7 +433,7 @@
 				};
 			};
 			buildConfigurationList = F206BAAA1F8D3DE900A25807 /* Build configuration list for PBXProject "HCaptcha-Carthage" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -499,6 +509,7 @@
 			files = (
 				E6BF595C288AE915007CE1CE /* HCaptchaHtml.swift in Sources */,
 				E634944A2828856300130AC5 /* HCaptchaEvent.swift in Sources */,
+				43C3B8FA2EBA065F00705F63 /* HCaptchaWebViewManager+JSCommand.swift in Sources */,
 				E65C08A02A656CC6002E82EC /* HCaptchaLog.swift in Sources */,
 				F24EA1E51F968403001DEC17 /* HCaptchaError.swift in Sources */,
 				E65145E327786BDB0079668A /* HCaptchaConfig.swift in Sources */,
@@ -511,6 +522,7 @@
 				F231B39A1FEC51C800F82943 /* DispatchQueue+Throttle.swift in Sources */,
 				43DC084C2EA819DB003839A5 /* HCaptchaJourneys.swift in Sources */,
 				E6DB9EA827B15954008F0327 /* HCaptchaDebugInfo.swift in Sources */,
+				43C3B8FC2EBA07C900705F63 /* HCaptchaWebViewManager+Private.swift in Sources */,
 				E614B37B2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift in Sources */,
 				E683772129053E560021BFD7 /* HCaptchaURLOpener.swift in Sources */,
 			);

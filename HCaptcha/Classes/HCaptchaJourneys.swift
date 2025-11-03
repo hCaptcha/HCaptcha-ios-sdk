@@ -33,7 +33,7 @@ public enum HCaptchaJourneys {
         }
         return anyObj
     }
-    
+
     /// Returns collected events as a JSON string ("[]" when unavailable/empty).
     /// @deprecated Use drainEvents() instead for better performance
     public static func drainEventsAsJSONString() -> String {
