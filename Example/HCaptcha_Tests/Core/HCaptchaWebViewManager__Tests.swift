@@ -8,6 +8,7 @@
 
 @testable import HCaptcha
 
+import MessageUI
 import WebKit
 import XCTest
 
@@ -562,6 +563,65 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         manager.validate(on: presenterView)
 
         wait(for: [exp1, exp2], timeout: TestTimeouts.standard)
+    }
+
+    // MARK: SMS
+
+    func test__SMS_Link_Presents_Composer() {
+        let configureExpectation = expectation(description: "should call configureWebView")
+        let presentExpectation = expectation(description: "should present message composer")
+
+        let presenter = TestMessagePresenter()
+        presenter.presentExpectation = presentExpectation
+
+        let manager = HCaptchaWebViewManager(messageBody: "{action: \"sms\"}",
+                                             apiKey: apiKey,
+                                             messagePresenter: presenter)
+
+        manager.configureWebView { _ in
+            configureExpectation.fulfill()
+        }
+
+        manager.validate(on: presenterView)
+
+        wait(for: [configureExpectation, presentExpectation], timeout: TestTimeouts.standard)
+
+        XCTAssertEqual(presenter.lastRecipient, "+123456789")
+        XCTAssertEqual(presenter.lastBody, "somebody-someone")
+        XCTAssertTrue(presenter.lastDelegate === manager)
+    }
+
+    func test__SMS_Composer_Dismisses_On_Result() {
+        let configureExpectation = expectation(description: "should call configureWebView")
+        let presentExpectation = expectation(description: "should present message composer")
+        let dismissOnCancel = expectation(description: "should dismiss composer on cancel")
+        let dismissOnSend = expectation(description: "should dismiss composer on send")
+
+        let presenter = TestMessagePresenter()
+        presenter.presentExpectation = presentExpectation
+
+        let manager = HCaptchaWebViewManager(messageBody: "{action: \"sms\"}",
+                                             apiKey: apiKey,
+                                             messagePresenter: presenter)
+
+        manager.configureWebView { _ in
+            configureExpectation.fulfill()
+        }
+
+        manager.validate(on: presenterView)
+
+        wait(for: [configureExpectation, presentExpectation], timeout: TestTimeouts.standard)
+
+        XCTAssertTrue(presenter.lastDelegate === manager)
+
+        presenter.dismissExpectation = dismissOnCancel
+        manager.messageComposeViewController(MFMessageComposeViewController(), didFinishWith: .cancelled)
+
+        presenter.dismissExpectation = dismissOnSend
+        manager.messageComposeViewController(MFMessageComposeViewController(), didFinishWith: .sent)
+
+        wait(for: [dismissOnCancel, dismissOnSend], timeout: TestTimeouts.standard)
+        XCTAssertEqual(presenter.dismissCallCount, 2)
     }
 
     func test__Invalid_HTML() {
