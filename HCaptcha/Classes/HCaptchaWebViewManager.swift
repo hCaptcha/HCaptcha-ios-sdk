@@ -3,6 +3,7 @@
 //  HCaptcha
 
 import Foundation
+import MessageUI
 import WebKit
 
 
@@ -108,14 +109,20 @@ internal class HCaptchaWebViewManager: NSObject {
         return webview
     }()
 
+    /// Handles presentation of the native SMS composer
+    let messagePresenter: HCaptchaMessagePresenter
+
     /**
      - parameters:
          - `config`: HCaptcha config
          - `urlOpener`:  class
      */
-    init(config: HCaptchaConfig, urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener()) {
+    init(config: HCaptchaConfig,
+         urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener(),
+         messagePresenter: HCaptchaMessagePresenter = HCaptchaSystemMessagePresenter()) {
         Log.debug("WebViewManager.init")
         self.urlOpener = urlOpener
+        self.messagePresenter = messagePresenter
         self.baseURL = config.baseURL
         self.passiveApiKey = config.passiveApiKey
         self.loadingTimeout = config.loadingTimeout

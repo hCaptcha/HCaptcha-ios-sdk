@@ -9,6 +9,7 @@ build/
 DerivedData
 logs/
 HCaptcha.framework.zip
+Example/HCaptcha.xcworkspace/xcshareddata/swiftpm*
 
 ## Various settings
 *.pbxuser
