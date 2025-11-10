@@ -112,12 +112,11 @@ private extension HCaptchaWebViewManager {
         }
 
         if let delimiterRange = recipient.range(of: ";") {
-            let parameters = String(recipient[delimiterRange...])
+            let parameters = String(recipient[delimiterRange.lowerBound...])
             recipient = String(recipient[..<delimiterRange.lowerBound])
             if body == nil {
-                body = bodyValue(from: parameters
-                                    .dropFirst()
-                                    .replacingOccurrences(of: ";", with: "&"))
+                let query = String(parameters.dropFirst()).replacingOccurrences(of: ";", with: "&")
+                body = bodyValue(from: query)
             }
         }
 
