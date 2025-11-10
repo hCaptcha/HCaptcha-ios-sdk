@@ -28,7 +28,8 @@ extension HCaptchaWebViewManager {
         theme: String = "light",
         customTheme: String? = nil,
         userJourney: Bool = false,
-        urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener()
+        urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener(),
+        messagePresenter: HCaptchaMessagePresenter = HCaptchaSystemMessagePresenter()
     ) {
         let html = String(format: HCaptchaWebViewManager.unformattedHTML,
                           arguments: [
@@ -46,7 +47,8 @@ extension HCaptchaWebViewManager {
             theme: theme,
             customTheme: customTheme,
             urlOpener: urlOpener,
-            userJourney: userJourney
+            userJourney: userJourney,
+            messagePresenter: messagePresenter
         )
     }
 
@@ -61,6 +63,7 @@ extension HCaptchaWebViewManager {
         theme: String = "light",
         customTheme: String? = nil,
         urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener(),
+        messagePresenter: HCaptchaMessagePresenter = HCaptchaSystemMessagePresenter(),
         loadingTimeout: TimeInterval = 5,
         userJourney: Bool = false
     ) {
@@ -83,7 +86,8 @@ extension HCaptchaWebViewManager {
 
         self.init(
             config: config,
-            urlOpener: urlOpener
+            urlOpener: urlOpener,
+            messagePresenter: messagePresenter
         )
     }
 
