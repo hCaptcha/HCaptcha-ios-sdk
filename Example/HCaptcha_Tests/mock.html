@@ -113,11 +113,11 @@
           }
       };
 
-      // Mock hcaptcha.setData to accept userJourneys and immediately post a token
+      // Mock hcaptcha.setData to accept userJourney and immediately post a token
       var hcaptcha = {
           setData: function(containerId, data) {
               try {
-                  if (data && data.userJourneys) {
+                  if (data && data.userJourney) {
                       token = "journeys:setData";
                   }
               } catch (e) {

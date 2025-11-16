@@ -78,11 +78,11 @@ public class HCaptcha: NSObject {
         customTheme: String? = nil,
         diagnosticLog: Bool = false,
         disablePat: Bool = false,
-        userJourneys: Bool = false
+        userJourney: Bool = false
     ) throws {
         Log.minLevel = diagnosticLog ? .debug : .warning
 
-        if userJourneys {
+        if userJourney {
             guard HCaptchaJourneys.start() else { throw HCaptchaError.journeyliticsNotAvailable }
         }
 
@@ -110,7 +110,7 @@ public class HCaptcha: NSObject {
                                         customTheme: customTheme,
                                         locale: locale,
                                         disablePat: disablePat,
-                                        userJourneys: userJourneys)
+                                        userJourney: userJourney)
 
         Log.debug(".init with: \(config)")
 
@@ -169,7 +169,7 @@ public class HCaptcha: NSObject {
                          completion: @escaping (HCaptchaResult) -> Void) {
         Log.debug(".validate on: \(String(describing: view)) verifyParams: \(verifyParams)")
 
-        verifyParams.userJourneys = HCaptchaJourneys.drainEvents()
+        verifyParams.userJourney = HCaptchaJourneys.drainEvents()
 
         manager.completion = completion
         manager.verifyParams = verifyParams
@@ -299,8 +299,8 @@ public class HCaptcha: NSObject {
                             theme: String,
                             customTheme: String?,
                             diagnosticLog: Bool,
-                            userJourneys: Bool) throws {
-        if userJourneys {
+                            userJourney: Bool) throws {
+        if userJourney {
             guard HCaptchaJourneys.start() else { throw HCaptchaError.journeyliticsNotAvailable }
         }
 
@@ -322,6 +322,6 @@ public class HCaptcha: NSObject {
                       customTheme: customTheme,
                       diagnosticLog: diagnosticLog,
                       disablePat: false,
-                      userJourneys: userJourneys)
+                      userJourney: userJourney)
     }
 }
