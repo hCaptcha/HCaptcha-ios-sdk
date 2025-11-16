@@ -21,7 +21,7 @@ class HCaptcha__Journey__Tests: XCTestCase {
         let view = UIApplication.shared.windows.first!.rootViewController!.view!
         // Create journey events as raw data (array of dictionaries)
         let journeyEvents: [Any] = [["k": "click", "ts": 1, "v": "View", "m": [:]]]
-        let verifyParams = HCaptchaVerifyParams(userJourneys: journeyEvents)
+        let verifyParams = HCaptchaVerifyParams(userJourney: journeyEvents)
         manager.verifyParams = verifyParams
         manager.validate(on: view)
 
@@ -40,7 +40,7 @@ class HCaptcha__Journey__Tests: XCTestCase {
         let view = UIApplication.shared.windows.first!.rootViewController!.view!
         // Create invalid journey events data to test error handling
         let invalidJourneyEvents: [Any] = ["korrupted!=!DATA"]
-        let verifyParams = HCaptchaVerifyParams(userJourneys: invalidJourneyEvents)
+        let verifyParams = HCaptchaVerifyParams(userJourney: invalidJourneyEvents)
         manager.verifyParams = verifyParams
         manager.validate(on: view)
 

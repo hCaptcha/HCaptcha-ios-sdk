@@ -55,7 +55,7 @@ class ViewController: BaseViewController {
             apiKey: "00000000-0000-0000-0000-000000000000",
             locale: locale,
             diagnosticLog: true,
-            userJourneys: journeySwitch.isOn
+            userJourney: journeySwitch.isOn
         )
 
         hcaptcha.onEvent { (event, _) in

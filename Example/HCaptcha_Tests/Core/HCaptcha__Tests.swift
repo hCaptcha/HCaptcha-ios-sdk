@@ -333,9 +333,9 @@ class HCaptcha__Tests: XCTestCase {
 
     // MARK: - User Journeys Tests
     // To run manually once Journeylitics subspec removed from test target app
-    func test__userJourneys_enabled_without_impl_throws() {
+    func test__userJourney_enabled_without_impl_throws() {
         do {
-            _ = try HCaptcha(userJourneys: true)
+            _ = try HCaptcha(userJourney: true)
             XCTFail("Expected journeyliticsNotAvailable error when Journeylitics impl is not linked")
         } catch let error as HCaptchaError {
             XCTAssertEqual(error, .journeyliticsNotAvailable)

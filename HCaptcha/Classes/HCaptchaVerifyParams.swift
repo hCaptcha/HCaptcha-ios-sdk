@@ -38,14 +38,14 @@ public class HCaptchaVerifyParams: NSObject {
     /**
      Optional user journey events for analytics tracking.
      */
-    @objc internal var userJourneys: Any?
+    @objc internal var userJourney: Any?
 
     /**
      - parameters:
      - phonePrefix: Optional phone country calling code (without '+'), e.g., "44"
      - phoneNumber: Optional full phone number in E.164 or local format
      - rqdata: Optional request data string to be passed to hCaptcha
-     - userJourneys: Optional user journey events for analytics tracking (Any type that will be JSON serialized)
+     - userJourney: Optional user journey events for analytics tracking (Any type that will be JSON serialized)
      - resetOnError: If HCaptcha should be reset if it errors. Defaults to `true`
 
      Initializes HCaptchaVerifyParams with the given parameters.
@@ -54,31 +54,31 @@ public class HCaptchaVerifyParams: NSObject {
     internal init(phonePrefix: String?,
                   phoneNumber: String?,
                   rqdata: String?,
-                  userJourneys: Any?,
+                  userJourney: Any?,
                   resetOnErr: Bool) {
         self.phonePrefix = phonePrefix
         self.phoneNumber = phoneNumber
         self.rqdata = rqdata
-        self.userJourneys = userJourneys
+        self.userJourney = userJourney
         self.resetOnError = resetOnErr
     }
 
     internal convenience init(phonePrefix: String? = nil,
                               phoneNumber: String? = nil,
                               rqdata: String? = nil,
-                              userJourneys: Any? = nil,
+                              userJourney: Any? = nil,
                               resetOnError: Bool = true) {
         self.init(
             phonePrefix: phonePrefix,
             phoneNumber: phoneNumber,
             rqdata: rqdata,
-            userJourneys: userJourneys,
+            userJourney: userJourney,
             resetOnErr: resetOnError
         )
     }
 
     /**
-     Convenience initializer for backward compatibility (without userJourneys parameter)
+     Convenience initializer for backward compatibility (without userJourney parameter)
      */
     public convenience init(phonePrefix: String? = nil,
                             phoneNumber: String? = nil,
@@ -88,7 +88,7 @@ public class HCaptchaVerifyParams: NSObject {
             phonePrefix: phonePrefix,
             phoneNumber: phoneNumber,
             rqdata: rqdata,
-            userJourneys: nil,
+            userJourney: nil,
             resetOnErr: resetOnError
         )
     }
@@ -108,8 +108,8 @@ public class HCaptchaVerifyParams: NSObject {
         if let rqdata = rqdata {
             dict["rqdata"] = rqdata
         }
-        if let userJourneys = userJourneys {
-            dict["user_journeys"] = userJourneys
+        if let userJourney = userJourney {
+            dict["userJourney"] = userJourney
         }
         dict["resetOnError"] = resetOnError
         return dict

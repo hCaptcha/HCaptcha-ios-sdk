@@ -17,7 +17,7 @@
       "skippedTests" : [
         "HCaptchaWebViewManager__HTML__Tests",
         "HCaptcha_Rx__Tests",
-        "HCaptcha__Tests\/test__userJourneys_enabled_without_impl_throws()"
+        "HCaptcha__Tests\/test__userJourney_enabled_without_impl_throws()"
       ],
       "target" : {
         "containerPath" : "container:HCaptcha.xcodeproj",
