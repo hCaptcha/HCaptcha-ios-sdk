@@ -12,19 +12,21 @@ public enum FieldKey: String {
     case meta = "m"
 
     // Meta fields (nested under meta object)
-    case id = "i"
-    case screen = "s"
-    case action = "a"
+    case id = "id"
+    case screen = "sc"
+    case action = "ac"
     case value = "val"
     case x = "x"
     case y = "y"
     case index = "idx"
     case section = "sct"
-    case target = "t"
-    case control = "c"
-    case gesture = "g"
-    case state = "st"
+    case target = "tt"
+    case control = "ct"
+    case gesture = "gt"
+    case state = "gs"
     case taps = "tap"
+    case containerView = "cv"
+    case length = "ln"
 }
 
 extension FieldKey {
