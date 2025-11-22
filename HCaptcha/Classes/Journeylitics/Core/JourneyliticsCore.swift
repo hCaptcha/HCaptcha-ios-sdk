@@ -121,29 +121,29 @@ extension JLCore {
         @unknown default: state = "unknown"
         }
         let gestureType = String(describing: type(of: recognizer))
-        var meta: [String: String] = [
-            "gesture": gestureType,
-            "state": state
-        ]
+        var meta = createFieldMap(
+            (.gesture, gestureType),
+            (.state, state)
+        )
         if let view = recognizer.view {
-            meta["view"] = String(describing: type(of: view))
+            meta[FieldKey.containerView.jsonKey] = String(describing: type(of: view))
         }
         emit(kind: .gesture, view: gestureType, metadata: meta)
     }
 
     @objc func handleTextFieldDidChange(_ notification: Notification) {
         guard let field = notification.object as? UITextField else { return }
-        let meta: [String: String] = [
-            "length": String(field.text?.count ?? 0)
-        ]
+        let meta = createFieldMap(
+            (.length, field.text?.count ?? 0)
+        )
         emit(kind: .edit, view: String(describing: type(of: field)), metadata: meta)
     }
 
     @objc func handleTextViewDidChange(_ notification: Notification) {
         guard let textView = notification.object as? UITextView else { return }
-        let meta: [String: String] = [
-            "length": String(textView.text.count)
-        ]
+        let meta = createFieldMap(
+            (.length, textView.text.count)
+        )
         emit(kind: .edit, view: String(describing: type(of: textView)), metadata: meta)
     }
 }

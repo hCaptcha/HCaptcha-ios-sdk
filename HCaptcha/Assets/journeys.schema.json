@@ -20,19 +20,21 @@
         "additionalProperties": true,
         "description": "Event metadata (minified keys)",
         "properties": {
-          "i":  { "type": "string", "description": "id" },
-          "s":  { "type": "string", "description": "screen" },
-          "a":  { "type": "string", "description": "action" },
+          "id": { "type": "string", "description": "id" },
+          "sc": { "type": "string", "description": "screen" },
+          "ac": { "type": "string", "description": "action" },
           "val":{ "type": ["string","number"], "description": "value" },
           "x":  { "type": "number", "description": "x coordinate" },
           "y":  { "type": "number", "description": "y coordinate" },
           "idx":{ "type": "integer", "description": "index" },
           "sct":{ "type": "integer", "description": "section index" },
-          "t":  { "type": "string", "description": "target type" },
-          "c":  { "type": "string", "description": "control type" },
-          "g":  { "type": "string", "description": "gesture type" },
-          "st": { "type": "string", "enum": ["possible","began","changed","ended","cancelled","failed","unknown"], "description": "gesture state" },
-          "tap":{ "type": "integer", "description": "tap count" }
+          "tt": { "type": "string", "description": "target type" },
+          "ct": { "type": "string", "description": "control type" },
+          "gt": { "type": "string", "description": "gesture type" },
+          "gs": { "type": "string", "enum": ["possible","began","changed","ended","cancelled","failed","unknown"], "description": "gesture state" },
+          "tap":{ "type": "integer", "description": "tap count" },
+          "cv": { "type": "string", "description": "container view" },
+          "ln": { "type": "integer", "description": "length" }
         }
       }
     }
