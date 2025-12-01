@@ -29,7 +29,6 @@ jobs:
     name: Test SDK
     permissions:
       contents: read
-      actions: write
     runs-on: macos-14
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -69,7 +68,6 @@ jobs:
     needs: test
     permissions:
       contents: read
-      actions: write
     runs-on: macos-14
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -93,7 +91,6 @@ jobs:
     needs: test
     permissions:
       contents: read
-      actions: write
     runs-on: macos-14
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -113,7 +110,6 @@ jobs:
     needs: test
     permissions:
       contents: read
-      actions: write
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
     strategy:
@@ -146,7 +142,6 @@ jobs:
     needs: test
     permissions:
       contents: read
-      actions: write
     runs-on: macos-14
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -167,7 +162,6 @@ jobs:
     permissions:
       pull-requests: write
       contents: read
-      actions: write
       issues: write
     runs-on: macos-14
     steps:
@@ -234,7 +228,6 @@ jobs:
     needs: test
     permissions:
       contents: read
-      actions: write
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental }}
     strategy:
@@ -274,7 +267,6 @@ jobs:
       - samples
     permissions:
       contents: write
-      actions: write
     runs-on: macos-14
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
