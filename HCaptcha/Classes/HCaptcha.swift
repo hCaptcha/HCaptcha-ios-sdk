@@ -77,9 +77,14 @@ public class HCaptcha: NSObject {
         theme: String = "light",
         customTheme: String? = nil,
         diagnosticLog: Bool = false,
-        disablePat: Bool = false
+        disablePat: Bool = false,
+        userJourney: Bool = false
     ) throws {
         Log.minLevel = diagnosticLog ? .debug : .warning
+
+        if userJourney {
+            guard HCaptchaJourneys.start() else { throw HCaptchaError.journeyliticsNotAvailable }
+        }
 
         let infoDict = Bundle.main.infoDictionary
 
@@ -104,7 +109,8 @@ public class HCaptcha: NSObject {
                                         theme: theme,
                                         customTheme: customTheme,
                                         locale: locale,
-                                        disablePat: disablePat)
+                                        disablePat: disablePat,
+                                        userJourney: userJourney)
 
         Log.debug(".init with: \(config)")
 
@@ -145,10 +151,9 @@ public class HCaptcha: NSObject {
                          completion: @escaping (HCaptchaResult) -> Void) {
         Log.debug(".validate on: \(String(describing: view)) resetOnError: \(resetOnError)")
 
-        manager.shouldResetOnError = resetOnError
-        manager.completion = completion
+        let verifyParams = HCaptchaVerifyParams(resetOnError: resetOnError)
 
-        manager.validate(on: view)
+        validate(on: view, verifyParams: verifyParams, completion: completion)
     }
 
     /**
@@ -164,9 +169,10 @@ public class HCaptcha: NSObject {
                          completion: @escaping (HCaptchaResult) -> Void) {
         Log.debug(".validate on: \(String(describing: view)) verifyParams: \(verifyParams)")
 
+        verifyParams.userJourney = HCaptchaJourneys.drainEvents()
+
         manager.completion = completion
         manager.verifyParams = verifyParams
-        manager.shouldResetOnError = verifyParams.resetOnError
 
         manager.validate(on: view)
     }
@@ -175,7 +181,7 @@ public class HCaptcha: NSObject {
     @objc
     public func stop() {
         Log.debug(".stop")
-
+        HCaptchaJourneys.stop()
         manager.stop()
     }
 
@@ -292,7 +298,12 @@ public class HCaptcha: NSObject {
                             host: String?,
                             theme: String,
                             customTheme: String?,
-                            diagnosticLog: Bool) throws {
+                            diagnosticLog: Bool,
+                            userJourney: Bool) throws {
+        if userJourney {
+            guard HCaptchaJourneys.start() else { throw HCaptchaError.journeyliticsNotAvailable }
+        }
+
         try self.init(apiKey: apiKey,
                       passiveApiKey: passiveApiKey,
                       baseURL: baseURL,
@@ -310,6 +321,7 @@ public class HCaptcha: NSObject {
                       theme: theme,
                       customTheme: customTheme,
                       diagnosticLog: diagnosticLog,
-                      disablePat: false)
+                      disablePat: false,
+                      userJourney: userJourney)
     }
 }

@@ -27,6 +27,8 @@
           window.webkit.messageHandlers.hcaptcha.postMessage(value);
       };
 
+      var token = null;
+
       var execute = function(verifyParams) {
           if (shouldFail) {
               post({error: 15}); // .sessionTimeout
@@ -43,15 +45,16 @@
                   post({"log": "verifyParams: " + JSON.stringify(verifyParams)});
               }
 
+              var messageToPost = ${message};
               if (rqdata) {
                   post({"log": rqdata});
               }
-              var messageToPost = ${message};
               if (messageToPost.action === "openExternalPage") {
                   document.getElementById("external-link").click();
               } else if (messageToPost.action === "sms") {
                   window.open("sms:+123-456-789?body=somebody-someone")
               }
+              messageToPost.token = token || messageToPost.token;
               post(messageToPost);
               if (messageToPost && messageToPost.token || messageToPost.action === "showHCaptcha") {
                   setTimeout(function() {
@@ -64,47 +67,61 @@
       var validateVerifyParams = function(params) {
           try {
               // Check if params is an object
-              if (typeof params !== 'object' || params === null) {
+              if (typeof params !== 'object') {
+                  post({"log": "bad object type"});
                   return 34; // verifyParamsParseError
               }
 
               // Validate phonePrefix if present
-              if (params.phonePrefix !== undefined) {
-                  if (typeof params.phonePrefix !== 'string') {
+              if (params.mfa_phoneprefix !== undefined) {
+                  if (typeof params.mfa_phoneprefix !== 'string') {
+                      post({"log": "bad type mfa_phoneprefix"});
                       return 34; // verifyParamsParseError
                   }
                   // Basic validation: should be 1-4 digits, optionally with + prefix
                   var phonePrefixRegex = /^\+?[1-9]\d{0,3}$/;
-                  if (!phonePrefixRegex.test(params.phonePrefix)) {
+                  if (!phonePrefixRegex.test(params.mfa_phoneprefix)) {
+                      post({"log": "malformed mfa_phoneprefix"});
                       return 34; // verifyParamsParseError
                   }
               }
 
               // Validate phoneNumber if present
-              if (params.phoneNumber !== undefined) {
-                  if (typeof params.phoneNumber !== 'string') {
+              if (params.mfa_phonenumber !== undefined) {
+                  if (typeof params.mfa_phonenumber !== 'string') {
+                      post({"log": "bad type mfa_phonenumber"});
                       return 34; // verifyParamsParseError
                   }
                   // Basic validation: should be 7-15 digits, optionally with + prefix
                   var phoneNumberRegex = /^\+?[1-9]\d{6,14}$/;
-                  if (!phoneNumberRegex.test(params.phoneNumber)) {
+                  if (!phoneNumberRegex.test(params.mfa_phonenumber)) {
+                      post({"log": "malformed mfa_phonenumber"});
                       return 34; // verifyParamsParseError
                   }
               }
 
               // Validate resetOnError if present
               if (params.resetOnError !== undefined && typeof params.resetOnError !== 'boolean') {
-                  return 34; // verifyParamsParseError
-              }
-
-              // At least one phone value should be present if verifyParams is provided
-              if (!params.phonePrefix && !params.phoneNumber) {
+                  post({"log": "bad type resetOnError"});
                   return 34; // verifyParamsParseError
               }
 
               return null; // No validation errors
           } catch (e) {
+              post({"log": "validateVerifyParams exception " + e.message});
               return 34; // verifyParamsParseError
+          }
+      };
+
+      // Mock hcaptcha.setData to accept userJourney and immediately post a token
+      var hcaptcha = {
+          setData: function(containerId, data) {
+              try {
+                  if (data && data.userJourney) {
+                      token = "journeys:setData";
+                  }
+              } catch (e) {
+              }
           }
       };
 

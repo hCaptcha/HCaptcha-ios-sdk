@@ -142,6 +142,9 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
     /// A debug property
     let disablePat: Bool?
 
+    /// Enable user journey tracking for analytics
+    let userJourney: Bool
+
     /// Return actual theme value based on init params. It must return valid JS object.
     var actualTheme: String {
         self.customTheme ?? "\"\(theme)\""
@@ -215,7 +218,8 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
                 customTheme: String?,
                 locale: Locale?,
                 loadingTimeout: TimeInterval = 5.0,
-                disablePat: Bool?) throws {
+                disablePat: Bool?,
+                userJourney: Bool = false) throws {
         guard let apiKey = apiKey ?? infoPlistKey else {
             throw HCaptchaError.apiKeyNotFound
         }
@@ -259,6 +263,7 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
         self.locale = locale
         self.loadingTimeout = loadingTimeout
         self.disablePat = disablePat
+        self.userJourney = userJourney
     }
 
     /**

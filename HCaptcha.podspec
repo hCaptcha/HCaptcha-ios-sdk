@@ -21,7 +21,8 @@ invisibility is not possible.
   s.default_subspecs = 'Core'
 
   s.subspec 'Core' do |core|
-    core.source_files = 'HCaptcha/Classes/*'
+    core.source_files = 'HCaptcha/Classes/*', 'HCaptcha/Classes/Core/**/*'
+    core.exclude_files = 'HCaptcha/Classes/Journeylitics/**/*'
     core.resource_bundles  = { 'HCaptcha_Privacy' => ['HCaptcha/Resources/PrivacyInfo.xcprivacy'] }
     core.frameworks = ['WebKit', 'JavaScriptCore']
   end
@@ -30,5 +31,10 @@ invisibility is not possible.
     rx.source_files = 'HCaptcha/Classes/Rx/**/*'
     rx.dependency 'HCaptcha/Core'
     rx.dependency 'RxSwift', '~> 6.9.0'
+  end
+
+  s.subspec 'Journeylitics' do |jl|
+    jl.source_files = 'HCaptcha/Classes/Journeylitics/**/*'
+    jl.dependency 'HCaptcha/Core'
   end
 end

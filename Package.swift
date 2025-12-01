@@ -17,6 +17,10 @@ let package = Package(
         .library(
             name: "HCaptcha_RxSwift",
             targets: ["HCaptcha_RxSwift"]
+        ),
+        .library(
+            name: "HCaptcha_Journeylitics",
+            targets: ["HCaptcha_Journeylitics"]
         )
     ],
     dependencies: [
@@ -26,7 +30,7 @@ let package = Package(
         .target(
             name: "HCaptcha",
             path: "HCaptcha",
-            exclude: ["Classes/Rx"],
+            exclude: ["Classes/Rx", "Classes/Journeylitics"],
             resources: [
                 .process("Resources/PrivacyInfo.xcprivacy")
             ]
@@ -38,6 +42,13 @@ let package = Package(
                 .product(name: "RxSwift", package: "RxSwift")
             ],
             path: "HCaptcha/Classes/Rx"
+        ),
+        .target(
+            name: "HCaptcha_Journeylitics",
+            dependencies: [
+                "HCaptcha"
+            ],
+            path: "HCaptcha/Classes/Journeylitics"
         )
     ]
 )
