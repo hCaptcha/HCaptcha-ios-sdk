@@ -9,18 +9,18 @@ public enum JLEventKind: String {
 }
 
 public struct JLEvent {
-    public let timestampMs: Int64
+    public let timestamp: Int64
     public let kind: JLEventKind
     public let view: String
     public let metadata: [String: Any]
 
     public init(
-        timestampMs: Int64 = Int64(Date().timeIntervalSince1970 * 1000),
+        timestamp: Int64 = Int64(Date().timeIntervalSince1970),
         kind: JLEventKind,
         view: String,
         metadata: [String: Any] = [:]
     ) {
-        self.timestampMs = timestampMs
+        self.timestamp = timestamp
         self.kind = kind
         self.view = view
         self.metadata = metadata

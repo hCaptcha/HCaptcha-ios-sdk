@@ -6,7 +6,7 @@
   "items": {
     "type": "object",
     "additionalProperties": false,
-    "required": ["k", "v", "ts", "m"],
+    "required": ["k", "v", "ts"],
     "properties": {
       "k": {
         "type": "string",
@@ -14,9 +14,9 @@
         "description": "Event kind"
       },
       "v": { "type": "string", "description": "View type name" },
-      "ts": { "type": "integer", "minimum": 0, "description": "Timestamp (ms since epoch)" },
+      "ts": { "type": "integer", "minimum": 0, "description": "Timestamp (seconds since epoch)" },
       "m": {
-        "type": "object",
+        "type": ["string", "object"],
         "additionalProperties": true,
         "description": "Event metadata (minified keys)",
         "properties": {

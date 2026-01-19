@@ -48,7 +48,7 @@ final class JourneyBridgeSink: JourneyliticsSink {
 
     func emit(_ event: JLEvent) {
         let journeyEvent: [String: Any] = [
-            FieldKey.timestamp.rawValue: event.timestampMs,
+            FieldKey.timestamp.rawValue: event.timestamp,
             FieldKey.kind.rawValue: event.kind.rawValue,
             FieldKey.view.rawValue: event.view,
             FieldKey.meta.rawValue: event.metadata

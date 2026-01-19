@@ -10,7 +10,7 @@ public final class NSLogSink: JourneyliticsSink {
     public func emit(_ event: JLEvent) {
         let parts: [String: String] = [
             FieldKey.kind.jsonKey: event.kind.rawValue,
-            FieldKey.timestamp.jsonKey: String(event.timestampMs),
+            FieldKey.timestamp.jsonKey: String(event.timestamp),
             FieldKey.meta.jsonKey: event.metadata.description
         ]
         let body = parts.map { (key: String, value: String) in "\"\(key)\":\"\(value)\"" }.joined(separator: ",")
