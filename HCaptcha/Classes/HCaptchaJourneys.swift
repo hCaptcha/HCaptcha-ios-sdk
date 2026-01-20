@@ -23,13 +23,13 @@ public enum HCaptchaJourneys {
     }
 
     /// Returns collected events as raw data ([] when unavailable/empty).
-    public static func drainEvents() -> [Any] {
+    public static func drainEvents() -> [Any]? {
         guard let impl = NSClassFromString("HCaptchaJourneysImpl") else { return [] }
         let sel = NSSelectorFromString("drainEvents")
         guard let unmanaged = (impl as AnyObject).perform(sel),
               let anyObj = unmanaged.takeUnretainedValue() as? [Any],
               JSONSerialization.isValidJSONObject(anyObj) else {
-            return []
+            return nil
         }
         return anyObj
     }

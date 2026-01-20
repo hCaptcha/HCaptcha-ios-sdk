@@ -27,6 +27,9 @@ public class HCaptcha: NSObject {
     /// The worker that handles webview events and communication
     let manager: HCaptchaWebViewManager
 
+    /// The user journey feature flag
+    let userJourney: Bool
+
     /**
      - parameters:
          - apiKey: The API key sent to the HCaptcha init
@@ -114,7 +117,7 @@ public class HCaptcha: NSObject {
 
         Log.debug(".init with: \(config)")
 
-        self.init(manager: HCaptchaWebViewManager(config: config))
+        self.init(manager: HCaptchaWebViewManager(config: config), userJourney: userJourney)
     }
 
     /**
@@ -122,8 +125,9 @@ public class HCaptcha: NSObject {
 
       Initializes HCaptcha with the given manager
     */
-    init(manager: HCaptchaWebViewManager) {
+    init(manager: HCaptchaWebViewManager, userJourney: Bool) {
         self.manager = manager
+        self.userJourney = userJourney
     }
 
     /**
@@ -169,7 +173,9 @@ public class HCaptcha: NSObject {
                          completion: @escaping (HCaptchaResult) -> Void) {
         Log.debug(".validate on: \(String(describing: view)) verifyParams: \(verifyParams)")
 
-        verifyParams.userJourney = HCaptchaJourneys.drainEvents()
+        if userJourney {
+            verifyParams.userJourney = HCaptchaJourneys.drainEvents()
+        }
 
         manager.completion = completion
         manager.verifyParams = verifyParams
