@@ -21,7 +21,7 @@ final class JourneyliticsHooks__Tests: XCTestCase {
         // When we simulate a scroll event via the proxy
         let scrollView = UIScrollView()
         let proxy = JLScrollDelegateProxy(original: nil)
-        proxy.scrollViewDidScroll(scrollView)
+        proxy.scrollViewWillBeginDragging(scrollView)
 
         // Then we should have received at least one drag event with numeric x,y
         guard let event = recorder.events.last else { return XCTFail("No events recorded") }
@@ -252,9 +252,9 @@ final class JourneyliticsHooks__Tests: XCTestCase {
         let scroll = UIScrollView()
         let spy = SpyScrollDelegate()
         scroll.delegate = spy
-        scroll.delegate?.scrollViewDidScroll?(scroll)
+        scroll.delegate?.scrollViewWillBeginDragging?(scroll)
 
-        XCTAssertTrue(spy.didScrollCalled)
+        XCTAssertTrue(spy.didBeginDraggingCalled)
         guard let event = recorder.events.last else { return XCTFail("No events recorded") }
         XCTAssertEqual(event.kind, .drag)
     }
@@ -326,8 +326,12 @@ private final class SpyActionTarget: NSObject {
 }
 
 private final class SpyScrollDelegate: NSObject, UIScrollViewDelegate {
-    var didScrollCalled = false
-    func scrollViewDidScroll(_ scrollView: UIScrollView) { didScrollCalled = true }
+    var didBeginDraggingCalled = false
+    var didEndDraggingCalled = false
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) { didBeginDraggingCalled = true }
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        didEndDraggingCalled = true
+    }
 }
 
 private final class SpyTableDelegate: NSObject, UITableViewDelegate {
@@ -636,10 +640,10 @@ extension JourneyliticsHooks__Tests {
         scrollView.delegate = spyDelegate
 
         // Simulate scroll event through the proxy
-        scrollView.delegate?.scrollViewDidScroll?(scrollView)
+        scrollView.delegate?.scrollViewWillBeginDragging?(scrollView)
 
         // Then: Events should be emitted and original delegate called
-        XCTAssertTrue(spyDelegate.didScrollCalled, "Original delegate should be called")
+        XCTAssertTrue(spyDelegate.didBeginDraggingCalled, "Original delegate should be called")
         XCTAssertFalse(recorder.events.isEmpty, "Should have recorded events")
         let dragEvents = recorder.events.filter { $0.kind == .drag }
         XCTAssertFalse(dragEvents.isEmpty, "Should have recorded drag events")

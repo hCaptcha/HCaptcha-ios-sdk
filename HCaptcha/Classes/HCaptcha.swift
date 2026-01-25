@@ -125,7 +125,7 @@ public class HCaptcha: NSObject {
 
       Initializes HCaptcha with the given manager
     */
-    init(manager: HCaptchaWebViewManager, userJourney: Bool) {
+    init(manager: HCaptchaWebViewManager, userJourney: Bool = false) {
         self.manager = manager
         self.userJourney = userJourney
     }

@@ -25,7 +25,8 @@ extension HCaptchaConfig {
          customTheme: String? = nil,
          locale: Locale? = nil,
          loadingTimeout: TimeInterval = 5.0,
-         disablePat: Bool? = nil) throws {
+         disablePat: Bool? = nil,
+         userJourney: Bool = false) throws {
 
         try self.init(html: html,
                       apiKey: apiKey,
@@ -47,7 +48,8 @@ extension HCaptchaConfig {
                       customTheme: customTheme,
                       locale: locale,
                       loadingTimeout: loadingTimeout,
-                      disablePat: disablePat)
+                      disablePat: disablePat,
+                      userJourney: userJourney)
     }
 
     init(apiKey: String = "some-api-key",

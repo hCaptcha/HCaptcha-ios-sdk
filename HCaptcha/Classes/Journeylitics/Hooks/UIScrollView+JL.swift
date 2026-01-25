@@ -23,22 +23,16 @@ final class JLScrollDelegateProxy: NSObject, UIScrollViewDelegate {
         return original
     }
 
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         let meta = createFieldMap((.x, Double(scrollView.contentOffset.x)), (.y, Double(scrollView.contentOffset.y)))
         JLCore.shared.emit(kind: .drag, view: scrollView.viewTypeName, metadata: meta)
-        (original as AnyObject?)?.scrollViewDidScroll?(scrollView)
-    }
-
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         (original as AnyObject?)?.scrollViewWillBeginDragging?(scrollView)
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         (original as AnyObject?)?.scrollViewDidEndDragging?(scrollView, willDecelerate: decelerate)
-    }
-
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        (original as AnyObject?)?.scrollViewDidEndDecelerating?(scrollView)
+        let meta = createFieldMap((.x, Double(scrollView.contentOffset.x)), (.y, Double(scrollView.contentOffset.y)))
+        JLCore.shared.emit(kind: .drag, view: scrollView.viewTypeName, metadata: meta)
     }
 }
 
@@ -51,6 +45,7 @@ extension UIScrollView {
             original: NSSelectorFromString("setDelegate:"),
             swizzled: #selector(UIScrollView.jl_setDelegate(_:))
         )
+        jl_wrapExistingDelegates()
     }
 
     static func jl_uninstallHook() {
@@ -70,6 +65,37 @@ extension UIScrollView {
             jl_setDelegate(proxy)
         } else {
             jl_setDelegate(nil)
+        }
+    }
+
+    private static func jl_wrapExistingDelegates() {
+        var scrollViews: [UIScrollView] = []
+        for window in jl_allWindows() {
+            jl_collectScrollViews(in: window, into: &scrollViews)
+        }
+        for scrollView in scrollViews {
+            guard !(scrollView.delegate is JLScrollDelegateProxy) else { continue }
+            let proxy = JLScrollDelegateProxy(original: scrollView.delegate)
+            objc_setAssociatedObject(scrollView, &jlProxyKey, proxy, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            scrollView.jl_setDelegate(proxy)
+        }
+    }
+
+    private static func jl_allWindows() -> [UIWindow] {
+        if #available(iOS 13.0, *) {
+            return UIApplication.shared.connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .flatMap { $0.windows }
+        }
+        return UIApplication.shared.windows
+    }
+
+    private static func jl_collectScrollViews(in view: UIView, into list: inout [UIScrollView]) {
+        if let scrollView = view as? UIScrollView {
+            list.append(scrollView)
+        }
+        for subview in view.subviews {
+            jl_collectScrollViews(in: subview, into: &list)
         }
     }
 }
