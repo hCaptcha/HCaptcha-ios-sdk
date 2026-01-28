@@ -34,13 +34,13 @@ public enum HCaptchaJourneys {
         return anyObj
     }
 
-    /// Returns collected events as a JSON string ("[]" when unavailable/empty).
+    /// Returns collected events as a JSON string (nil when unavailable/empty).
     /// @deprecated Use drainEvents() instead for better performance
-    public static func drainEventsAsJSONString() -> String {
-        let events = drainEvents()
-        guard let data = try? JSONSerialization.data(withJSONObject: events, options: []),
+    public static func drainEventsAsJSONString() -> String? {
+        guard let events = drainEvents(),
+              let data = try? JSONSerialization.data(withJSONObject: events, options: []),
               let json = String(data: data, encoding: .utf8) else {
-            return "[]"
+            return nil
         }
         return json
     }
