@@ -24,7 +24,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/ReactiveX/RxSwift", .upToNextMajor(from: "6.10.0"))
+        .package(url: "https://github.com/CAMOBAP/RxSwift", .branch("main"))
     ],
     targets: [
         .target(
