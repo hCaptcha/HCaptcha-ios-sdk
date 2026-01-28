@@ -17,16 +17,20 @@ let package = Package(
         .library(
             name: "HCaptcha_RxSwift",
             targets: ["HCaptcha_RxSwift"]
+        ),
+        .library(
+            name: "HCaptcha_Journeylitics",
+            targets: ["HCaptcha_Journeylitics"]
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/ReactiveX/RxSwift", .upToNextMajor(from: "6.2.0"))
+        .package(url: "https://github.com/CAMOBAP/RxSwift", .branch("main"))
     ],
     targets: [
         .target(
             name: "HCaptcha",
             path: "HCaptcha",
-            exclude: ["Classes/Rx"],
+            exclude: ["Classes/Rx", "Classes/Journeylitics"],
             resources: [
                 .process("Resources/PrivacyInfo.xcprivacy")
             ]
@@ -38,6 +42,13 @@ let package = Package(
                 .product(name: "RxSwift", package: "RxSwift")
             ],
             path: "HCaptcha/Classes/Rx"
+        ),
+        .target(
+            name: "HCaptcha_Journeylitics",
+            dependencies: [
+                "HCaptcha"
+            ],
+            path: "HCaptcha/Classes/Journeylitics"
         )
     ]
 )

@@ -27,6 +27,7 @@ extension HCaptchaWebViewManager {
         rqdata: String? = nil,
         theme: String = "light",
         customTheme: String? = nil,
+        userJourney: Bool = false,
         urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener()
     ) {
         let html = String(format: HCaptchaWebViewManager.unformattedHTML,
@@ -44,7 +45,8 @@ extension HCaptchaWebViewManager {
             rqdata: rqdata,
             theme: theme,
             customTheme: customTheme,
-            urlOpener: urlOpener
+            urlOpener: urlOpener,
+            userJourney: userJourney
         )
     }
 
@@ -59,7 +61,8 @@ extension HCaptchaWebViewManager {
         theme: String = "light",
         customTheme: String? = nil,
         urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener(),
-        loadingTimeout: TimeInterval = 5
+        loadingTimeout: TimeInterval = 5,
+        userJourney: Bool = false
     ) {
         let localhost = URL(string: "http://localhost")!
 
@@ -74,7 +77,9 @@ extension HCaptchaWebViewManager {
                                          endpoint: endpoint,
                                          theme: theme,
                                          customTheme: customTheme,
-                                         loadingTimeout: loadingTimeout)
+                                         loadingTimeout: loadingTimeout,
+                                         disablePat: nil,
+                                         userJourney: userJourney)
 
         self.init(
             config: config,
@@ -87,7 +92,7 @@ extension HCaptchaWebViewManager {
     }
 
     func validate(on view: UIView, resetOnError: Bool = true, completion: @escaping (HCaptchaResult) -> Void) {
-        self.shouldResetOnError = resetOnError
+        self.verifyParams = HCaptchaVerifyParams(resetOnError: resetOnError)
         self.completion = completion
 
         validate(on: view)

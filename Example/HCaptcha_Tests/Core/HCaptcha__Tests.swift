@@ -280,7 +280,7 @@ class HCaptcha__Tests: XCTestCase {
 
             override func validate(on view: UIView?) {
                 receivedVerifyParams = self.verifyParams
-                receivedResetOnError = self.shouldResetOnError
+                receivedResetOnError = self.verifyParams?.resetOnError ?? true
                 super.validate(on: view)
             }
         }
@@ -312,7 +312,7 @@ class HCaptcha__Tests: XCTestCase {
             var receivedResetOnError: Bool?
 
             override func validate(on view: UIView?) {
-                receivedResetOnError = self.shouldResetOnError
+                receivedResetOnError = self.verifyParams?.resetOnError ?? true
                 super.validate(on: view)
             }
         }
@@ -329,6 +329,19 @@ class HCaptcha__Tests: XCTestCase {
         }
 
         wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+
+    // MARK: - User Journeys Tests
+    // To run manually once Journeylitics subspec removed from test target app
+    func test__userJourney_enabled_without_impl_throws() {
+        do {
+            _ = try HCaptcha(userJourney: true)
+            XCTFail("Expected journeyliticsNotAvailable error when Journeylitics impl is not linked")
+        } catch let error as HCaptchaError {
+            XCTAssertEqual(error, .journeyliticsNotAvailable)
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
     }
 }
 

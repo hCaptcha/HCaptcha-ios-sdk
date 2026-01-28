@@ -9,7 +9,29 @@
 /* Begin PBXBuildFile section */
 		1F833B7F271DC69C00E4DAB2 /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */; };
 		1F833B80271DC69C00E4DAB2 /* RxSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		43C3B8F62EB973A500705F63 /* HCaptcha_Journeylitics.h in Headers */ = {isa = PBXBuildFile; fileRef = 43C3B8F42EB973A500705F63 /* HCaptcha_Journeylitics.h */; };
+		43C3B8FA2EBA065F00705F63 /* HCaptchaWebViewManager+JSCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C3B8F72EBA065F00705F63 /* HCaptchaWebViewManager+JSCommand.swift */; };
+		43C3B8FC2EBA07C900705F63 /* HCaptchaWebViewManager+Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C3B8FB2EBA07C900705F63 /* HCaptchaWebViewManager+Private.swift */; };
 		43DC08142E971586003839A5 /* HCaptchaVerifyParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08132E971586003839A5 /* HCaptchaVerifyParams.swift */; };
+		43DC08392EA819C2003839A5 /* UISearchBar+JL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC082C2EA819C2003839A5 /* UISearchBar+JL.swift */; };
+		43DC083A2EA819C2003839A5 /* JourneyliticsCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08232EA819C2003839A5 /* JourneyliticsCore.swift */; };
+		43DC083B2EA819C2003839A5 /* JourneyliticsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08372EA819C2003839A5 /* JourneyliticsConfig.swift */; };
+		43DC083C2EA819C2003839A5 /* Journeylitics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08362EA819C2003839A5 /* Journeylitics.swift */; };
+		43DC083D2EA819C2003839A5 /* FieldKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08332EA819C2003839A5 /* FieldKey.swift */; };
+		43DC083E2EA819C2003839A5 /* InMemorySink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08312EA819C2003839A5 /* InMemorySink.swift */; };
+		43DC083F2EA819C2003839A5 /* Swizzler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08242EA819C2003839A5 /* Swizzler.swift */; };
+		43DC08402EA819C2003839A5 /* UIScrollView+JL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC082B2EA819C2003839A5 /* UIScrollView+JL.swift */; };
+		43DC08412EA819C2003839A5 /* UICollectionView+JL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08272EA819C2003839A5 /* UICollectionView+JL.swift */; };
+		43DC08422EA819C2003839A5 /* UITableView+JL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC082D2EA819C2003839A5 /* UITableView+JL.swift */; };
+		43DC08432EA819C2003839A5 /* ConsoleSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08302EA819C2003839A5 /* ConsoleSink.swift */; };
+		43DC08442EA819C2003839A5 /* UIGestureRecognizer+JL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08292EA819C2003839A5 /* UIGestureRecognizer+JL.swift */; };
+		43DC08452EA819C2003839A5 /* UIApplication+JL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08262EA819C2003839A5 /* UIApplication+JL.swift */; };
+		43DC08462EA819C2003839A5 /* UIViewController+JL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC082E2EA819C2003839A5 /* UIViewController+JL.swift */; };
+		43DC08472EA819C2003839A5 /* HCaptchaJourneysImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08342EA819C2003839A5 /* HCaptchaJourneysImpl.swift */; };
+		43DC08482EA819C2003839A5 /* UIControl+JL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08282EA819C2003839A5 /* UIControl+JL.swift */; };
+		43DC08492EA819C2003839A5 /* UIPickerView+JL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC082A2EA819C2003839A5 /* UIPickerView+JL.swift */; };
+		43DC084A2EA819C2003839A5 /* JLEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08352EA819C2003839A5 /* JLEvent.swift */; };
+		43DC084C2EA819DB003839A5 /* HCaptchaJourneys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC084B2EA819DB003839A5 /* HCaptchaJourneys.swift */; };
 		E614B37B2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E614B37A2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift */; };
 		E634944A2828856300130AC5 /* HCaptchaEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63494492828856300130AC5 /* HCaptchaEvent.swift */; };
 		E64C60082B7DFBE900D203F4 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E64C60072B7DFBE900D203F4 /* PrivacyInfo.xcprivacy */; };
@@ -56,7 +78,30 @@
 
 /* Begin PBXFileReference section */
 		1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
+		43C3B8F42EB973A500705F63 /* HCaptcha_Journeylitics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCaptcha_Journeylitics.h; sourceTree = "<group>"; };
+		43C3B8F72EBA065F00705F63 /* HCaptchaWebViewManager+JSCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HCaptchaWebViewManager+JSCommand.swift"; sourceTree = "<group>"; };
+		43C3B8FB2EBA07C900705F63 /* HCaptchaWebViewManager+Private.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HCaptchaWebViewManager+Private.swift"; sourceTree = "<group>"; };
 		43DC08132E971586003839A5 /* HCaptchaVerifyParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaVerifyParams.swift; sourceTree = "<group>"; };
+		43DC081A2EA8199F003839A5 /* HCaptcha_Journeylitics.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HCaptcha_Journeylitics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		43DC08232EA819C2003839A5 /* JourneyliticsCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyliticsCore.swift; sourceTree = "<group>"; };
+		43DC08242EA819C2003839A5 /* Swizzler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swizzler.swift; sourceTree = "<group>"; };
+		43DC08262EA819C2003839A5 /* UIApplication+JL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+JL.swift"; sourceTree = "<group>"; };
+		43DC08272EA819C2003839A5 /* UICollectionView+JL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+JL.swift"; sourceTree = "<group>"; };
+		43DC08282EA819C2003839A5 /* UIControl+JL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+JL.swift"; sourceTree = "<group>"; };
+		43DC08292EA819C2003839A5 /* UIGestureRecognizer+JL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIGestureRecognizer+JL.swift"; sourceTree = "<group>"; };
+		43DC082A2EA819C2003839A5 /* UIPickerView+JL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPickerView+JL.swift"; sourceTree = "<group>"; };
+		43DC082B2EA819C2003839A5 /* UIScrollView+JL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+JL.swift"; sourceTree = "<group>"; };
+		43DC082C2EA819C2003839A5 /* UISearchBar+JL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+JL.swift"; sourceTree = "<group>"; };
+		43DC082D2EA819C2003839A5 /* UITableView+JL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+JL.swift"; sourceTree = "<group>"; };
+		43DC082E2EA819C2003839A5 /* UIViewController+JL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+JL.swift"; sourceTree = "<group>"; };
+		43DC08302EA819C2003839A5 /* ConsoleSink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleSink.swift; sourceTree = "<group>"; };
+		43DC08312EA819C2003839A5 /* InMemorySink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemorySink.swift; sourceTree = "<group>"; };
+		43DC08332EA819C2003839A5 /* FieldKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldKey.swift; sourceTree = "<group>"; };
+		43DC08342EA819C2003839A5 /* HCaptchaJourneysImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaJourneysImpl.swift; sourceTree = "<group>"; };
+		43DC08352EA819C2003839A5 /* JLEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLEvent.swift; sourceTree = "<group>"; };
+		43DC08362EA819C2003839A5 /* Journeylitics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journeylitics.swift; sourceTree = "<group>"; };
+		43DC08372EA819C2003839A5 /* JourneyliticsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyliticsConfig.swift; sourceTree = "<group>"; };
+		43DC084B2EA819DB003839A5 /* HCaptchaJourneys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaJourneys.swift; sourceTree = "<group>"; };
 		E614B37A2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HCaptchaWebViewManager+WKNavigationDelegate.swift"; sourceTree = "<group>"; };
 		E63494492828856300130AC5 /* HCaptchaEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaEvent.swift; sourceTree = "<group>"; };
 		E64C60072B7DFBE900D203F4 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -84,6 +129,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		43DC08172EA8199F003839A5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F206BAAC1F8D3DE900A25807 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -102,6 +154,63 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		43C3B8F52EB973A500705F63 /* HCaptcha_Journeylitics */ = {
+			isa = PBXGroup;
+			children = (
+				43C3B8F42EB973A500705F63 /* HCaptcha_Journeylitics.h */,
+			);
+			path = HCaptcha_Journeylitics;
+			sourceTree = "<group>";
+		};
+		43DC08252EA819C2003839A5 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				43DC08232EA819C2003839A5 /* JourneyliticsCore.swift */,
+				43DC08242EA819C2003839A5 /* Swizzler.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		43DC082F2EA819C2003839A5 /* Hooks */ = {
+			isa = PBXGroup;
+			children = (
+				43DC08262EA819C2003839A5 /* UIApplication+JL.swift */,
+				43DC08272EA819C2003839A5 /* UICollectionView+JL.swift */,
+				43DC08282EA819C2003839A5 /* UIControl+JL.swift */,
+				43DC08292EA819C2003839A5 /* UIGestureRecognizer+JL.swift */,
+				43DC082A2EA819C2003839A5 /* UIPickerView+JL.swift */,
+				43DC082B2EA819C2003839A5 /* UIScrollView+JL.swift */,
+				43DC082C2EA819C2003839A5 /* UISearchBar+JL.swift */,
+				43DC082D2EA819C2003839A5 /* UITableView+JL.swift */,
+				43DC082E2EA819C2003839A5 /* UIViewController+JL.swift */,
+			);
+			path = Hooks;
+			sourceTree = "<group>";
+		};
+		43DC08322EA819C2003839A5 /* Sinks */ = {
+			isa = PBXGroup;
+			children = (
+				43DC08302EA819C2003839A5 /* ConsoleSink.swift */,
+				43DC08312EA819C2003839A5 /* InMemorySink.swift */,
+			);
+			path = Sinks;
+			sourceTree = "<group>";
+		};
+		43DC08382EA819C2003839A5 /* Journeylitics */ = {
+			isa = PBXGroup;
+			children = (
+				43DC08252EA819C2003839A5 /* Core */,
+				43DC082F2EA819C2003839A5 /* Hooks */,
+				43DC08322EA819C2003839A5 /* Sinks */,
+				43DC08332EA819C2003839A5 /* FieldKey.swift */,
+				43DC08342EA819C2003839A5 /* HCaptchaJourneysImpl.swift */,
+				43DC08352EA819C2003839A5 /* JLEvent.swift */,
+				43DC08362EA819C2003839A5 /* Journeylitics.swift */,
+				43DC08372EA819C2003839A5 /* JourneyliticsConfig.swift */,
+			);
+			path = Journeylitics;
+			sourceTree = "<group>";
+		};
 		E64C60062B7DFBE900D203F4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +225,7 @@
 				F206BACF1F8D3E2800A25807 /* Cartfile */,
 				F206BAB21F8D3DE900A25807 /* HCaptcha-Carthage */,
 				F206BB1A1F8D4DBC00A25807 /* HCaptcha_RxSwift */,
+				43C3B8F52EB973A500705F63 /* HCaptcha_Journeylitics */,
 				F206BAB11F8D3DE900A25807 /* Products */,
 				F206BAD11F8D3E7600A25807 /* Frameworks */,
 				F24EA1D41F967F21001DEC17 /* Recovered References */,
@@ -127,6 +237,7 @@
 			children = (
 				F206BAB01F8D3DE900A25807 /* HCaptcha.framework */,
 				F206BB191F8D4DBC00A25807 /* HCaptcha_RxSwift.framework */,
+				43DC081A2EA8199F003839A5 /* HCaptcha_Journeylitics.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -178,6 +289,7 @@
 		F24EA1D71F9683F5001DEC17 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				43DC084B2EA819DB003839A5 /* HCaptchaJourneys.swift */,
 				E65C089F2A656CC6002E82EC /* HCaptchaLog.swift */,
 				E63494492828856300130AC5 /* HCaptchaEvent.swift */,
 				E65145E227786BDB0079668A /* HCaptchaConfig.swift */,
@@ -185,15 +297,18 @@
 				E6DB9EA727B15954008F0327 /* HCaptchaDebugInfo.swift */,
 				43DC08132E971586003839A5 /* HCaptchaVerifyParams.swift */,
 				F24EA1D91F9683F5001DEC17 /* HCaptchaWebViewManager.swift */,
+				43C3B8F72EBA065F00705F63 /* HCaptchaWebViewManager+JSCommand.swift */,
+				43C3B8FB2EBA07C900705F63 /* HCaptchaWebViewManager+Private.swift */,
 				E614B37A2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift */,
 				F24EA1DA1F9683F5001DEC17 /* String+Dict.swift */,
 				F24EA1DB1F9683F5001DEC17 /* HCaptchaError.swift */,
 				F2AE8613204F3B41002E28D7 /* HCaptchaResult.swift */,
 				F231B3991FEC51C800F82943 /* DispatchQueue+Throttle.swift */,
-				F24EA1DC1F9683F5001DEC17 /* Rx */,
 				F24EA1DE1F9683F5001DEC17 /* HCaptcha.swift */,
 				E683772029053E560021BFD7 /* HCaptchaURLOpener.swift */,
 				E6BF595B288AE915007CE1CE /* HCaptchaHtml.swift */,
+				43DC08382EA819C2003839A5 /* Journeylitics */,
+				F24EA1DC1F9683F5001DEC17 /* Rx */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -209,6 +324,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		43DC08152EA8199F003839A5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43C3B8F62EB973A500705F63 /* HCaptcha_Journeylitics.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F206BAAD1F8D3DE900A25807 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -228,6 +351,26 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		43DC08192EA8199F003839A5 /* HCaptcha_Journeylitics */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43DC08202EA8199F003839A5 /* Build configuration list for PBXNativeTarget "HCaptcha_Journeylitics" */;
+			buildPhases = (
+				43DC08152EA8199F003839A5 /* Headers */,
+				43DC08162EA8199F003839A5 /* Sources */,
+				43DC08172EA8199F003839A5 /* Frameworks */,
+				43DC08182EA8199F003839A5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HCaptcha_Journeylitics;
+			packageProductDependencies = (
+			);
+			productName = HCaptcha_Journeylitics;
+			productReference = 43DC081A2EA8199F003839A5 /* HCaptcha_Journeylitics.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		F206BAAF1F8D3DE900A25807 /* HCaptcha */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F206BAB81F8D3DE900A25807 /* Build configuration list for PBXNativeTarget "HCaptcha" */;
@@ -272,9 +415,13 @@
 		F206BAA71F8D3DE900A25807 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Flávio Caetano";
 				TargetAttributes = {
+					43DC08192EA8199F003839A5 = {
+						CreatedOnToolsVersion = 16.4;
+					};
 					F206BAAF1F8D3DE900A25807 = {
 						CreatedOnToolsVersion = 8.3.2;
 						ProvisioningStyle = Automatic;
@@ -286,7 +433,7 @@
 				};
 			};
 			buildConfigurationList = F206BAAA1F8D3DE900A25807 /* Build configuration list for PBXProject "HCaptcha-Carthage" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -300,11 +447,19 @@
 			targets = (
 				F206BAAF1F8D3DE900A25807 /* HCaptcha */,
 				F206BB181F8D4DBC00A25807 /* HCaptcha_RxSwift */,
+				43DC08192EA8199F003839A5 /* HCaptcha_Journeylitics */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		43DC08182EA8199F003839A5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F206BAAE1F8D3DE900A25807 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -323,12 +478,38 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		43DC08162EA8199F003839A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43DC08392EA819C2003839A5 /* UISearchBar+JL.swift in Sources */,
+				43DC083A2EA819C2003839A5 /* JourneyliticsCore.swift in Sources */,
+				43DC083B2EA819C2003839A5 /* JourneyliticsConfig.swift in Sources */,
+				43DC083C2EA819C2003839A5 /* Journeylitics.swift in Sources */,
+				43DC083D2EA819C2003839A5 /* FieldKey.swift in Sources */,
+				43DC083E2EA819C2003839A5 /* InMemorySink.swift in Sources */,
+				43DC083F2EA819C2003839A5 /* Swizzler.swift in Sources */,
+				43DC08402EA819C2003839A5 /* UIScrollView+JL.swift in Sources */,
+				43DC08412EA819C2003839A5 /* UICollectionView+JL.swift in Sources */,
+				43DC08422EA819C2003839A5 /* UITableView+JL.swift in Sources */,
+				43DC08432EA819C2003839A5 /* ConsoleSink.swift in Sources */,
+				43DC08442EA819C2003839A5 /* UIGestureRecognizer+JL.swift in Sources */,
+				43DC08452EA819C2003839A5 /* UIApplication+JL.swift in Sources */,
+				43DC08462EA819C2003839A5 /* UIViewController+JL.swift in Sources */,
+				43DC08472EA819C2003839A5 /* HCaptchaJourneysImpl.swift in Sources */,
+				43DC08482EA819C2003839A5 /* UIControl+JL.swift in Sources */,
+				43DC08492EA819C2003839A5 /* UIPickerView+JL.swift in Sources */,
+				43DC084A2EA819C2003839A5 /* JLEvent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F206BAAB1F8D3DE900A25807 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				E6BF595C288AE915007CE1CE /* HCaptchaHtml.swift in Sources */,
 				E634944A2828856300130AC5 /* HCaptchaEvent.swift in Sources */,
+				43C3B8FA2EBA065F00705F63 /* HCaptchaWebViewManager+JSCommand.swift in Sources */,
 				E65C08A02A656CC6002E82EC /* HCaptchaLog.swift in Sources */,
 				F24EA1E51F968403001DEC17 /* HCaptchaError.swift in Sources */,
 				E65145E327786BDB0079668A /* HCaptchaConfig.swift in Sources */,
@@ -339,7 +520,9 @@
 				43DC08142E971586003839A5 /* HCaptchaVerifyParams.swift in Sources */,
 				F24EA1E41F968403001DEC17 /* String+Dict.swift in Sources */,
 				F231B39A1FEC51C800F82943 /* DispatchQueue+Throttle.swift in Sources */,
+				43DC084C2EA819DB003839A5 /* HCaptchaJourneys.swift in Sources */,
 				E6DB9EA827B15954008F0327 /* HCaptchaDebugInfo.swift in Sources */,
+				43C3B8FC2EBA07C900705F63 /* HCaptchaWebViewManager+Private.swift in Sources */,
 				E614B37B2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift in Sources */,
 				E683772129053E560021BFD7 /* HCaptchaURLOpener.swift in Sources */,
 			);
@@ -364,6 +547,96 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		43DC081E2EA8199F003839A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Flávio Caetano. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hcaptcha.HCaptcha-Journeylitics";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		43DC081F2EA8199F003839A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2025 Flávio Caetano. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hcaptcha.HCaptcha-Journeylitics";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		F206BAB61F8D3DE900A25807 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -599,6 +872,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		43DC08202EA8199F003839A5 /* Build configuration list for PBXNativeTarget "HCaptcha_Journeylitics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43DC081E2EA8199F003839A5 /* Debug */,
+				43DC081F2EA8199F003839A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F206BAAA1F8D3DE900A25807 /* Build configuration list for PBXProject "HCaptcha-Carthage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -25,6 +25,7 @@ class BaseViewController: UIViewController {
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var phoneModeSwitch: UISwitch!
     @IBOutlet weak var phoneModeLabel: UILabel!
+    @IBOutlet weak var journeySwitch: UISwitch!
 
     var hcaptcha: HCaptcha!
     var locale: Locale?
@@ -65,6 +66,10 @@ class BaseViewController: UIViewController {
             phoneTextField.placeholder = "Enter prefix (e.g., 44)"
             phoneTextField.keyboardType = .numberPad
         }
+    }
+
+    @IBAction func journeySwitchChanged(_ sender: UISwitch) {
+        setupHCaptcha()
     }
 
     @IBAction func didPressLocaleSegmentedControl(_ sender: UISegmentedControl) {

@@ -49,3 +49,6 @@ file_header:
     \/\/  Created by .*? on \d{1,2}\/\d{1,2}\/\d{2}\.
     \/\/  Copyright © 2018 HCaptcha\. All rights reserved\.
     \/\/
+
+identifier_name:
+  excluded: [x, y, id]

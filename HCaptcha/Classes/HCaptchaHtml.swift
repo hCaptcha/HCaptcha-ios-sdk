@@ -60,19 +60,8 @@ struct HCaptchaHtml {
               var setVerifyParams = function(params) {
                 console.log("setting verify params:", params);
                 try {
-                  var phone = params.phoneNumber || params.mfa_phone;
-                  var prefix = params.phonePrefix || params.mfa_phoneprefix;
-                  var rqdata = params.rqdata || "${rqdata}";
-
-                  if (phone || prefix || rqdata) {
-                    var data = {};
-                    if (phone) data.mfa_phone = phone;
-                    if (prefix) data.mfa_phoneprefix = prefix;
-                    if (rqdata) data.rqdata = rqdata;
-
-                    if (window.hCaptchaID) {
-                      hcaptcha.setData(window.hCaptchaID, data);
-                    }
+                  if (params && window.hCaptchaID) {
+                    hcaptcha.setData(window.hCaptchaID, params);
                   }
                 } catch (e) {
                   console.log("failed to set verify params");
