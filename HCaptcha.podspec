@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name             = 'HCaptcha'
-  s.version          = '2.10.0'
+  s.version          = '2.11.0'
   s.summary          = 'HCaptcha for iOS'
   s.swift_version    = '5.0'
-  
+
   s.description      = <<-DESC
 Add [hCaptcha](https://hcaptcha.com) to your project. This library
 automatically handles HCaptcha's events and retrieves the validation token or notifies you to present the challenge if

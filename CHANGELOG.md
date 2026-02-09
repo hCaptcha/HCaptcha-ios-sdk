@@ -1,3 +1,8 @@
+# 2.11.0
+
+- Fix: Switch to fork of RxSwift
+- Fix: Update WebView manager config to prevent full screen video
+
 # 2.10.0
 
 - Feat: Add phone prefix/number support for MFA flows
