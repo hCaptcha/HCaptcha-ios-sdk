@@ -1,3 +1,7 @@
+# 2.12.0
+
+- Fix: Revert RxSwift dependency back to ReactiveX upstream in Swift Package Manager
+
 # 2.11.0
 
 - Fix: Switch to fork of RxSwift
