@@ -18,9 +18,11 @@ extension HCaptchaError: Equatable {
              (.wrongMessageFormat, .wrongMessageFormat),
              (.failedSetup, .failedSetup),
              (.sessionTimeout, .sessionTimeout),
+             (.challengeClosed, .challengeClosed),
              (.rateLimit, .rateLimit),
              (.invalidCustomTheme, .invalidCustomTheme),
              (.networkError, .networkError),
+             (.verifyParamsParseError, .verifyParamsParseError),
              (.invalidHostFormat, .invalidHostFormat):
             return true
         case (.unexpected(let lhe as NSError), .unexpected(let rhe as NSError)):
@@ -38,8 +40,10 @@ extension HCaptchaError: Equatable {
             .wrongMessageFormat,
             .failedSetup,
             .sessionTimeout,
+            .challengeClosed,
             .rateLimit,
             .invalidCustomTheme,
+            .verifyParamsParseError,
             .invalidHostFormat,
             .networkError,
             .unexpected(NSError())
