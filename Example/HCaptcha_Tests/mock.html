@@ -97,8 +97,13 @@
                   return 34; // verifyParamsParseError
               }
 
-              // At least one phone value should be present if verifyParams is provided
-              if (!params.phonePrefix && !params.phoneNumber) {
+              // Validate rqdata if present
+              if (params.rqdata !== undefined && typeof params.rqdata !== 'string') {
+                  return 34; // verifyParamsParseError
+              }
+
+              // At least one supported verify param should be present if verifyParams is provided
+              if (!params.phonePrefix && !params.phoneNumber && !params.rqdata) {
                   return 34; // verifyParamsParseError
               }
 

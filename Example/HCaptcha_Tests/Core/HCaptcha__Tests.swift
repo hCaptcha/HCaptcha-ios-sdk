@@ -232,6 +232,96 @@ class HCaptcha__Tests: XCTestCase {
         wait(for: [exp], timeout: TestTimeouts.standard)
     }
 
+    func test__validate__withVerifyParams__rqdataReachesJSOnInitialLoad() {
+        // Given
+        let exp = expectation(description: "rqdata is forwarded to JS on initial load")
+        let rqdata = "test-rqdata-string"
+        let verifyParams = HCaptchaVerifyParams(rqdata: rqdata)
+        let html = """
+        <html>
+          <head>
+            <script type="text/javascript">
+              var post = function(value) {
+                window.webkit.messageHandlers.hcaptcha.postMessage(value);
+              };
+
+              var execute = function(verifyParams) {
+                if (verifyParams && verifyParams.rqdata) {
+                  post({ token: verifyParams.rqdata });
+                } else {
+                  post({ error: 34 });
+                }
+              };
+
+              var reset = function() {
+                post({ action: "didLoad" });
+              };
+
+              post({ action: "didLoad" });
+            </script>
+          </head>
+          <body></body>
+        </html>
+        """
+        let manager = HCaptchaWebViewManager(html: html, apiKey: "api-key")
+        let hcaptcha = HCaptcha(manager: manager)
+
+        // When
+        let view = UIApplication.shared.windows.first?.rootViewController?.view
+        hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
+            // Then
+            XCTAssertNil(result.error)
+            XCTAssertEqual(result.token, rqdata)
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+
+    func test__validate__withDeprecatedRqdata__reachesJSOnInitialLoad() {
+        // Given
+        let exp = expectation(description: "deprecated rqdata is forwarded to JS on initial load")
+        let rqdata = "deprecated-rqdata-string"
+        let manager = HCaptchaWebViewManager(html: deprecatedRqdataHTML,
+                                             apiKey: "api-key",
+                                             rqdata: rqdata)
+        let hcaptcha = HCaptcha(manager: manager)
+
+        // When
+        let view = UIApplication.shared.windows.first?.rootViewController?.view
+        hcaptcha.validate(on: view) { result in
+            // Then
+            XCTAssertNil(result.error)
+            XCTAssertEqual(result.token, rqdata)
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+
+    func test__validate__withDeprecatedRqdata__verifyParamsOverrideFallback() {
+        // Given
+        let exp = expectation(description: "verify params rqdata overrides deprecated fallback")
+        let deprecatedRqdata = "deprecated-rqdata-string"
+        let verifyRqdata = "verify-rqdata-string"
+        let manager = HCaptchaWebViewManager(html: deprecatedRqdataHTML,
+                                             apiKey: "api-key",
+                                             rqdata: deprecatedRqdata)
+        let hcaptcha = HCaptcha(manager: manager)
+        let verifyParams = HCaptchaVerifyParams(rqdata: verifyRqdata)
+
+        // When
+        let view = UIApplication.shared.windows.first?.rootViewController?.view
+        hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
+            // Then
+            XCTAssertNil(result.error)
+            XCTAssertEqual(result.token, verifyRqdata)
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+
     func test__validate__withVerifyParams__resetOnErrorFalse() {
         // Given
         let exp = expectation(description: "validate with resetOnError false")
@@ -329,6 +419,85 @@ class HCaptcha__Tests: XCTestCase {
         }
 
         wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+}
+
+private extension HCaptcha__Tests {
+    var deprecatedRqdataHTML: String {
+        """
+        <html>
+          <head>
+            <script type="text/javascript">
+              var post = function(value) {
+                window.webkit.messageHandlers.hcaptcha.postMessage(value);
+              };
+
+              var capturedData = null;
+              var hcaptcha = {
+                render: function() {
+                  return 1;
+                },
+                setData: function(_, data) {
+                  capturedData = data;
+                },
+                execute: function() {
+                  if (capturedData && capturedData.rqdata) {
+                    post({ token: capturedData.rqdata });
+                  } else {
+                    post({ error: 34 });
+                  }
+                },
+                reset: function() {
+                  post({ action: "didLoad" });
+                }
+              };
+              window.hcaptcha = hcaptcha;
+
+              var setVerifyParams = function(params) {
+                try {
+                  var phone = params.phoneNumber || params.mfa_phone;
+                  var prefix = params.phonePrefix || params.mfa_phoneprefix;
+                  var rqdata = params.rqdata || "${rqdata}";
+
+                  if (phone || prefix || rqdata) {
+                    var data = {};
+                    if (phone) data.mfa_phone = phone;
+                    if (prefix) data.mfa_phoneprefix = prefix;
+                    if (rqdata) data.rqdata = rqdata;
+
+                    if (window.hCaptchaID) {
+                      hcaptcha.setData(window.hCaptchaID, data);
+                    }
+                  }
+                } catch (e) {
+                  post({ error: 34 });
+                }
+              };
+
+              var execute = function(verifyParams) {
+                try {
+                  if (verifyParams || "${rqdata}") {
+                    setVerifyParams(verifyParams || {});
+                  }
+                  hcaptcha.execute();
+                } catch (e) {
+                  post({ error: 29 });
+                }
+              };
+
+              var reset = function() {
+                hcaptcha.reset();
+              };
+
+              window.hCaptchaID = hcaptcha.render("hcaptcha-container", {});
+              post({ action: "didLoad" });
+            </script>
+          </head>
+          <body>
+            <div id="hcaptcha-container"></div>
+          </body>
+        </html>
+        """
     }
 }
 

@@ -84,9 +84,9 @@ struct HCaptchaHtml {
                 console.log("challenge executing");
 
                 try {
-                  // Set verify params if provided
-                  if (verifyParams) {
-                    setVerifyParams(verifyParams);
+                  // Apply deprecated config rqdata as a fallback when runtime verify params are absent.
+                  if (verifyParams || "${rqdata}") {
+                    setVerifyParams(verifyParams || {});
                   }
 
                   if ("${size}" === 'invisible') {

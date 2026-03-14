@@ -285,7 +285,7 @@ fileprivate extension HCaptchaWebViewManager {
     private func didLoad() {
         Log.debug("WebViewManager.didLoad")
         if completion != nil {
-            executeJS(command: .execute(), didLoad: true)
+            executeJS(command: .execute(verifyParams), didLoad: true)
         }
         didFinishLoading = true
         loadingTimer?.invalidate()
