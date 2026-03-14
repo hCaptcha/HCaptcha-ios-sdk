@@ -65,3 +65,7 @@ fastlane/test_output
 
 ## cocoapods-size
 /.lint
+
+## misc
+Example/HCaptcha.xcworkspace/xcshareddata/swiftpm/
+

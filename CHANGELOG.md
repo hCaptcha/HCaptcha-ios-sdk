@@ -1,3 +1,8 @@
+# 2.13.0
+
+- Fix: forward `rqdata` from `HCaptchaVerifyParams` to JS on the initial load path
+- Fix: preserve deprecated config-level `rqdata` fallback and let runtime `verifyParams.rqdata` override it
+
 # 2.12.0
 
 - Fix: Revert RxSwift dependency back to ReactiveX upstream in Swift Package Manager
