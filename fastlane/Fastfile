@@ -163,11 +163,7 @@ platform :ios do
       html_file.write html
       html_file.close
 
-      yarn(
-        command: "lint #{html_file.path}",
-        package_path: "package.json",
-        auto_install_dependencies: true
-      )
+      sh "npx -y jshint --extract=always #{html_file.path}"
     end
   end
 

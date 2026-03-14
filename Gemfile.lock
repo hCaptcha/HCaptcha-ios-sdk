@@ -170,7 +170,6 @@ GEM
       xcodeproj (>= 1.13.0, < 2.0.0)
       xcpretty (~> 0.3.0)
       xcpretty-travis-formatter (>= 0.0.3, < 2.0.0)
-    fastlane-plugin-yarn (1.2)
     fastlane-sirp (1.0.0)
       sysrandom (~> 1.0)
     ffi (1.17.0)
@@ -317,7 +316,6 @@ PLATFORMS
 DEPENDENCIES
   cocoapods
   fastlane (~> 2.222)
-  fastlane-plugin-yarn
   jazzy
 
 BUNDLED WITH
