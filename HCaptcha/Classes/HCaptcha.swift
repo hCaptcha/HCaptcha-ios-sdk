@@ -145,6 +145,7 @@ public class HCaptcha: NSObject {
                          completion: @escaping (HCaptchaResult) -> Void) {
         Log.debug(".validate on: \(String(describing: view)) resetOnError: \(resetOnError)")
 
+        manager.verifyParams = nil
         manager.shouldResetOnError = resetOnError
         manager.completion = completion
 
@@ -163,6 +164,12 @@ public class HCaptcha: NSObject {
     public func validate(on view: UIView? = nil, verifyParams: HCaptchaVerifyParams,
                          completion: @escaping (HCaptchaResult) -> Void) {
         Log.debug(".validate on: \(String(describing: view)) verifyParams: \(verifyParams)")
+
+        guard verifyParams.hasSupportedValues else {
+            manager.verifyParams = nil
+            completion(HCaptchaResult(manager, error: .verifyParamsParseError))
+            return
+        }
 
         manager.completion = completion
         manager.verifyParams = verifyParams

@@ -62,6 +62,10 @@ public class HCaptchaVerifyParams: NSObject {
         self.init(phonePrefix: phonePrefix, phoneNumber: phoneNumber, rqdata: rqdata, resetOnErr: resetOnError)
     }
 
+    var hasSupportedValues: Bool {
+        phonePrefix != nil || phoneNumber != nil || rqdata != nil
+    }
+
     /**
      - returns: A dictionary representation of the verify params for JSON serialization
      */

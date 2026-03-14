@@ -350,7 +350,8 @@ class HCaptcha__Tests: XCTestCase {
         let view = UIApplication.shared.windows.first?.rootViewController?.view
         hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
             // Then
-            XCTAssertEqual(result.token, "test_token")
+            XCTAssertEqual(result.error, .verifyParamsParseError)
+            XCTAssertNil(result.token)
             exp.fulfill()
         }
 
