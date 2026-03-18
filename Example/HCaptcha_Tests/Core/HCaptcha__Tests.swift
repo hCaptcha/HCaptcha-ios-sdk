@@ -201,13 +201,18 @@ class HCaptcha__Tests: XCTestCase {
         let phonePrefix = "44"
         let phoneNumber = "1234567890"
         let verifyParams = HCaptchaVerifyParams(phonePrefix: phonePrefix, phoneNumber: phoneNumber)
-        let hcaptcha = HCaptcha(manager: HCaptchaWebViewManager(messageBody: "{token: \"test_token\"}"))
+        let manager = HCaptchaWebViewManager(html: instrumentedSetDataHTML, apiKey: "api-key")
+        let hcaptcha = HCaptcha(manager: manager)
 
         // When
         let view = UIApplication.shared.windows.first?.rootViewController?.view
         hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
             // Then
-            XCTAssertEqual(result.token, "test_token")
+            let payload = self.setDataPayload(from: result)
+            XCTAssertEqual(payload["mfa_phoneprefix"] as? String, phonePrefix)
+            XCTAssertEqual(payload["mfa_phone"] as? String, phoneNumber)
+            XCTAssertNil(payload["phonePrefix"])
+            XCTAssertNil(payload["phoneNumber"])
             exp.fulfill()
         }
 
@@ -226,6 +231,70 @@ class HCaptcha__Tests: XCTestCase {
         hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
             // Then
             XCTAssertEqual(result.token, "test_token")
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+
+    func test__validate__withVerifyParams__rqdataReachesJSOnInitialLoad() {
+        // Given
+        let exp = expectation(description: "rqdata is forwarded to JS on initial load")
+        let rqdata = "test-rqdata-string"
+        let verifyParams = HCaptchaVerifyParams(rqdata: rqdata)
+        let manager = HCaptchaWebViewManager(html: instrumentedSetDataHTML, apiKey: "api-key")
+        let hcaptcha = HCaptcha(manager: manager)
+
+        // When
+        let view = UIApplication.shared.windows.first?.rootViewController?.view
+        hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
+            // Then
+            let payload = self.setDataPayload(from: result)
+            XCTAssertEqual(payload["rqdata"] as? String, rqdata)
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+
+    func test__validate__withDeprecatedRqdata__reachesJSOnInitialLoad() {
+        // Given
+        let exp = expectation(description: "deprecated rqdata is forwarded to JS on initial load")
+        let rqdata = "deprecated-rqdata-string"
+        let manager = HCaptchaWebViewManager(html: instrumentedSetDataHTML,
+                                             apiKey: "api-key",
+                                             rqdata: rqdata)
+        let hcaptcha = HCaptcha(manager: manager)
+
+        // When
+        let view = UIApplication.shared.windows.first?.rootViewController?.view
+        hcaptcha.validate(on: view) { result in
+            // Then
+            let payload = self.setDataPayload(from: result)
+            XCTAssertEqual(payload["rqdata"] as? String, rqdata)
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+
+    func test__validate__withDeprecatedRqdata__verifyParamsOverrideFallback() {
+        // Given
+        let exp = expectation(description: "verify params rqdata overrides deprecated fallback")
+        let deprecatedRqdata = "deprecated-rqdata-string"
+        let verifyRqdata = "verify-rqdata-string"
+        let manager = HCaptchaWebViewManager(html: instrumentedSetDataHTML,
+                                             apiKey: "api-key",
+                                             rqdata: deprecatedRqdata)
+        let hcaptcha = HCaptcha(manager: manager)
+        let verifyParams = HCaptchaVerifyParams(rqdata: verifyRqdata)
+
+        // When
+        let view = UIApplication.shared.windows.first?.rootViewController?.view
+        hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
+            // Then
+            let payload = self.setDataPayload(from: result)
+            XCTAssertEqual(payload["rqdata"] as? String, verifyRqdata)
             exp.fulfill()
         }
 
@@ -260,7 +329,8 @@ class HCaptcha__Tests: XCTestCase {
         let view = UIApplication.shared.windows.first?.rootViewController?.view
         hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
             // Then
-            XCTAssertEqual(result.token, "test_token")
+            XCTAssertEqual(result.error, .verifyParamsParseError)
+            XCTAssertNil(result.token)
             exp.fulfill()
         }
 
@@ -280,7 +350,7 @@ class HCaptcha__Tests: XCTestCase {
 
             override func validate(on view: UIView?) {
                 receivedVerifyParams = self.verifyParams
-                receivedResetOnError = self.verifyParams?.resetOnError ?? true
+                receivedResetOnError = self.shouldResetOnError
                 super.validate(on: view)
             }
         }
@@ -312,7 +382,7 @@ class HCaptcha__Tests: XCTestCase {
             var receivedResetOnError: Bool?
 
             override func validate(on view: UIView?) {
-                receivedResetOnError = self.verifyParams?.resetOnError ?? true
+                receivedResetOnError = self.shouldResetOnError
                 super.validate(on: view)
             }
         }
@@ -331,6 +401,39 @@ class HCaptcha__Tests: XCTestCase {
         wait(for: [exp], timeout: TestTimeouts.standard)
     }
 
+    func test__validate__withUserJourney__allowsInternalVerifyParams() {
+        // Given
+        let exp = expectation(description: "userJourney payload is injected on default validate path")
+
+        class MockManager: HCaptchaWebViewManager {
+            var receivedVerifyParams: HCaptchaVerifyParams?
+
+            override func validate(on view: UIView?) {
+                receivedVerifyParams = self.verifyParams
+                let completion = self.completion
+                self.completion = nil
+                stop()
+                completion?(HCaptchaResult(self, token: "test_token"))
+            }
+        }
+
+        let manager = MockManager(messageBody: "{token: \"fallback_token\"}")
+        let hcaptcha = HCaptcha(manager: manager, userJourney: true)
+
+        // When
+        let view = UIApplication.shared.windows.first?.rootViewController?.view
+        hcaptcha.validate(on: view) { result in
+            // Then
+            XCTAssertNil(result.error)
+            XCTAssertEqual(result.token, "test_token")
+            XCTAssertNotNil(manager.receivedVerifyParams)
+            XCTAssertNotNil(manager.receivedVerifyParams?.userJourney as? [Any])
+            exp.fulfill()
+        }
+
+        wait(for: [exp], timeout: TestTimeouts.standard)
+    }
+
     // MARK: - User Journeys Tests
     // To run manually once Journeylitics subspec removed from test target app
     func test__userJourney_enabled_without_impl_throws() {
@@ -342,6 +445,50 @@ class HCaptcha__Tests: XCTestCase {
         } catch {
             XCTFail("Unexpected error: \(error)")
         }
+    }
+}
+
+private extension HCaptcha__Tests {
+    var instrumentedSetDataHTML: String {
+        HCaptchaHtml.template.replacingOccurrences(
+            of: "document.head.appendChild(script);",
+            with: """
+              window.hcaptcha = {
+                setData: function(_, data) {
+                  window.__setDataPayload = data;
+                },
+                execute: function() {
+                  post({ token: JSON.stringify(window.__setDataPayload || null) });
+                },
+                reset: function() {
+                  post({ action: "didLoad" });
+                },
+                render: function() {
+                  return 1;
+                },
+                close: function() {}
+              };
+
+              setTimeout(function() {
+                onloadCallback();
+              }, 0);
+            """
+        )
+    }
+
+    func setDataPayload(from result: HCaptchaResult,
+                        file: StaticString = #filePath,
+                        line: UInt = #line) -> [String: Any] {
+        XCTAssertNil(result.error, file: file, line: line)
+
+        guard let token = result.token,
+              let data = token.data(using: .utf8),
+              let payload = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            XCTFail("expected setData payload token", file: file, line: line)
+            return [:]
+        }
+
+        return payload
     }
 }
 

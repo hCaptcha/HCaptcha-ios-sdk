@@ -62,7 +62,7 @@ extension HCaptchaWebViewManager {
         loadingTimer?.invalidate()
         loadingTimer = nil
         if error == .sessionTimeout {
-            if verifyParams?.resetOnError == true, let view = webView.superview {
+            if shouldResetOnError, let view = webView.superview {
                 reset()
                 validate(on: view)
             } else {
@@ -80,7 +80,7 @@ extension HCaptchaWebViewManager {
     private func didLoad() {
         Log.debug("WebViewManager.didLoad")
         if completion != nil {
-            executeJS(command: .execute(), didLoad: true)
+            executeJS(command: .execute(verifyParams), didLoad: true)
         }
         didFinishLoading = true
         loadingTimer?.invalidate()

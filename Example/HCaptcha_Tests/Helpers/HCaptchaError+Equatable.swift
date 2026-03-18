@@ -18,9 +18,11 @@ extension HCaptchaError: Equatable {
              (.wrongMessageFormat, .wrongMessageFormat),
              (.failedSetup, .failedSetup),
              (.sessionTimeout, .sessionTimeout),
+             (.challengeClosed, .challengeClosed),
              (.rateLimit, .rateLimit),
              (.invalidCustomTheme, .invalidCustomTheme),
              (.networkError, .networkError),
+             (.verifyParamsParseError, .verifyParamsParseError),
              (.invalidHostFormat, .invalidHostFormat),
              (.journeyliticsNotAvailable, .journeyliticsNotAvailable):
             return true
@@ -39,8 +41,10 @@ extension HCaptchaError: Equatable {
             .wrongMessageFormat,
             .failedSetup,
             .sessionTimeout,
+            .challengeClosed,
             .rateLimit,
             .invalidCustomTheme,
+            .verifyParamsParseError,
             .invalidHostFormat,
             .networkError,
             .journeyliticsNotAvailable,

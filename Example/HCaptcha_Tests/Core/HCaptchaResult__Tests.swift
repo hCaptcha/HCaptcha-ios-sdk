@@ -26,7 +26,7 @@ class HCaptchaResult__Tests: XCTestCase {
     }
 
     func test__Get_Token__Error() {
-        let error = HCaptchaError.random()
+        let error = HCaptchaError.networkError
         let manager = HCaptchaWebViewManager()
         let result = HCaptchaResult(manager, error: error)
 

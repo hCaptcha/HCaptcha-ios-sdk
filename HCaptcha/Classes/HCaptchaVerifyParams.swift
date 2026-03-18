@@ -93,6 +93,10 @@ public class HCaptchaVerifyParams: NSObject {
         )
     }
 
+    var hasSupportedValues: Bool {
+        phonePrefix != nil || phoneNumber != nil || rqdata != nil
+    }
+
     /**
      - returns: A dictionary representation of the verify params for JSON serialization
      */
@@ -100,10 +104,10 @@ public class HCaptchaVerifyParams: NSObject {
     public func toDictionary() -> [String: Any] {
         var dict: [String: Any] = [:]
         if let phonePrefix = phonePrefix {
-            dict["mfa_phoneprefix"] = phonePrefix
+            dict["phonePrefix"] = phonePrefix
         }
         if let phoneNumber = phoneNumber {
-            dict["mfa_phonenumber"] = phoneNumber
+            dict["phoneNumber"] = phoneNumber
         }
         if let rqdata = rqdata {
             dict["rqdata"] = rqdata

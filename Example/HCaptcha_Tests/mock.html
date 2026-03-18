@@ -67,35 +67,38 @@
       var validateVerifyParams = function(params) {
           try {
               // Check if params is an object
-              if (typeof params !== 'object') {
+              if (typeof params !== 'object' || params === null) {
                   post({"log": "bad object type"});
                   return 34; // verifyParamsParseError
               }
 
+              var phonePrefix = params.phonePrefix;
+              var phoneNumber = params.phoneNumber;
+
               // Validate phonePrefix if present
-              if (params.mfa_phoneprefix !== undefined) {
-                  if (typeof params.mfa_phoneprefix !== 'string') {
-                      post({"log": "bad type mfa_phoneprefix"});
+              if (phonePrefix !== undefined) {
+                  if (typeof phonePrefix !== 'string') {
+                      post({"log": "bad type phonePrefix"});
                       return 34; // verifyParamsParseError
                   }
                   // Basic validation: should be 1-4 digits, optionally with + prefix
                   var phonePrefixRegex = /^\+?[1-9]\d{0,3}$/;
-                  if (!phonePrefixRegex.test(params.mfa_phoneprefix)) {
-                      post({"log": "malformed mfa_phoneprefix"});
+                  if (!phonePrefixRegex.test(phonePrefix)) {
+                      post({"log": "malformed phonePrefix"});
                       return 34; // verifyParamsParseError
                   }
               }
 
               // Validate phoneNumber if present
-              if (params.mfa_phonenumber !== undefined) {
-                  if (typeof params.mfa_phonenumber !== 'string') {
-                      post({"log": "bad type mfa_phonenumber"});
+              if (phoneNumber !== undefined) {
+                  if (typeof phoneNumber !== 'string') {
+                      post({"log": "bad type phoneNumber"});
                       return 34; // verifyParamsParseError
                   }
                   // Basic validation: should be 7-15 digits, optionally with + prefix
                   var phoneNumberRegex = /^\+?[1-9]\d{6,14}$/;
-                  if (!phoneNumberRegex.test(params.mfa_phonenumber)) {
-                      post({"log": "malformed mfa_phonenumber"});
+                  if (!phoneNumberRegex.test(phoneNumber)) {
+                      post({"log": "malformed phoneNumber"});
                       return 34; // verifyParamsParseError
                   }
               }
@@ -103,6 +106,21 @@
               // Validate resetOnError if present
               if (params.resetOnError !== undefined && typeof params.resetOnError !== 'boolean') {
                   post({"log": "bad type resetOnError"});
+                  return 34; // verifyParamsParseError
+              }
+
+              // Validate rqdata if present
+              if (params.rqdata !== undefined && typeof params.rqdata !== 'string') {
+                  return 34; // verifyParamsParseError
+              }
+
+              // At least one supported verify param should be present if verifyParams is provided
+              if (
+                phonePrefix === undefined &&
+                phoneNumber === undefined &&
+                params.rqdata === undefined &&
+                params.userJourney === undefined
+              ) {
                   return 34; // verifyParamsParseError
               }
 

@@ -41,6 +41,9 @@ internal class HCaptchaWebViewManager: NSObject {
     /// The dispatch token used to ensure `configureWebView` is only called once.
     var configureWebViewDispatchToken = UUID()
 
+    /// If the HCaptcha should be reset when it errors
+    var shouldResetOnError = true
+
     /// Verification parameters (e.g., phone prefix/number for MFA flows)
     var verifyParams: HCaptchaVerifyParams?
 

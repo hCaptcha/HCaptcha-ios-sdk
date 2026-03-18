@@ -43,7 +43,7 @@ class HCaptchaDecoder__Tests: XCTestCase {
 
 
         // Send
-        let err = HCaptchaError.random()
+        let err = HCaptchaError.networkError
         decoder.send(error: err)
 
         waitForExpectations(timeout: TestTimeouts.short)

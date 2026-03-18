@@ -46,11 +46,33 @@
         post({ log: message });
       };
 
+      var buildSetDataPayload = function(params) {
+        var data = {};
+
+        if (params.phonePrefix !== undefined) {
+          data.mfa_phoneprefix = params.phonePrefix;
+        }
+        if (params.phoneNumber !== undefined) {
+          data.mfa_phone = params.phoneNumber;
+        }
+        if (params.rqdata !== undefined) {
+          data.rqdata = params.rqdata;
+        } else if ("${rqdata}" !== "") {
+          data.rqdata = "${rqdata}";
+        }
+        if (params.userJourney !== undefined) {
+          data.userJourney = params.userJourney;
+        }
+
+        return Object.keys(data).length > 0 ? data : null;
+      };
+
       var setVerifyParams = function(params) {
         console.log("setting verify params:", params);
         try {
-          if (params && window.hCaptchaID) {
-            hcaptcha.setData(window.hCaptchaID, params);
+          var data = buildSetDataPayload(params || {});
+          if (data && window.hCaptchaID) {
+            hcaptcha.setData(window.hCaptchaID, data);
           }
         } catch (e) {
           console.log("failed to set verify params");
@@ -62,9 +84,9 @@
         console.log("challenge executing");
 
         try {
-          // Set verify params if provided
-          if (verifyParams) {
-            setVerifyParams(verifyParams);
+          // Apply deprecated config rqdata as a fallback when runtime verify params are absent.
+          if (verifyParams || "${rqdata}") {
+            setVerifyParams(verifyParams || {});
           }
 
           if ("${size}" === 'invisible') {
