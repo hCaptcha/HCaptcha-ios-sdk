@@ -39,7 +39,7 @@ extension HCaptchaWebViewManager: WKNavigationDelegate, WKUIDelegate {
         complete(HCaptchaResult(self, error: .unexpected(error)))
     }
 
-    /// Tells the delegate that the web view’s content process was terminated.
+    /// Tells the delegate that the web view's content process was terminated.
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
         Log.debug("WebViewManager.webViewWebContentProcessDidTerminate")
         let kHCaptchaErrorWebViewProcessDidTerminate = -1
@@ -49,7 +49,7 @@ extension HCaptchaWebViewManager: WKNavigationDelegate, WKUIDelegate {
                             userInfo: [
                                 NSLocalizedDescriptionKey: "WebView web content process did terminate",
                                 NSLocalizedRecoverySuggestionErrorKey: "Call HCaptcha.reset()"])
-        didFinishLoading = false
+        loadingState = .idle
         complete(HCaptchaResult(self, error: .unexpected(error)))
     }
 }

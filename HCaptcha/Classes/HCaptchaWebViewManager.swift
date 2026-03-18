@@ -9,6 +9,24 @@ import WebKit
 /** Handles comunications with the webview containing the HCaptcha challenge.
  */
 internal class HCaptchaWebViewManager: NSObject {
+    enum LoadingState {
+        case idle
+        case loading
+        case loaded
+        case failed(HCaptchaError)
+        case stopped
+
+        var isLoaded: Bool {
+            if case .loaded = self { return true }
+            return false
+        }
+
+        var error: HCaptchaError? {
+            if case .failed(let error) = self { return error }
+            return nil
+        }
+    }
+
     typealias Log = HCaptchaLogger
 
     fileprivate struct Constants {
@@ -29,7 +47,7 @@ internal class HCaptchaWebViewManager: NSObject {
     /// Notifies the JS bundle has finished loading
     var onDidFinishLoading: (() -> Void)? {
         didSet {
-            if didFinishLoading {
+            if loadingState.isLoaded {
                 onDidFinishLoading?()
             }
         }
@@ -50,10 +68,10 @@ internal class HCaptchaWebViewManager: NSObject {
     /// The JS message recoder
     var decoder: HCaptchaDecoder!
 
-    /// Indicates if the script has already been loaded by the `webView`
-    var didFinishLoading = false {
+    /// Tracks the WebView HTML/JS loading lifecycle
+    internal var loadingState: LoadingState = .idle {
         didSet {
-            if didFinishLoading {
+            if loadingState.isLoaded {
                 onDidFinishLoading?()
             }
         }
@@ -73,17 +91,11 @@ internal class HCaptchaWebViewManager: NSObject {
     /// Passive apiKey
     var passiveApiKey: Bool
 
-    /// Keep error If it happens before validate call
-    var lastError: HCaptchaError?
-
     /// Timeout to throw `.htmlLoadError` if no `didLoad` called
     let loadingTimeout: TimeInterval
 
     /// Responsible for external link handling
     let urlOpener: HCaptchaURLOpener
-
-    /// Stop async webView configuration
-    private var stopInitWebViewConfiguration = false
 
     /// The webview that executes JS code
     lazy var webView: WKWebView = {
@@ -136,7 +148,7 @@ internal class HCaptchaWebViewManager: NSObject {
             Log.debug("WebViewManager.init formattedHTML built")
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                guard !self.stopInitWebViewConfiguration else { return }
+                guard case .idle = self.loadingState else { return }
 
                 self.setupWebview(html: self.formattedHTML, url: self.baseURL)
             }
@@ -159,7 +171,7 @@ internal class HCaptchaWebViewManager: NSObject {
             }
 
             view.addSubview(webView)
-            if self.didFinishLoading && (webView.bounds.size == CGSize.zero || webView.bounds.size == webViewInitSize) {
+            if loadingState.isLoaded && (webView.bounds.size == CGSize.zero || webView.bounds.size == webViewInitSize) {
                 self.doConfigureWebView()
             }
         }
@@ -170,7 +182,7 @@ internal class HCaptchaWebViewManager: NSObject {
     /// Stops the execution of the webview
     func stop() {
         Log.debug("WebViewManager.stop")
-        stopInitWebViewConfiguration = true
+        loadingState = .stopped
         completion = nil
         webView.stopLoading()
         resultHandled = true
@@ -186,13 +198,15 @@ internal class HCaptchaWebViewManager: NSObject {
     func reset() {
         Log.debug("WebViewManager.reset")
         configureWebViewDispatchToken = UUID()
-        stopInitWebViewConfiguration = false
         resultHandled = false
-        if didFinishLoading {
+        if loadingState.isLoaded {
             executeJS(command: .reset)
-            didFinishLoading = false
-        } else if let formattedHTML = self.formattedHTML {
-            setupWebview(html: formattedHTML, url: baseURL)
+            loadingState = .idle
+        } else {
+            loadingState = .idle
+            if let formattedHTML = self.formattedHTML {
+                setupWebview(html: formattedHTML, url: baseURL)
+            }
         }
     }
 }

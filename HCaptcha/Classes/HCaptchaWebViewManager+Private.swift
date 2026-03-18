@@ -41,7 +41,7 @@ extension HCaptchaWebViewManager {
         case .token(let token): handleToken(token)
         case .error(let error): handleDecoderError(error)
         case .showHCaptcha: webView.isHidden = false
-        case .didLoad: didLoad()
+        case .didLoad: onDidLoad()
         case .onOpen: onEvent?(.open, nil)
         case .onExpired: onEvent?(.expired, nil)
         case .onChallengeExpired: onEvent?(.challengeExpired, nil)
@@ -81,19 +81,19 @@ extension HCaptchaWebViewManager {
             if completion != nil {
                 complete(HCaptchaResult(self, error: error))
             } else {
-                lastError = error
+                loadingState = .failed(error)
             }
         }
     }
 
-    private func didLoad() {
-        Log.debug("WebViewManager.didLoad")
-        if completion != nil {
-            executeJS(command: .execute(verifyParams), didLoad: true)
-        }
-        didFinishLoading = true
+    private func onDidLoad() {
+        Log.debug("WebViewManager.onDidLoad")
+        loadingState = .loaded
         loadingTimer?.invalidate()
         loadingTimer = nil
+        if completion != nil {
+            executeJS(command: .execute(verifyParams))
+        }
         self.doConfigureWebView()
     }
 
@@ -143,6 +143,7 @@ extension HCaptchaWebViewManager {
      */
     func setupWebview(on window: UIWindow, html: String, url: URL) {
         Log.debug("WebViewManager.setupWebview")
+        loadingState = .loading
         if webView.superview == nil {
             window.addSubview(webView)
         }
@@ -163,25 +164,21 @@ extension HCaptchaWebViewManager {
     }
 
     /**
-     - parameters:
-         - command: The JavaScript command to be executed
-         - didLoad: True if didLoad event already occured
-         - journeyEvents: JSON string of journey events to pass to JavaScript
+     - parameter command: The JavaScript command to be executed
 
      Executes the JS command that loads the HCaptcha challenge. This method has no effect if the webview hasn't
      finished loading.
      */
-    func executeJS(command: JSCommand, didLoad: Bool = false) {
+    func executeJS(command: JSCommand) {
         Log.debug("WebViewManager.executeJS: \(command)")
-        guard didLoad else {
-            if let error = lastError {
+        guard loadingState.isLoaded else {
+            if let error = loadingState.error {
                 loadingTimer?.invalidate()
                 loadingTimer = nil
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     Log.debug("WebViewManager complete with pendingError: \(error)")
 
-                    self.lastError = nil
                     self.complete(HCaptchaResult(self, error: error))
                 }
                 if error == .networkError {
@@ -192,18 +189,11 @@ extension HCaptchaWebViewManager {
             return
         }
 
-        // Execute the JavaScript command
-        let jsCommand = command.rawValue
-
-        webView.evaluateJavaScript(jsCommand) { [weak self] _, error in
+        webView.evaluateJavaScript(command.rawValue) { [weak self] _, error in
             if let error = error {
                 self?.decoder.send(error: .unexpected(error))
             }
         }
-    }
-
-    func executeJS(command: JSCommand) {
-        executeJS(command: command, didLoad: self.didFinishLoading)
     }
 
     func complete(_ result: HCaptchaResult) {
