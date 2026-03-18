@@ -79,24 +79,6 @@ extension HCaptchaWebViewManager {
         onEvent?(.error, error)
     }
 
-    private func handle(error: HCaptchaError) {
-        cancelLoadingTimer()
-        if error == .sessionTimeout {
-            if shouldResetOnError, let view = webView.superview {
-                reset()
-                validate(on: view)
-            } else {
-                complete(HCaptchaResult(self, error: error))
-            }
-        } else {
-            if completion != nil {
-                complete(HCaptchaResult(self, error: error))
-            } else {
-                loadingState = .failed(error)
-            }
-        }
-    }
-
     private func onDidLoad() {
         Log.debug("WebViewManager.onDidLoad")
         loadingState = .loaded

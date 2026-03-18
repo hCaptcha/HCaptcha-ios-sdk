@@ -29,11 +29,11 @@ internal class HCaptchaWebViewManager: NSObject {
 
     typealias Log = HCaptchaLogger
 
-    fileprivate struct Constants {
+    private struct Constants {
         static let BotUserAgent = "bot/2.1"
     }
 
-    fileprivate let webViewInitSize = CGSize(width: 1, height: 1)
+    private let webViewInitSize = CGSize(width: 1, height: 1)
 
     /// True if validation  token was dematerialized
     var resultHandled: Bool = false
@@ -205,6 +205,24 @@ internal class HCaptchaWebViewManager: NSObject {
             loadingState = .idle
             if let formattedHTML = self.formattedHTML {
                 setupWebview(html: formattedHTML, url: baseURL)
+            }
+        }
+    }
+
+    func handle(error: HCaptchaError) {
+        cancelLoadingTimer()
+        if error == .sessionTimeout {
+            if shouldResetOnError, let view = webView.superview {
+                reset()
+                validate(on: view)
+            } else {
+                complete(HCaptchaResult(self, error: error))
+            }
+        } else {
+            if completion != nil {
+                complete(HCaptchaResult(self, error: error))
+            } else {
+                loadingState = .failed(error)
             }
         }
     }
