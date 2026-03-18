@@ -91,8 +91,18 @@ struct HCaptchaHtml {
                 }
               };
 
+              var checkReady = function(caller) {
+                if (typeof hcaptcha === 'undefined') {
+                  console.log(caller + " failed, resources not loaded");
+                  post({ error: 7 });
+                  return false;
+                }
+                return true;
+              };
+
               var execute = function(verifyParams) {
                 console.log("challenge executing");
+                if (!checkReady("execute")) return;
 
                 try {
                   // Apply deprecated config rqdata as a fallback when runtime verify params are absent.
@@ -115,6 +125,8 @@ struct HCaptchaHtml {
 
               var reset = function() {
                 console.log("challenge resetting");
+                if (!checkReady("reset")) return;
+
                 hcaptcha.reset();
                 post({ action: "didLoad" });
               };
