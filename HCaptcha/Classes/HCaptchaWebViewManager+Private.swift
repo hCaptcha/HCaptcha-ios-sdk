@@ -29,6 +29,18 @@ extension HCaptchaWebViewManager {
         return conf
     }
 
+    func startLoadingTimer() {
+        cancelLoadingTimer()
+        loadingTimer = Timer.scheduledTimer(withTimeInterval: self.loadingTimeout, repeats: false) { [weak self] _ in
+            self?.handle(error: .htmlLoadError)
+        }
+    }
+
+    func cancelLoadingTimer() {
+        loadingTimer?.invalidate()
+        loadingTimer = nil
+    }
+
     /**
      - parameter result: A `HCaptchaDecoder.Result` with the decoded message.
 
@@ -68,8 +80,7 @@ extension HCaptchaWebViewManager {
     }
 
     private func handle(error: HCaptchaError) {
-        loadingTimer?.invalidate()
-        loadingTimer = nil
+        cancelLoadingTimer()
         if error == .sessionTimeout {
             if shouldResetOnError, let view = webView.superview {
                 reset()
@@ -89,8 +100,7 @@ extension HCaptchaWebViewManager {
     private func onDidLoad() {
         Log.debug("WebViewManager.onDidLoad")
         loadingState = .loaded
-        loadingTimer?.invalidate()
-        loadingTimer = nil
+        cancelLoadingTimer()
         if completion != nil {
             executeJS(command: .execute(verifyParams))
         }
@@ -152,11 +162,7 @@ extension HCaptchaWebViewManager {
             webView.navigationDelegate = self
             webView.uiDelegate = self
         }
-        loadingTimer?.invalidate()
-        loadingTimer = Timer.scheduledTimer(withTimeInterval: self.loadingTimeout, repeats: false, block: { _ in
-            self.handle(error: .htmlLoadError)
-            self.loadingTimer = nil
-        })
+        startLoadingTimer()
 
         if let observer = observer {
             NotificationCenter.default.removeObserver(observer)
@@ -173,8 +179,7 @@ extension HCaptchaWebViewManager {
         Log.debug("WebViewManager.executeJS: \(command)")
         guard loadingState.isLoaded else {
             if let error = loadingState.error {
-                loadingTimer?.invalidate()
-                loadingTimer = nil
+                cancelLoadingTimer()
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     Log.debug("WebViewManager complete with pendingError: \(error)")

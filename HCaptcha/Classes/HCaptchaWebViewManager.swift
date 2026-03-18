@@ -186,8 +186,7 @@ internal class HCaptchaWebViewManager: NSObject {
         completion = nil
         webView.stopLoading()
         resultHandled = true
-        loadingTimer?.invalidate()
-        loadingTimer = nil
+        cancelLoadingTimer()
     }
 
     /**
