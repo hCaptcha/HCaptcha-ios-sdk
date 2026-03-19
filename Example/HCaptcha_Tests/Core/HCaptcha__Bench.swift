@@ -10,8 +10,11 @@ import XCTest
 @testable import HCaptcha
 
 class HCaptcha__Bench: XCTestCase {
+    private var originalTemplate = ""
+
     override func setUp() {
         super.setUp()
+        originalTemplate = HCaptchaHtml.template
 
         HCaptchaHtml.template = """
             <html>
@@ -48,8 +51,13 @@ class HCaptcha__Bench: XCTestCase {
               <body>
                 <div id="hcaptcha-container">
               </body>
-            </html>
+                </html>
         """
+    }
+
+    override func tearDown() {
+        HCaptchaHtml.template = originalTemplate
+        super.tearDown()
     }
 
     let apiKey = "10000000-ffff-ffff-ffff-000000000001"

@@ -201,7 +201,7 @@ class HCaptcha__Tests: XCTestCase {
         let phonePrefix = "44"
         let phoneNumber = "1234567890"
         let verifyParams = HCaptchaVerifyParams(phonePrefix: phonePrefix, phoneNumber: phoneNumber)
-        let manager = HCaptchaWebViewManager(html: instrumentedSetDataHTML, apiKey: "api-key")
+        let manager = HCaptchaWebViewManager(html: instrumentedSetDataHTML(), apiKey: "api-key")
         let hcaptcha = HCaptcha(manager: manager)
 
         // When
@@ -242,7 +242,7 @@ class HCaptcha__Tests: XCTestCase {
         let exp = expectation(description: "rqdata is forwarded to JS on initial load")
         let rqdata = "test-rqdata-string"
         let verifyParams = HCaptchaVerifyParams(rqdata: rqdata)
-        let manager = HCaptchaWebViewManager(html: instrumentedSetDataHTML, apiKey: "api-key")
+        let manager = HCaptchaWebViewManager(html: instrumentedSetDataHTML(), apiKey: "api-key")
         let hcaptcha = HCaptcha(manager: manager)
 
         // When
@@ -261,7 +261,7 @@ class HCaptcha__Tests: XCTestCase {
         // Given
         let exp = expectation(description: "deprecated rqdata is forwarded to JS on initial load")
         let rqdata = "deprecated-rqdata-string"
-        let manager = HCaptchaWebViewManager(html: instrumentedSetDataHTML,
+        let manager = HCaptchaWebViewManager(html: instrumentedSetDataHTML(),
                                              apiKey: "api-key",
                                              rqdata: rqdata)
         let hcaptcha = HCaptcha(manager: manager)
@@ -283,7 +283,7 @@ class HCaptcha__Tests: XCTestCase {
         let exp = expectation(description: "verify params rqdata overrides deprecated fallback")
         let deprecatedRqdata = "deprecated-rqdata-string"
         let verifyRqdata = "verify-rqdata-string"
-        let manager = HCaptchaWebViewManager(html: instrumentedSetDataHTML,
+        let manager = HCaptchaWebViewManager(html: instrumentedSetDataHTML(),
                                              apiKey: "api-key",
                                              rqdata: deprecatedRqdata)
         let hcaptcha = HCaptcha(manager: manager)
@@ -449,8 +449,8 @@ class HCaptcha__Tests: XCTestCase {
 }
 
 private extension HCaptcha__Tests {
-    var instrumentedSetDataHTML: String {
-        HCaptchaHtml.template.replacingOccurrences(
+    func instrumentedSetDataHTML(file: StaticString = #filePath, line: UInt = #line) -> String {
+        let html = HCaptchaHtml.template.replacingOccurrences(
             of: "document.head.appendChild(script);",
             with: """
               window.hcaptcha = {
@@ -474,6 +474,16 @@ private extension HCaptcha__Tests {
               }, 0);
             """
         )
+
+        XCTAssertNotEqual(
+            html,
+            HCaptchaHtml.template,
+            "failed to instrument setData test HTML",
+            file: file,
+            line: line
+        )
+
+        return html
     }
 
     func setDataPayload(from result: HCaptchaResult,
