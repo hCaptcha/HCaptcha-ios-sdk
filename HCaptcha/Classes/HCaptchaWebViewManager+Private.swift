@@ -167,16 +167,13 @@ extension HCaptchaWebViewManager {
             }
         } else if let error = loadingState.error {
             cancelLoadingTimer()
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                Log.debug("WebViewManager complete with pendingError: \(error)")
-                self.complete(HCaptchaResult(self, error: error))
-            }
             if error == .networkError {
                 Log.debug("WebViewManager reloads html after networkError")
                 loadingState = .loading
                 webView.loadHTMLString(formattedHTML, baseURL: baseURL)
                 startLoadingTimer()
+            } else {
+                complete(HCaptchaResult(self, error: error))
             }
         }
     }

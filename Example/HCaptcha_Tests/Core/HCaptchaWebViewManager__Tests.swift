@@ -831,4 +831,101 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         // Then
         XCTAssertEqual(rawValue, "reset();")
     }
+
+    // MARK: - Pre-Validate Error Handling
+
+    func test__Handle_Error_PreValidate__Stores_Failed_State() {
+        let exp = expectation(description: "error stored in loadingState")
+
+        let manager = HCaptchaWebViewManager(onLoad: .networkError)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            XCTAssertEqual(manager.loadingState.error, .networkError)
+            XCTAssertNil(manager.completion)
+            exp.fulfill()
+        }
+
+        waitForExpectations(timeout: TestTimeouts.standard)
+    }
+
+    func test__Validate_After_PreValidate_Network_Error__Silent_Retry_Reports_Error() {
+        let exp0 = expectation(description: "error stored in loadingState")
+
+        let manager = HCaptchaWebViewManager(onLoad: .networkError)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            XCTAssertEqual(manager.loadingState.error, .networkError)
+            exp0.fulfill()
+        }
+
+        waitForExpectations(timeout: TestTimeouts.standard)
+
+        let exp1 = expectation(description: "silent retry fails, then completion receives networkError")
+        manager.validate(on: presenterView, resetOnError: false) { result in
+            XCTAssertEqual(result.error, .networkError)
+            exp1.fulfill()
+        }
+
+        waitForExpectations(timeout: TestTimeouts.standard)
+
+        manager.stop()
+    }
+
+    func test__Validate_After_PreValidate_Network_Error__Silent_Retry_Recovers() {
+        let exp0 = expectation(description: "error stored in loadingState")
+
+        let manager = HCaptchaWebViewManager(messageBody: "{token: key}",
+                                             apiKey: apiKey,
+                                             onLoad: .networkOnce)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            XCTAssertEqual(manager.loadingState.error, .networkError)
+            exp0.fulfill()
+        }
+
+        waitForExpectations(timeout: TestTimeouts.standard)
+
+        let exp1 = expectation(description: "silent retry succeeds, validate returns token")
+        manager.validate(on: presenterView, resetOnError: false) { result in
+            XCTAssertNil(result.error)
+            XCTAssertEqual(result.token, self.apiKey)
+            exp1.fulfill()
+        }
+
+        waitForExpectations(timeout: TestTimeouts.standard)
+    }
+
+    func test__Validate_After_PreValidate_Network_Error__No_Double_Callback() {
+        let exp0 = expectation(description: "error stored in loadingState")
+
+        let manager = HCaptchaWebViewManager(onLoad: .networkError)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            XCTAssertEqual(manager.loadingState.error, .networkError)
+            exp0.fulfill()
+        }
+
+        waitForExpectations(timeout: TestTimeouts.standard)
+
+        var completionCallCount = 0
+        let exp1 = expectation(description: "completion called exactly once")
+
+        manager.validate(on: presenterView, resetOnError: false) { result in
+            completionCallCount += 1
+            XCTAssertEqual(result.error, .networkError)
+            exp1.fulfill()
+        }
+
+        waitForExpectations(timeout: TestTimeouts.standard)
+
+        let exp2 = expectation(description: "no extra callbacks")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            XCTAssertEqual(completionCallCount, 1, "completion should be called exactly once")
+            exp2.fulfill()
+        }
+
+        waitForExpectations(timeout: TestTimeouts.standard)
+
+        manager.stop()
+    }
 }
