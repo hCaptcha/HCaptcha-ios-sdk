@@ -29,10 +29,6 @@ internal class HCaptchaWebViewManager: NSObject {
 
     typealias Log = HCaptchaLogger
 
-    private struct Constants {
-        static let BotUserAgent = "bot/2.1"
-    }
-
     private let webViewInitSize = CGSize(width: 1, height: 1)
 
     /// True if validation  token was dematerialized
