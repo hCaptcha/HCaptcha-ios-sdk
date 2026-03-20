@@ -77,6 +77,27 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         XCTAssertEqual(result2?.token, apiKey)
     }
 
+    func test__Validate__Ignores_Late_Termination_After_Token() {
+        let exp = expectation(description: "load token")
+        var results = [HCaptchaResult]()
+
+        let manager = HCaptchaWebViewManager(messageBody: "{token: key}", apiKey: apiKey)
+        manager.validate(on: presenterView) { response in
+            results.append(response)
+            if results.count == 1 {
+                exp.fulfill()
+            }
+        }
+
+        waitForExpectations(timeout: TestTimeouts.standard)
+
+        manager.webViewWebContentProcessDidTerminate(manager.webView)
+
+        XCTAssertEqual(results.count, 1)
+        XCTAssertNil(results.first?.error)
+        XCTAssertEqual(results.first?.token, apiKey)
+    }
+
 
     func test__Validate__Show_HCaptcha() {
         let exp = expectation(description: "show hcaptcha")

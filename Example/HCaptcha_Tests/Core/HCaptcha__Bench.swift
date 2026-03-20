@@ -85,6 +85,13 @@ class HCaptcha__Bench: XCTestCase {
     func testBenchVerify() throws {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 400, height: 600))
         let hcaptcha = try? HCaptcha(apiKey: apiKey, size: .invisible)
+        let loaded = expectation(description: "loaded")
+
+        hcaptcha?.didFinishLoading {
+            loaded.fulfill()
+        }
+        wait(for: [loaded], timeout: TestTimeouts.long)
+
         self.measureMetrics([.wallClockTime], automaticallyStartMeasuring: true, for: {
             let exp = expectation(description: "completed")
             hcaptcha?.validate(on: view, completion: { result in
