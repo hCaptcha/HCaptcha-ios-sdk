@@ -38,19 +38,8 @@ extension HCaptchaWebViewManager {
         Log.debug("WebViewManager.handleResult: \(result)")
 
         switch result {
-        case .token(let token):
-            guard !resultHandled else {
-                Log.debug("WebViewManager.handleResult skip token as handled")
-                return
-            }
-            complete(HCaptchaResult(self, token: token))
-        case .error(let error):
-            guard !resultHandled else {
-                Log.debug("WebViewManager.handleResult skip error as handled")
-                return
-            }
-            handle(error: error)
-            onEvent?(.error, error)
+        case .token(let token): handleToken(token)
+        case .error(let error): handleDecoderError(error)
         case .showHCaptcha: webView.isHidden = false
         case .didLoad: didLoad()
         case .onOpen: onEvent?(.open, nil)
@@ -59,6 +48,23 @@ extension HCaptchaWebViewManager {
         case .onClose: onEvent?(.close, nil)
         case .log(_): break
         }
+    }
+
+    private func handleToken(_ token: String) {
+        guard !resultHandled else {
+            Log.debug("WebViewManager.handleResult skip token as handled")
+            return
+        }
+        complete(HCaptchaResult(self, token: token))
+    }
+
+    private func handleDecoderError(_ error: HCaptchaError) {
+        guard !resultHandled else {
+            Log.debug("WebViewManager.handleResult skip error as handled")
+            return
+        }
+        handle(error: error)
+        onEvent?(.error, error)
     }
 
     private func handle(error: HCaptchaError) {
