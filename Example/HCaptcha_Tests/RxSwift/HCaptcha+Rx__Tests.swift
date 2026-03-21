@@ -11,6 +11,7 @@
 import RxBlocking
 import RxCocoa
 import RxSwift
+import WebKit
 import XCTest
 
 // these test doesn't work in parallel mode for some reason
@@ -22,11 +23,21 @@ class HCaptcha_Rx__Tests: XCTestCase {
     override func setUp() {
         super.setUp()
 
+        DispatchQueue.resetOnceTokens()
+        HCaptchaWebViewManager.clearWebViewData()
         presenterView = UIApplication.shared.keyWindow!
         apiKey = String(arc4random())
     }
 
     override func tearDown() {
+        presenterView?.subviews
+            .filter { $0 is WKWebView }
+            .forEach { $0.removeFromSuperview() }
+
+        UIApplication.shared.keyWindow?.subviews
+            .filter { $0 is WKWebView }
+            .forEach { $0.removeFromSuperview() }
+
         presenterView = nil
         apiKey = nil
 
@@ -212,7 +223,6 @@ class HCaptcha_Rx__Tests: XCTestCase {
         var expCount = 0
         let exp = expectation(description: "should call configureWebView")
 
-        // Validate
         let hcaptcha = HCaptcha(
             manager: HCaptchaWebViewManager(messageBody: "{token: key}", apiKey: apiKey, shouldFail: true)
         )
@@ -224,22 +234,18 @@ class HCaptcha_Rx__Tests: XCTestCase {
             }
         }
 
-        do {
-            // Error
-            _ = try hcaptcha.rx.validate(on: presenterView, resetOnError: false)
-                .toBlocking()
-                .single()
-        }
-        catch let error {
-            XCTAssertEqual(error as? HCaptchaError, .sessionTimeout)
-
-            // Resets after failure
-            _ = Observable<Void>.just(())
-                .bind(to: hcaptcha.rx.reset)
+        let errorExp = expectation(description: "first validate errors")
+        hcaptcha.validate(on: presenterView, resetOnError: false) { result in
+            XCTAssertEqual(result.error, .sessionTimeout)
+            errorExp.fulfill()
         }
 
+        wait(for: [errorExp], timeout: TestTimeouts.standard)
+
+        _ = Observable<Void>.just(())
+            .bind(to: hcaptcha.rx.reset)
+
         do {
-            // Resets and tries again
             let result = try hcaptcha.rx.validate(on: presenterView, resetOnError: false)
                 .toBlocking()
                 .single()

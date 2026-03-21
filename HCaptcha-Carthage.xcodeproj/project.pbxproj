@@ -42,7 +42,7 @@
 		E6DB9EA827B15954008F0327 /* HCaptchaDebugInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DB9EA727B15954008F0327 /* HCaptchaDebugInfo.swift */; };
 		F206BAB51F8D3DE900A25807 /* HCaptcha-Carthage.h in Headers */ = {isa = PBXBuildFile; fileRef = F206BAB31F8D3DE900A25807 /* HCaptcha-Carthage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F206BB1D1F8D4DBC00A25807 /* HCaptcha_RxSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = F206BB1B1F8D4DBC00A25807 /* HCaptcha_RxSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F231B39A1FEC51C800F82943 /* DispatchQueue+Throttle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F231B3991FEC51C800F82943 /* DispatchQueue+Throttle.swift */; };
+		F231B39A1FEC51C800F82943 /* DispatchQueue+Once.swift in Sources */ = {isa = PBXBuildFile; fileRef = F231B3991FEC51C800F82943 /* DispatchQueue+Once.swift */; };
 		F24EA1E11F9683FB001DEC17 /* HCaptcha+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24EA1DD1F9683F5001DEC17 /* HCaptcha+Rx.swift */; };
 		F24EA1E21F968403001DEC17 /* HCaptchaDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24EA1D81F9683F5001DEC17 /* HCaptchaDecoder.swift */; };
 		F24EA1E31F968403001DEC17 /* HCaptchaWebViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24EA1D91F9683F5001DEC17 /* HCaptchaWebViewManager.swift */; };
@@ -118,7 +118,7 @@
 		F206BB191F8D4DBC00A25807 /* HCaptcha_RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HCaptcha_RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F206BB1B1F8D4DBC00A25807 /* HCaptcha_RxSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCaptcha_RxSwift.h; sourceTree = "<group>"; };
 		F206BB1C1F8D4DBC00A25807 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F231B3991FEC51C800F82943 /* DispatchQueue+Throttle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Throttle.swift"; sourceTree = "<group>"; };
+		F231B3991FEC51C800F82943 /* DispatchQueue+Once.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Once.swift"; sourceTree = "<group>"; };
 		F24EA1D81F9683F5001DEC17 /* HCaptchaDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaDecoder.swift; sourceTree = "<group>"; };
 		F24EA1D91F9683F5001DEC17 /* HCaptchaWebViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaWebViewManager.swift; sourceTree = "<group>"; };
 		F24EA1DA1F9683F5001DEC17 /* String+Dict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Dict.swift"; sourceTree = "<group>"; };
@@ -303,7 +303,7 @@
 				F24EA1DA1F9683F5001DEC17 /* String+Dict.swift */,
 				F24EA1DB1F9683F5001DEC17 /* HCaptchaError.swift */,
 				F2AE8613204F3B41002E28D7 /* HCaptchaResult.swift */,
-				F231B3991FEC51C800F82943 /* DispatchQueue+Throttle.swift */,
+				F231B3991FEC51C800F82943 /* DispatchQueue+Once.swift */,
 				F24EA1DE1F9683F5001DEC17 /* HCaptcha.swift */,
 				E683772029053E560021BFD7 /* HCaptchaURLOpener.swift */,
 				E6BF595B288AE915007CE1CE /* HCaptchaHtml.swift */,
@@ -519,7 +519,7 @@
 				F24EA1E31F968403001DEC17 /* HCaptchaWebViewManager.swift in Sources */,
 				43DC08142E971586003839A5 /* HCaptchaVerifyParams.swift in Sources */,
 				F24EA1E41F968403001DEC17 /* String+Dict.swift in Sources */,
-				F231B39A1FEC51C800F82943 /* DispatchQueue+Throttle.swift in Sources */,
+				F231B39A1FEC51C800F82943 /* DispatchQueue+Once.swift in Sources */,
 				43DC084C2EA819DB003839A5 /* HCaptchaJourneys.swift in Sources */,
 				E6DB9EA827B15954008F0327 /* HCaptchaDebugInfo.swift in Sources */,
 				43C3B8FC2EBA07C900705F63 /* HCaptchaWebViewManager+Private.swift in Sources */,

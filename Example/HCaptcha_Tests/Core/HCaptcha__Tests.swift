@@ -9,6 +9,7 @@
 import AppSwizzle
 @testable import HCaptcha
 import RxSwift
+import WebKit
 import XCTest
 
 
@@ -18,6 +19,19 @@ class HCaptcha__Tests: XCTestCase {
             static let APIKey = "HCaptchaKey"
             static let Domain = "HCaptchaDomain"
         }
+    }
+
+    override func setUp() {
+        super.setUp()
+        DispatchQueue.resetOnceTokens()
+        HCaptchaWebViewManager.clearWebViewData()
+    }
+
+    override func tearDown() {
+        UIApplication.shared.keyWindow?.subviews
+            .filter { $0 is WKWebView }
+            .forEach { $0.removeFromSuperview() }
+        super.tearDown()
     }
 
     func test__valid_js_customTheme() {

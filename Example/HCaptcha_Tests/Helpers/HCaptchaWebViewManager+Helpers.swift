@@ -18,9 +18,9 @@ extension HCaptchaWebViewManager {
     }()
 
     enum MockOnLoad: String {
-        case didLoad = "didLoad"
-        case networkError = "networkError"
-        case networkOnce = "networkOnce"
+        case didLoad
+        case networkError
+        case networkOnce
     }
 
     convenience init(
@@ -106,5 +106,24 @@ extension HCaptchaWebViewManager {
         self.completion = completion
 
         validate(on: view)
+    }
+
+    /// Removes all session/local storage from the default data store so
+    /// tests start with a clean `WKWebView` environment.
+    static func clearWebViewData() {
+        let types: Set<String> = [
+            WKWebsiteDataTypeDiskCache,
+            WKWebsiteDataTypeMemoryCache,
+            WKWebsiteDataTypeSessionStorage,
+            WKWebsiteDataTypeLocalStorage
+        ]
+        var done = false
+        WKWebsiteDataStore.default().removeData(
+            ofTypes: types,
+            modifiedSince: .distantPast
+        ) { done = true }
+        while !done {
+            RunLoop.current.run(mode: .default, before: Date(timeIntervalSinceNow: 0.01))
+        }
     }
 }
