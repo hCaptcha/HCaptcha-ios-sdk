@@ -115,7 +115,8 @@ extension HCaptchaWebViewManager {
             WKWebsiteDataTypeDiskCache,
             WKWebsiteDataTypeMemoryCache,
             WKWebsiteDataTypeSessionStorage,
-            WKWebsiteDataTypeLocalStorage
+            WKWebsiteDataTypeLocalStorage,
+            WKWebsiteDataTypeCookies
         ]
         var done = false
         WKWebsiteDataStore.default().removeData(

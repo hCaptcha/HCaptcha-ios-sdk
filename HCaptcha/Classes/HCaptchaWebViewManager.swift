@@ -217,6 +217,9 @@ internal class HCaptchaWebViewManager: NSObject {
         } else {
             if completion != nil {
                 complete(HCaptchaResult(self, error: error))
+                if !loadingState.isLoaded {
+                    loadingState = .failed(error)
+                }
             } else {
                 loadingState = .failed(error)
             }

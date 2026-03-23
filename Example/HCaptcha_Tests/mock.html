@@ -28,7 +28,10 @@
       //   any other value  — evaluated as JS expression and posted
       var onExecuteBehavior = "${onExecute}";
 
-      var loadCount = parseInt(sessionStorage.getItem("loadCount") || "0");
+      var loadCount = (function() {
+          var m = document.cookie.match(/(?:^|;\s*)loadCount=(\d+)/);
+          return m ? parseInt(m[1]) : 0;
+      })();
 
       const themeType = typeof theme;
       console.assert(themeType === "string" || themeType === "object", "invalid theme object");
@@ -149,7 +152,7 @@
       };
 
       loadCount++;
-      sessionStorage.setItem("loadCount", loadCount.toString());
+      document.cookie = "loadCount=" + loadCount + ";path=/";
       switch (onLoadBehavior) {
           case "networkError":
               post({ error: 7 });
