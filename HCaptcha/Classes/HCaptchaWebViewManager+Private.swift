@@ -207,12 +207,6 @@ extension HCaptchaWebViewManager {
     }
 
     func complete(_ result: HCaptchaResult) {
-        guard !resultHandled else {
-            Log.debug("WebViewManager.complete skip as handled")
-            return
-        }
-
-        resultHandled = true
         let completion = self.completion
         self.completion = nil
         completion?(result)

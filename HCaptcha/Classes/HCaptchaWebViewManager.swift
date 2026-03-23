@@ -154,7 +154,7 @@ internal class HCaptchaWebViewManager: NSObject {
 
         if !passiveApiKey {
             guard let view = view else {
-                completion?(HCaptchaResult(self, error: .failedSetup))
+                complete(HCaptchaResult(self, error: .failedSetup))
                 return
             }
 
@@ -171,6 +171,7 @@ internal class HCaptchaWebViewManager: NSObject {
     func stop() {
         Log.debug("WebViewManager.stop")
         stopInitWebViewConfiguration = true
+        completion = nil
         webView.stopLoading()
         resultHandled = true
         loadingTimer?.invalidate()
