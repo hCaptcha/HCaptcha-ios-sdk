@@ -23,6 +23,7 @@ extension HCaptchaWebViewManager {
 
         let conf = WKWebViewConfiguration()
         conf.userContentController = controller
+        conf.websiteDataStore = .nonPersistent()
         conf.allowsInlineMediaPlayback = true
         conf.mediaTypesRequiringUserActionForPlayback = []
 
