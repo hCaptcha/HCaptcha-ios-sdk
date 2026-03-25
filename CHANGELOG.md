@@ -1,3 +1,8 @@
+# 3.0.0
+
+- Feat: add User Journeys support, including Journeylitics packages for CocoaPods and Swift Package Manager
+- Fix: resolve a late WebView completion race during verification
+
 # 2.13.0
 
 - Fix: forward `rqdata` from `HCaptchaVerifyParams` to JS on the initial load path

@@ -314,7 +314,7 @@ When enabled, the SDK will automatically collect these events (from initializati
 
 ## Compiled size: impact on including in your app
 
-HCaptcha pod size: **140** KB as of Jan 2024. You can always see the latest number in the CI logs by searching for the "pod size" string.
+HCaptcha pod size: **159** KB as of March 2026. You can always see the latest number in the CI logs by searching for the "pod size" string.
 
 ## Known issues
 
