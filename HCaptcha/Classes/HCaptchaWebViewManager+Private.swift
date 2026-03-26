@@ -81,12 +81,13 @@ extension HCaptchaWebViewManager {
 
     private func onDidLoad() {
         Log.debug("WebViewManager.onDidLoad")
-        loadingState = .loaded
         cancelLoadingTimer()
-        if completion != nil {
+        let hasPendingExecution = completion != nil
+        loadingState = .loaded
+        self.doConfigureWebView()
+        if hasPendingExecution {
             executeJS(command: .execute(verifyParams))
         }
-        self.doConfigureWebView()
     }
 
     /**
