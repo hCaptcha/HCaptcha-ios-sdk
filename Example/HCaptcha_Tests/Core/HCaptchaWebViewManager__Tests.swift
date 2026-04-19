@@ -603,7 +603,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             configureExpectation.fulfill()
         }
 
-        manager.validate(on: presenterView)
+        manager.validate(on: presenterView) { _ in }
 
         wait(for: [configureExpectation, presentExpectation], timeout: TestTimeouts.standard)
 
@@ -629,7 +629,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
             configureExpectation.fulfill()
         }
 
-        manager.validate(on: presenterView)
+        manager.validate(on: presenterView) { _ in }
 
         wait(for: [configureExpectation, presentExpectation], timeout: TestTimeouts.standard)
 
