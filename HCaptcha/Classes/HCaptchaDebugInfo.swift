@@ -8,6 +8,7 @@
 import Foundation
 import CommonCrypto
 import UIKit
+import MachO
 
 private extension String {
     func jsSanitize() -> String {
@@ -51,31 +52,25 @@ class HCaptchaDebugInfo {
         CC_MD5_Init(sysCtx)
         CC_MD5_Init(appCtx)
 
-        let loadedCount = Int(min(objc_getClassList(nil, 0), 1024))
-        if loadedCount > 0 {
-            let classes = UnsafeMutablePointer<AnyClass?>.allocate(capacity: loadedCount)
-            defer { classes.deallocate() }
+        let imageCount = _dyld_image_count()
+        for imageIdx in 0..<imageCount {
+            guard let imageNamePtr = _dyld_get_image_name(imageIdx) else { continue }
+            let imagePath = String(cString: imageNamePtr)
 
-            _ = objc_getClassList(AutoreleasingUnsafeMutablePointer(classes), Int32(loadedCount))
+            var md5Ctx = depsCtx
+            if imagePath.isSystemFramework {
+                md5Ctx = sysCtx
+            } else if let execPath = Bundle.main.executablePath, imagePath.hasPrefix(execPath) {
+                md5Ctx = appCtx
+            }
 
-            for idx in 0..<loadedCount {
-                if let `class` = classes[idx] {
-                    var info = Dl_info()
-                    if dladdr(unsafeBitCast(`class`, to: UnsafeRawPointer.self), &info) != 0,
-                            let imagePathPtr = info.dli_fname {
-                        let imagePath = String(cString: imagePathPtr)
+            var classCount: UInt32 = 0
+            guard let classNames = objc_copyClassNamesForImage(imageNamePtr, &classCount) else { continue }
+            defer { free(classNames) }
 
-                        var md5Ctx = depsCtx
-                        if imagePath.isSystemFramework {
-                            md5Ctx = sysCtx
-                        } else if let execPath = Bundle.main.executablePath, imagePath.hasPrefix(execPath) {
-                            md5Ctx = appCtx
-                        }
-
-                        let className = NSStringFromClass(`class`)
-                        CC_MD5_Update(md5Ctx, className, CC_LONG(className.count))
-                    }
-                }
+            for classIdx in 0..<Int(classCount) {
+                let className = String(cString: classNames[classIdx])
+                CC_MD5_Update(md5Ctx, className, CC_LONG(className.count))
             }
         }
 
