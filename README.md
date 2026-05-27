@@ -45,16 +45,14 @@ To secure your application, you need to send the token received here to your bac
 
 HCaptcha is available through [CocoaPods](http://cocoapods.org) and packaged for [Carthage](https://github.com/Carthage/Carthage) and [SPM](https://www.swift.org/package-manager/) (Swift Package Manager).
 
-To install it, simply add the following line to your dependencies file:
+### SPM
 
-### Cocoapods
-``` ruby
-pod "HCaptcha"
-# or
-pod "HCaptcha/RxSwift"
-```
+Standard SPM formula: uses [Package.swift](./Package.swift)
 
 ### Carthage
+
+To install it, simply add the following line to your dependencies file:
+
 ``` ruby
 github "hCaptcha/HCaptcha-ios-sdk"
 ```
@@ -66,8 +64,15 @@ Known issues:
  - Carthage has a `RxSwift` build issue, also avoidable via `--no-use-binaries` - https://github.com/Carthage/Carthage/issues/3243
 
 
-### SPM
-Standard SPM formula: uses [Package.swift](./Package.swift)
+### Cocoapods
+
+Note that CocoaPods support has been officially deprecated following Cocoapods' read-only trunk notice and will be removed in the future. Please migrate to Swift Package Manager or Carthage.
+
+``` ruby
+pod "HCaptcha"
+# or
+pod "HCaptcha/RxSwift"
+```
 
 ## Requirements
 
@@ -78,7 +83,7 @@ Standard SPM formula: uses [Package.swift](./Package.swift)
 
 ## Pre-requisites
 
-Once you have the hCaptcha `apiKey` (also referred to as `sitekey`, which can be obtained at [`https://dashboard.hcaptcha.com/sites`](https://dashboard.hcaptcha.com/sites)),
+Once you have the hCaptcha `apiKey` (the `sitekey`, which can be obtained at [`https://dashboard.hcaptcha.com/sites`](https://dashboard.hcaptcha.com/sites)),
 
 the hCaptcha `apiKey` can be specified in `Info.plist` keys or can be passed as parameters when instantiating `HCaptcha()`.
 

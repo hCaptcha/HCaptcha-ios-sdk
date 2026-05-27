@@ -1,3 +1,7 @@
+# 3.0.1
+
+- Fix: use RxSwift 6.10.2 tagged release dependency for Swift Package Manager resolution
+
 # 3.0.0
 
 - Feat: add User Journeys support, including Journeylitics packages for CocoaPods and Swift Package Manager
