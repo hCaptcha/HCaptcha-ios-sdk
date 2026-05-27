@@ -30,6 +30,16 @@ platform :ios do
       try_repo_update_on_error: true,
     )
 
+    scan_options = {
+      devices: self.select_similar_simulator(devices),
+      scheme: "HCaptcha-RxSwift-Example",
+      workspace: "Example/HCaptcha.xcworkspace",
+      code_coverage: true,
+      derived_data_path: File.expand_path("../.build/fastlane/DerivedData", __dir__),
+      output_directory: File.expand_path("test_output", __dir__),
+      buildlog_path: File.expand_path("test_output/build_logs", __dir__),
+    }
+
     # The problem lies in the fact (or rather: serious bug in xcodebuild) that
     # the timeout for connecting to the XCTest server starts at the moment you
     # issue the command xcodebuild. The timeout is 120 seconds, so if your
@@ -37,28 +47,19 @@ platform :ios do
     # xcodebuild will give this "Canceling tests due to timeout" error.
     # https://stackoverflow.com/questions/37922146/xctests-failing-on-physical-device-canceling-tests-due-to-timeout/40790171#40790171
     scan(
+      **scan_options,
       build_for_testing: true,
-      devices: self.select_similar_simulator(devices),
-      scheme: "HCaptcha-RxSwift-Example",
-      workspace: "Example/HCaptcha.xcworkspace",
-      code_coverage: true,
     )
 
     scan(
+      **scan_options,
       test_without_building: true,
-      devices: self.select_similar_simulator(devices),
-      scheme: "HCaptcha-RxSwift-Example",
-      workspace: "Example/HCaptcha.xcworkspace",
-      code_coverage: true,
       skip_testing: ["HCaptcha_Tests/HCaptcha__Bench"],
     )
 
     scan(
+      **scan_options,
       test_without_building: true,
-      devices: self.select_similar_simulator(devices),
-      scheme: "HCaptcha-RxSwift-Example",
-      workspace: "Example/HCaptcha.xcworkspace",
-      code_coverage: true,
       disable_concurrent_testing: true,
       only_testing: ["HCaptcha_Tests/HCaptcha__Bench"]
     )
@@ -71,6 +72,9 @@ platform :ios do
     unless Helper.is_ci?
       puts "Running UI Tests"
       scan(
+        derived_data_path: File.expand_path("../.build/fastlane/DerivedData", __dir__),
+        output_directory: File.expand_path("test_output", __dir__),
+        buildlog_path: File.expand_path("test_output/build_logs", __dir__),
         test_without_building: true,
         devices: self.select_similar_simulator(devices),
         scheme: "HCaptcha_UITests",
