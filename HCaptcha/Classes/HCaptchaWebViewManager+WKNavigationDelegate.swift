@@ -32,7 +32,7 @@ extension HCaptchaWebViewManager: WKNavigationDelegate, WKUIDelegate {
     /// auto-denies the request and the camera challenge cannot start.
     ///
     /// Only camera capture is granted. The liveness challenge requests video only
-    /// (`audio: false`), so microphone capture is denied — granting it would require the
+    /// (`audio: false`), so microphone capture is denied; granting it would require the
     /// host app to declare `NSMicrophoneUsageDescription`, which the SDK does not need.
     ///
     /// The host app must still declare `NSCameraUsageDescription` in its Info.plist;
@@ -43,7 +43,12 @@ extension HCaptchaWebViewManager: WKNavigationDelegate, WKUIDelegate {
                  initiatedByFrame frame: WKFrameInfo,
                  type: WKMediaCaptureType,
                  decisionHandler: @escaping (WKPermissionDecision) -> Void) {
-        decisionHandler(type == .camera ? .grant : .deny)
+        // `.cameraAndMicrophone` is intentionally denied alongside `.microphone`: the
+        // liveness challenge never requests audio, and granting the microphone would force
+        // the host app to declare `NSMicrophoneUsageDescription`, which is not needed.
+        let granted = type == .camera
+        Log.debug("WebViewManager.requestMediaCapturePermissionFor type: \(type.rawValue) granted: \(granted)")
+        decisionHandler(granted ? .grant : .deny)
     }
 
     /// Tells the delegate that an error occurred during navigation.
