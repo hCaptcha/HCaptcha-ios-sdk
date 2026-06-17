@@ -31,9 +31,7 @@ extension HCaptchaWebViewManager: WKNavigationDelegate, WKUIDelegate {
     /// in this web view (the camera-based liveness challenge). Without this, WKWebView
     /// auto-denies the request and the camera challenge cannot start.
     ///
-    /// Only camera capture is granted. The liveness challenge requests video only
-    /// (`audio: false`), so microphone capture is denied; granting it would require the
-    /// host app to declare `NSMicrophoneUsageDescription`, which the SDK does not need.
+    /// Only camera capture is granted — the liveness challenge requests video only.
     ///
     /// The host app must still declare `NSCameraUsageDescription` in its Info.plist;
     /// iOS terminates the app on camera access otherwise.

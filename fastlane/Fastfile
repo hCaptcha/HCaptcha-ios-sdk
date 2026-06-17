@@ -244,7 +244,8 @@ platform :ios do
     ["HCaptcha-UIKit-Example",
      "HCaptcha-RxSwift-Example",
      "HCaptcha-Objc-Example",
-     "HCaptcha-SwiftUI-Example"].each do |scheme|
+     "HCaptcha-SwiftUI-Example",
+     "HCaptcha-Passive-Example"].each do |scheme|
       gym(
         workspace: "Example/HCaptcha.xcworkspace",
         scheme: scheme,
