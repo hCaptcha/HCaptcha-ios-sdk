@@ -27,14 +27,8 @@ extension HCaptchaWebViewManager: WKNavigationDelegate, WKUIDelegate {
         return nil
     }
 
-    /// Grants camera capture requested via `getUserMedia` by the hCaptcha content loaded
-    /// in this web view (the camera-based liveness challenge). Without this, WKWebView
-    /// auto-denies the request and the camera challenge cannot start.
-    ///
-    /// Only camera capture is granted — the liveness challenge requests video only.
-    ///
-    /// The host app must still declare `NSCameraUsageDescription` in its Info.plist;
-    /// iOS terminates the app on camera access otherwise.
+    /// Grants the camera capture the liveness challenge requests via `getUserMedia`
+    /// (WKWebView auto-denies otherwise). The host app must declare `NSCameraUsageDescription`.
     @available(iOS 15.0, *)
     func webView(_ webView: WKWebView,
                  requestMediaCapturePermissionFor origin: WKSecurityOrigin,

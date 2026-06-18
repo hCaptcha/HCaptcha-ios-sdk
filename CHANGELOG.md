@@ -1,7 +1,3 @@
-# 3.1.0
-
-- Feat: grant WKWebView camera capture permission so the camera-based liveness challenge can start
-
 # 3.0.1
 
 - Fix: use RxSwift 6.10.2 tagged release dependency for Swift Package Manager resolution
