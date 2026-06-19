@@ -27,6 +27,22 @@ extension HCaptchaWebViewManager: WKNavigationDelegate, WKUIDelegate {
         return nil
     }
 
+    /// Grants the camera capture the liveness challenge requests via `getUserMedia`
+    /// (WKWebView auto-denies otherwise). The host app must declare `NSCameraUsageDescription`.
+    @available(iOS 15.0, *)
+    func webView(_ webView: WKWebView,
+                 requestMediaCapturePermissionFor origin: WKSecurityOrigin,
+                 initiatedByFrame frame: WKFrameInfo,
+                 type: WKMediaCaptureType,
+                 decisionHandler: @escaping (WKPermissionDecision) -> Void) {
+        // `.cameraAndMicrophone` is intentionally denied alongside `.microphone`: the
+        // liveness challenge never requests audio, and granting the microphone would force
+        // the host app to declare `NSMicrophoneUsageDescription`, which is not needed.
+        let granted = type == .camera
+        Log.debug("WebViewManager.requestMediaCapturePermissionFor type: \(type.rawValue) granted: \(granted)")
+        decisionHandler(granted ? .grant : .deny)
+    }
+
     /// Tells the delegate that an error occurred during navigation.
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         Log.debug("WebViewManager.webViewDidFail with \(error)")

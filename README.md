@@ -92,6 +92,8 @@ For the Info.plist configuration, add `HCaptchaKey` (sitekey) and `HCaptchaDomai
 - `HCaptchaKey` is your hCaptcha sitekey.
 - `HCaptchaDomain` should be a string like `https://www.your.com`
 
+If you use the camera-based liveness challenge, also add `NSCameraUsageDescription` to your app's Info.plist — without it, iOS terminates the app the first time the camera is accessed. (Liveness requires iOS 15+.)
+
 If you prefer to keep the information out of the Info.plist, you can instead use:
 
 ``` swift
