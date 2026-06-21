@@ -2,7 +2,6 @@
   <head>
     <meta name="viewport" content="width=device-width" />
     <script type="text/javascript">
-      // onerror need to report errors which happens on WKWebView.loadHTMLString
       window.onerror = function(msg, url, line, column, error) {
         if (window.webkit) {
           window.webkit.messageHandlers.hcaptcha.postMessage({ "error": 1 });
@@ -14,10 +13,22 @@
     <script type="text/javascript">
       var key = "${apiKey}";
       var endpoint = "${endpoint}";
-      var shouldFail = ${shouldFail};
       var rqdata = "${rqdata}";
       var theme = ${theme};
       var debugInfo = JSON.parse('${debugInfo}');
+
+      // Controls what happens on page load:
+      //   "didLoad"       — normal: posts didLoad (default)
+      //   "networkError"  — posts error 7 (permanent network failure)
+      //   "networkOnce"   — posts error 7 on first load, didLoad on reload
+      var onLoadBehavior = "${onLoad}";
+
+      // Controls what execute() returns:
+      //   "sessionTimeout" — posts error 15
+      //   any other value  — evaluated as JS expression and posted
+      var onExecuteBehavior = "${onExecute}";
+
+      var loadCount = parseInt(localStorage.getItem("loadCount") || "0");
 
       const themeType = typeof theme;
       console.assert(themeType === "string" || themeType === "object", "invalid theme object");
@@ -29,19 +40,87 @@
 
       var token = null;
 
+      var validateVerifyParams = function(params) {
+          try {
+              if (typeof params !== 'object' || params === null) {
+                  post({"log": "bad object type"});
+                  return 34;
+              }
+
+              var phonePrefix = params.phonePrefix;
+              var phoneNumber = params.phoneNumber;
+
+              if (phonePrefix !== undefined) {
+                  if (typeof phonePrefix !== 'string') {
+                      post({"log": "bad type phonePrefix"});
+                      return 34;
+                  }
+                  var phonePrefixRegex = /^\+?[1-9]\d{0,3}$/;
+                  if (!phonePrefixRegex.test(phonePrefix)) {
+                      post({"log": "malformed phonePrefix"});
+                      return 34;
+                  }
+              }
+
+              if (phoneNumber !== undefined) {
+                  if (typeof phoneNumber !== 'string') {
+                      post({"log": "bad type phoneNumber"});
+                      return 34;
+                  }
+                  var phoneNumberRegex = /^\+?[1-9]\d{6,14}$/;
+                  if (!phoneNumberRegex.test(phoneNumber)) {
+                      post({"log": "malformed phoneNumber"});
+                      return 34;
+                  }
+              }
+
+              if (params.resetOnError !== undefined && typeof params.resetOnError !== 'boolean') {
+                  post({"log": "bad type resetOnError"});
+                  return 34;
+              }
+
+              if (params.rqdata !== undefined && typeof params.rqdata !== 'string') {
+                  return 34;
+              }
+
+              if (
+                phonePrefix === undefined &&
+                phoneNumber === undefined &&
+                params.rqdata === undefined &&
+                params.userJourney === undefined
+              ) {
+                  return 34;
+              }
+
+              return null;
+          } catch (e) {
+              post({"log": "validateVerifyParams exception " + e.message});
+              return 34;
+          }
+      };
+
+      // Mock hcaptcha.setData to accept userJourney and immediately post a token
+      var hcaptcha = {
+          setData: function(containerId, data) {
+              try {
+                  if (data && data.userJourney) {
+                      token = "journeys:setData";
+                  }
+              } catch (e) {
+              }
+          }
+      };
+
       var execute = function(verifyParams) {
-          if (shouldFail) {
-              post({error: 15}); // .sessionTimeout
+          if (onExecuteBehavior === "sessionTimeout") {
+              post({error: 15});
           } else {
-              // Validate verify params if provided
               if (verifyParams) {
                   var validationError = validateVerifyParams(verifyParams);
                   if (validationError) {
                       post({error: validationError});
                       return;
                   }
-
-                  // Log verify params for testing
                   post({"log": "verifyParams: " + JSON.stringify(verifyParams)});
               }
 
@@ -64,93 +143,29 @@
           }
       };
 
-      var validateVerifyParams = function(params) {
-          try {
-              // Check if params is an object
-              if (typeof params !== 'object' || params === null) {
-                  post({"log": "bad object type"});
-                  return 34; // verifyParamsParseError
-              }
-
-              var phonePrefix = params.phonePrefix;
-              var phoneNumber = params.phoneNumber;
-
-              // Validate phonePrefix if present
-              if (phonePrefix !== undefined) {
-                  if (typeof phonePrefix !== 'string') {
-                      post({"log": "bad type phonePrefix"});
-                      return 34; // verifyParamsParseError
-                  }
-                  // Basic validation: should be 1-4 digits, optionally with + prefix
-                  var phonePrefixRegex = /^\+?[1-9]\d{0,3}$/;
-                  if (!phonePrefixRegex.test(phonePrefix)) {
-                      post({"log": "malformed phonePrefix"});
-                      return 34; // verifyParamsParseError
-                  }
-              }
-
-              // Validate phoneNumber if present
-              if (phoneNumber !== undefined) {
-                  if (typeof phoneNumber !== 'string') {
-                      post({"log": "bad type phoneNumber"});
-                      return 34; // verifyParamsParseError
-                  }
-                  // Basic validation: should be 7-15 digits, optionally with + prefix
-                  var phoneNumberRegex = /^\+?[1-9]\d{6,14}$/;
-                  if (!phoneNumberRegex.test(phoneNumber)) {
-                      post({"log": "malformed phoneNumber"});
-                      return 34; // verifyParamsParseError
-                  }
-              }
-
-              // Validate resetOnError if present
-              if (params.resetOnError !== undefined && typeof params.resetOnError !== 'boolean') {
-                  post({"log": "bad type resetOnError"});
-                  return 34; // verifyParamsParseError
-              }
-
-              // Validate rqdata if present
-              if (params.rqdata !== undefined && typeof params.rqdata !== 'string') {
-                  return 34; // verifyParamsParseError
-              }
-
-              // At least one supported verify param should be present if verifyParams is provided
-              if (
-                phonePrefix === undefined &&
-                phoneNumber === undefined &&
-                params.rqdata === undefined &&
-                params.userJourney === undefined
-              ) {
-                  return 34; // verifyParamsParseError
-              }
-
-              return null; // No validation errors
-          } catch (e) {
-              post({"log": "validateVerifyParams exception " + e.message});
-              return 34; // verifyParamsParseError
-          }
-      };
-
-      // Mock hcaptcha.setData to accept userJourney and immediately post a token
-      var hcaptcha = {
-          setData: function(containerId, data) {
-              try {
-                  if (data && data.userJourney) {
-                      token = "journeys:setData";
-                  }
-              } catch (e) {
-              }
-          }
-      };
-
       var reset = function() {
-          shouldFail = false;
+          onExecuteBehavior = "normal";
           post({ action: "didLoad" });
       };
 
-      post({ action: "didLoad" });
+      loadCount++;
+      localStorage.setItem("loadCount", loadCount.toString());
+      switch (onLoadBehavior) {
+          case "networkError":
+              post({ error: 7 });
+              break;
+          case "networkOnce":
+              if (loadCount <= 1) {
+                  post({ error: 7 });
+              } else {
+                  post({ action: "didLoad" });
+              }
+              break;
+          default:
+              post({ action: "didLoad" });
+              break;
+      }
 
-      // clear global error handle, rest will be handled in WKWebView.evaluateJavaScript closure
       window.onerror = null;
     </script>
   </head>

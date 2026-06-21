@@ -20,11 +20,21 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
     override func setUp() {
         super.setUp()
 
+        DispatchQueue.resetOnceTokens()
+        HCaptchaWebViewManager.clearWebViewData()
         presenterView = UIApplication.shared.keyWindow?.rootViewController?.view
         apiKey = String(arc4random())
     }
 
     override func tearDown() {
+        presenterView?.subviews
+            .filter { $0 is WKWebView }
+            .forEach { $0.removeFromSuperview() }
+
+        UIApplication.shared.keyWindow?.subviews
+            .filter { $0 is WKWebView }
+            .forEach { $0.removeFromSuperview() }
+
         presenterView = nil
         apiKey = nil
 
@@ -579,7 +589,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         manager.configureWebView { _ in
             exp0.fulfill()
         }
-        wait(for: [exp0], timeout: TestTimeouts.short)
+        wait(for: [exp0], timeout: TestTimeouts.standard)
         manager.validate(on: presenterView)
 
         wait(for: [exp1, exp2], timeout: TestTimeouts.standard)
@@ -830,5 +840,83 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         // Then
         XCTAssertEqual(rawValue, "reset();")
+    }
+
+    // MARK: - Pre-Validate Error Handling
+
+    func test__Handle_Error_PreValidate__Stores_Failed_State() {
+        let manager = HCaptchaWebViewManager(onLoad: .networkError)
+
+        let pred = NSPredicate { _, _ in manager.loadingState.error == .networkError }
+        let exp = XCTNSPredicateExpectation(predicate: pred, object: nil)
+        wait(for: [exp], timeout: TestTimeouts.standard)
+
+        XCTAssertNil(manager.completion)
+    }
+
+    func test__Validate_After_PreValidate_Network_Error__Silent_Retry_Reports_Error() {
+        let manager = HCaptchaWebViewManager(onLoad: .networkError)
+
+        let pred = NSPredicate { _, _ in manager.loadingState.error == .networkError }
+        let errExp = XCTNSPredicateExpectation(predicate: pred, object: nil)
+        wait(for: [errExp], timeout: TestTimeouts.standard)
+
+        let exp1 = expectation(description: "silent retry fails, then completion receives networkError")
+        manager.validate(on: presenterView, resetOnError: false) { result in
+            XCTAssertEqual(result.error, .networkError)
+            exp1.fulfill()
+        }
+
+        waitForExpectations(timeout: TestTimeouts.standard)
+
+        manager.stop()
+    }
+
+    func test__Validate_After_PreValidate_Network_Error__Silent_Retry_Recovers() {
+        let manager = HCaptchaWebViewManager(messageBody: "{token: key}",
+                                             apiKey: apiKey,
+                                             onLoad: .networkOnce)
+
+        let pred = NSPredicate { _, _ in manager.loadingState.error == .networkError }
+        let errExp = XCTNSPredicateExpectation(predicate: pred, object: nil)
+        wait(for: [errExp], timeout: TestTimeouts.standard)
+
+        let exp1 = expectation(description: "silent retry succeeds, validate returns token")
+        manager.validate(on: presenterView, resetOnError: false) { result in
+            XCTAssertNil(result.error)
+            XCTAssertEqual(result.token, self.apiKey)
+            exp1.fulfill()
+        }
+
+        waitForExpectations(timeout: TestTimeouts.standard)
+    }
+
+    func test__Validate_After_PreValidate_Network_Error__No_Double_Callback() {
+        let manager = HCaptchaWebViewManager(onLoad: .networkError)
+
+        let pred = NSPredicate { _, _ in manager.loadingState.error == .networkError }
+        let errExp = XCTNSPredicateExpectation(predicate: pred, object: nil)
+        wait(for: [errExp], timeout: TestTimeouts.standard)
+
+        var completionCallCount = 0
+        let exp1 = expectation(description: "completion called exactly once")
+
+        manager.validate(on: presenterView, resetOnError: false) { result in
+            completionCallCount += 1
+            XCTAssertEqual(result.error, .networkError)
+            exp1.fulfill()
+        }
+
+        waitForExpectations(timeout: TestTimeouts.standard)
+
+        let exp2 = expectation(description: "no extra callbacks")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            XCTAssertEqual(completionCallCount, 1, "completion should be called exactly once")
+            exp2.fulfill()
+        }
+
+        waitForExpectations(timeout: TestTimeouts.standard)
+
+        manager.stop()
     }
 }

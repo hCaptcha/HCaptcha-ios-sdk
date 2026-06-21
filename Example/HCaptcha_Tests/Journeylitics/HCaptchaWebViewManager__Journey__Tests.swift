@@ -6,9 +6,23 @@
 //
 
 @testable import HCaptcha
+import WebKit
 import XCTest
 
 class HCaptcha__Journey__Tests: XCTestCase {
+    override func setUp() {
+        super.setUp()
+        DispatchQueue.resetOnceTokens()
+        HCaptchaWebViewManager.clearWebViewData()
+    }
+
+    override func tearDown() {
+        UIApplication.shared.keyWindow?.subviews
+            .filter { $0 is WKWebView }
+            .forEach { $0.removeFromSuperview() }
+        super.tearDown()
+    }
+
     func test__setData_called_injects_journeys() {
         let exp = expectation(description: "journeys setData -> token posted")
         let manager = HCaptchaWebViewManager(messageBody: "{action: \"setData\", token: \"journeys:setData\"}")

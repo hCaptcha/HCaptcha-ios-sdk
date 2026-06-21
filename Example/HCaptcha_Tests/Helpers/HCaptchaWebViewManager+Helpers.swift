@@ -17,12 +17,19 @@ extension HCaptchaWebViewManager {
             .flatMap { try? String(contentsOfFile: $0) }
     }()
 
+    enum MockOnLoad: String {
+        case didLoad
+        case networkError
+        case networkOnce
+    }
+
     convenience init(
         messageBody: String = "undefined",
         apiKey: String? = nil,
         passiveApiKey: Bool = false,
         endpoint: URL? = nil,
-        shouldFail: Bool = false, // will fail with retriable sessionTimeout
+        onLoad: MockOnLoad = .didLoad,
+        shouldFail: Bool = false,
         size: HCaptchaSize = .invisible,
         rqdata: String? = nil,
         theme: String = "light",
@@ -30,10 +37,12 @@ extension HCaptchaWebViewManager {
         userJourney: Bool = false,
         urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener()
     ) {
+        let onExecute = shouldFail ? "sessionTimeout" : "normal"
         let html = String(format: HCaptchaWebViewManager.unformattedHTML,
                           arguments: [
                             "message": messageBody,
-                            "shouldFail": shouldFail.description
+                            "onLoad": onLoad.rawValue,
+                            "onExecute": onExecute
                           ])
 
         self.init(
@@ -97,5 +106,24 @@ extension HCaptchaWebViewManager {
         self.completion = completion
 
         validate(on: view)
+    }
+
+    /// Removes all session/local storage from the default data store so
+    /// tests start with a clean `WKWebView` environment.
+    static func clearWebViewData() {
+        let types: Set<String> = [
+            WKWebsiteDataTypeDiskCache,
+            WKWebsiteDataTypeMemoryCache,
+            WKWebsiteDataTypeSessionStorage,
+            WKWebsiteDataTypeLocalStorage
+        ]
+        var done = false
+        WKWebsiteDataStore.default().removeData(
+            ofTypes: types,
+            modifiedSince: .distantPast
+        ) { done = true }
+        while !done {
+            RunLoop.current.run(mode: .default, before: Date(timeIntervalSinceNow: 0.01))
+        }
     }
 }

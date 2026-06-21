@@ -18,11 +18,16 @@ class HCaptchaWebViewManager__HTML__Tests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
 
+        DispatchQueue.resetOnceTokens()
+        HCaptchaWebViewManager.clearWebViewData()
         webViewContentIsAvailable = expectation(description: "get webview content")
         _ = HCaptchaDebugInfo.json
     }
 
     override func tearDownWithError() throws {
+        UIApplication.shared.keyWindow?.subviews
+            .filter { $0 is WKWebView }
+            .forEach { $0.removeFromSuperview() }
         webViewContentIsAvailable = nil
 
         try super.tearDownWithError()
