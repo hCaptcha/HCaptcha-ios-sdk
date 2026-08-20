@@ -36,7 +36,7 @@ private func sampledImages(_ images: [String]) -> [String] {
 private func updateHash(_ ctx: UnsafeMutablePointer<CC_MD5_CTX>, with images: [String]) {
     for imagePath in sampledImages(images) {
         let imageName = URL(fileURLWithPath: imagePath).lastPathComponent
-        imageName.withCString { CC_MD5_Update(ctx, $0, CC_LONG(strlen($0))) }
+        _ = imageName.withCString { CC_MD5_Update(ctx, $0, CC_LONG(strlen($0))) }
     }
 }
 
