@@ -27,6 +27,19 @@ private func getFinalHash(_ ctx: UnsafeMutablePointer<CC_MD5_CTX>) -> String {
     return hexDigest
 }
 
+private func sampledImages(_ images: [String]) -> [String] {
+    let sortedImages = images.sorted()
+    guard sortedImages.count > 20 else { return sortedImages }
+    return Array(sortedImages.prefix(10)) + Array(sortedImages.suffix(10))
+}
+
+private func updateHash(_ ctx: UnsafeMutablePointer<CC_MD5_CTX>, with images: [String]) {
+    for imagePath in sampledImages(images) {
+        let imageName = URL(fileURLWithPath: imagePath).lastPathComponent
+        imageName.withCString { CC_MD5_Update(ctx, $0, CC_LONG(strlen($0))) }
+    }
+}
+
 private func bundleShortVersion() -> String {
     let sdkBundle = Bundle(for: HCaptchaDebugInfo.self)
     let sdkBundleShortVer = sdkBundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
@@ -45,38 +58,38 @@ class HCaptchaDebugInfo {
     }
 
     private class func buildDebugInfo() -> [String] {
-        let depsCtx = UnsafeMutablePointer<CC_MD5_CTX>.allocate(capacity: 1)
-        let sysCtx = UnsafeMutablePointer<CC_MD5_CTX>.allocate(capacity: 1)
-        let appCtx = UnsafeMutablePointer<CC_MD5_CTX>.allocate(capacity: 1)
-        CC_MD5_Init(depsCtx)
-        CC_MD5_Init(sysCtx)
-        CC_MD5_Init(appCtx)
+        var depsCtx = CC_MD5_CTX()
+        var sysCtx = CC_MD5_CTX()
+        var appCtx = CC_MD5_CTX()
+        CC_MD5_Init(&depsCtx)
+        CC_MD5_Init(&sysCtx)
+        CC_MD5_Init(&appCtx)
 
+        var depsImages: [String] = []
+        var sysImages: [String] = []
+        var appImages: [String] = []
+        let execPath = Bundle.main.executablePath
         let imageCount = _dyld_image_count()
         for imageIdx in 0..<imageCount {
             guard let imageNamePtr = _dyld_get_image_name(imageIdx) else { continue }
             let imagePath = String(cString: imageNamePtr)
 
-            var md5Ctx = depsCtx
             if imagePath.isSystemFramework {
-                md5Ctx = sysCtx
-            } else if let execPath = Bundle.main.executablePath, imagePath.hasPrefix(execPath) {
-                md5Ctx = appCtx
-            }
-
-            var classCount: UInt32 = 0
-            guard let classNames = objc_copyClassNamesForImage(imageNamePtr, &classCount) else { continue }
-            defer { free(classNames) }
-
-            for classIdx in 0..<Int(classCount) {
-                let className = String(cString: classNames[classIdx])
-                CC_MD5_Update(md5Ctx, className, CC_LONG(className.count))
+                sysImages.append(imagePath)
+            } else if let execPath = execPath, imagePath.hasPrefix(execPath) {
+                appImages.append(imagePath)
+            } else {
+                depsImages.append(imagePath)
             }
         }
 
-        let depsHash = getFinalHash(depsCtx)
-        let sysHash = getFinalHash(sysCtx)
-        let appHash = getFinalHash(appCtx)
+        updateHash(&depsCtx, with: depsImages)
+        updateHash(&sysCtx, with: sysImages)
+        updateHash(&appCtx, with: appImages)
+
+        let depsHash = getFinalHash(&depsCtx)
+        let sysHash = getFinalHash(&sysCtx)
+        let appHash = getFinalHash(&appCtx)
         let iver = UIDevice.current.systemVersion.jsSanitize()
 
         return [
