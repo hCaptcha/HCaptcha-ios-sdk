@@ -26,6 +26,7 @@ extension HCaptchaConfig {
          locale: Locale? = nil,
          loadingTimeout: TimeInterval = 5.0,
          disablePat: Bool? = nil,
+         disableDebugInfo: Bool = false,
          userJourney: Bool = false) throws {
 
         try self.init(html: html,
@@ -49,6 +50,7 @@ extension HCaptchaConfig {
                       locale: locale,
                       loadingTimeout: loadingTimeout,
                       disablePat: disablePat,
+                      disableDebugInfo: disableDebugInfo,
                       userJourney: userJourney)
     }
 

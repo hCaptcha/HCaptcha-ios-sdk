@@ -48,6 +48,7 @@ public class HCaptcha: NSObject {
          - theme: HCaptcha supports `.light`, `dark` and `.contrast` themes
          - customTheme: See Enterprise docs
          - diagnosticLog: Emit detailed console logs for debugging
+         - disableDebugInfo: Disable SDK debug info
 
      Initializes a HCaptcha object
 
@@ -80,6 +81,7 @@ public class HCaptcha: NSObject {
         theme: String = "light",
         customTheme: String? = nil,
         diagnosticLog: Bool = false,
+        disableDebugInfo: Bool = false,
         disablePat: Bool = false,
         userJourney: Bool = false
     ) throws {
@@ -113,6 +115,7 @@ public class HCaptcha: NSObject {
                                         customTheme: customTheme,
                                         locale: locale,
                                         disablePat: disablePat,
+                                        disableDebugInfo: disableDebugInfo,
                                         userJourney: userJourney)
 
         Log.debug(".init with: \(config)")
@@ -341,7 +344,54 @@ public class HCaptcha: NSObject {
                       theme: theme,
                       customTheme: customTheme,
                       diagnosticLog: diagnosticLog,
+                      disableDebugInfo: false,
                       disablePat: false,
+                      userJourney: userJourney)
+    }
+}
+
+extension HCaptcha {
+    @objc
+    public convenience init(
+        apiKey: String?,
+        passiveApiKey: Bool,
+        baseURL: URL?,
+        locale: Locale?,
+        size: HCaptchaSize,
+        orientation: HCaptchaOrientation,
+        jsSrc: URL,
+        rqdata: String?,
+        sentry: Bool,
+        endpoint: URL?,
+        reportapi: URL?,
+        assethost: URL?,
+        imghost: URL?,
+        host: String?,
+        theme: String,
+        customTheme: String?,
+        diagnosticLog: Bool,
+        disablePat: Bool,
+        userJourney: Bool
+    ) throws {
+        try self.init(apiKey: apiKey,
+                      passiveApiKey: passiveApiKey,
+                      baseURL: baseURL,
+                      locale: locale,
+                      size: size,
+                      orientation: orientation,
+                      jsSrc: jsSrc,
+                      rqdata: rqdata,
+                      sentry: sentry,
+                      endpoint: endpoint,
+                      reportapi: reportapi,
+                      assethost: assethost,
+                      imghost: imghost,
+                      host: host,
+                      theme: theme,
+                      customTheme: customTheme,
+                      diagnosticLog: diagnosticLog,
+                      disableDebugInfo: false,
+                      disablePat: disablePat,
                       userJourney: userJourney)
     }
 }

@@ -140,6 +140,10 @@ class HCaptcha__Config__Tests: XCTestCase {
         XCTAssertTrue(actual.contains("pat=off"))
     }
 
+    func test__Debug_Info_Defaults_To_Enabled() throws {
+        XCTAssertFalse(try HCaptchaConfig().disableDebugInfo)
+    }
+
     func test__Host_Validation__Valid_Hostnames() {
         // Test valid hostnames
         let validHosts = [

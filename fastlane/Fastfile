@@ -295,14 +295,26 @@ platform :ios do
   # Private
 
   def select_similar_simulator(args)
-    args.map { |device_string|
+    simulators = FastlaneCore::Simulator.all.select { |simulator| simulator.os_type == "iOS" }
+    selected = args.map { |device_string|
       pieces = device_string.split(' (')
-      FastlaneCore::Simulator.all
+      simulators
         .select { |s| s.name == pieces.first }
         .sort_by { |s| Gem::Version.create(s.os_version) }
         .detect { |s| Gem::Requirement.new(pieces[1].tr('()', '')).satisfied_by?(Gem::Version.create(s.os_version)) }
     }
     .compact
+
+    if selected.empty?
+      fallback = simulators
+        .select { |simulator| simulator.name.start_with?("iPhone") }
+        .max_by { |simulator| Gem::Version.create(simulator.os_version) }
+      UI.user_error!("No iPhone simulator available") unless fallback
+      UI.important("Requested simulator unavailable; using #{fallback.name} (#{fallback.ios_version})")
+      selected = [fallback]
+    end
+
+    selected
     .map { |s| "#{s.name} (#{s.ios_version})"}
   end
 

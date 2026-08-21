@@ -142,6 +142,9 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
     /// A debug property
     let disablePat: Bool?
 
+    /// Disable collection of SDK debug information
+    let disableDebugInfo: Bool
+
     /// Enable user journey tracking for analytics
     let userJourney: Bool
 
@@ -219,6 +222,7 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
                 locale: Locale?,
                 loadingTimeout: TimeInterval = 5.0,
                 disablePat: Bool?,
+                disableDebugInfo: Bool = false,
                 userJourney: Bool = false) throws {
         guard let apiKey = apiKey ?? infoPlistKey else {
             throw HCaptchaError.apiKeyNotFound
@@ -263,6 +267,7 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
         self.locale = locale
         self.loadingTimeout = loadingTimeout
         self.disablePat = disablePat
+        self.disableDebugInfo = disableDebugInfo
         self.userJourney = userJourney
     }
 

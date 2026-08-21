@@ -62,6 +62,10 @@ fastlane/test_output
 
 ## Node
 .node_modules
+node_modules/
+
+## Yarn
+.yarn/
 
 ## cocoapods-size
 /.lint
