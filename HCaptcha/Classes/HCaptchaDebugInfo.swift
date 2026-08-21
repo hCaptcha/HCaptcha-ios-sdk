@@ -47,10 +47,6 @@ private func bundleShortVersion() -> String {
 }
 
 class HCaptchaDebugInfo {
-    static func json(disabled: Bool) -> String {
-        return disabled ? "[]" : json
-    }
-
     public static let json: String = HCaptchaDebugInfo.buildDebugInfoJson()
 
     private class func buildDebugInfoJson() -> String {

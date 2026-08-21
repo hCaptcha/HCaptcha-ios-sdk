@@ -32,10 +32,6 @@ class HCaptcha__Tests: XCTestCase {
         XCTAssertTrue(debugInfo[4].hasPrefix("sdk_"))
     }
 
-    func test__Debug_Info_Can_Be_Disabled() {
-        XCTAssertEqual(HCaptchaDebugInfo.json(disabled: true), "[]")
-    }
-
     func test__valid_js_customTheme() {
         let customTheme = """
               {
