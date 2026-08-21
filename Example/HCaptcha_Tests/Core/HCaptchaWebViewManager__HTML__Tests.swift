@@ -42,6 +42,14 @@ class HCaptchaWebViewManager__HTML__Tests: XCTestCase {
         waitForWebViewContent(manager: manager)
         XCTAssertEqual(webViewContent, "orientation: portrait")
     }
+
+    func test__Debug_Info_Can_Be_Disabled() throws {
+        let config = try HCaptchaConfig(html: "debugInfo: ${debugInfo}",
+                                        disableDebugInfo: true)
+        let manager = HCaptchaWebViewManager(config: config)
+        waitForWebViewContent(manager: manager)
+        XCTAssertEqual(webViewContent, "debugInfo: []")
+    }
 }
 
 extension HCaptchaWebViewManager__HTML__Tests: WKNavigationDelegate {
