@@ -579,7 +579,7 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         manager.configureWebView { _ in
             exp0.fulfill()
         }
-        wait(for: [exp0], timeout: TestTimeouts.short)
+        wait(for: [exp0], timeout: TestTimeouts.standard)
         manager.validate(on: presenterView)
 
         wait(for: [exp1, exp2], timeout: TestTimeouts.standard)

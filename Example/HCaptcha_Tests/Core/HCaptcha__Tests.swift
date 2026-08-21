@@ -20,6 +20,18 @@ class HCaptcha__Tests: XCTestCase {
         }
     }
 
+    func test__Debug_Info_Has_Expected_Signals() throws {
+        let data = try XCTUnwrap(HCaptchaDebugInfo.json.data(using: .utf8))
+        let debugInfo = try JSONDecoder().decode([String].self, from: data)
+
+        XCTAssertEqual(debugInfo.count, 5)
+        XCTAssertTrue(debugInfo[0].hasPrefix("sys_"))
+        XCTAssertTrue(debugInfo[1].hasPrefix("deps_"))
+        XCTAssertTrue(debugInfo[2].hasPrefix("app_"))
+        XCTAssertTrue(debugInfo[3].hasPrefix("iver_"))
+        XCTAssertTrue(debugInfo[4].hasPrefix("sdk_"))
+    }
+
     func test__valid_js_customTheme() {
         let customTheme = """
               {

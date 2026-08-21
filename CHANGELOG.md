@@ -1,3 +1,7 @@
+# 3.1.0
+
+- Fix: performance improvements in debugging workflow for large apps
+
 # 3.0.1
 
 - Fix: use RxSwift 6.10.2 tagged release dependency for Swift Package Manager resolution
