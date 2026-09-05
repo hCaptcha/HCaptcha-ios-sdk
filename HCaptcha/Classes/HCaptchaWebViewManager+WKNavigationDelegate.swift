@@ -28,9 +28,8 @@ extension HCaptchaWebViewManager: WKNavigationDelegate, WKUIDelegate, MFMessageC
 
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration,
                  for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        if let url = navigationAction.request.url,
-           handleSMSNavigation(for: url) {
-            return nil
+        if let url = navigationAction.request.url {
+            _ = handleSMSNavigation(for: url)
         }
         return nil
     }
@@ -77,90 +76,39 @@ extension HCaptchaWebViewManager: WKNavigationDelegate, WKUIDelegate, MFMessageC
         complete(HCaptchaResult(self, error: .unexpected(error)))
     }
 
+    /// Called when the user taps either Send or Cancel in the composer. Dismissing here returns
+    /// the user straight to the challenge, which is still on screen underneath. Re-enabling the
+    /// challenge's Confirm button is handled by the hCaptcha web challenge itself.
     func messageComposeViewController(_ controller: MFMessageComposeViewController,
                                       didFinishWith result: MessageComposeResult) {
-        messagePresenter.dismiss(animated: true) { [weak self] in
-            guard let self = self else { return }
-            self.webView.evaluateJavaScript("window.focus && window.focus();", completionHandler: nil)
-        }
+        Log.debug("WebViewManager.messageComposeViewController didFinishWith \(result.rawValue)")
+        messagePresenter.dismiss(animated: true, completion: nil)
     }
 }
 
 // MARK: - SMS Handling
 
 private extension HCaptchaWebViewManager {
+    /// Presents the SMS composer in-app when possible, so the user never leaves the host app.
+    /// Falls back to the external Messages app whenever the composer is unavailable.
+    /// - returns: `true` when the link was handled and the navigation should be cancelled.
     func handleSMSNavigation(for url: URL) -> Bool {
-        guard url.scheme?.lowercased() == "sms" else { return false }
+        guard let link = HCaptchaSMSLink(url: url) else { return false }
 
-        let components = parseSMSComponents(from: url)
-
-        if messagePresenter.canSendText(),
-           messagePresenter.present(recipient: components.recipient,
-                                    body: components.body,
+        if messagePresenter.present(recipient: link.recipient,
+                                    body: link.body,
                                     from: webView,
                                     delegate: self) {
             return true
         }
 
         guard urlOpener.canOpenURL(url) else {
+            Log.warn("WebViewManager: cannot handle sms link")
             return false
         }
 
+        Log.debug("WebViewManager: falling back to the external Messages app")
         urlOpener.openURL(url)
         return true
-    }
-
-    func parseSMSComponents(from url: URL) -> (recipient: String?, body: String?) {
-        let urlString = url.absoluteString
-
-        guard let schemeRange = urlString.range(of: "sms:", options: [.caseInsensitive, .anchored]) else {
-            return (nil, nil)
-        }
-
-        let payload = String(urlString[schemeRange.upperBound...])
-        let parts = payload.split(separator: "?", maxSplits: 1, omittingEmptySubsequences: false)
-
-        var recipient = parts.first.map(String.init) ?? ""
-        var body: String?
-
-        if parts.count > 1 {
-            body = bodyValue(from: String(parts[1]))
-        }
-
-        if let delimiterRange = recipient.range(of: ";") {
-            let parameters = String(recipient[delimiterRange.lowerBound...])
-            recipient = String(recipient[..<delimiterRange.lowerBound])
-            if body == nil {
-                let query = String(parameters.dropFirst()).replacingOccurrences(of: ";", with: "&")
-                body = bodyValue(from: query)
-            }
-        }
-
-        if let delimiter = recipient.firstIndex(where: { $0 == "," || $0 == "&" }) {
-            recipient = String(recipient[..<delimiter])
-        }
-
-        recipient = recipient.removingPercentEncoding ?? recipient
-        recipient = recipient.trimmingCharacters(in: .whitespacesAndNewlines)
-
-        let sanitizedRecipient = recipient
-            .replacingOccurrences(of: "-", with: "")
-            .replacingOccurrences(of: " ", with: "")
-
-        return (sanitizedRecipient.isEmpty ? nil : sanitizedRecipient, body)
-    }
-
-    func bodyValue(from query: String) -> String? {
-        let items = query.split(separator: "&", omittingEmptySubsequences: true)
-
-        for item in items {
-            let pair = item.split(separator: "=", maxSplits: 1, omittingEmptySubsequences: false)
-            guard let key = pair.first?.lowercased(), key == "body" else { continue }
-
-            let rawValue = pair.count > 1 ? String(pair[1]) : ""
-            return rawValue.removingPercentEncoding ?? rawValue
-        }
-
-        return nil
     }
 }

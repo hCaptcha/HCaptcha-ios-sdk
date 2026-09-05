@@ -11,7 +11,6 @@ import UIKit
 import XCTest
 
 final class TestMessagePresenter: HCaptchaMessagePresenter {
-    var canSendTextReturnValue: Bool = true
     var shouldPresentSucceed: Bool = true
 
     var presentExpectation: XCTestExpectation?
@@ -23,11 +22,6 @@ final class TestMessagePresenter: HCaptchaMessagePresenter {
 
     private(set) var dismissCallCount: Int = 0
 
-    func canSendText() -> Bool {
-        canSendTextReturnValue
-    }
-
-    @discardableResult
     func present(recipient: String?, body: String?, from sourceView: UIView,
                  delegate: MFMessageComposeViewControllerDelegate) -> Bool {
         lastRecipient = recipient

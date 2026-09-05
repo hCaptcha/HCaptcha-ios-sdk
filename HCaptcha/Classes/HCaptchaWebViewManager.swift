@@ -119,7 +119,7 @@ internal class HCaptchaWebViewManager: NSObject {
      */
     init(config: HCaptchaConfig,
          urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener(),
-         messagePresenter: HCaptchaMessagePresenter = HCaptchaSystemMessagePresenter()) {
+         messagePresenter: HCaptchaMessagePresenter = HCaptchaMessagePresenterFactory.make()) {
         Log.debug("WebViewManager.init")
         self.urlOpener = urlOpener
         self.messagePresenter = messagePresenter

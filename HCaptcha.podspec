@@ -24,7 +24,7 @@ invisibility is not possible.
     core.source_files = 'HCaptcha/Classes/*', 'HCaptcha/Classes/Core/**/*'
     core.exclude_files = 'HCaptcha/Classes/Journeylitics/**/*'
     core.resource_bundles  = { 'HCaptcha_Privacy' => ['HCaptcha/Resources/PrivacyInfo.xcprivacy'] }
-    core.frameworks = ['WebKit', 'JavaScriptCore']
+    core.frameworks = ['WebKit', 'JavaScriptCore', 'MessageUI']
   end
 
   s.subspec 'RxSwift' do |rx|

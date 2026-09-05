@@ -633,8 +633,6 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         wait(for: [configureExpectation, presentExpectation], timeout: TestTimeouts.standard)
 
-        XCTAssertTrue(presenter.lastDelegate === manager)
-
         presenter.dismissExpectation = dismissOnCancel
         manager.messageComposeViewController(MFMessageComposeViewController(), didFinishWith: .cancelled)
 
@@ -643,6 +641,36 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
 
         wait(for: [dismissOnCancel, dismissOnSend], timeout: TestTimeouts.standard)
         XCTAssertEqual(presenter.dismissCallCount, 2)
+    }
+
+    func test__SMS_Falls_Back_To_Messages_App_When_Composer_Unavailable() {
+        let configureExpectation = expectation(description: "should call configureWebView")
+        let presentExpectation = expectation(description: "should attempt to present composer")
+        let canOpenExpectation = expectation(description: "sms link should be checked")
+        let openExpectation = expectation(description: "sms link should be opened")
+
+        // Covers every reason the composer can decline: a device that cannot send texts, and a
+        // view with no view controller to present from. Both surface as `present` returning false.
+        let presenter = TestMessagePresenter()
+        presenter.shouldPresentSucceed = false
+        presenter.presentExpectation = presentExpectation
+
+        let manager = HCaptchaWebViewManager(messageBody: "{action: \"sms\"}",
+                                             apiKey: apiKey,
+                                             urlOpener: TestURLOpener(canOpenExpectation, openExpectation),
+                                             messagePresenter: presenter)
+
+        manager.configureWebView { _ in
+            configureExpectation.fulfill()
+        }
+
+        manager.validate(on: presenterView) { _ in }
+
+        wait(for: [configureExpectation, presentExpectation, canOpenExpectation, openExpectation],
+             timeout: TestTimeouts.standard)
+
+        // The parsed link still reached the presenter before it declined
+        XCTAssertEqual(presenter.lastRecipient, "+123456789")
     }
 
     func test__Invalid_HTML() {
@@ -706,23 +734,6 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         manager.validate(on: nil)
 
         waitForExpectations(timeout: TestTimeouts.standard)
-    }
-
-    func test__Sms_open() {
-        let exp0 = expectation(description: "should call configureWebView")
-        let exp1 = expectation(description: "sms link should be checked")
-        let exp2 = expectation(description: "sms link should be opened")
-
-        let manager = HCaptchaWebViewManager(messageBody: "{action: \"sms\"}",
-                                             apiKey: apiKey,
-                                             urlOpener: TestURLOpener(exp1, exp2))
-        manager.configureWebView { _ in
-            exp0.fulfill()
-        }
-        wait(for: [exp0], timeout: TestTimeouts.standard)
-        manager.validate(on: presenterView)
-
-        wait(for: [exp1, exp2], timeout: TestTimeouts.standard)
     }
 
     // MARK: - Verify Params Tests

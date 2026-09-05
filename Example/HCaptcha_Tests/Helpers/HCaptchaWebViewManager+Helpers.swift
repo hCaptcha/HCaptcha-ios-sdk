@@ -29,7 +29,7 @@ extension HCaptchaWebViewManager {
         customTheme: String? = nil,
         urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener(),
         userJourney: Bool = false,
-        messagePresenter: HCaptchaMessagePresenter = HCaptchaSystemMessagePresenter()
+        messagePresenter: HCaptchaMessagePresenter = HCaptchaMessagePresenterFactory.make()
     ) {
         let html = String(format: HCaptchaWebViewManager.unformattedHTML,
                           arguments: [
@@ -64,7 +64,7 @@ extension HCaptchaWebViewManager {
         customTheme: String? = nil,
         urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener(),
         userJourney: Bool = false,
-        messagePresenter: HCaptchaMessagePresenter = HCaptchaSystemMessagePresenter(),
+        messagePresenter: HCaptchaMessagePresenter = HCaptchaMessagePresenterFactory.make(),
         loadingTimeout: TimeInterval = 5
     ) {
         let localhost = URL(string: "http://localhost")!
