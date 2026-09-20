@@ -50,7 +50,10 @@ internal class HCaptchaLogger {
             return
         }
 
-        let formattedMessage = String(format: message, arguments: args)
+        // Only treat `message` as a format string when there are arguments for it. Callers
+        // interpolate instead, and an interpolated value can carry `%@`/`%s` from a remote
+        // source, which would read past the end of the argument list.
+        let formattedMessage = args.isEmpty ? message : String(format: message, arguments: args)
         let logMessage = "\(threadId) HCaptcha/\(level.description): \(formattedMessage)"
 
         NSLog(logMessage)
