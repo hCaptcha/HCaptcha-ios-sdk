@@ -63,7 +63,7 @@ class HCaptchaSMSLink__Tests: XCTestCase {
             ("sms:+15551234567?body=a+b", "+15551234567", "a+b"),
 
             // Recipient: normalized for the composer, percent-decoded, extras dropped
-            ("sms:+1 (555) 123-4567", "+15551234567", nil),
+            ("sms:+1%20(555)%20123-4567", "+15551234567", nil),
             ("sms:%2B15551234567,+15559999999?body=x", "+15551234567", "x"),
 
             // Parameter lookup

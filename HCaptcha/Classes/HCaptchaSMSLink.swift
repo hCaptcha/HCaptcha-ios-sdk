@@ -22,7 +22,9 @@ internal struct HCaptchaSMSLink {
 
     /// Fails for any URL that is not an `sms:` link
     init?(url: URL) {
-        let string = url.absoluteString
+        // Legacy Foundation escapes literal '#' in opaque SMS URLs when producing
+        // absoluteString. The original bytes preserve the distinction from an encoded %23.
+        let string = String(data: url.absoluteURL.dataRepresentation, encoding: .utf8) ?? url.absoluteString
 
         guard let schemeRange = string.range(of: "sms:", options: [.caseInsensitive, .anchored]) else {
             return nil
