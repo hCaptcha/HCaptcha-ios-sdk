@@ -6,11 +6,18 @@
 //
 
 import Foundation
+import MessageUI
 import WebKit
 
-extension HCaptchaWebViewManager: WKNavigationDelegate, WKUIDelegate {
+extension HCaptchaWebViewManager: WKNavigationDelegate, WKUIDelegate, MFMessageComposeViewControllerDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url,
+           handleSMSNavigation(for: url) {
+            decisionHandler(.cancel)
+            return
+        }
+
         if navigationAction.targetFrame == nil, let url = navigationAction.request.url, urlOpener.canOpenURL(url) {
             urlOpener.openURL(url)
             decisionHandler(WKNavigationActionPolicy.cancel)
@@ -21,8 +28,8 @@ extension HCaptchaWebViewManager: WKNavigationDelegate, WKUIDelegate {
 
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration,
                  for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        if let url = navigationAction.request.url, url.scheme == "sms" && urlOpener.canOpenURL(url) {
-            urlOpener.openURL(url)
+        if let url = navigationAction.request.url {
+            _ = handleSMSNavigation(for: url)
         }
         return nil
     }
@@ -67,5 +74,41 @@ extension HCaptchaWebViewManager: WKNavigationDelegate, WKUIDelegate {
                                 NSLocalizedRecoverySuggestionErrorKey: "Call HCaptcha.reset()"])
         didFinishLoading = false
         complete(HCaptchaResult(self, error: .unexpected(error)))
+    }
+
+    /// Called when the user taps either Send or Cancel in the composer. Dismissing here returns
+    /// the user straight to the challenge, which is still on screen underneath. Re-enabling the
+    /// challenge's Confirm button is handled by the hCaptcha web challenge itself.
+    func messageComposeViewController(_ controller: MFMessageComposeViewController,
+                                      didFinishWith result: MessageComposeResult) {
+        Log.debug("WebViewManager.messageComposeViewController didFinishWith \(result.rawValue)")
+        messagePresenter.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - SMS Handling
+
+private extension HCaptchaWebViewManager {
+    /// Presents the SMS composer in-app when possible, so the user never leaves the host app.
+    /// Falls back to the external Messages app whenever the composer is unavailable.
+    /// - returns: `true` when the link was handled and the navigation should be cancelled.
+    func handleSMSNavigation(for url: URL) -> Bool {
+        guard let link = HCaptchaSMSLink(url: url) else { return false }
+
+        if messagePresenter.present(recipient: link.recipient,
+                                    body: link.body,
+                                    from: webView,
+                                    delegate: self) {
+            return true
+        }
+
+        guard urlOpener.canOpenURL(url) else {
+            Log.warn("WebViewManager: cannot handle sms link")
+            return false
+        }
+
+        Log.debug("WebViewManager: falling back to the external Messages app")
+        urlOpener.openURL(url)
+        return true
     }
 }

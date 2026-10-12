@@ -291,6 +291,24 @@ hcaptcha.validate(on: view, verifyParams: verifyParams) { result in
 
 **Note**: If you update verify parameters and call `validate` a second time, call `reset()` before the second validation to ensure updated parameters are consumed by the SDK.
 
+#### In-app SMS composer
+
+When the SMS step of an MFA challenge asks the user to send a verification message, the SDK presents
+the native `MFMessageComposeViewController` as a modal sheet on top of your app, pre-filled with the
+hCaptcha recipient and the verification code. Tapping either **Send** or **Cancel** dismisses the
+sheet and returns the user straight to the challenge, which stays on screen underneath.
+
+This is the default behavior and requires no setup on your side. `MessageUI` is linked by the SDK,
+and no usage-description key is needed: the user always confirms the message in the system sheet.
+
+The SDK falls back to opening the external Messages app when the composer is unavailable, for
+example on a device that cannot send texts (`MFMessageComposeViewController.canSendText() == false`)
+or when the challenge is hosted in a view that is not attached to a view controller.
+
+**Note**: the iOS Simulator cannot send texts. There, the SDK shows a plain alert with the recipient
+and body it would have used, so the flow can still be walked through end to end. This stand-in is
+compiled into simulator builds only.
+
 ### Testing Examples with SPM
 
 If `CocoaPods` for some reason is inaccessible to you, you can test the app with `SPM` only. It will require some changes in the `Xcode` project:

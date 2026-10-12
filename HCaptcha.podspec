@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'HCaptcha'
-  s.version          = '3.1.0'
+  s.version          = '3.2.0'
   s.summary          = 'HCaptcha for iOS'
   s.swift_version    = '5.0'
 
@@ -24,7 +24,7 @@ invisibility is not possible.
     core.source_files = 'HCaptcha/Classes/*', 'HCaptcha/Classes/Core/**/*'
     core.exclude_files = 'HCaptcha/Classes/Journeylitics/**/*'
     core.resource_bundles  = { 'HCaptcha_Privacy' => ['HCaptcha/Resources/PrivacyInfo.xcprivacy'] }
-    core.frameworks = ['WebKit', 'JavaScriptCore']
+    core.frameworks = ['WebKit', 'JavaScriptCore', 'MessageUI']
   end
 
   s.subspec 'RxSwift' do |rx|
