@@ -25,6 +25,26 @@ class HCaptchaSMSLink__Tests: XCTestCase {
         }
     }
 
+    func test__Ignores_Literal_Fragments_Without_Removing_Encoded_Hashes() {
+        let cases: [(url: String, recipient: String?, body: String?)] = [
+            ("sms:+15551234567#123?body=code", "+15551234567", nil),
+            ("sms:+15551234567?body=code#123", "+15551234567", "code"),
+            ("sms:+15551234567;body=code#123?body=other", "+15551234567", "code"),
+            ("sms:+15551234567?body=code%23suffix", "+15551234567", "code#suffix"),
+            ("sms:+15551234567?body=code%23suffix#ignored", "+15551234567", "code#suffix"),
+            ("sms:+15551234567;body=code%23suffix#ignored", "+15551234567", "code#suffix"),
+            ("sms:+15551234567?body=%2523#ignored", "+15551234567", "%23"),
+            ("sms:#123?body=code", nil, nil)
+        ]
+
+        for (string, recipient, body) in cases {
+            let link = parse(string)
+            XCTAssertNotNil(link, string)
+            XCTAssertEqual(link?.recipient, recipient, string)
+            XCTAssertEqual(link?.body, body, string)
+        }
+    }
+
     func test__Parses_SMS_Links() {
         let cases: [(url: String, recipient: String?, body: String?)] = [
             // The shape the live MFA challenge emits. The code must survive byte-exact:

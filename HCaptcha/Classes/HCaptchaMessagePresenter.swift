@@ -94,8 +94,7 @@ internal final class HCaptchaSimulatorMessagePresenter: NSObject, HCaptchaMessag
 
     func present(recipient: String?, body: String?, from sourceView: UIView,
                  delegate: MFMessageComposeViewControllerDelegate) -> Bool {
-        Log.warn("MessagePresenter: simulator stub, no SMS is sent. " +
-                 "To: \(recipient ?? "none") Body: \(body ?? "none")")
+        Log.warn("MessagePresenter: simulator stub, no SMS is sent.")
 
         guard let presenter = HCaptchaPresentationTarget.viewController(for: sourceView) else {
             return false

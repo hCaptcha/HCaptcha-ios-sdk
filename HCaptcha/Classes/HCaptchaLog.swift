@@ -56,7 +56,7 @@ internal class HCaptchaLogger {
         let formattedMessage = args.isEmpty ? message : String(format: message, arguments: args)
         let logMessage = "\(threadId) HCaptcha/\(level.description): \(formattedMessage)"
 
-        NSLog(logMessage)
+        NSLog("%@", logMessage)
 #endif
     }
 

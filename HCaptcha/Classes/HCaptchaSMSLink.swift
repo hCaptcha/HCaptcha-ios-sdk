@@ -28,8 +28,11 @@ internal struct HCaptchaSMSLink {
             return nil
         }
 
+        // Strip the literal fragment before parsing recipients or parameters. Percent-encoded
+        // hashes (%23) remain payload data and are decoded only after splitting.
+        var payload = string[schemeRange.upperBound...].prefix { $0 != "#" }
+
         // Tolerate the authority-style `sms://` spelling seen in the wild
-        var payload = string[schemeRange.upperBound...]
         while payload.hasPrefix("/") {
             payload = payload.dropFirst()
         }
