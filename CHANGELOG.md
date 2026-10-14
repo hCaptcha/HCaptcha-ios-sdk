@@ -1,8 +1,11 @@
+# 3.2.1
+
+- Fix: CocoaPods publish failing on internal deprecation warnings
+
 # 3.2.0
 
 - Feat: present the SMS composer in-app for MFA challenges instead of leaving for the Messages app
 - Fix: don't pass interpolated log messages through `String(format:)`
-- Fix: CocoaPods publish failing on internal deprecation warnings
 
 # 3.1.0
 
