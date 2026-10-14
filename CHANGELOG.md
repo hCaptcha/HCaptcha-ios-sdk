@@ -1,3 +1,7 @@
+# 3.2.1
+
+- Fix: allow deprecation warnings when publishing to CocoaPods
+
 # 3.2.0
 
 - Feat: present the SMS composer in-app for MFA challenges instead of leaving for the Messages app
