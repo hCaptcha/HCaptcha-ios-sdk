@@ -274,6 +274,7 @@ platform :ios do
 
     pod_push(
       path: "HCaptcha.podspec",
+      allow_warnings: true,
       verbose: true,
     )
 
