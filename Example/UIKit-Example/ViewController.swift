@@ -50,13 +50,13 @@ class ViewController: BaseViewController {
 
 
     override func setupHCaptcha() {
+        let config = HCaptchaConfig(apiKey: "00000000-0000-0000-0000-000000000000")
+        config.locale = locale
+        config.diagnosticLog = true
+        config.userJourney = journeySwitch.isOn
+
         // swiftlint:disable:next force_try
-        hcaptcha = try! HCaptcha(
-            apiKey: "00000000-0000-0000-0000-000000000000",
-            locale: locale,
-            diagnosticLog: true,
-            userJourney: journeySwitch.isOn
-        )
+        hcaptcha = try! HCaptcha(config: config)
 
         hcaptcha.onEvent { (event, _) in
             if event == .open {
