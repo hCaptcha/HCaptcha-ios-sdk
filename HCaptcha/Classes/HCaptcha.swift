@@ -252,43 +252,62 @@ public class HCaptcha: NSObject {
 
     @objc
     public convenience init(locale: Locale) throws {
-        try self.init(locale: locale, size: .invisible)
+        let config = HCaptchaConfig()
+        config.locale = locale
+        try self.init(config: config)
     }
 
     @objc
     public convenience init(size: HCaptchaSize) throws {
-        try self.init(locale: nil, size: size)
+        let config = HCaptchaConfig()
+        config.locale = nil
+        config.size = size
+        try self.init(config: config)
     }
 
     @objc
     public convenience init(passiveApiKey: Bool) throws {
-        try self.init(passiveApiKey: passiveApiKey, locale: nil)
+        let config = HCaptchaConfig()
+        config.locale = nil
+        config.passiveApiKey = passiveApiKey
+        try self.init(config: config)
     }
 
     @objc
     public convenience init(apiKey: String) throws {
-        try self.init(apiKey: apiKey, locale: nil)
+        let config = HCaptchaConfig(apiKey: apiKey)
+        config.locale = nil
+        try self.init(config: config)
     }
 
     @objc
     public convenience init(apiKey: String, baseURL: URL) throws {
-        try self.init(apiKey: apiKey, baseURL: baseURL, locale: nil)
+        let config = HCaptchaConfig(apiKey: apiKey, baseURL: baseURL)
+        config.locale = nil
+        try self.init(config: config)
     }
 
     @objc
     public convenience init(apiKey: String, passiveApiKey: Bool) throws {
-        try self.init(apiKey: apiKey, passiveApiKey: passiveApiKey, locale: nil)
+        let config = HCaptchaConfig(apiKey: apiKey)
+        config.locale = nil
+        config.passiveApiKey = passiveApiKey
+        try self.init(config: config)
     }
 
     @objc
     public convenience init(apiKey: String, baseURL: URL, locale: Locale) throws {
-        try self.init(apiKey: apiKey, baseURL: baseURL, locale: locale, size: .invisible)
+        let config = HCaptchaConfig(apiKey: apiKey, baseURL: baseURL)
+        config.locale = locale
+        try self.init(config: config)
     }
-
 
     @objc
     public convenience init(apiKey: String, baseURL: URL, locale: Locale, size: HCaptchaSize) throws {
-        try self.init(apiKey: apiKey, baseURL: baseURL, locale: locale, size: size, rqdata: nil)
+        let config = HCaptchaConfig(apiKey: apiKey, baseURL: baseURL)
+        config.locale = locale
+        config.size = size
+        try self.init(config: config)
     }
 
     @objc
