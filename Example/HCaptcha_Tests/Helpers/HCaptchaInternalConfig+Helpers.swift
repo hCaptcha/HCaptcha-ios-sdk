@@ -1,5 +1,5 @@
 //
-//  HCaptchaConfig+Helpers.swift
+//  HCaptchaInternalConfig+Helpers.swift
 //  HCaptcha_Tests
 //
 //  Created by Алексей Берёзка on 17.08.2021.

@@ -223,7 +223,7 @@ Can be passed via `HCaptcha(...)`
 
 Please see the [hCaptcha Enterprise documentation](https://docs.hcaptcha.com/enterprise/) for more details.
 
-**Note**: The `rqdata` parameter has been moved from `HCaptchaConfig` to `HCaptchaVerifyParams` for better API consistency. The old `rqdata` property in `HCaptchaConfig` is now deprecated, and will be removed in the next major version.
+**Note**: The `rqdata` parameter has been moved to `HCaptchaVerifyParams` for better API consistency. The `rqdata` param of the `HCaptcha(...)` init is now deprecated, and will be removed in the next major version. `HCaptchaConfig` does not have `rqdata`, pass it via `HCaptchaVerifyParams` instead.
 
 ### Enabling the visible checkbox flow
 

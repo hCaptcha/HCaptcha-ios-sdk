@@ -6,9 +6,7 @@
 //  Copyright © 2018 HCaptcha. All rights reserved.
 //
 
-import WebKit
-import UIKit
-import JavaScriptCore
+import Foundation
 
 /** Widget display mode
  */
@@ -74,7 +72,6 @@ public enum HCaptchaOrientation: Int, RawRepresentable {
         }
     }
 }
-
 
 /**
  SDK init params passed to `HCaptcha(config:)`
