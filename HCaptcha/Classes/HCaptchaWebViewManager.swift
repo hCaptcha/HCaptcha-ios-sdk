@@ -117,7 +117,7 @@ internal class HCaptchaWebViewManager: NSObject {
          - `config`: HCaptcha config
          - `urlOpener`:  class
      */
-    init(config: HCaptchaConfig,
+    init(config: HCaptchaInternalConfig,
          urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener(),
          messagePresenter: HCaptchaMessagePresenter = HCaptchaMessagePresenterFactory.make()) {
         Log.debug("WebViewManager.init")

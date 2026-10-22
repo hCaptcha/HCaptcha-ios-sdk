@@ -29,14 +29,14 @@ class HCaptchaWebViewManager__HTML__Tests: XCTestCase {
     }
 
     func test__Size_Is_Mapped_Into_HTML() throws {
-        let config = try HCaptchaConfig(html: "size: ${size}", size: .compact)
+        let config = try HCaptchaInternalConfig(html: "size: ${size}", size: .compact)
         let manager = HCaptchaWebViewManager(config: config)
         waitForWebViewContent(manager: manager)
         XCTAssertEqual(webViewContent, "size: compact")
     }
 
     func test__Orientation_Is_Mapped_Into_HTML() throws {
-        let config = try HCaptchaConfig(html: "orientation: ${orientation}",
+        let config = try HCaptchaInternalConfig(html: "orientation: ${orientation}",
                                         orientation: .portrait)
         let manager = HCaptchaWebViewManager(config: config)
         waitForWebViewContent(manager: manager)
@@ -44,7 +44,7 @@ class HCaptchaWebViewManager__HTML__Tests: XCTestCase {
     }
 
     func test__Debug_Info_Can_Be_Disabled() throws {
-        let config = try HCaptchaConfig(html: "debugInfo: ${debugInfo}",
+        let config = try HCaptchaInternalConfig(html: "debugInfo: ${debugInfo}",
                                         disableDebugInfo: true)
         let manager = HCaptchaWebViewManager(config: config)
         waitForWebViewContent(manager: manager)

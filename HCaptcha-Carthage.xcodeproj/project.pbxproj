@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1F833B7F271DC69C00E4DAB2 /* RxSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */; };
 		1F833B80271DC69C00E4DAB2 /* RxSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		257E9B10A8A7D5FD8B43CF1D /* HCaptcha+Inits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACDF4AB23B931BA311CC915 /* HCaptcha+Inits.swift */; };
+		43A1B0112EC5100100705F63 /* HCaptchaMessagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A1B0102EC5100100705F63 /* HCaptchaMessagePresenter.swift */; };
+		43A1B0132EC5100100705F63 /* HCaptchaSMSLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A1B0122EC5100100705F63 /* HCaptchaSMSLink.swift */; };
 		43C3B8F62EB973A500705F63 /* HCaptcha_Journeylitics.h in Headers */ = {isa = PBXBuildFile; fileRef = 43C3B8F42EB973A500705F63 /* HCaptcha_Journeylitics.h */; };
 		43C3B8FA2EBA065F00705F63 /* HCaptchaWebViewManager+JSCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C3B8F72EBA065F00705F63 /* HCaptchaWebViewManager+JSCommand.swift */; };
 		43C3B8FC2EBA07C900705F63 /* HCaptchaWebViewManager+Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C3B8FB2EBA07C900705F63 /* HCaptchaWebViewManager+Private.swift */; };
@@ -32,14 +35,13 @@
 		43DC08492EA819C2003839A5 /* UIPickerView+JL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC082A2EA819C2003839A5 /* UIPickerView+JL.swift */; };
 		43DC084A2EA819C2003839A5 /* JLEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC08352EA819C2003839A5 /* JLEvent.swift */; };
 		43DC084C2EA819DB003839A5 /* HCaptchaJourneys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DC084B2EA819DB003839A5 /* HCaptchaJourneys.swift */; };
+		B9288C76DA74A0988C2143E4 /* HCaptchaInternalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9458A9BE405FA0F70A3C7DAB /* HCaptchaInternalConfig.swift */; };
 		E614B37B2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E614B37A2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift */; };
 		E634944A2828856300130AC5 /* HCaptchaEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63494492828856300130AC5 /* HCaptchaEvent.swift */; };
 		E64C60082B7DFBE900D203F4 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E64C60072B7DFBE900D203F4 /* PrivacyInfo.xcprivacy */; };
 		E65145E327786BDB0079668A /* HCaptchaConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65145E227786BDB0079668A /* HCaptchaConfig.swift */; };
 		E65C08A02A656CC6002E82EC /* HCaptchaLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C089F2A656CC6002E82EC /* HCaptchaLog.swift */; };
 		E683772129053E560021BFD7 /* HCaptchaURLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = E683772029053E560021BFD7 /* HCaptchaURLOpener.swift */; };
-		43A1B0112EC5100100705F63 /* HCaptchaMessagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A1B0102EC5100100705F63 /* HCaptchaMessagePresenter.swift */; };
-		43A1B0132EC5100100705F63 /* HCaptchaSMSLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A1B0122EC5100100705F63 /* HCaptchaSMSLink.swift */; };
 		E6BF595C288AE915007CE1CE /* HCaptchaHtml.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BF595B288AE915007CE1CE /* HCaptchaHtml.swift */; };
 		E6DB9EA827B15954008F0327 /* HCaptchaDebugInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DB9EA727B15954008F0327 /* HCaptchaDebugInfo.swift */; };
 		F206BAB51F8D3DE900A25807 /* HCaptcha-Carthage.h in Headers */ = {isa = PBXBuildFile; fileRef = F206BAB31F8D3DE900A25807 /* HCaptcha-Carthage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -79,7 +81,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1ACDF4AB23B931BA311CC915 /* HCaptcha+Inits.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "HCaptcha+Inits.swift"; sourceTree = "<group>"; };
 		1F833B7E271DC69C00E4DAB2 /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
+		43A1B0102EC5100100705F63 /* HCaptchaMessagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaMessagePresenter.swift; sourceTree = "<group>"; };
+		43A1B0122EC5100100705F63 /* HCaptchaSMSLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaSMSLink.swift; sourceTree = "<group>"; };
 		43C3B8F42EB973A500705F63 /* HCaptcha_Journeylitics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HCaptcha_Journeylitics.h; sourceTree = "<group>"; };
 		43C3B8F72EBA065F00705F63 /* HCaptchaWebViewManager+JSCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HCaptchaWebViewManager+JSCommand.swift"; sourceTree = "<group>"; };
 		43C3B8FB2EBA07C900705F63 /* HCaptchaWebViewManager+Private.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HCaptchaWebViewManager+Private.swift"; sourceTree = "<group>"; };
@@ -104,14 +109,13 @@
 		43DC08362EA819C2003839A5 /* Journeylitics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journeylitics.swift; sourceTree = "<group>"; };
 		43DC08372EA819C2003839A5 /* JourneyliticsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyliticsConfig.swift; sourceTree = "<group>"; };
 		43DC084B2EA819DB003839A5 /* HCaptchaJourneys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaJourneys.swift; sourceTree = "<group>"; };
+		9458A9BE405FA0F70A3C7DAB /* HCaptchaInternalConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HCaptchaInternalConfig.swift; sourceTree = "<group>"; };
 		E614B37A2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HCaptchaWebViewManager+WKNavigationDelegate.swift"; sourceTree = "<group>"; };
 		E63494492828856300130AC5 /* HCaptchaEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaEvent.swift; sourceTree = "<group>"; };
 		E64C60072B7DFBE900D203F4 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		E65145E227786BDB0079668A /* HCaptchaConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaConfig.swift; sourceTree = "<group>"; };
 		E65C089F2A656CC6002E82EC /* HCaptchaLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaLog.swift; sourceTree = "<group>"; };
 		E683772029053E560021BFD7 /* HCaptchaURLOpener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaURLOpener.swift; sourceTree = "<group>"; };
-		43A1B0102EC5100100705F63 /* HCaptchaMessagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaMessagePresenter.swift; sourceTree = "<group>"; };
-		43A1B0122EC5100100705F63 /* HCaptchaSMSLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaSMSLink.swift; sourceTree = "<group>"; };
 		E6BF595B288AE915007CE1CE /* HCaptchaHtml.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaHtml.swift; sourceTree = "<group>"; };
 		E6DB9EA727B15954008F0327 /* HCaptchaDebugInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaDebugInfo.swift; sourceTree = "<group>"; };
 		F206BAB01F8D3DE900A25807 /* HCaptcha.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HCaptcha.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -315,6 +319,8 @@
 				E6BF595B288AE915007CE1CE /* HCaptchaHtml.swift */,
 				43DC08382EA819C2003839A5 /* Journeylitics */,
 				F24EA1DC1F9683F5001DEC17 /* Rx */,
+				9458A9BE405FA0F70A3C7DAB /* HCaptchaInternalConfig.swift */,
+				1ACDF4AB23B931BA311CC915 /* HCaptcha+Inits.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -371,8 +377,6 @@
 			dependencies = (
 			);
 			name = HCaptcha_Journeylitics;
-			packageProductDependencies = (
-			);
 			productName = HCaptcha_Journeylitics;
 			productReference = 43DC081A2EA8199F003839A5 /* HCaptcha_Journeylitics.framework */;
 			productType = "com.apple.product-type.framework";
@@ -533,6 +537,8 @@
 				E683772129053E560021BFD7 /* HCaptchaURLOpener.swift in Sources */,
 				43A1B0112EC5100100705F63 /* HCaptchaMessagePresenter.swift in Sources */,
 				43A1B0132EC5100100705F63 /* HCaptchaSMSLink.swift in Sources */,
+				B9288C76DA74A0988C2143E4 /* HCaptchaInternalConfig.swift in Sources */,
+				257E9B10A8A7D5FD8B43CF1D /* HCaptcha+Inits.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

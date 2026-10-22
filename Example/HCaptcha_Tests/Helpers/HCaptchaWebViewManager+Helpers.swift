@@ -70,7 +70,7 @@ extension HCaptchaWebViewManager {
         let localhost = URL(string: "http://localhost")!
 
         // swiftlint:disable:next force_try
-        let config = try! HCaptchaConfig(html: html,
+        let config = try! HCaptchaInternalConfig(html: html,
                                          apiKey: apiKey,
                                          passiveApiKey: passiveApiKey,
                                          baseURL: localhost,

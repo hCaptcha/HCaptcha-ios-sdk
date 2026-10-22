@@ -9,7 +9,7 @@
 import Foundation
 @testable import HCaptcha
 
-extension HCaptchaConfig {
+extension HCaptchaInternalConfig {
     init(html: String = HCaptchaHtml.template,
          apiKey: String? = String(arc4random()),
          passiveApiKey: Bool = false,
