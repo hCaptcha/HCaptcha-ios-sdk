@@ -310,10 +310,6 @@ public class HCaptcha: NSObject {
                             customTheme: String?,
                             diagnosticLog: Bool,
                             userJourney: Bool) throws {
-        if userJourney {
-            guard HCaptchaJourneys.start() else { throw HCaptchaError.journeyliticsNotAvailable }
-        }
-
         try self.init(apiKey: apiKey,
                       passiveApiKey: passiveApiKey,
                       baseURL: baseURL,
