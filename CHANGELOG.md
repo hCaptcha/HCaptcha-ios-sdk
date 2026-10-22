@@ -1,3 +1,7 @@
+# Unreleased
+
+- Fix: look up the host key window through connected scenes instead of the deprecated `UIApplication.keyWindow`
+
 # 3.2.1
 
 - Fix: allow deprecation warnings when publishing to CocoaPods
