@@ -38,31 +38,13 @@ extension HCaptcha {
         let plistApiKey = infoDict?[Constants.InfoDictKeys.APIKey] as? String
         let plistDomain = (infoDict?[Constants.InfoDictKeys.Domain] as? String).flatMap(URL.init(string:))
 
-        let resolved = try HCaptchaInternalConfig(apiKey: config.apiKey,
-                                                  passiveApiKey: config.passiveApiKey,
-                                                  infoPlistKey: plistApiKey,
-                                                  baseURL: config.baseURL,
-                                                  infoPlistURL: plistDomain,
-                                                  jsSrc: config.jsSrc,
-                                                  size: config.size,
-                                                  orientation: config.orientation,
-                                                  rqdata: config.rqdata,
-                                                  sentry: config.sentry,
-                                                  endpoint: config.endpoint,
-                                                  reportapi: config.reportapi,
-                                                  assethost: config.assethost,
-                                                  imghost: config.imghost,
-                                                  host: config.host,
-                                                  theme: config.theme,
-                                                  customTheme: config.customTheme,
-                                                  locale: config.locale,
-                                                  disablePat: config.disablePat,
-                                                  disableDebugInfo: config.disableDebugInfo,
-                                                  userJourney: config.userJourney)
+        let internalConfig = try HCaptchaInternalConfig(config: config,
+                                                        infoPlistKey: plistApiKey,
+                                                        infoPlistURL: plistDomain)
 
-        Log.debug(".init with: \(resolved)")
+        Log.debug(".init with: \(internalConfig)")
 
-        self.init(manager: HCaptchaWebViewManager(config: resolved), userJourney: config.userJourney)
+        self.init(manager: HCaptchaWebViewManager(config: internalConfig), userJourney: config.userJourney)
     }
 }
 

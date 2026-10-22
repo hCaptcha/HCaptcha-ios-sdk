@@ -71,18 +71,17 @@ extension HCaptchaWebViewManager {
 
         // swiftlint:disable:next force_try
         let config = try! HCaptchaInternalConfig(html: html,
-                                         apiKey: apiKey,
-                                         passiveApiKey: passiveApiKey,
-                                         baseURL: localhost,
-                                         size: size,
-                                         orientation: orientation,
-                                         rqdata: rqdata,
-                                         endpoint: endpoint,
-                                         theme: theme,
-                                         customTheme: customTheme,
-                                         loadingTimeout: loadingTimeout,
-                                         disablePat: nil,
-                                         userJourney: userJourney)
+                                                 apiKey: apiKey,
+                                                 passiveApiKey: passiveApiKey,
+                                                 baseURL: localhost,
+                                                 size: size,
+                                                 orientation: orientation,
+                                                 rqdata: rqdata,
+                                                 endpoint: endpoint,
+                                                 theme: theme,
+                                                 customTheme: customTheme,
+                                                 loadingTimeout: loadingTimeout,
+                                                 userJourney: userJourney)
 
         self.init(
             config: config,

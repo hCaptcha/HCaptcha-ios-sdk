@@ -41,7 +41,7 @@ struct HCaptchaInternalConfig: CustomDebugStringConvertible {
     let rqdata: String?
 
     /// Enable / Disable sentry error reporting.
-    let sentry: Bool?
+    let sentry: Bool
 
     /// Point hCaptcha JS Ajax Requests to alternative API Endpoint.
     /// Default: https://hcaptcha.com
@@ -75,7 +75,7 @@ struct HCaptchaInternalConfig: CustomDebugStringConvertible {
     let loadingTimeout: TimeInterval
 
     /// A debug property
-    let disablePat: Bool?
+    let disablePat: Bool
 
     /// Disable collection of SDK debug information
     let disableDebugInfo: Bool
@@ -124,50 +124,35 @@ struct HCaptchaInternalConfig: CustomDebugStringConvertible {
 
     /**
      - parameters:
-         - apiKey: The API key sent to the HCaptcha init
-         - infoPlistKey: The API key retrived from the application's Info.plist
-         - baseURL: The base URL sent to the HCaptcha init
-         - infoPlistURL: The base URL retrieved from the application's Info.plist
+         - config: SDK init params passed to `HCaptcha(config:)`
+         - infoPlistKey: The API key retrieved from the application's Info.plist, used if `config.apiKey` is `nil`
+         - infoPlistURL: The base URL retrieved from the application's Info.plist, used if `config.baseURL` is `nil`
+         - html: The raw unformatted HTML template
+         - loadingTimeout: A time before throw the `.htmlLoadError` if HCaptcha is not loaded
 
-     - Throws: `HCaptchaError.htmlLoadError`: if is unable to load the HTML embedded in the bundle.
+     The values are copied, so later changes to `config` don't affect this instance.
+
      - Throws: `HCaptchaError.apiKeyNotFound`: if an `apiKey` is not provided and can't find one in the project's
      Info.plist.
      - Throws: `HCaptchaError.baseURLNotFound`: if a `baseURL` is not provided and can't find one in the project's
      Info.plist.
-     - Throws: Rethrows any exceptions thrown by `String(contentsOfFile:)`
+     - Throws: `HCaptchaError.invalidCustomTheme`: if `customTheme` is not a valid JS object.
+     - Throws: `HCaptchaError.invalidHostFormat`: if `host` is not a hostname.
      */
-    public init(html: String = HCaptchaHtml.template,
-                apiKey: String?,
-                passiveApiKey: Bool?,
-                infoPlistKey: String?,
-                baseURL: URL?,
-                infoPlistURL: URL?,
-                jsSrc: URL,
-                size: HCaptchaSize,
-                orientation: HCaptchaOrientation,
-                rqdata: String?,
-                sentry: Bool?,
-                endpoint: URL?,
-                reportapi: URL?,
-                assethost: URL?,
-                imghost: URL?,
-                host: String?,
-                theme: String,
-                customTheme: String?,
-                locale: Locale?,
-                loadingTimeout: TimeInterval = 5.0,
-                disablePat: Bool?,
-                disableDebugInfo: Bool = false,
-                userJourney: Bool = false) throws {
-        guard let apiKey = apiKey ?? infoPlistKey else {
+    init(config: HCaptchaConfig,
+         infoPlistKey: String?,
+         infoPlistURL: URL?,
+         html: String = HCaptchaHtml.template,
+         loadingTimeout: TimeInterval = 5.0) throws {
+        guard let apiKey = config.apiKey ?? infoPlistKey else {
             throw HCaptchaError.apiKeyNotFound
         }
 
-        guard let domain = baseURL ?? infoPlistURL else {
+        guard let domain = config.baseURL ?? infoPlistURL else {
             throw HCaptchaError.baseURLNotFound
         }
 
-        if let customTheme = customTheme {
+        if let customTheme = config.customTheme {
             let validationJS: String = "(function() { return \(customTheme) })()"
             let context = JSContext()!
             context.exceptionHandler = { _, err in
@@ -179,31 +164,31 @@ struct HCaptchaInternalConfig: CustomDebugStringConvertible {
             }
         }
 
-        if let host = host, host.localizedStandardContains("/") {
+        if let host = config.host, host.localizedStandardContains("/") {
             throw HCaptchaError.invalidHostFormat
         }
 
         self.html = html
         self.apiKey = apiKey
-        self.passiveApiKey = passiveApiKey ?? false
-        self.size = size
-        self.orientation = orientation
+        self.passiveApiKey = config.passiveApiKey
+        self.size = config.size
+        self.orientation = config.orientation
         self.baseURL = HCaptchaInternalConfig.fixSchemeIfNeeded(for: domain)
-        self.jsSrc = jsSrc
-        self.rqdata = rqdata
-        self.sentry = sentry
-        self.endpoint = endpoint
-        self.reportapi = reportapi
-        self.assethost = assethost
-        self.imghost = imghost
-        self.host = host
-        self.theme = theme
-        self.customTheme = customTheme
-        self.locale = locale
+        self.jsSrc = config.jsSrc
+        self.rqdata = config.rqdata
+        self.sentry = config.sentry
+        self.endpoint = config.endpoint
+        self.reportapi = config.reportapi
+        self.assethost = config.assethost
+        self.imghost = config.imghost
+        self.host = config.host
+        self.theme = config.theme
+        self.customTheme = config.customTheme
+        self.locale = config.locale
         self.loadingTimeout = loadingTimeout
-        self.disablePat = disablePat
-        self.disableDebugInfo = disableDebugInfo
-        self.userJourney = userJourney
+        self.disablePat = config.disablePat
+        self.disableDebugInfo = config.disableDebugInfo
+        self.userJourney = config.userJourney
     }
 
     /**
@@ -218,9 +203,7 @@ struct HCaptchaInternalConfig: CustomDebugStringConvertible {
             URLQueryItem(name: "host", value: host ?? "\(apiKey).ios-sdk.hcaptcha.com")
         ]
 
-        if let sentry = sentry {
-            queryItems.append(URLQueryItem(name: "sentry", value: String(sentry)))
-        }
+        queryItems.append(URLQueryItem(name: "sentry", value: String(sentry)))
         if let url = endpoint {
             queryItems.append(URLQueryItem(name: "endpoint", value: url.absoluteString))
         }
@@ -239,7 +222,7 @@ struct HCaptchaInternalConfig: CustomDebugStringConvertible {
         if customTheme != nil {
             queryItems.append(URLQueryItem(name: "custom", value: String(true)))
         }
-        if let disablePat = disablePat, disablePat {
+        if disablePat {
             queryItems.append(URLQueryItem(name: "pat", value: "off"))
         }
 
