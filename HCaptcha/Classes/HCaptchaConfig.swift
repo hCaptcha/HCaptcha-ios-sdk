@@ -80,6 +80,8 @@ public enum HCaptchaOrientation: Int, RawRepresentable {
  and adding a param does not break apps or prebuilt frameworks compiled against an older SDK version.
 
  The values are read once in `HCaptcha(config:)`; changing them afterwards does not affect that `HCaptcha` instance.
+
+ - Warning: `HCaptchaConfig` is not thread-safe. Don't mutate it from another thread while `HCaptcha(config:)` runs.
  */
 @objc
 public final class HCaptchaConfig: NSObject {
