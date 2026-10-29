@@ -508,7 +508,7 @@ class HCaptcha__Tests: XCTestCase {
 
 private extension HCaptcha__Tests {
     func instrumentedSetDataHTML(setDataThrows: Bool = false,
-                                file: StaticString = #filePath, line: UInt = #line) -> String {
+                                 file: StaticString = #filePath, line: UInt = #line) -> String {
         let html = HCaptchaHtml.template.replacingOccurrences(
             of: "document.head.appendChild(script);",
             with: """
