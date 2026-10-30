@@ -85,9 +85,11 @@ struct HCaptchaHtml {
                   if (data && window.hCaptchaID) {
                     hcaptcha.setData(window.hCaptchaID, data);
                   }
+                  return true;
                 } catch (e) {
                   console.log("failed to set verify params");
                   post({ error: 34 });
+                  return false;
                 }
               };
 
@@ -97,7 +99,9 @@ struct HCaptchaHtml {
                 try {
                   // Apply deprecated config rqdata as a fallback when runtime verify params are absent.
                   if (verifyParams || "${rqdata}") {
-                    setVerifyParams(verifyParams || {});
+                    if (!setVerifyParams(verifyParams || {})) {
+                      return;
+                    }
                   }
 
                   if ("${size}" === 'invisible') {

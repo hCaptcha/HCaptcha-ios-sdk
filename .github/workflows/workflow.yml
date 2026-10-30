@@ -26,15 +26,26 @@ env:
 
 jobs:
   test:
-    name: Test SDK
+    name: Test SDK${{ !matrix.primary && format(' (Xcode {0})', matrix.xcode) || '' }}
     permissions:
       contents: read
-    runs-on: macos-14
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-14
+            xcode: '15.4'
+            primary: true
+          # App Store uploads require Xcode 26 / iOS 26 SDK since 2026-04-28
+          - os: macos-26
+            xcode: '26.6'
+            primary: false
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - name: Use Xcode ${{ env.XCODE_VERSION }}
-        run: sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
+      - name: Use Xcode ${{ matrix.xcode }}
+        run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
       - name: "Cache dependencies"
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
@@ -52,12 +63,12 @@ jobs:
       - run: bundle exec fastlane test
         timeout-minutes: 25
 
-      - if: github.event_name == 'push'
+      - if: github.event_name == 'push' && matrix.primary
         run: |
           bundle exec fastlane pod_size
           cp .lint/cocoapods-size/result.json cocoapods-size-result.json
 
-      - if: github.event_name == 'push'
+      - if: github.event_name == 'push' && matrix.primary
         uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: cocoapods-size-result.json
@@ -122,6 +133,9 @@ jobs:
           - os: macos-15
             xcode: '16.4' # https://github.com/actions/runner-images/issues/12758
             experimental: true
+          - os: macos-26
+            xcode: '26.6'
+            experimental: false
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
@@ -138,16 +152,26 @@ jobs:
       - run: bundle exec fastlane carthage_build
 
   swift-package-build:
-    name: Swift Package Build
+    name: Swift Package Build${{ !matrix.primary && format(' (Xcode {0})', matrix.xcode) || '' }}
     needs: test
     permissions:
       contents: read
-    runs-on: macos-14
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-14
+            xcode: '15.4'
+            primary: true
+          - os: macos-26
+            xcode: '26.6'
+            primary: false
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - name: Use Xcode ${{ env.XCODE_VERSION }}
-        run: sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
+      - name: Use Xcode ${{ matrix.xcode }}
+        run: sudo xcode-select --switch /Applications/Xcode_${{ matrix.xcode }}.app
 
       - uses: ruby/setup-ruby@922ebc4c5262cd14e07bb0e1db020984b6c064fe
         with:
@@ -240,6 +264,9 @@ jobs:
           - os: macos-15
             xcode: '16.4' # https://github.com/actions/runner-images/issues/12758
             experimental: true
+          - os: macos-26
+            xcode: '26.6'
+            experimental: false
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 

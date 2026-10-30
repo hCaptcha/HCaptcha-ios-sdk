@@ -313,6 +313,52 @@ class HCaptcha__Tests: XCTestCase {
         wait(for: [exp], timeout: TestTimeouts.standard)
     }
 
+    func test__validate__setDataFailure__doesNotStartChallenge() {
+        for size in [HCaptchaSize.invisible, .compact] {
+            for useDeprecatedRqdata in [false, true] {
+                let exp = expectation(description: "setData failure stops challenge: \(size), \(useDeprecatedRqdata)")
+                let manager = HCaptchaWebViewManager(
+                    html: instrumentedSetDataHTML(setDataThrows: true),
+                    apiKey: "api-key",
+                    size: size,
+                    rqdata: useDeprecatedRqdata ? "test-rqdata" : nil
+                )
+                let hcaptcha = HCaptcha(manager: manager)
+                let view = UIApplication.shared.windows.first?.rootViewController?.view
+                let completion: (HCaptchaResult) -> Void = { result in
+                    XCTAssertEqual(result.error, .verifyParamsParseError)
+                    XCTAssertNil(result.token)
+                    manager.webView.evaluateJavaScript(
+                        """
+                        [window.__setDataCalls || 0, window.__executeCalls || 0,
+                         window.__messages.filter(function(message) {
+                           return message.action === "showHCaptcha";
+                         }).length,
+                         window.__messages.filter(function(message) {
+                           return message.error !== undefined;
+                         }).length]
+                        """
+                    ) { value, error in
+                        XCTAssertNil(error)
+                        XCTAssertEqual(value as? [Int], [1, 0, 0, 1])
+                        XCTAssertTrue(manager.webView.isHidden)
+                        exp.fulfill()
+                    }
+                }
+
+                if useDeprecatedRqdata {
+                    hcaptcha.validate(on: view, completion: completion)
+                } else {
+                    hcaptcha.validate(on: view,
+                                      verifyParams: HCaptchaVerifyParams(rqdata: "test-rqdata"),
+                                      completion: completion)
+                }
+
+                wait(for: [exp], timeout: TestTimeouts.standard)
+            }
+        }
+    }
+
     func test__validate__withVerifyParams__resetOnErrorFalse() {
         // Given
         let exp = expectation(description: "validate with resetOnError false")
@@ -461,15 +507,19 @@ class HCaptcha__Tests: XCTestCase {
 }
 
 private extension HCaptcha__Tests {
-    func instrumentedSetDataHTML(file: StaticString = #filePath, line: UInt = #line) -> String {
+    func instrumentedSetDataHTML(setDataThrows: Bool = false,
+                                 file: StaticString = #filePath, line: UInt = #line) -> String {
         let html = HCaptchaHtml.template.replacingOccurrences(
             of: "document.head.appendChild(script);",
             with: """
               window.hcaptcha = {
                 setData: function(_, data) {
+                  window.__setDataCalls = (window.__setDataCalls || 0) + 1;
+                  if (\(setDataThrows)) { throw new Error("setData failed"); }
                   window.__setDataPayload = data;
                 },
                 execute: function() {
+                  window.__executeCalls = (window.__executeCalls || 0) + 1;
                   post({ token: JSON.stringify(window.__setDataPayload || null) });
                 },
                 reset: function() {
@@ -482,6 +532,12 @@ private extension HCaptcha__Tests {
               };
 
               setTimeout(function() {
+                window.__messages = [];
+                var originalPost = post;
+                post = function(message) {
+                  window.__messages.push(message);
+                  originalPost(message);
+                };
                 onloadCallback();
               }, 0);
             """

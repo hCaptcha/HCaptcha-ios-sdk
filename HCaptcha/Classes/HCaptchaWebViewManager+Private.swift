@@ -25,6 +25,9 @@ extension HCaptchaWebViewManager {
         conf.userContentController = controller
         conf.allowsInlineMediaPlayback = true
         conf.mediaTypesRequiringUserActionForPlayback = []
+        if #available(iOS 13.0, *) {
+            conf.defaultWebpagePreferences.preferredContentMode = .mobile
+        }
 
         return conf
     }
