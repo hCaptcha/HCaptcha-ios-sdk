@@ -207,6 +207,13 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         waitForExpectations(timeout: TestTimeouts.standard)
     }
 
+    func test__Configure_Web_View__Uses_Mobile_Content_Mode() {
+        guard #available(iOS 13.0, *) else { return }
+
+        let manager = HCaptchaWebViewManager(messageBody: "{action: \"showHCaptcha\"}")
+        XCTAssertEqual(manager.webView.configuration.defaultWebpagePreferences.preferredContentMode, .mobile)
+    }
+
     func test__Configure_Web_View__Called_Once() {
         var count = 0
         let exp0 = expectation(description: "configure webview")
