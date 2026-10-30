@@ -169,6 +169,69 @@ class HCaptcha__Tests: XCTestCase {
                                       size: .normal))
     }
 
+    // MARK: - HCaptchaConfig Tests
+
+    func test__config_defaults_match_legacy_init_defaults() {
+        let config = HCaptchaConfig()
+
+        XCTAssertNil(config.apiKey)
+        XCTAssertFalse(config.passiveApiKey)
+        XCTAssertNil(config.baseURL)
+        XCTAssertEqual(config.locale, Locale.current)
+        XCTAssertEqual(config.size, .invisible)
+        XCTAssertEqual(config.orientation, .portrait)
+        XCTAssertEqual(config.jsSrc, URL(string: "https://js.hcaptcha.com/1/api.js")!)
+        XCTAssertFalse(config.sentry)
+        XCTAssertNil(config.endpoint)
+        XCTAssertNil(config.reportapi)
+        XCTAssertNil(config.assethost)
+        XCTAssertNil(config.imghost)
+        XCTAssertNil(config.host)
+        XCTAssertEqual(config.theme, "light")
+        XCTAssertNil(config.customTheme)
+        XCTAssertFalse(config.diagnosticLog)
+        XCTAssertFalse(config.disableDebugInfo)
+        XCTAssertFalse(config.disablePat)
+        XCTAssertFalse(config.userJourney)
+        XCTAssertNil(config.rqdata)
+    }
+
+    func test__config_convenience_inits() {
+        let url = URL(string: "http://localhost")!
+
+        let config1 = HCaptchaConfig(apiKey: "10000000-ffff-ffff-ffff-000000000001")
+        XCTAssertEqual(config1.apiKey, "10000000-ffff-ffff-ffff-000000000001")
+        XCTAssertNil(config1.baseURL)
+
+        let config2 = HCaptchaConfig(apiKey: "10000000-ffff-ffff-ffff-000000000001", baseURL: url)
+        XCTAssertEqual(config2.apiKey, "10000000-ffff-ffff-ffff-000000000001")
+        XCTAssertEqual(config2.baseURL, url)
+    }
+
+    func test__init_with_config() {
+        XCTAssertNotNil(try? HCaptcha(config: HCaptchaConfig()))
+
+        let config = HCaptchaConfig(apiKey: "10000000-ffff-ffff-ffff-000000000001",
+                                    baseURL: URL(string: "http://localhost")!)
+        config.size = .compact
+        config.theme = "dark"
+        XCTAssertNotNil(try? HCaptcha(config: config))
+    }
+
+    func test__init_with_config_validates_params() {
+        let invalidHost = HCaptchaConfig()
+        invalidHost.host = "https://example.com/path"
+        XCTAssertThrowsError(try HCaptcha(config: invalidHost)) { error in
+            XCTAssertEqual(error as? HCaptchaError, .invalidHostFormat)
+        }
+
+        let invalidTheme = HCaptchaConfig()
+        invalidTheme.customTheme = "[Object object]"
+        XCTAssertThrowsError(try HCaptcha(config: invalidTheme)) { error in
+            XCTAssertEqual(error as? HCaptchaError, .invalidCustomTheme)
+        }
+    }
+
     // MARK: - Verify Params Tests
 
     func test__validate__withVerifyParams__phonePrefix() {

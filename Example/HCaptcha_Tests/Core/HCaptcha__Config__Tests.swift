@@ -18,7 +18,7 @@ class HCaptcha__Config__Tests: XCTestCase {
     func test__Base_URL() {
         // Ensures baseURL failure when nil
         do {
-            _ = try HCaptchaConfig(apiKey: "", infoPlistKey: nil, baseURL: nil, infoPlistURL: nil)
+            _ = try HCaptchaInternalConfig(apiKey: "", infoPlistKey: nil, baseURL: nil, infoPlistURL: nil)
             XCTFail("Should have failed")
         } catch let e as HCaptchaError {
             print(e)
@@ -29,31 +29,31 @@ class HCaptcha__Config__Tests: XCTestCase {
 
         // Ensures plist url if nil key
         let plistURL = URL(string: "https://bar")!
-        let config1 = try? HCaptchaConfig(apiKey: "", infoPlistKey: nil, baseURL: nil, infoPlistURL: plistURL)
+        let config1 = try? HCaptchaInternalConfig(apiKey: "", infoPlistKey: nil, baseURL: nil, infoPlistURL: plistURL)
         XCTAssertEqual(config1?.baseURL, plistURL)
 
         // Ensures preference of given url over plist entry
         let url = URL(string: "ftp://foo")!
-        let config2 = try? HCaptchaConfig(apiKey: "", infoPlistKey: nil, baseURL: url, infoPlistURL: plistURL)
+        let config2 = try? HCaptchaInternalConfig(apiKey: "", infoPlistKey: nil, baseURL: url, infoPlistURL: plistURL)
         XCTAssertEqual(config2?.baseURL, url)
     }
 
     func test__Base_URL_Without_Scheme() {
         // Ignores URL with scheme
         let goodURL = URL(string: "https://foo.bar")!
-        let config0 = try? HCaptchaConfig(apiKey: "", infoPlistKey: nil, baseURL: goodURL, infoPlistURL: nil)
+        let config0 = try? HCaptchaInternalConfig(apiKey: "", infoPlistKey: nil, baseURL: goodURL, infoPlistURL: nil)
         XCTAssertEqual(config0?.baseURL, goodURL)
 
         // Fixes URL without scheme
         let badURL = URL(string: "foo")!
-        let config = try? HCaptchaConfig(apiKey: "", infoPlistKey: nil, baseURL: badURL, infoPlistURL: nil)
+        let config = try? HCaptchaInternalConfig(apiKey: "", infoPlistKey: nil, baseURL: badURL, infoPlistURL: nil)
         XCTAssertEqual(config?.baseURL.absoluteString, "http://" + badURL.absoluteString)
     }
 
     func test__API_Key() {
         // Ensures key failure when nil
         do {
-            _ = try HCaptchaConfig(apiKey: nil, infoPlistKey: nil, baseURL: nil, infoPlistURL: nil)
+            _ = try HCaptchaInternalConfig(apiKey: nil, infoPlistKey: nil, baseURL: nil, infoPlistURL: nil)
             XCTFail("Should have failed")
         } catch let e as HCaptchaError {
             print(e)
@@ -64,7 +64,7 @@ class HCaptcha__Config__Tests: XCTestCase {
 
         // Ensures plist key if nil key
         let plistKey = "bar"
-        let config1 = try? HCaptchaConfig(
+        let config1 = try? HCaptchaInternalConfig(
             apiKey: nil,
             infoPlistKey: plistKey,
             baseURL: URL(string: "foo"),
@@ -74,7 +74,7 @@ class HCaptcha__Config__Tests: XCTestCase {
 
         // Ensures preference of given key over plist entry
         let key = "foo"
-        let config2 = try? HCaptchaConfig(
+        let config2 = try? HCaptchaInternalConfig(
             apiKey: key,
             infoPlistKey: plistKey,
             baseURL: URL(string: "foo"),
@@ -84,21 +84,21 @@ class HCaptcha__Config__Tests: XCTestCase {
     }
 
     func test__Locale__Nil() {
-        let config = try? HCaptchaConfig()
+        let config = try? HCaptchaInternalConfig()
         let actual = config?.actualEndpoint.absoluteString
         XCTAssertEqual(actual, expected)
     }
 
     func test__Locale__Valid() {
         let locale = Locale(identifier: "pt-BR")
-        let config = try? HCaptchaConfig(locale: locale)
+        let config = try? HCaptchaInternalConfig(locale: locale)
         let actual = config?.actualEndpoint.absoluteString
         XCTAssertEqual(actual, "\(expected)&hl=\(locale.identifier)")
     }
 
     func test__Custom__Host() {
         let host = "custom-host"
-        let config = try? HCaptchaConfig(host: host)
+        let config = try? HCaptchaInternalConfig(host: host)
         let actual = config?.actualEndpoint.absoluteString
         XCTAssertEqual(actual, expected.replacingOccurrences(
             of: "some-api-key.ios-sdk.hcaptcha.com",
@@ -117,14 +117,14 @@ class HCaptcha__Config__Tests: XCTestCase {
             }
           }
         """
-        let config = try? HCaptchaConfig(customTheme: customTheme)
+        let config = try? HCaptchaInternalConfig(customTheme: customTheme)
         let actual = config?.actualEndpoint.absoluteString
         XCTAssertEqual(actual, expected + "&custom=true")
     }
 
     func test__Invalid_Theme() {
         do {
-            _ = try HCaptchaConfig(customTheme: "[Object object]")
+            _ = try HCaptchaInternalConfig(customTheme: "[Object object]")
             XCTFail("Should have failed")
         } catch let e as HCaptchaError {
             print(e)
@@ -135,13 +135,13 @@ class HCaptcha__Config__Tests: XCTestCase {
     }
 
     func test__Pat() {
-        let config = try? HCaptchaConfig(disablePat: true)
+        let config = try? HCaptchaInternalConfig(disablePat: true)
         let actual = config!.actualEndpoint.absoluteString
         XCTAssertTrue(actual.contains("pat=off"))
     }
 
     func test__Debug_Info_Defaults_To_Enabled() throws {
-        XCTAssertFalse(try HCaptchaConfig().disableDebugInfo)
+        XCTAssertFalse(try HCaptchaInternalConfig().disableDebugInfo)
     }
 
     func test__Host_Validation__Valid_Hostnames() {
@@ -158,7 +158,7 @@ class HCaptcha__Config__Tests: XCTestCase {
 
         for host in validHosts {
             do {
-                let config = try HCaptchaConfig(host: host)
+                let config = try HCaptchaInternalConfig(host: host)
                 XCTAssertEqual(config.host, host)
             } catch {
                 XCTFail("Valid host '\(host)' should not throw error: \(error)")
@@ -181,7 +181,7 @@ class HCaptcha__Config__Tests: XCTestCase {
 
         for host in invalidHosts {
             do {
-                _ = try HCaptchaConfig(host: host)
+                _ = try HCaptchaInternalConfig(host: host)
                 XCTFail("Invalid host '\(host)' should throw HCaptchaError.invalidHostFormat")
             } catch let error as HCaptchaError {
                 XCTAssertEqual(error, HCaptchaError.invalidHostFormat)

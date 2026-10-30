@@ -110,6 +110,29 @@ let hcaptcha = try? HCaptcha(
 - in most cases `baseURL` can be `http://localhost`. This value is mainly used for your convenience in analytics.
 - `baseURL` should match `HCaptchaDomain` if specified; it controls the URI used to initialize the hCaptcha session. Example: `https://www.your.com`
 
+### Init with `HCaptchaConfig`
+
+All init params are also available as properties of `HCaptchaConfig`. New params are only added to `HCaptchaConfig`, so `HCaptcha(config:)` keeps the same signature between SDK versions. Prefer it if you ship a framework that depends on HCaptcha, so it keeps working when your users update the SDK.
+
+``` swift
+let config = HCaptchaConfig(apiKey: "YOUR_HCAPTCHA_KEY", baseURL: URL(string: "YOUR_HCAPTCHA_DOMAIN")!)
+config.size = .compact
+config.theme = "dark"
+
+let hcaptcha = try? HCaptcha(config: config)
+```
+
+``` objc
+HCaptchaConfig *config = [[HCaptchaConfig alloc] initWithApiKey:@"YOUR_HCAPTCHA_KEY"
+                                                         baseURL:[NSURL URLWithString:@"YOUR_HCAPTCHA_DOMAIN"]];
+config.size = HCaptchaSizeCompact;
+
+NSError *error = nil;
+HCaptcha *hcaptcha = [[HCaptcha alloc] initWithConfig:config error:&error];
+```
+
+`HCaptcha(config:)` reads the values once, changing `config` afterwards doesn't affect the created `HCaptcha` instance.
+
 ## Examples
 
 If you are looking for a complete example please check links below:
@@ -200,7 +223,7 @@ Can be passed via `HCaptcha(...)`
 
 Please see the [hCaptcha Enterprise documentation](https://docs.hcaptcha.com/enterprise/) for more details.
 
-**Note**: The `rqdata` parameter has been moved from `HCaptchaConfig` to `HCaptchaVerifyParams` for better API consistency. The old `rqdata` property in `HCaptchaConfig` is now deprecated, and will be removed in the next major version.
+**Note**: The `rqdata` parameter has been moved to `HCaptchaVerifyParams` for better API consistency. The `rqdata` param of the `HCaptcha(...)` init is now deprecated, and will be removed in the next major version. `HCaptchaConfig` does not have `rqdata`, pass it via `HCaptchaVerifyParams` instead.
 
 ### Enabling the visible checkbox flow
 

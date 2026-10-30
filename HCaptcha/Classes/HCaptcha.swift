@@ -15,7 +15,7 @@ import JavaScriptCore
 */
 @objc
 public class HCaptcha: NSObject {
-    fileprivate struct Constants {
+    struct Constants {
         struct InfoDictKeys {
             static let APIKey = "HCaptchaKey"
             static let Domain = "HCaptchaDomain"
@@ -85,42 +85,29 @@ public class HCaptcha: NSObject {
         disablePat: Bool = false,
         userJourney: Bool = false
     ) throws {
-        Log.minLevel = diagnosticLog ? .debug : .warning
+        let config = HCaptchaConfig()
+        config.apiKey = apiKey
+        config.passiveApiKey = passiveApiKey
+        config.baseURL = baseURL
+        config.locale = locale
+        config.size = size
+        config.orientation = orientation
+        config.jsSrc = jsSrc
+        config.rqdata = rqdata
+        config.sentry = sentry
+        config.endpoint = endpoint
+        config.reportapi = reportapi
+        config.assethost = assethost
+        config.imghost = imghost
+        config.host = host
+        config.theme = theme
+        config.customTheme = customTheme
+        config.diagnosticLog = diagnosticLog
+        config.disableDebugInfo = disableDebugInfo
+        config.disablePat = disablePat
+        config.userJourney = userJourney
 
-        if userJourney {
-            guard HCaptchaJourneys.start() else { throw HCaptchaError.journeyliticsNotAvailable }
-        }
-
-        let infoDict = Bundle.main.infoDictionary
-
-        let plistApiKey = infoDict?[Constants.InfoDictKeys.APIKey] as? String
-        let plistDomain = (infoDict?[Constants.InfoDictKeys.Domain] as? String).flatMap(URL.init(string:))
-
-        let config = try HCaptchaConfig(apiKey: apiKey,
-                                        passiveApiKey: passiveApiKey,
-                                        infoPlistKey: plistApiKey,
-                                        baseURL: baseURL,
-                                        infoPlistURL: plistDomain,
-                                        jsSrc: jsSrc,
-                                        size: size,
-                                        orientation: orientation,
-                                        rqdata: rqdata,
-                                        sentry: sentry,
-                                        endpoint: endpoint,
-                                        reportapi: reportapi,
-                                        assethost: assethost,
-                                        imghost: imghost,
-                                        host: host,
-                                        theme: theme,
-                                        customTheme: customTheme,
-                                        locale: locale,
-                                        disablePat: disablePat,
-                                        disableDebugInfo: disableDebugInfo,
-                                        userJourney: userJourney)
-
-        Log.debug(".init with: \(config)")
-
-        self.init(manager: HCaptchaWebViewManager(config: config), userJourney: userJourney)
+        try self.init(config: config)
     }
 
     /**
@@ -265,43 +252,62 @@ public class HCaptcha: NSObject {
 
     @objc
     public convenience init(locale: Locale) throws {
-        try self.init(locale: locale, size: .invisible)
+        let config = HCaptchaConfig()
+        config.locale = locale
+        try self.init(config: config)
     }
 
     @objc
     public convenience init(size: HCaptchaSize) throws {
-        try self.init(locale: nil, size: size)
+        let config = HCaptchaConfig()
+        config.locale = nil
+        config.size = size
+        try self.init(config: config)
     }
 
     @objc
     public convenience init(passiveApiKey: Bool) throws {
-        try self.init(passiveApiKey: passiveApiKey, locale: nil)
+        let config = HCaptchaConfig()
+        config.locale = nil
+        config.passiveApiKey = passiveApiKey
+        try self.init(config: config)
     }
 
     @objc
     public convenience init(apiKey: String) throws {
-        try self.init(apiKey: apiKey, locale: nil)
+        let config = HCaptchaConfig(apiKey: apiKey)
+        config.locale = nil
+        try self.init(config: config)
     }
 
     @objc
     public convenience init(apiKey: String, baseURL: URL) throws {
-        try self.init(apiKey: apiKey, baseURL: baseURL, locale: nil)
+        let config = HCaptchaConfig(apiKey: apiKey, baseURL: baseURL)
+        config.locale = nil
+        try self.init(config: config)
     }
 
     @objc
     public convenience init(apiKey: String, passiveApiKey: Bool) throws {
-        try self.init(apiKey: apiKey, passiveApiKey: passiveApiKey, locale: nil)
+        let config = HCaptchaConfig(apiKey: apiKey)
+        config.locale = nil
+        config.passiveApiKey = passiveApiKey
+        try self.init(config: config)
     }
 
     @objc
     public convenience init(apiKey: String, baseURL: URL, locale: Locale) throws {
-        try self.init(apiKey: apiKey, baseURL: baseURL, locale: locale, size: .invisible)
+        let config = HCaptchaConfig(apiKey: apiKey, baseURL: baseURL)
+        config.locale = locale
+        try self.init(config: config)
     }
-
 
     @objc
     public convenience init(apiKey: String, baseURL: URL, locale: Locale, size: HCaptchaSize) throws {
-        try self.init(apiKey: apiKey, baseURL: baseURL, locale: locale, size: size, rqdata: nil)
+        let config = HCaptchaConfig(apiKey: apiKey, baseURL: baseURL)
+        config.locale = locale
+        config.size = size
+        try self.init(config: config)
     }
 
     @objc
@@ -323,10 +329,6 @@ public class HCaptcha: NSObject {
                             customTheme: String?,
                             diagnosticLog: Bool,
                             userJourney: Bool) throws {
-        if userJourney {
-            guard HCaptchaJourneys.start() else { throw HCaptchaError.journeyliticsNotAvailable }
-        }
-
         try self.init(apiKey: apiKey,
                       passiveApiKey: passiveApiKey,
                       baseURL: baseURL,
@@ -346,52 +348,6 @@ public class HCaptcha: NSObject {
                       diagnosticLog: diagnosticLog,
                       disableDebugInfo: false,
                       disablePat: false,
-                      userJourney: userJourney)
-    }
-}
-
-extension HCaptcha {
-    @objc
-    public convenience init(
-        apiKey: String?,
-        passiveApiKey: Bool,
-        baseURL: URL?,
-        locale: Locale?,
-        size: HCaptchaSize,
-        orientation: HCaptchaOrientation,
-        jsSrc: URL,
-        rqdata: String?,
-        sentry: Bool,
-        endpoint: URL?,
-        reportapi: URL?,
-        assethost: URL?,
-        imghost: URL?,
-        host: String?,
-        theme: String,
-        customTheme: String?,
-        diagnosticLog: Bool,
-        disablePat: Bool,
-        userJourney: Bool
-    ) throws {
-        try self.init(apiKey: apiKey,
-                      passiveApiKey: passiveApiKey,
-                      baseURL: baseURL,
-                      locale: locale,
-                      size: size,
-                      orientation: orientation,
-                      jsSrc: jsSrc,
-                      rqdata: rqdata,
-                      sentry: sentry,
-                      endpoint: endpoint,
-                      reportapi: reportapi,
-                      assethost: assethost,
-                      imghost: imghost,
-                      host: host,
-                      theme: theme,
-                      customTheme: customTheme,
-                      diagnosticLog: diagnosticLog,
-                      disableDebugInfo: false,
-                      disablePat: disablePat,
                       userJourney: userJourney)
     }
 }

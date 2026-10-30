@@ -15,9 +15,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // hCaptcha init
-    self.hCaptcha = [[HCaptcha alloc] initWithApiKey:@"a5f74b19-9e45-40e0-b45d-47ff91b7a6c2"
-                                             baseURL:[NSURL URLWithString: @"http://localhost"]
-                                               error:nil];
+    HCaptchaConfig *config = [[HCaptchaConfig alloc] initWithApiKey:@"a5f74b19-9e45-40e0-b45d-47ff91b7a6c2"
+                                                             baseURL:[NSURL URLWithString: @"http://localhost"]];
+    self.hCaptcha = [[HCaptcha alloc] initWithConfig:config error:nil];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];

@@ -1,3 +1,7 @@
+# Unreleased
+
+- Feat: add `HCaptchaConfig` and `HCaptcha(config:)` init, new init params are only added to `HCaptchaConfig` to keep ABI compatibility #180
+
 # 3.2.1
 
 - Fix: allow deprecation warnings when publishing to CocoaPods

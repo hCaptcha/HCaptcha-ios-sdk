@@ -1,5 +1,5 @@
 //
-//  HCaptchaConfig+Helpers.swift
+//  HCaptchaInternalConfig+Helpers.swift
 //  HCaptcha_Tests
 //
 //  Created by Алексей Берёзка on 17.08.2021.
@@ -9,7 +9,7 @@
 import Foundation
 @testable import HCaptcha
 
-extension HCaptchaConfig {
+extension HCaptchaInternalConfig {
     init(html: String = HCaptchaHtml.template,
          apiKey: String? = String(arc4random()),
          passiveApiKey: Bool = false,
@@ -21,37 +21,38 @@ extension HCaptchaConfig {
          rqdata: String? = nil,
          endpoint: URL = URL(string: "https://api.hcaptcha.com")!,
          host: String? = nil,
-         theme: String = "\"light\"",
+         theme: String = "light",
          customTheme: String? = nil,
          locale: Locale? = nil,
          loadingTimeout: TimeInterval = 5.0,
-         disablePat: Bool? = nil,
+         disablePat: Bool = false,
          disableDebugInfo: Bool = false,
          userJourney: Bool = false) throws {
+        let config = HCaptchaConfig()
+        config.apiKey = apiKey
+        config.passiveApiKey = passiveApiKey
+        config.baseURL = baseURL
+        config.jsSrc = URL(string: "https://hcaptcha.com/1/api.js")!
+        config.size = size
+        config.orientation = orientation
+        config.rqdata = rqdata
+        config.endpoint = endpoint
+        config.reportapi = URL(string: "https://accounts.hcaptcha.com")!
+        config.assethost = URL(string: "https://newassets.hcaptcha.com")!
+        config.imghost = URL(string: "https://imgs.hcaptcha.com")!
+        config.host = host
+        config.theme = theme
+        config.customTheme = customTheme
+        config.locale = locale
+        config.disablePat = disablePat
+        config.disableDebugInfo = disableDebugInfo
+        config.userJourney = userJourney
 
-        try self.init(html: html,
-                      apiKey: apiKey,
-                      passiveApiKey: passiveApiKey,
+        try self.init(config: config,
                       infoPlistKey: infoPlistKey,
-                      baseURL: baseURL,
                       infoPlistURL: infoPlistURL,
-                      jsSrc: URL(string: "https://hcaptcha.com/1/api.js")!,
-                      size: size,
-                      orientation: orientation,
-                      rqdata: rqdata,
-                      sentry: false,
-                      endpoint: endpoint,
-                      reportapi: URL(string: "https://accounts.hcaptcha.com")!,
-                      assethost: URL(string: "https://newassets.hcaptcha.com")!,
-                      imghost: URL(string: "https://imgs.hcaptcha.com")!,
-                      host: host,
-                      theme: theme,
-                      customTheme: customTheme,
-                      locale: locale,
-                      loadingTimeout: loadingTimeout,
-                      disablePat: disablePat,
-                      disableDebugInfo: disableDebugInfo,
-                      userJourney: userJourney)
+                      html: html,
+                      loadingTimeout: loadingTimeout)
     }
 
     init(apiKey: String = "some-api-key",

@@ -31,12 +31,12 @@ struct ContentView: View {
     }
 
     func fetchHCaptchaToken() async -> String? {
-        guard let hcaptcha = try? HCaptcha(
-            apiKey: "10000000-ffff-ffff-ffff-000000000001",
-            passiveApiKey: true,
-            baseURL: URL(string: "http://localhost")!,
-            diagnosticLog: true
-        ) else { return "init error" }
+        let config = HCaptchaConfig(apiKey: "10000000-ffff-ffff-ffff-000000000001",
+                                    baseURL: URL(string: "http://localhost")!)
+        config.passiveApiKey = true
+        config.diagnosticLog = true
+
+        guard let hcaptcha = try? HCaptcha(config: config) else { return "init error" }
 
         return await withCheckedContinuation { continuation in
             hcaptcha.validate { result in

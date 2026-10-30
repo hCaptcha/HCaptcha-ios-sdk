@@ -35,6 +35,8 @@
 		E614B37B2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E614B37A2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift */; };
 		E634944A2828856300130AC5 /* HCaptchaEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E63494492828856300130AC5 /* HCaptchaEvent.swift */; };
 		E64C60082B7DFBE900D203F4 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E64C60072B7DFBE900D203F4 /* PrivacyInfo.xcprivacy */; };
+		B9288C76DA74A0988C2143E4 /* HCaptchaInternalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9458A9BE405FA0F70A3C7DAB /* HCaptchaInternalConfig.swift */; };
+		257E9B10A8A7D5FD8B43CF1D /* HCaptcha+Inits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ACDF4AB23B931BA311CC915 /* HCaptcha+Inits.swift */; };
 		E65145E327786BDB0079668A /* HCaptchaConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65145E227786BDB0079668A /* HCaptchaConfig.swift */; };
 		E65C08A02A656CC6002E82EC /* HCaptchaLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65C089F2A656CC6002E82EC /* HCaptchaLog.swift */; };
 		E683772129053E560021BFD7 /* HCaptchaURLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = E683772029053E560021BFD7 /* HCaptchaURLOpener.swift */; };
@@ -107,6 +109,8 @@
 		E614B37A2BCEBF3400CEA791 /* HCaptchaWebViewManager+WKNavigationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HCaptchaWebViewManager+WKNavigationDelegate.swift"; sourceTree = "<group>"; };
 		E63494492828856300130AC5 /* HCaptchaEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaEvent.swift; sourceTree = "<group>"; };
 		E64C60072B7DFBE900D203F4 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		9458A9BE405FA0F70A3C7DAB /* HCaptchaInternalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaInternalConfig.swift; sourceTree = "<group>"; };
+		1ACDF4AB23B931BA311CC915 /* HCaptcha+Inits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HCaptcha+Inits.swift"; sourceTree = "<group>"; };
 		E65145E227786BDB0079668A /* HCaptchaConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaConfig.swift; sourceTree = "<group>"; };
 		E65C089F2A656CC6002E82EC /* HCaptchaLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaLog.swift; sourceTree = "<group>"; };
 		E683772029053E560021BFD7 /* HCaptchaURLOpener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaURLOpener.swift; sourceTree = "<group>"; };
@@ -297,6 +301,8 @@
 				E65C089F2A656CC6002E82EC /* HCaptchaLog.swift */,
 				E63494492828856300130AC5 /* HCaptchaEvent.swift */,
 				E65145E227786BDB0079668A /* HCaptchaConfig.swift */,
+				9458A9BE405FA0F70A3C7DAB /* HCaptchaInternalConfig.swift */,
+				1ACDF4AB23B931BA311CC915 /* HCaptcha+Inits.swift */,
 				F24EA1D81F9683F5001DEC17 /* HCaptchaDecoder.swift */,
 				E6DB9EA727B15954008F0327 /* HCaptchaDebugInfo.swift */,
 				43DC08132E971586003839A5 /* HCaptchaVerifyParams.swift */,
@@ -519,6 +525,8 @@
 				E65C08A02A656CC6002E82EC /* HCaptchaLog.swift in Sources */,
 				F24EA1E51F968403001DEC17 /* HCaptchaError.swift in Sources */,
 				E65145E327786BDB0079668A /* HCaptchaConfig.swift in Sources */,
+				B9288C76DA74A0988C2143E4 /* HCaptchaInternalConfig.swift in Sources */,
+				257E9B10A8A7D5FD8B43CF1D /* HCaptcha+Inits.swift in Sources */,
 				F24EA1E21F968403001DEC17 /* HCaptchaDecoder.swift in Sources */,
 				F2AE8614204F3B42002E28D7 /* HCaptchaResult.swift in Sources */,
 				F24EA1E61F968403001DEC17 /* HCaptcha.swift in Sources */,
