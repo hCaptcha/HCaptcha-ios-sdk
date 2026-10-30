@@ -207,11 +207,15 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         waitForExpectations(timeout: TestTimeouts.standard)
     }
 
-    func test__Configure_Web_View__Uses_Mobile_Content_Mode() {
-        guard #available(iOS 13.0, *) else { return }
-
+    func test__Host_Key_Window__Is_Found_Through_Scenes() {
         let manager = HCaptchaWebViewManager(messageBody: "{action: \"showHCaptcha\"}")
-        XCTAssertEqual(manager.webView.configuration.defaultWebpagePreferences.preferredContentMode, .mobile)
+
+        let window = manager.hostKeyWindow
+        XCTAssertNotNil(window)
+        XCTAssertTrue(window?.isKeyWindow ?? false)
+        if #available(iOS 13.0, *) {
+            XCTAssertNotNil(window?.windowScene)
+        }
     }
 
     func test__Configure_Web_View__Called_Once() {

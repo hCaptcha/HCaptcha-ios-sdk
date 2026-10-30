@@ -121,7 +121,7 @@ extension HCaptchaWebViewManager {
      Adds the webview to a valid UIView and loads the initial HTML file
      */
     func setupWebview(html: String, url: URL) {
-        if let window = UIApplication.shared.keyWindow {
+        if let window = hostKeyWindow {
             setupWebview(on: window, html: html, url: url)
         } else {
             observer = NotificationCenter.default.addObserver(
@@ -134,6 +134,27 @@ extension HCaptchaWebViewManager {
                 slf.setupWebview(on: window, html: html, url: url)
             }
         }
+    }
+
+    /**
+     The key window of the host app, looked up through connected scenes on iOS 13+.
+
+     Foreground active scenes are checked first. `UIApplication.keyWindow` is deprecated and
+     apps built with SDKs after iOS 26 are required to use the UIScene lifecycle.
+     */
+    var hostKeyWindow: UIWindow? {
+        guard #available(iOS 13.0, *) else {
+            return UIApplication.shared.keyWindow
+        }
+
+        let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
+        let activeScenes = scenes.filter { $0.activationState == .foregroundActive }
+        for scene in activeScenes + scenes {
+            if let window = scene.windows.first(where: { $0.isKeyWindow }) {
+                return window
+            }
+        }
+        return nil
     }
 
     /**
