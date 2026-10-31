@@ -7,6 +7,7 @@
 //
 
 @testable import HCaptcha
+import HCaptcha_RxSwift
 
 import RxBlocking
 import RxCocoa

@@ -2,37 +2,28 @@ fastlane_version "2.212.1"
 
 default_platform :ios
 
-max_pod_size_kb = 200
-
 platform :ios do
   skip_docs
 
   devices = ["iPhone 16 Pro (~> 18)"]
 
-  desc "Runs the following lanes:\n- test\n- pod_lint\n- carthage_lint"
+  desc "Run tests, lint, and package builds"
   lane :ci do
     test
     html_lint
     xcprivacy_lint
-    pod_lint
     carthage_build
     spm_build
-    pod_size
   end
 
   desc "Runs all the tests"
   lane :test do
     ENV["TEST_RUNNER_CI"] = "true" if Helper.is_ci?
 
-    cocoapods(
-      podfile: "Example/Podfile",
-      try_repo_update_on_error: true,
-    )
-
     scan_options = {
       devices: self.select_similar_simulator(devices),
       scheme: "HCaptcha-RxSwift-Example",
-      workspace: "Example/HCaptcha.xcworkspace",
+      project: "Example/HCaptcha.xcodeproj",
       code_coverage: true,
       derived_data_path: File.expand_path("../.build/fastlane/DerivedData", __dir__),
       output_directory: File.expand_path("test_output", __dir__),
@@ -77,7 +68,7 @@ platform :ios do
         test_without_building: true,
         devices: self.select_similar_simulator(devices),
         scheme: "HCaptcha_UITests",
-        workspace: "Example/HCaptcha.xcworkspace",
+        project: "Example/HCaptcha.xcodeproj",
         code_coverage: true,
       )
 
@@ -87,17 +78,10 @@ platform :ios do
 
   desc "Swift Lint"
   lane :swift_lint do
-    cocoapods(podfile: "Example/Podfile")
     swiftlint(
-      executable: "Example/Pods/Swiftlint/swiftlint",
       strict: true,
       reporter: "emoji",
     )
-  end
-
-  desc "Lint Cocoapods Lib"
-  lane :pod_lint do
-    pod_lib_lint(allow_warnings: true)
   end
 
   desc "Build Carthage lib"
@@ -163,43 +147,6 @@ platform :ios do
     sh %w[plutil -lint ../HCaptcha/Resources/PrivacyInfo.xcprivacy]
   end
 
-  desc "Cocoapods size check"
-  lane :pod_size do
-    cocoapods_size_repo = Pathname.new "../.lint/cocoapods-size"
-    unless cocoapods_size_repo.exist?
-      cocoapods_size_repo.parent.mkpath
-      sh("git clone https://github.com/google/cocoapods-size #{cocoapods_size_repo}")
-    end
-    sh("sed -i '' -E 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]+/IPHONEOS_DEPLOYMENT_TARGET = 15.0/g' #{cocoapods_size_repo}/SwiftApp/SwiftApp.xcodeproj/project.pbxproj")
-
-    Dir.chdir(cocoapods_size_repo) do
-      config_json = "source_config.json"
-      File.write(config_json, {
-                                pods:[
-                                  {
-                                    sdk: "HCaptcha",
-                                    path: Pathname.getwd.parent.parent
-                                  }
-                                ]
-                              }.to_json)
-      output_json = "result.json"
-
-      sh ["./measure_cocoapod_size.py",
-          "--cocoapods HCaptcha",
-          "--cocoapods_source_config #{config_json}",
-          "--mode swift",
-          "--json #{output_json}"].join(" ")
-
-      output = JSON.parse(File.read(output_json))
-
-      pod_size_kb = output["combined_pods_extra_size"].to_int / 1024
-
-      UI.user_error!("HCaptcha pod size size exceeded! #{pod_size_kb}KB > #{max_pod_size_kb}KB") if pod_size_kb > max_pod_size_kb
-
-      puts("HCaptcha pod size is #{pod_size_kb}KB")
-    end
-  end
-
   desc "Generate HCaptchaHtml.swift"
   lane :html2swift do
     File.write("../HCaptcha/Classes/HCaptchaHtml.swift",
@@ -230,7 +177,7 @@ platform :ios do
      "HCaptcha-SwiftUI-Example",
      "HCaptcha-Passive-Example"].each do |scheme|
       gym(
-        workspace: "Example/HCaptcha.xcworkspace",
+        project: "Example/HCaptcha.xcodeproj",
         scheme: scheme,
         configuration: "Debug",
         skip_archive: true,
@@ -241,25 +188,13 @@ platform :ios do
     end
   end
 
-  desc "Deploy a new version to Github and Cocoapods"
+  desc "Update the GitHub release"
   lane :release do
     # Checking files
     tag = last_git_tag
 
-    changelog_contents = File.read '../CHANGELOG.md'
-    if !changelog_contents.include? tag
-      UI.user_error! "CHANGELOG hasn't been updated"
-    end
-
-    if version_get_podspec != tag
-      UI.user_error! "Podspec version different than tag name"
-    end
-
-    pod_push(
-      path: "HCaptcha.podspec",
-      allow_warnings: true,
-      verbose: true,
-    )
+    version = File.foreach('../CHANGELOG.md').first.strip.delete_prefix('# ')
+    UI.user_error! "Changelog version different than tag name" unless version == tag
 
     prev_tag = sh "git describe --abbrev=0 --tags `git rev-list --tags --skip=1  --max-count=1`"
     changelog = changelog_from_git_commits(

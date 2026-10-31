@@ -1,3 +1,7 @@
+# 4.1.0
+
+- Breaking: remove CocoaPods support; use Swift Package Manager or Carthage
+
 # 4.0.0
 
 - Breaking: raise the minimum supported iOS version to 15.0

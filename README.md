@@ -1,8 +1,8 @@
 # HCaptcha
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-orange.svg)](https://github.com/Carthage/Carthage)
-[![Version](https://img.shields.io/cocoapods/v/HCaptcha)](http://cocoapods.org/pods/HCaptcha)
-[![Platform](https://img.shields.io/badge/Platform-iOS-blue)](http://cocoapods.org/pods/HCaptcha)
+[![Version](https://img.shields.io/github/v/release/hCaptcha/HCaptcha-ios-sdk)](https://github.com/hCaptcha/HCaptcha-ios-sdk/releases)
+[![Platform](https://img.shields.io/badge/Platform-iOS-blue)](https://developer.apple.com/ios/)
 [![iOS](https://img.shields.io/badge/iOS-15.0%2B-blue.svg)](https://developer.apple.com/support/app-store/)
 [![Xcode](https://img.shields.io/badge/Xcode-14.3.1%20--%2016.1-blue.svg)](https://developer.apple.com/xcode/)
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
@@ -11,7 +11,6 @@
 -----
 
 - [Installation](#installation)
-   * [Cocoapods](#cocoapods)
    * [Carthage](#carthage)
    * [SPM](#spm)
 - [Requirements](#requirements)
@@ -30,7 +29,6 @@
    * [MFA Phone Support](#mfa-phone-support)
    * [Testing Examples with SPM](#testing-examples-with-spm)
    * [User Journeys](#user-journeys)
-- [Compiled size](#compiled-size-impact-on-including-in-your-app)
 - [Known issues](#known-issues)
 - [License](#license)
 - [Troubleshooting](#troubleshooting)
@@ -43,11 +41,13 @@ To secure your application, you need to send the token received here to your bac
 
 ## Installation
 
-HCaptcha is available through [CocoaPods](http://cocoapods.org) and packaged for [Carthage](https://github.com/Carthage/Carthage) and [SPM](https://www.swift.org/package-manager/) (Swift Package Manager).
+HCaptcha is available through [Swift Package Manager](https://www.swift.org/package-manager/) and [Carthage](https://github.com/Carthage/Carthage). CocoaPods support was removed in 4.1.0; migrate to SPM or Carthage to upgrade.
 
 ### SPM
 
-Standard SPM formula: uses [Package.swift](./Package.swift)
+In Xcode, choose **File → Add Package Dependencies** and enter `https://github.com/hCaptcha/HCaptcha-ios-sdk`.
+
+Select `HCaptcha` for the core SDK, `HCaptcha_RxSwift` for RxSwift extensions, and `HCaptcha_Journeylitics` for User Journeys. For a `Package.swift` dependency, use version `4.1.0` or later.
 
 ### Carthage
 
@@ -63,16 +63,6 @@ Known issues:
  - Carthage doesn't support prebuilt zips for `xcframework` so use `--no-use-binaries` - https://github.com/Carthage/Carthage/issues/3130
  - Carthage has a `RxSwift` build issue, also avoidable via `--no-use-binaries` - https://github.com/Carthage/Carthage/issues/3243
 
-
-### Cocoapods
-
-Note that CocoaPods support has been officially deprecated following Cocoapods' read-only trunk notice and will be removed in the future. Please migrate to Swift Package Manager or Carthage.
-
-``` ruby
-pod "HCaptcha"
-# or
-pod "HCaptcha/RxSwift"
-```
 
 ## Requirements
 
@@ -311,16 +301,9 @@ compiled into simulator builds only.
 
 ### Testing Examples with SPM
 
-If `CocoaPods` for some reason is inaccessible to you, you can test the app with `SPM` only. It will require some changes in the `Xcode` project:
+Open `Example/HCaptcha.xcodeproj`, select an example scheme, and build. The project uses the local SDK package and resolves RxSwift through SPM; no dependency installation step is required.
 
-**Note**: Make sure to open `Example/HCaptcha.xcodeproj` and not the workspace file.
-
-In `Xcode`:
-
-1. In `Project Navigator`: from `Frameworks` and Configuration references (red links)
-2. Select project (`Project Navigator`) -> Select target (one of our example apps `UIKit-Example` or `SwiftUI-Examples` or another) -> Select `Build Phases` tab -> remove all phases that start with `[CP]` prefix
-3. `File` -> `Add Package Dependencies...` -> `Add local...` -> select root of the repo
-4. Select project (`Project Navigator`) -> Select target (one of our example apps `UIKit-Example` or `SwiftUI-Examples` or another) -> Select `General` tab -> Go to `Frameworks, Libraries and Embedded Content` -> `+` -> select `HCaptcha`
+See [Example/README.md](./Example/README.md) for details.
 
 ### User Journeys
 
@@ -336,10 +319,6 @@ let hcaptcha = try? HCaptcha(
 When enabled, the SDK will automatically collect these events (from initialization until the `validate` method called) and process them during verification.
 
 **Note**: To stop User Journeys events collection, `hcaptcha.stop()` must be called.
-
-## Compiled size: impact on including in your app
-
-HCaptcha pod size: **159** KB as of March 2026. You can always see the latest number in the CI logs by searching for the "pod size" string.
 
 ## Known issues
 

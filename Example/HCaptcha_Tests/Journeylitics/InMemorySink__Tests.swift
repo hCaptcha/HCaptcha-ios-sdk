@@ -6,6 +6,7 @@
 //
 
 @testable import HCaptcha
+@testable import HCaptcha_Journeylitics
 import XCTest
 
 final class InMemorySink__Tests: XCTestCase {

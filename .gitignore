@@ -42,8 +42,10 @@ vendor
 .idea/
 .DS_Store
 
-## CocoaPods
+## Legacy dependencies
 Pods/
+
+## Carthage
 Carthage/
 
 docs/
@@ -68,7 +70,7 @@ node_modules/
 ## Yarn
 .yarn/
 
-## cocoapods-size
+## Lint cache
 /.lint
 
 ## misc
