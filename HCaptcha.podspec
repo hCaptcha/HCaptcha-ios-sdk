@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'HCaptcha'
-  s.version          = '3.3.0'
+  s.version          = '4.0.0'
   s.summary          = 'HCaptcha for iOS'
   s.swift_version    = '5.0'
 
@@ -17,7 +17,7 @@ invisibility is not possible.
   s.social_media_url  = 'https://twitter.com/hCaptcha'
   s.documentation_url = 'https://github.com/hCaptcha/HCaptcha-ios-sdk'
 
-  s.ios.deployment_target = '12.0'
+  s.ios.deployment_target = '15.0'
   s.default_subspecs = 'Core'
 
   s.subspec 'Core' do |core|

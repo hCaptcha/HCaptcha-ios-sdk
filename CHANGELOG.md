@@ -1,8 +1,10 @@
-# 3.3.0
+# 4.0.0
 
+- Breaking: raise the minimum supported iOS version to 15.0
 - Fix: stop the challenge after parameter setup fails
 - Fix: use mobile content mode for the WebView on iPadOS 26+
-- CI: build and test with Xcode 26
+- CI: replace macOS 14 runners with macOS 15 / Xcode 16.4 and retain Xcode 26.6 coverage
+- Test: forward CI settings to the simulator and allow more time for mock WebView startup
 
 # 3.2.1
 
