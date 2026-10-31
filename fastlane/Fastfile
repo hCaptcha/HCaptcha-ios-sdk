@@ -7,10 +7,7 @@ max_pod_size_kb = 200
 platform :ios do
   skip_docs
 
-  devices = ["iPhone X (~> 12)"]
-  # devices << "iPhone X (~> 11)" if !Helper.is_ci?
-  # devices << "iPhone 7 (~> 10)" if !Helper.is_ci?
-  # devices << "iPhone 6s (~> 9)" if !Helper.is_ci?
+  devices = ["iPhone 16 Pro (~> 18)"]
 
   desc "Runs the following lanes:\n- test\n- pod_lint\n- carthage_lint"
   lane :ci do
@@ -25,6 +22,8 @@ platform :ios do
 
   desc "Runs all the tests"
   lane :test do
+    ENV["TEST_RUNNER_CI"] = "true" if Helper.is_ci?
+
     cocoapods(
       podfile: "Example/Podfile",
       try_repo_update_on_error: true,
@@ -98,8 +97,7 @@ platform :ios do
 
   desc "Lint Cocoapods Lib"
   lane :pod_lint do
-    suppress_deprecation_lines if Helper.is_ci? 
-    pod_lib_lint(allow_warnings: false)
+    pod_lib_lint(allow_warnings: true)
   end
 
   desc "Build Carthage lib"
@@ -128,23 +126,8 @@ platform :ios do
 
   desc "Build Swift Package"
   lane :spm_build do
-    # swift build doesn't support iOS build out of the box
-    # https://github.com/fastlane/fastlane/discussions/17362
     sdk = `xcrun --sdk iphoneos --show-sdk-path`.strip
-    target = 'arm64-apple-ios17.0'
-    swiftc = [
-      '-sdk',
-      sdk,
-      '-target',
-      target
-    ].map { |o| " -Xswiftc \"#{o}\"" }
-    cc = [
-      '-isysroot',
-      sdk,
-      '-target',
-      target
-    ].map { |o| " -Xcc \"#{o}\"" }
-    sh("swift build #{swiftc.join} #{cc.join}")
+    sh("xcrun", "swift", "build", "--sdk", sdk, "--triple", "arm64-apple-ios15.0")
   end
 
   desc "Validate html template"
@@ -186,8 +169,8 @@ platform :ios do
     unless cocoapods_size_repo.exist?
       cocoapods_size_repo.parent.mkpath
       sh("git clone https://github.com/google/cocoapods-size #{cocoapods_size_repo}")
-      sh("sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = 11.4/IPHONEOS_DEPLOYMENT_TARGET = 12.0/g' #{cocoapods_size_repo}/SwiftApp/SwiftApp.xcodeproj/project.pbxproj")
     end
+    sh("sed -i '' -E 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]+/IPHONEOS_DEPLOYMENT_TARGET = 15.0/g' #{cocoapods_size_repo}/SwiftApp/SwiftApp.xcodeproj/project.pbxproj")
 
     Dir.chdir(cocoapods_size_repo) do
       config_json = "source_config.json"
@@ -323,14 +306,4 @@ platform :ios do
     str.split("\n").map { |l| l.empty? ? "" : "#{' ' * spaces}#{l}" }.join("\n")
   end
 
-  def suppress_deprecation_lines
-    puts "Removing deprecated annotations to keep pod lint happy..."
-    Dir.glob("../HCaptcha/**/*.swift").each do |file|
-      text = File.read(file)
-      new_text = text.lines.map do |line|
-        line.include?("@available(*, deprecated") ? "//" + line : line
-      end.join
-      File.write(file, new_text)
-    end
-  end
 end

@@ -3,7 +3,7 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-orange.svg)](https://github.com/Carthage/Carthage)
 [![Version](https://img.shields.io/cocoapods/v/HCaptcha)](http://cocoapods.org/pods/HCaptcha)
 [![Platform](https://img.shields.io/badge/Platform-iOS-blue)](http://cocoapods.org/pods/HCaptcha)
-[![iOS](https://img.shields.io/badge/iOS-12.0%20--%2018.0-blue.svg)](https://developer.apple.com/support/app-store/)
+[![iOS](https://img.shields.io/badge/iOS-15.0%2B-blue.svg)](https://developer.apple.com/support/app-store/)
 [![Xcode](https://img.shields.io/badge/Xcode-14.3.1%20--%2016.1-blue.svg)](https://developer.apple.com/xcode/)
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
 [![Build](https://github.com/hCaptcha/HCaptcha-ios-sdk/actions/workflows/workflow.yml/badge.svg)](https://github.com/hCaptcha/HCaptcha-ios-sdk/actions/workflows/workflow.yml)
@@ -78,7 +78,7 @@ pod "HCaptcha/RxSwift"
 
 | Platform | Requirements               |
 |----------|----------------------------|
-| iOS      | :white_check_mark: >= 12.0 |
+| iOS      | :white_check_mark: >= 15.0 |
 | WatchOS  | :heavy_multiplication_x:   |
 
 ## Pre-requisites

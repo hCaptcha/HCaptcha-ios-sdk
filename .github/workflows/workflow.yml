@@ -21,7 +21,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  XCODE_VERSION: '15.4'
+  XCODE_VERSION: '16.4'
   RUBY_VERSION: '3.1'
 
 jobs:
@@ -34,8 +34,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: macos-14
-            xcode: '15.4'
+          - os: macos-15
+            xcode: '16.4'
             primary: true
           # App Store uploads require Xcode 26 / iOS 26 SDK since 2026-04-28
           - os: macos-26
@@ -79,7 +79,7 @@ jobs:
     needs: test
     permissions:
       contents: read
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
@@ -102,7 +102,7 @@ jobs:
     needs: test
     permissions:
       contents: read
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
@@ -126,13 +126,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ macos-14 ]
-        xcode: [ '15.4' ]
-        experimental: [ false ]
         include:
           - os: macos-15
-            xcode: '16.4' # https://github.com/actions/runner-images/issues/12758
-            experimental: true
+            xcode: '16.4'
+            experimental: false
           - os: macos-26
             xcode: '26.6'
             experimental: false
@@ -161,8 +158,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: macos-14
-            xcode: '15.4'
+          - os: macos-15
+            xcode: '16.4'
             primary: true
           - os: macos-26
             xcode: '26.6'
@@ -187,7 +184,7 @@ jobs:
       pull-requests: write
       contents: read
       issues: write
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
@@ -257,13 +254,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ macos-14 ]
-        xcode: [ '15.4' ]
-        experimental: [ false ]
         include:
           - os: macos-15
-            xcode: '16.4' # https://github.com/actions/runner-images/issues/12758
-            experimental: true
+            xcode: '16.4'
+            experimental: false
           - os: macos-26
             xcode: '26.6'
             experimental: false
@@ -294,7 +288,7 @@ jobs:
       - samples
     permissions:
       contents: write
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 

@@ -65,7 +65,7 @@ extension HCaptchaWebViewManager {
         urlOpener: HCaptchaURLOpener = HCapchaAppURLOpener(),
         userJourney: Bool = false,
         messagePresenter: HCaptchaMessagePresenter = HCaptchaMessagePresenterFactory.make(),
-        loadingTimeout: TimeInterval = 5
+        loadingTimeout: TimeInterval = TestTimeouts.webViewLoad
     ) {
         let localhost = URL(string: "http://localhost")!
 
