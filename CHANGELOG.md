@@ -1,3 +1,9 @@
+# 3.3.0
+
+- Fix: stop the challenge after parameter setup fails
+- Fix: use mobile content mode for the WebView on iPadOS 26+
+- CI: build and test with Xcode 26
+
 # 3.2.1
 
 - Fix: allow deprecation warnings when publishing to CocoaPods
