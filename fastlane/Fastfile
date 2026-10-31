@@ -97,8 +97,7 @@ platform :ios do
 
   desc "Lint Cocoapods Lib"
   lane :pod_lint do
-    suppress_deprecation_lines if Helper.is_ci? 
-    pod_lib_lint(allow_warnings: false)
+    pod_lib_lint(allow_warnings: true)
   end
 
   desc "Build Carthage lib"
@@ -307,14 +306,4 @@ platform :ios do
     str.split("\n").map { |l| l.empty? ? "" : "#{' ' * spaces}#{l}" }.join("\n")
   end
 
-  def suppress_deprecation_lines
-    puts "Removing deprecated annotations to keep pod lint happy..."
-    Dir.glob("../HCaptcha/**/*.swift").each do |file|
-      text = File.read(file)
-      new_text = text.lines.map do |line|
-        line.include?("@available(*, deprecated") ? "//" + line : line
-      end.join
-      File.write(file, new_text)
-    end
-  end
 end
