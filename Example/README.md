@@ -7,21 +7,12 @@ You can also simply copy the example code in the ViewController to get up and ru
 
 ## Quickstart: Building the Example
 
-If you don't already have a working CocoaPods environment, we recommend homebrew:
+1. Open `Example/HCaptcha.xcodeproj` in Xcode.
+2. Let SPM resolve RxSwift. The SDK is linked from the local repository.
+3. Select `HCaptcha-UIKit-Example`, `HCaptcha-RxSwift-Example`, `HCaptcha-Objc-Example`, `HCaptcha-SwiftUI-Example`, or `HCaptcha-Passive-Example`.
+4. Select a simulator or device, then build and run.
 
-`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-
-Then install CocoaPods:
-
-`brew install cocoapods`
-
-Finally, install the pods needed for the Example app:
-
-`pod install`
-
-
-You should now be able to build and run the example in Xcode.
-
+From the repository root, run tests with `bundle exec fastlane test` and build all samples with `bundle exec fastlane samples_build`.
 
 ## Example Changes
 

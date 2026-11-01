@@ -105,7 +105,7 @@ public enum HCaptchaError: Error, CustomStringConvertible {
         case .journeyliticsNotAvailable:
             return """
             ⚠️ WARNING! User journey tracking is enabled but Journeylitics library is not available.
-            Please add HCaptcha/Journeylitics to your Podfile or import HCaptcha_Journeylitics in your Package.swift.
+            Please add the HCaptcha_Journeylitics product to your app target.
             """
         }
     }

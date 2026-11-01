@@ -63,17 +63,6 @@ jobs:
       - run: bundle exec fastlane test
         timeout-minutes: 25
 
-      - if: github.event_name == 'push' && matrix.primary
-        run: |
-          bundle exec fastlane pod_size
-          cp .lint/cocoapods-size/result.json cocoapods-size-result.json
-
-      - if: github.event_name == 'push' && matrix.primary
-        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
-        with:
-          path: cocoapods-size-result.json
-          key: cocoapods-size-${{ github.sha }}
-
   sources-lint:
     name: Lint Source files
     needs: test
@@ -91,30 +80,18 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
+      - name: Install SwiftLint 0.43.1
+        run: |
+          curl -fLsS --retry 3 https://github.com/realm/SwiftLint/releases/download/0.43.1/portable_swiftlint.zip -o "$RUNNER_TEMP/swiftlint.zip"
+          echo "eb7f66d7a5f691eefb56ede73fa42a1aef9060e67f3112b864cb5dac35ec2dc4  $RUNNER_TEMP/swiftlint.zip" | shasum -a 256 -c -
+          unzip -q "$RUNNER_TEMP/swiftlint.zip" -d "$RUNNER_TEMP/swiftlint"
+          echo "$RUNNER_TEMP/swiftlint" >> "$GITHUB_PATH"
+
       - run: bundle exec fastlane swift_lint
 
       - run: bundle exec fastlane html_lint
 
       - run: bundle exec fastlane xcprivacy_lint
-
-  pod-lint:
-    name: Lint Podspec
-    needs: test
-    permissions:
-      contents: read
-    runs-on: macos-15
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-
-      - name: Use Xcode ${{ env.XCODE_VERSION }}
-        run: sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
-
-      - uses: ruby/setup-ruby@922ebc4c5262cd14e07bb0e1db020984b6c064fe
-        with:
-          ruby-version: ${{ env.RUBY_VERSION }}
-          bundler-cache: true
-
-      - run: bundle exec fastlane pod_lint
 
   carthage-build:
     name: Carthage Build
@@ -177,73 +154,6 @@ jobs:
 
       - run: bundle exec fastlane spm_build
 
-  size-report:
-    name: Cocoapods size report
-    if: github.event_name == 'pull_request'
-    permissions:
-      pull-requests: write
-      contents: read
-      issues: write
-    runs-on: macos-15
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-
-      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
-        with:
-          path: cocoapods-size-result.json
-          key: cocoapods-size-${{ github.sha }}
-          restore-keys: cocoapods-size-
-
-      - run: brew install jq
-
-      - if: hashFiles('cocoapods-size-result.json') == ''
-        run: |
-          jq -n '{combined_pods_extra_size: 0}' > cocoapods-size-result.json
-
-      - id: main_size
-        run: |
-          main_size=$(jq '.combined_pods_extra_size // 0' cocoapods-size-result.json -r)
-          echo "value=${main_size}" >> $GITHUB_OUTPUT
-
-      - name: Use Xcode ${{ env.XCODE_VERSION }}
-        run: sudo xcode-select --switch /Applications/Xcode_${XCODE_VERSION}.app
-
-      - uses: ruby/setup-ruby@922ebc4c5262cd14e07bb0e1db020984b6c064fe
-        with:
-          ruby-version: ${{ env.RUBY_VERSION }}
-          bundler-cache: true
-
-      - run: bundle exec fastlane pod_size
-
-      - id: pr_size
-        run: |
-          pr_size=$(jq '.combined_pods_extra_size' .lint/cocoapods-size/result.json -r)
-          echo "value=${pr_size}" >> $GITHUB_OUTPUT
-
-      - id: diff_size
-        run: echo "value=$((${{ steps.pr_size.outputs.value }} - ${{ steps.main_size.outputs.value }}))" >> $GITHUB_OUTPUT
-
-      - uses: hCaptcha/find-comment@3eae4d37986fb5a8592848f6a574fdf654e61f9e
-        id: find_comment
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body-includes: Cocoapods size report
-
-      - uses: hCaptcha/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043
-        with:
-          body: |
-            Cocoapods size report:
-            ```
-            OLD: ${{ steps.main_size.outputs.value }} bytes
-            NEW: ${{ steps.pr_size.outputs.value }} bytes
-
-            DIFF: ${{ steps.diff_size.outputs.value }} bytes
-            ```
-          edit-mode: replace
-          comment-id: ${{ steps.find_comment.outputs.comment-id }}
-          issue-number: ${{ github.event.pull_request.number }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-
   samples:
     name: Build Samples
     needs: test
@@ -272,9 +182,6 @@ jobs:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
 
-      - run: bundle exec pod install
-        working-directory: Example
-
       - run: bundle exec fastlane ios samples_build
 
   release:
@@ -282,7 +189,6 @@ jobs:
     if: github.event_name == 'release'
     needs:
       - sources-lint
-      - pod-lint
       - carthage-build
       - swift-package-build
       - samples
@@ -291,6 +197,8 @@ jobs:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
 
       - name: Use Xcode ${{ env.XCODE_VERSION }}
         run: sudo xcode-select -switch /Applications/Xcode_${XCODE_VERSION}.app
@@ -302,7 +210,6 @@ jobs:
 
       - name: Release
         env:
-          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name github-actions

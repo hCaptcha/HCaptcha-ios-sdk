@@ -7,6 +7,7 @@
 //
 
 import HCaptcha
+import HCaptcha_RxSwift
 import RxCocoa
 import RxSwift
 import UIKit

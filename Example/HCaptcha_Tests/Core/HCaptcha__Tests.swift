@@ -6,7 +6,6 @@
 //  Copyright © 2018 HCaptcha. All rights reserved.
 //
 
-import AppSwizzle
 @testable import HCaptcha
 import RxSwift
 import XCTest

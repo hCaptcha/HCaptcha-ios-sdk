@@ -7,22 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		101F37ED6EAB5FBAD9EA393C /* HCaptcha in Frameworks */ = {isa = PBXBuildFile; productRef = D7C09BFEE2675666A161004F /* HCaptcha */; };
+		13A4545AE8997CE89009F036 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DBED0DEED47602D8C6855393 /* RxCocoa */; };
+		1599AFA978E540DAB2BBFA4C /* HCaptcha in Frameworks */ = {isa = PBXBuildFile; productRef = 75A528E54633F78A702C40B5 /* HCaptcha */; };
+		1DD577E34F682B40F95EC34D /* HCaptcha_Journeylitics in Frameworks */ = {isa = PBXBuildFile; productRef = A6CA3E30A51D0F8D4FD0BCD7 /* HCaptcha_Journeylitics */; };
+		1EAA03CBFEBC7877C2AF37DA /* HCaptcha_Journeylitics in Frameworks */ = {isa = PBXBuildFile; productRef = AFA58C44C374B8CB1EE641B9 /* HCaptcha_Journeylitics */; };
+		3A2609A261528B467DA37F78 /* HCaptcha in Frameworks */ = {isa = PBXBuildFile; productRef = 6DE9142E1AB9F5BF8EBD8FED /* HCaptcha */; };
+		40054549354E431CC4187B8B /* HCaptcha in Frameworks */ = {isa = PBXBuildFile; productRef = 14E6B48C3A19B6E854BB32E9 /* HCaptcha */; };
 		436BDD0E2E813A8F0009557B /* InMemorySink__Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436BDD0C2E813A8F0009557B /* InMemorySink__Tests.swift */; };
 		436BDD0F2E813A8F0009557B /* JourneyliticsHooks__Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436BDD0D2E813A8F0009557B /* JourneyliticsHooks__Tests.swift */; };
+		43A1B0212EC5100100AB0A36 /* TestMessagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A1B0202EC5100100AB0A36 /* TestMessagePresenter.swift */; };
+		43A1B0232EC5100100AB0A36 /* HCaptchaSMSLink__Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A1B0222EC5100100AB0A36 /* HCaptchaSMSLink__Tests.swift */; };
 		43C25BC32E3FC51600AB0A36 /* TestTimeouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C25BC22E3FC51600AB0A36 /* TestTimeouts.swift */; };
 		43C25BC42E3FC51600AB0A36 /* TestTimeouts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C25BC22E3FC51600AB0A36 /* TestTimeouts.swift */; };
 		43C37E8E2E80B4E9008435B2 /* HCaptchaWebViewManager__Journey__Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C37E8C2E80B4E9008435B2 /* HCaptchaWebViewManager__Journey__Tests.swift */; };
-		50AC78913CD85915C922C6E7 /* Pods_HCaptcha_RxSwift_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A23EFF913417B4D093248E /* Pods_HCaptcha_RxSwift_Example.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDD1AFB9204008FA782 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Assets.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		6A910916C775F4ABF126B732 /* Pods_HCaptcha_RxSwift_Example_HCaptcha_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3089D1286B04A4610A7EF299 /* Pods_HCaptcha_RxSwift_Example_HCaptcha_Tests.framework */; };
+		7F51E9ED064AFCF382B38A73 /* HCaptcha_RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 82F3AB7B1F97C94E34DA2CF2 /* HCaptcha_RxSwift */; };
 		9C5125BE26CB9A3A0094B023 /* HCaptchaWebViewManager__HTML__Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5125BD26CB9A3A0094B023 /* HCaptchaWebViewManager__HTML__Tests.swift */; };
 		9C766C7926CB814A00E0A592 /* HCaptchaConfig+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C766C7826CB814A00E0A592 /* HCaptchaConfig+Helpers.swift */; };
-		9D974807F9A78F46BA2DF507 /* Pods_HCaptcha_UIKit_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D10E8098B5018907486C310 /* Pods_HCaptcha_UIKit_Example.framework */; };
-		B239CA7190DC61887942610E /* Pods_HCaptcha_Objc_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8352086EA5EE39AFD3CDA308 /* Pods_HCaptcha_Objc_Example.framework */; };
-		BDFAD6E83D15B582D138D6BC /* Pods_HCaptcha_UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5369BD0117A5DA463EACA9 /* Pods_HCaptcha_UITests.framework */; };
+		A1213062DA467B4208E99B33 /* HCaptcha_RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 45C0A535953CF89EDAD0C559 /* HCaptcha_RxSwift */; };
+		A5FC74E874F4507082F3BEEF /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = D0D8ACA4914FA0C766BCE853 /* RxBlocking */; };
+		C166F885571A100980977FCF /* HCaptcha in Frameworks */ = {isa = PBXBuildFile; productRef = A80022205C350E1456B59553 /* HCaptcha */; };
+		C6EAF92B56CE2C6EF9806566 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 095FC8BCE215FBA3D05819C7 /* RxCocoa */; };
+		CAEA16F7D8E235C6657BE2D7 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3B8951F74D81DE31CBAE8986 /* RxSwift */; };
+		DC445058C7128D40D98BB102 /* HCaptcha_Journeylitics in Frameworks */ = {isa = PBXBuildFile; productRef = A4EBC3CDBA4C1F5C72D1067C /* HCaptcha_Journeylitics */; };
+		E5202ADB08FE031BADF3BA1C /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2574704F26CA02FAF17C1EC4 /* RxSwift */; };
 		E626A8002890568A0069D449 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E626A7FF2890568A0069D449 /* ContentView.swift */; };
 		E626A80A289056E00069D449 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = E626A809289056E00069D449 /* App.swift */; };
 		E62A74212771290A00973B5E /* HCaptcha__Config__Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62A74202771290A00973B5E /* HCaptcha__Config__Tests.swift */; };
@@ -35,8 +47,6 @@
 		E6514610277A09C60079668A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		E6586CCF2893DBCA0051EFE7 /* HCaptcha in Frameworks */ = {isa = PBXBuildFile; productRef = E6586CCE2893DBCA0051EFE7 /* HCaptcha */; };
 		E68790E12DF8C60900F2A70F /* TestURLOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68790E02DF8C60900F2A70F /* TestURLOpener.swift */; };
-		43A1B0212EC5100100AB0A36 /* TestMessagePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A1B0202EC5100100AB0A36 /* TestMessagePresenter.swift */; };
-		43A1B0232EC5100100AB0A36 /* HCaptchaSMSLink__Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A1B0222EC5100100AB0A36 /* HCaptchaSMSLink__Tests.swift */; };
 		E6A23A0E2CEA1AC50071D531 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A23A0C2CEA1AC50071D531 /* ViewController.swift */; };
 		E6A23A192CEA22190071D531 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		E6A23A1A2CEA29F40071D531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Assets.xcassets */; };
@@ -96,37 +106,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		086C3E9D592A52524FB6CA89 /* Pods-HCaptcha_UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_UITests.release.xcconfig"; path = "Target Support Files/Pods-HCaptcha_UITests/Pods-HCaptcha_UITests.release.xcconfig"; sourceTree = "<group>"; };
 		0A2D0E5B4C6E445BF971488B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		15BC45B776D109210F2FC581 /* Pods-HCaptcha_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_Tests.release.xcconfig"; path = "Target Support Files/Pods-HCaptcha_Tests/Pods-HCaptcha_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		15CF87684AC2F129E32CC71E /* Pods-HCaptcha_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_Example.debug.xcconfig"; path = "Target Support Files/Pods-HCaptcha_Example/Pods-HCaptcha_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		1CF662E463D56A0421D8A84A /* Pods-HCaptcha_RxSwift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_RxSwift_Example.debug.xcconfig"; path = "Target Support Files/Pods-HCaptcha_RxSwift_Example/Pods-HCaptcha_RxSwift_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		252CF3F651CD53804881A8EC /* Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests.debug.xcconfig"; path = "Target Support Files/Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests/Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		3089D1286B04A4610A7EF299 /* Pods_HCaptcha_RxSwift_Example_HCaptcha_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HCaptcha_RxSwift_Example_HCaptcha_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		436BDD0C2E813A8F0009557B /* InMemorySink__Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemorySink__Tests.swift; sourceTree = "<group>"; };
 		436BDD0D2E813A8F0009557B /* JourneyliticsHooks__Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyliticsHooks__Tests.swift; sourceTree = "<group>"; };
+		43A1B0202EC5100100AB0A36 /* TestMessagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMessagePresenter.swift; sourceTree = "<group>"; };
+		43A1B0222EC5100100AB0A36 /* HCaptchaSMSLink__Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaSMSLink__Tests.swift; sourceTree = "<group>"; };
 		43C25BC22E3FC51600AB0A36 /* TestTimeouts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTimeouts.swift; sourceTree = "<group>"; };
 		43C37E8C2E80B4E9008435B2 /* HCaptchaWebViewManager__Journey__Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaWebViewManager__Journey__Tests.swift; sourceTree = "<group>"; };
-		4D10E8098B5018907486C310 /* Pods_HCaptcha_UIKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HCaptcha_UIKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* HCaptcha_RxSwift_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_RxSwift_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		62C1DD0E80E9920845E5DA51 /* HCaptcha.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HCaptcha.podspec; path = ../HCaptcha.podspec; sourceTree = "<group>"; };
-		6C9781F236ACA3C757468D30 /* Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests.release.xcconfig"; path = "Target Support Files/Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests/Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		7CAE52D12DDE8FC56C961E7D /* Pods-HCaptcha_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_Example.release.xcconfig"; path = "Target Support Files/Pods-HCaptcha_Example/Pods-HCaptcha_Example.release.xcconfig"; sourceTree = "<group>"; };
-		81A23EFF913417B4D093248E /* Pods_HCaptcha_RxSwift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HCaptcha_RxSwift_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8352086EA5EE39AFD3CDA308 /* Pods_HCaptcha_Objc_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HCaptcha_Objc_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8453AB7DC2F84E620BCFA704 /* Pods-HCaptcha_Objc_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_Objc_Example.release.xcconfig"; path = "Target Support Files/Pods-HCaptcha_Objc_Example/Pods-HCaptcha_Objc_Example.release.xcconfig"; sourceTree = "<group>"; };
 		9C5125BD26CB9A3A0094B023 /* HCaptchaWebViewManager__HTML__Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaWebViewManager__HTML__Tests.swift; sourceTree = "<group>"; };
 		9C766C7826CB814A00E0A592 /* HCaptchaConfig+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HCaptchaConfig+Helpers.swift"; sourceTree = "<group>"; };
-		AC5A13AF32EFE2641B30101A /* Pods-HCaptcha_RxSwift_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_RxSwift_Example.release.xcconfig"; path = "Target Support Files/Pods-HCaptcha_RxSwift_Example/Pods-HCaptcha_RxSwift_Example.release.xcconfig"; sourceTree = "<group>"; };
-		AF5369BD0117A5DA463EACA9 /* Pods_HCaptcha_UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HCaptcha_UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C4CC6777C1126E7650593DB0 /* Pods-HCaptcha_UIKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_UIKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-HCaptcha_UIKit_Example/Pods-HCaptcha_UIKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		C8537003ECC47117AF54DCA9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		DE831E3AC800884C050910DF /* Pods-HCaptcha_UIKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_UIKit_Example.release.xcconfig"; path = "Target Support Files/Pods-HCaptcha_UIKit_Example/Pods-HCaptcha_UIKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		E605B7682D0ECBB9008EA9C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E605B76C2D0ED712008EA9C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E626A7FB2890568A0069D449 /* HCaptcha_SwiftUI_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_SwiftUI_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,16 +138,12 @@
 		E65145FC2779AE850079668A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E65146042779E5380079668A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E68790E02DF8C60900F2A70F /* TestURLOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestURLOpener.swift; sourceTree = "<group>"; };
-		43A1B0202EC5100100AB0A36 /* TestMessagePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMessagePresenter.swift; sourceTree = "<group>"; };
-		43A1B0222EC5100100AB0A36 /* HCaptchaSMSLink__Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCaptchaSMSLink__Tests.swift; sourceTree = "<group>"; };
 		E6A239E62CEA15E50071D531 /* HCaptcha_UIKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_UIKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6A23A0C2CEA1AC50071D531 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E6A23A392CEA6D480071D531 /* HCaptcha_PassiveExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCaptcha_PassiveExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6A23A4A2CEA6DA70071D531 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E6A23A4B2CEA6DA70071D531 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		E6A23A542CEA78430071D531 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		EE4771EFB96171863ED97253 /* Pods-HCaptcha_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_Tests.debug.xcconfig"; path = "Target Support Files/Pods-HCaptcha_Tests/Pods-HCaptcha_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		F0C65B53B0061534EA17E10A /* Pods-HCaptcha_Objc_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_Objc_Example.debug.xcconfig"; path = "Target Support Files/Pods-HCaptcha_Objc_Example/Pods-HCaptcha_Objc_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		F206BAD41F8D3FEB00A25807 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
 		F21901D91F98D62F00D8E2C9 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 		F231B3961FEC325A00F82943 /* DispatchQueue__Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue__Tests.swift; sourceTree = "<group>"; };
@@ -170,7 +161,6 @@
 		F2ECCF8D1E9FE68C0097B199 /* HCaptchaWebViewManager__Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HCaptchaWebViewManager__Tests.swift; sourceTree = "<group>"; };
 		F2ECCF921EA009360097B199 /* HCaptcha+Rx__Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HCaptcha+Rx__Tests.swift"; sourceTree = "<group>"; };
 		F2ECCF951EA00A5B0097B199 /* HCaptchaWebViewManager+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HCaptchaWebViewManager+Helpers.swift"; sourceTree = "<group>"; };
-		F9ED7BF8ED7CB5CA4E75F987 /* Pods-HCaptcha_UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCaptcha_UITests.debug.xcconfig"; path = "Target Support Files/Pods-HCaptcha_UITests/Pods-HCaptcha_UITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,7 +168,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50AC78913CD85915C922C6E7 /* Pods_HCaptcha_RxSwift_Example.framework in Frameworks */,
+				40054549354E431CC4187B8B /* HCaptcha in Frameworks */,
+				A1213062DA467B4208E99B33 /* HCaptcha_RxSwift in Frameworks */,
+				DC445058C7128D40D98BB102 /* HCaptcha_Journeylitics in Frameworks */,
+				E5202ADB08FE031BADF3BA1C /* RxSwift in Frameworks */,
+				13A4545AE8997CE89009F036 /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,7 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B239CA7190DC61887942610E /* Pods_HCaptcha_Objc_Example.framework in Frameworks */,
+				101F37ED6EAB5FBAD9EA393C /* HCaptcha in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,7 +196,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D974807F9A78F46BA2DF507 /* Pods_HCaptcha_UIKit_Example.framework in Frameworks */,
+				1599AFA978E540DAB2BBFA4C /* HCaptcha in Frameworks */,
+				1DD577E34F682B40F95EC34D /* HCaptcha_Journeylitics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,7 +213,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDFAD6E83D15B582D138D6BC /* Pods_HCaptcha_UITests.framework in Frameworks */,
+				3A2609A261528B467DA37F78 /* HCaptcha in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,25 +221,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A910916C775F4ABF126B732 /* Pods_HCaptcha_RxSwift_Example_HCaptcha_Tests.framework in Frameworks */,
+				C166F885571A100980977FCF /* HCaptcha in Frameworks */,
+				7F51E9ED064AFCF382B38A73 /* HCaptcha_RxSwift in Frameworks */,
+				1EAA03CBFEBC7877C2AF37DA /* HCaptcha_Journeylitics in Frameworks */,
+				CAEA16F7D8E235C6657BE2D7 /* RxSwift in Frameworks */,
+				C6EAF92B56CE2C6EF9806566 /* RxCocoa in Frameworks */,
+				A5FC74E874F4507082F3BEEF /* RxBlocking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3FB378B928AB7C6EDFA21696 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				AF5369BD0117A5DA463EACA9 /* Pods_HCaptcha_UITests.framework */,
-				8352086EA5EE39AFD3CDA308 /* Pods_HCaptcha_Objc_Example.framework */,
-				4D10E8098B5018907486C310 /* Pods_HCaptcha_UIKit_Example.framework */,
-				81A23EFF913417B4D093248E /* Pods_HCaptcha_RxSwift_Example.framework */,
-				3089D1286B04A4610A7EF299 /* Pods_HCaptcha_RxSwift_Example_HCaptcha_Tests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		43C37E8D2E80B4E9008435B2 /* Journeylitics */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,9 +250,7 @@
 				F2ECCF771E9FC47B0097B199 /* HCaptcha_Tests */,
 				F28FAC9D200E425600E14987 /* HCaptcha_UITests */,
 				E626A80B289058B70069D449 /* Packages */,
-				607FACF51AFB993E008FA782 /* Podspec Metadata */,
-				61C8B559C1E1C131025EE4EB /* Pods */,
-				3FB378B928AB7C6EDFA21696 /* Frameworks */,
+				607FACF51AFB993E008FA782 /* Project Metadata */,
 				607FACD11AFB9204008FA782 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -291,37 +277,15 @@
 			path = "RxSwift-Example";
 			sourceTree = "<group>";
 		};
-		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
+		607FACF51AFB993E008FA782 /* Project Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				62C1DD0E80E9920845E5DA51 /* HCaptcha.podspec */,
 				F206BAD41F8D3FEB00A25807 /* Cartfile */,
 				0A2D0E5B4C6E445BF971488B /* README.md */,
 				C8537003ECC47117AF54DCA9 /* LICENSE */,
 				F21901D91F98D62F00D8E2C9 /* CHANGELOG.md */,
 			);
-			name = "Podspec Metadata";
-			sourceTree = "<group>";
-		};
-		61C8B559C1E1C131025EE4EB /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				15CF87684AC2F129E32CC71E /* Pods-HCaptcha_Example.debug.xcconfig */,
-				7CAE52D12DDE8FC56C961E7D /* Pods-HCaptcha_Example.release.xcconfig */,
-				EE4771EFB96171863ED97253 /* Pods-HCaptcha_Tests.debug.xcconfig */,
-				15BC45B776D109210F2FC581 /* Pods-HCaptcha_Tests.release.xcconfig */,
-				F9ED7BF8ED7CB5CA4E75F987 /* Pods-HCaptcha_UITests.debug.xcconfig */,
-				086C3E9D592A52524FB6CA89 /* Pods-HCaptcha_UITests.release.xcconfig */,
-				F0C65B53B0061534EA17E10A /* Pods-HCaptcha_Objc_Example.debug.xcconfig */,
-				8453AB7DC2F84E620BCFA704 /* Pods-HCaptcha_Objc_Example.release.xcconfig */,
-				C4CC6777C1126E7650593DB0 /* Pods-HCaptcha_UIKit_Example.debug.xcconfig */,
-				DE831E3AC800884C050910DF /* Pods-HCaptcha_UIKit_Example.release.xcconfig */,
-				1CF662E463D56A0421D8A84A /* Pods-HCaptcha_RxSwift_Example.debug.xcconfig */,
-				AC5A13AF32EFE2641B30101A /* Pods-HCaptcha_RxSwift_Example.release.xcconfig */,
-				252CF3F651CD53804881A8EC /* Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests.debug.xcconfig */,
-				6C9781F236ACA3C757468D30 /* Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests.release.xcconfig */,
-			);
-			path = Pods;
+			name = "Project Metadata";
 			sourceTree = "<group>";
 		};
 		E626A7FC2890568A0069D449 /* SwiftUI-Example */ = {
@@ -465,18 +429,22 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "HCaptcha_RxSwift_Example" */;
 			buildPhases = (
-				B7BF578F9EF3E3A45B21D52D /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				F231B3981FEC3B7F00F82943 /* SwiftLint */,
-				185BFCAA848D75413CFA5A03 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = HCaptcha_RxSwift_Example;
+			packageProductDependencies = (
+				14E6B48C3A19B6E854BB32E9 /* HCaptcha */,
+				45C0A535953CF89EDAD0C559 /* HCaptcha_RxSwift */,
+				A4EBC3CDBA4C1F5C72D1067C /* HCaptcha_Journeylitics */,
+				2574704F26CA02FAF17C1EC4 /* RxSwift */,
+				DBED0DEED47602D8C6855393 /* RxCocoa */,
+			);
 			productName = HCaptcha;
 			productReference = 607FACD01AFB9204008FA782 /* HCaptcha_RxSwift_Example.app */;
 			productType = "com.apple.product-type.application";
@@ -506,17 +474,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E65146002779AE850079668A /* Build configuration list for PBXNativeTarget "HCaptcha_Objc_Example" */;
 			buildPhases = (
-				BA40BB3BE2448DD9B945912B /* [CP] Check Pods Manifest.lock */,
 				E65145E42779AE830079668A /* Sources */,
 				E65145E52779AE830079668A /* Frameworks */,
 				E65145E62779AE830079668A /* Resources */,
-				DACF56C3C2B653DEDAC7E153 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = HCaptcha_Objc_Example;
+			packageProductDependencies = (
+				D7C09BFEE2675666A161004F /* HCaptcha */,
+			);
 			productName = HCaptcha_Objc_Example;
 			productReference = E65145E82779AE830079668A /* HCaptcha_Objc_Example.app */;
 			productType = "com.apple.product-type.application";
@@ -525,17 +494,19 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E6A239FA2CEA15E80071D531 /* Build configuration list for PBXNativeTarget "HCaptcha_UIKit_Example" */;
 			buildPhases = (
-				32F367444AE98CB653AFE515 /* [CP] Check Pods Manifest.lock */,
 				E6A239E22CEA15E50071D531 /* Sources */,
 				E6A239E32CEA15E50071D531 /* Frameworks */,
 				E6A239E42CEA15E50071D531 /* Resources */,
-				4F153C09F05F24E746ED122D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = HCaptcha_UIKit_Example;
+			packageProductDependencies = (
+				75A528E54633F78A702C40B5 /* HCaptcha */,
+				A6CA3E30A51D0F8D4FD0BCD7 /* HCaptcha_Journeylitics */,
+			);
 			productName = HCaptacha_UIKitExample;
 			productReference = E6A239E62CEA15E50071D531 /* HCaptcha_UIKit_Example.app */;
 			productType = "com.apple.product-type.application";
@@ -564,7 +535,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F28FACA5200E425600E14987 /* Build configuration list for PBXNativeTarget "HCaptcha_UITests" */;
 			buildPhases = (
-				725E6D59F8BBFA75D9FC011F /* [CP] Check Pods Manifest.lock */,
 				F28FAC98200E425600E14987 /* Sources */,
 				F28FAC99200E425600E14987 /* Frameworks */,
 				F28FAC9A200E425600E14987 /* Resources */,
@@ -577,6 +547,9 @@
 				E6A23A302CEA4B7A0071D531 /* PBXTargetDependency */,
 			);
 			name = HCaptcha_UITests;
+			packageProductDependencies = (
+				6DE9142E1AB9F5BF8EBD8FED /* HCaptcha */,
+			);
 			productName = HCaptcha_UITests;
 			productReference = F28FAC9C200E425600E14987 /* HCaptcha_UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -585,11 +558,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F2ECCF7D1E9FC47B0097B199 /* Build configuration list for PBXNativeTarget "HCaptcha_Tests" */;
 			buildPhases = (
-				57DD493A364341D8FDECF9AE /* [CP] Check Pods Manifest.lock */,
 				F2ECCF721E9FC47B0097B199 /* Sources */,
 				F2ECCF731E9FC47B0097B199 /* Frameworks */,
 				F2ECCF741E9FC47B0097B199 /* Resources */,
-				FDEC8DF53099C4BA92CB48DA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -598,6 +569,14 @@
 				E6A23A322CEA4F270071D531 /* PBXTargetDependency */,
 			);
 			name = HCaptcha_Tests;
+			packageProductDependencies = (
+				A80022205C350E1456B59553 /* HCaptcha */,
+				82F3AB7B1F97C94E34DA2CF2 /* HCaptcha_RxSwift */,
+				AFA58C44C374B8CB1EE641B9 /* HCaptcha_Journeylitics */,
+				3B8951F74D81DE31CBAE8986 /* RxSwift */,
+				095FC8BCE215FBA3D05819C7 /* RxCocoa */,
+				D0D8ACA4914FA0C766BCE853 /* RxBlocking */,
+			);
 			productName = HCaptcha_Tests;
 			productReference = F2ECCF761E9FC47B0097B199 /* HCaptcha_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -654,6 +633,10 @@
 				Base,
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
+			packageReferences = (
+				BF4AFC740BD0C2F91E445432 /* XCLocalSwiftPackageReference ".." */,
+				3F6EFABEEA6FF2DAAF3D0C9E /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -735,190 +718,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		185BFCAA848D75413CFA5A03 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HCaptcha_RxSwift_Example/Pods-HCaptcha_RxSwift_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/HCaptcha.default-Journeylitics-RxSwift/HCaptcha.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCaptcha.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HCaptcha_RxSwift_Example/Pods-HCaptcha_RxSwift_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		32F367444AE98CB653AFE515 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HCaptcha_UIKit_Example-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4F153C09F05F24E746ED122D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HCaptcha_UIKit_Example/Pods-HCaptcha_UIKit_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/HCaptcha.default-Journeylitics/HCaptcha.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCaptcha.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HCaptcha_UIKit_Example/Pods-HCaptcha_UIKit_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		57DD493A364341D8FDECF9AE /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		725E6D59F8BBFA75D9FC011F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HCaptcha_UITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B7BF578F9EF3E3A45B21D52D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HCaptcha_RxSwift_Example-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BA40BB3BE2448DD9B945912B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HCaptcha_Objc_Example-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DACF56C3C2B653DEDAC7E153 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HCaptcha_Objc_Example/Pods-HCaptcha_Objc_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/HCaptcha-Core/HCaptcha.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCaptcha.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HCaptcha_Objc_Example/Pods-HCaptcha_Objc_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F231B3981FEC3B7F00F82943 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\" --config \"${PROJECT_DIR}/.swiftlint.yml\"\n";
-		};
 		F28FACA6200E447600E14987 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -931,34 +730,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# UI test bundles here still link app frameworks directly, so copy the host app's frameworks into the runner.\nHOST_APP_FRAMEWORKS=\"${BUILT_PRODUCTS_DIR}/${TEST_TARGET_NAME}.app/Frameworks\"\nRUNNER_FRAMEWORKS=\"${TARGET_BUILD_DIR%/PlugIns}/Frameworks\"\n\nif [ -d \"${HOST_APP_FRAMEWORKS}\" ]; then\n  mkdir -p \"${RUNNER_FRAMEWORKS}\"\n  cp -R \"${HOST_APP_FRAMEWORKS}/.\" \"${RUNNER_FRAMEWORKS}\"\nfi\n";
-		};
-		FDEC8DF53099C4BA92CB48DA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests/Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/HCaptcha.default-Journeylitics-RxSwift/HCaptcha.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/AppSwizzle/AppSwizzle.framework",
-				"${BUILT_PRODUCTS_DIR}/RxBlocking/RxBlocking.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCaptcha.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppSwizzle.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxBlocking.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests/Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1206,7 +977,6 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1CF662E463D56A0421D8A84A /* Pods-HCaptcha_RxSwift_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -1232,7 +1002,6 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC5A13AF32EFE2641B30101A /* Pods-HCaptcha_RxSwift_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
@@ -1338,7 +1107,6 @@
 		};
 		E65145FE2779AE850079668A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F0C65B53B0061534EA17E10A /* Pods-HCaptcha_Objc_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1379,7 +1147,6 @@
 		};
 		E65145FF2779AE850079668A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8453AB7DC2F84E620BCFA704 /* Pods-HCaptcha_Objc_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1418,7 +1185,6 @@
 		};
 		E6A239F72CEA15E80071D531 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C4CC6777C1126E7650593DB0 /* Pods-HCaptcha_UIKit_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1463,7 +1229,6 @@
 		};
 		E6A239F82CEA15E80071D531 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DE831E3AC800884C050910DF /* Pods-HCaptcha_UIKit_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1594,7 +1359,6 @@
 		};
 		F28FACA3200E425600E14987 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F9ED7BF8ED7CB5CA4E75F987 /* Pods-HCaptcha_UITests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1623,7 +1387,6 @@
 		};
 		F28FACA4200E425600E14987 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 086C3E9D592A52524FB6CA89 /* Pods-HCaptcha_UITests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1650,7 +1413,6 @@
 		};
 		F2ECCF7E1E9FC47B0097B199 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 252CF3F651CD53804881A8EC /* Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1675,7 +1437,6 @@
 		};
 		F2ECCF7F1E9FC47B0097B199 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C9781F236ACA3C757468D30 /* Pods-HCaptcha_RxSwift_Example-HCaptcha_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1773,17 +1534,113 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		BF4AFC740BD0C2F91E445432 /* XCLocalSwiftPackageReference ".." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3F6EFABEEA6FF2DAAF3D0C9E /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.10.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		095FC8BCE215FBA3D05819C7 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F6EFABEEA6FF2DAAF3D0C9E /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		14E6B48C3A19B6E854BB32E9 /* HCaptcha */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF4AFC740BD0C2F91E445432 /* XCLocalSwiftPackageReference ".." */;
+			productName = HCaptcha;
+		};
+		2574704F26CA02FAF17C1EC4 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F6EFABEEA6FF2DAAF3D0C9E /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		3B8951F74D81DE31CBAE8986 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F6EFABEEA6FF2DAAF3D0C9E /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		45C0A535953CF89EDAD0C559 /* HCaptcha_RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF4AFC740BD0C2F91E445432 /* XCLocalSwiftPackageReference ".." */;
+			productName = HCaptcha_RxSwift;
+		};
+		6DE9142E1AB9F5BF8EBD8FED /* HCaptcha */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF4AFC740BD0C2F91E445432 /* XCLocalSwiftPackageReference ".." */;
+			productName = HCaptcha;
+		};
+		75A528E54633F78A702C40B5 /* HCaptcha */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF4AFC740BD0C2F91E445432 /* XCLocalSwiftPackageReference ".." */;
+			productName = HCaptcha;
+		};
+		82F3AB7B1F97C94E34DA2CF2 /* HCaptcha_RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF4AFC740BD0C2F91E445432 /* XCLocalSwiftPackageReference ".." */;
+			productName = HCaptcha_RxSwift;
+		};
+		A4EBC3CDBA4C1F5C72D1067C /* HCaptcha_Journeylitics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF4AFC740BD0C2F91E445432 /* XCLocalSwiftPackageReference ".." */;
+			productName = HCaptcha_Journeylitics;
+		};
+		A6CA3E30A51D0F8D4FD0BCD7 /* HCaptcha_Journeylitics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF4AFC740BD0C2F91E445432 /* XCLocalSwiftPackageReference ".." */;
+			productName = HCaptcha_Journeylitics;
+		};
+		A80022205C350E1456B59553 /* HCaptcha */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF4AFC740BD0C2F91E445432 /* XCLocalSwiftPackageReference ".." */;
+			productName = HCaptcha;
+		};
+		AFA58C44C374B8CB1EE641B9 /* HCaptcha_Journeylitics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF4AFC740BD0C2F91E445432 /* XCLocalSwiftPackageReference ".." */;
+			productName = HCaptcha_Journeylitics;
+		};
+		D0D8ACA4914FA0C766BCE853 /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F6EFABEEA6FF2DAAF3D0C9E /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		D7C09BFEE2675666A161004F /* HCaptcha */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BF4AFC740BD0C2F91E445432 /* XCLocalSwiftPackageReference ".." */;
+			productName = HCaptcha;
+		};
+		DBED0DEED47602D8C6855393 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F6EFABEEA6FF2DAAF3D0C9E /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
 		E6586CCE2893DBCA0051EFE7 /* HCaptcha */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = BF4AFC740BD0C2F91E445432 /* XCLocalSwiftPackageReference ".." */;
 			productName = HCaptcha;
 		};
 		E6586CD02893DBD80051EFE7 /* HCaptcha */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = BF4AFC740BD0C2F91E445432 /* XCLocalSwiftPackageReference ".." */;
 			productName = HCaptcha;
 		};
 		E6A23A522CEA73790071D531 /* HCaptcha */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = BF4AFC740BD0C2F91E445432 /* XCLocalSwiftPackageReference ".." */;
 			productName = HCaptcha;
 		};
 /* End XCSwiftPackageProductDependency section */

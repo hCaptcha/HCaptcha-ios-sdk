@@ -158,14 +158,7 @@ struct HCaptchaConfig: CustomDebugStringConvertible {
         #if SWIFT_PACKAGE
         return Bundle.module
         #else
-        let bundle = Bundle(for: HCaptcha.self)
-        guard let cocoapodsBundle = bundle
-                .path(forResource: "HCaptcha", ofType: "bundle")
-                .flatMap(Bundle.init(path:)) else {
-            return bundle
-        }
-
-        return cocoapodsBundle
+        return Bundle(for: HCaptcha.self)
         #endif
     }()
 
