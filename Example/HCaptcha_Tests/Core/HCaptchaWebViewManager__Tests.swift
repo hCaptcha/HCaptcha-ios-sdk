@@ -486,6 +486,37 @@ class HCaptchaWebViewManager__Tests: XCTestCase {
         XCTAssertEqual(result?.token, apiKey)
     }
 
+    func test__Validate__Reset_On_Error__Keeps_Verify_Params() {
+        let rqdataCases: [String?] = ["retry-rqdata", nil]
+        for rqdata in rqdataCases {
+            let exp0 = expectation(description: "should call onEvent")
+            let exp1 = expectation(description: "token after retry")
+            var result: HCaptchaResult?
+
+            let messageBody = "{token: verifyParams ? verifyParams.rqdata : \"absent\"}"
+            let manager = HCaptchaWebViewManager(messageBody: messageBody, shouldFail: true)
+            manager.onEvent = { (event, error) in
+                if event == .error {
+                    XCTAssertEqual(HCaptchaError.sessionTimeout, error as? HCaptchaError)
+                    exp0.fulfill()
+                }
+            }
+
+            // Assign directly because the validate helper clears verifyParams
+            manager.verifyParams = rqdata.map { HCaptchaVerifyParams(rqdata: $0) }
+            manager.completion = { response in
+                result = response
+                exp1.fulfill()
+            }
+            manager.validate(on: presenterView)
+
+            waitForExpectations(timeout: TestTimeouts.standard)
+
+            XCTAssertNil(result?.error)
+            XCTAssertEqual(result?.token, rqdata ?? "absent")
+        }
+    }
+
     // MARK: On Did Finish Loading
 
     func test__Did_Finish_Loading__Immediate() {
