@@ -78,6 +78,17 @@ struct HCaptchaHtml {
                 return Object.keys(data).length > 0 ? data : null;
               };
 
+              var setSdkData = function() {
+                try {
+                  var sdkData = JSON.parse('${sdkData}' || "{}");
+                  if (Object.keys(sdkData).length > 0) {
+                    hcaptcha.setData(window.hCaptchaID, { sdk_data: sdkData });
+                  }
+                } catch (e) {
+                  console.log("failed to set sdk data");
+                }
+              };
+
               var setVerifyParams = function(params) {
                 console.log("setting verify params:", params);
                 try {
@@ -170,6 +181,7 @@ struct HCaptchaHtml {
                     "open-callback": openCallback,
                   });
 
+                  setSdkData();
                   post({ action: "didLoad" });
                 } catch (e) {
                   console.log("challenge failed to render");

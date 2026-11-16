@@ -50,6 +50,13 @@ class HCaptchaWebViewManager__HTML__Tests: XCTestCase {
         waitForWebViewContent(manager: manager)
         XCTAssertEqual(webViewContent, "debugInfo: []")
     }
+
+    func test__Sdk_Data_Is_Mapped_Into_HTML() throws {
+        let config = try HCaptchaConfig(html: "sdkData: ${sdkData}")
+        let manager = HCaptchaWebViewManager(config: config)
+        waitForWebViewContent(manager: manager)
+        XCTAssertEqual(webViewContent, "sdkData: \(HCaptchaSdkData.json)")
+    }
 }
 
 extension HCaptchaWebViewManager__HTML__Tests: WKNavigationDelegate {
