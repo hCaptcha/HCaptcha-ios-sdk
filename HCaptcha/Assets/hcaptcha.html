@@ -69,8 +69,8 @@
 
       var setSdkData = function() {
         try {
-          var sdkData = JSON.parse('${sdkData}' || "{}");
-          if (Object.keys(sdkData).length > 0) {
+          var sdkData = JSON.parse('${sdkData}' || "[]");
+          if (Array.isArray(sdkData) && sdkData.length > 0) {
             hcaptcha.setData(window.hCaptchaID, { sdk_data: sdkData });
           }
         } catch (e) {

@@ -33,22 +33,22 @@ class HCaptcha__Tests: XCTestCase {
 
     func test__Sdk_Data_Keeps_Device_Hardware_Models() {
         for machine in ["iPhone18,2", "iPad16,3", "iPod9,1"] {
-            XCTAssertEqual(HCaptchaSdkData.buildJson(machine: machine), "{\"hardware_model\":\"\(machine)\"}")
+            XCTAssertEqual(HCaptchaSdkData.buildJson(machine: machine), "[\"\(machine)\"]")
         }
     }
 
     func test__Sdk_Data_Drops_Simulator_And_Mac_Values() {
         let machines: [String?] = ["arm64", "x86_64", "Mac14,2", "iPhone", "iPhone18", "iPhone18,2'", "", nil]
         for machine in machines {
-            XCTAssertEqual(HCaptchaSdkData.buildJson(machine: machine), "{}", String(describing: machine))
+            XCTAssertEqual(HCaptchaSdkData.buildJson(machine: machine), "[]", String(describing: machine))
         }
     }
 
     func test__Sdk_Data_Is_Valid_Json() throws {
         let data = try XCTUnwrap(HCaptchaSdkData.json.data(using: .utf8))
-        let sdkData = try JSONDecoder().decode([String: String].self, from: data)
+        let sdkData = try JSONDecoder().decode([String].self, from: data)
 
-        XCTAssertTrue(Set(sdkData.keys).isSubset(of: ["hardware_model"]))
+        XCTAssertLessThanOrEqual(sdkData.count, 1)
     }
 
     func test__valid_js_customTheme() {

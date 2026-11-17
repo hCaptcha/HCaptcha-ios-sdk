@@ -13,14 +13,12 @@ internal enum HCaptchaSdkData {
 
     static let json: String = buildJson(machine: currentMachine())
 
+    /// A list, not an object, so the payload carries no key names; index 0 is the hardware model
     static func buildJson(machine: String?) -> String {
-        var data: [String: String] = [:]
-        if let hardwareModel = hardwareModel(from: machine) {
-            data["hardware_model"] = hardwareModel
-        }
+        let data: [String] = hardwareModel(from: machine).map { [$0] } ?? []
         guard let jsonData = try? JSONSerialization.data(withJSONObject: data),
               let json = String(data: jsonData, encoding: .utf8) else {
-            return "{}"
+            return "[]"
         }
         return json
     }
