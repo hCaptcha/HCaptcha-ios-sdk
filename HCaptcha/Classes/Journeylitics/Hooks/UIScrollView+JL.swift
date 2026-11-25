@@ -82,6 +82,11 @@ extension UIScrollView {
     }
 
     private static func jl_allWindows() -> [UIWindow] {
+#if !os(visionOS)
+        if #unavailable(iOS 13.0) {
+            return UIApplication.shared.windows
+        }
+#endif
         return UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
             .flatMap { $0.windows }
