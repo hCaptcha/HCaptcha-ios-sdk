@@ -97,13 +97,13 @@ platform :ios do
 
   desc "Build Swift Package"
   lane :spm_build do
-    {
-      "iphoneos" => "arm64-apple-ios15.0",
-      "xros" => "arm64-apple-xros1.0",
-      "xrsimulator" => "arm64-apple-xros1.0-simulator",
-    }.each do |platform, triple|
-      sdk = sh("xcrun", "--sdk", platform, "--show-sdk-path", log: false).strip
-      sh("xcrun", "swift", "build", "--sdk", sdk, "--triple", triple)
+    sdk = sh("xcrun", "--sdk", "iphoneos", "--show-sdk-path", log: false).strip
+    sh("xcrun", "swift", "build", "--sdk", sdk, "--triple", "arm64-apple-ios15.0")
+
+    # Older SwiftPM versions cannot cross-build directly for xros.
+    ["visionOS", "visionOS Simulator"].each do |platform|
+      sh("xcrun", "xcodebuild", "-workspace", "..", "-scheme", "HCaptcha-Package",
+         "-destination", "generic/platform=#{platform}", "CODE_SIGNING_ALLOWED=NO", "build")
     end
   end
 
