@@ -32,7 +32,7 @@ class HCaptcha__Tests: XCTestCase {
     }
 
     func test__Sdk_Data_Keeps_Device_Hardware_Models() {
-        for machine in ["iPhone18,2", "iPad16,3", "iPod9,1"] {
+        for machine in ["iPhone18,2", "iPad16,3", "iPod9,1", "RealityDevice14,1"] {
             XCTAssertEqual(HCaptchaSdkData.buildJson(machine: machine), "[\"\(machine)\"]")
         }
     }

@@ -9,7 +9,7 @@ import Foundation
 
 /// Native device data sent to the challenge as `sdk_data`
 internal enum HCaptchaSdkData {
-    private static let hardwareModelPattern = "^(iPhone|iPad|iPod)[0-9]{1,3},[0-9]{1,3}$"
+    private static let hardwareModelPattern = "^(iPhone|iPad|iPod|RealityDevice)[0-9]{1,3},[0-9]{1,3}$"
 
     static let json: String = buildJson(machine: currentMachine())
 
