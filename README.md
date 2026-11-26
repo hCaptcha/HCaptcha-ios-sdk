@@ -2,7 +2,7 @@
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-orange.svg)](https://github.com/Carthage/Carthage)
 [![Version](https://img.shields.io/github/v/release/hCaptcha/HCaptcha-ios-sdk)](https://github.com/hCaptcha/HCaptcha-ios-sdk/releases)
-[![Platform](https://img.shields.io/badge/Platform-iOS-blue)](https://developer.apple.com/ios/)
+[![Platforms](https://img.shields.io/badge/Platforms-iOS%20%7C%20visionOS-blue)](https://developer.apple.com/visionos/)
 [![iOS](https://img.shields.io/badge/iOS-15.0%2B-blue.svg)](https://developer.apple.com/support/app-store/)
 [![Xcode](https://img.shields.io/badge/Xcode-14.3.1%20--%2016.1-blue.svg)](https://developer.apple.com/xcode/)
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://github.com/apple/swift-package-manager)
@@ -59,6 +59,8 @@ github "hCaptcha/HCaptcha-ios-sdk"
 
 Carthage will create two different frameworks named `HCaptcha` and `HCaptcha_RxSwift`, the latter containing the RxSwift extension for the HCaptcha framework.
 
+For native visionOS, use Carthage 0.40 or later with `--platform visionOS --use-xcframeworks --no-use-binaries`.
+
 Known issues:
  - Carthage doesn't support prebuilt zips for `xcframework` so use `--no-use-binaries` - https://github.com/Carthage/Carthage/issues/3130
  - Carthage has a `RxSwift` build issue, also avoidable via `--no-use-binaries` - https://github.com/Carthage/Carthage/issues/3243
@@ -69,7 +71,10 @@ Known issues:
 | Platform | Requirements               |
 |----------|----------------------------|
 | iOS      | :white_check_mark: >= 15.0 |
+| visionOS | :white_check_mark: >= 1.0  |
 | WatchOS  | :heavy_multiplication_x:   |
+
+SwiftPM requires Swift tools 5.9 or later. For a native visionOS app, add the Apple Vision destination and pass a `UIView` from the presenting window to `validate(on:)` for visible challenges. The [SwiftUI example](Example/SwiftUI-Example) shows the integration. Passive validation can omit the view.
 
 ## Pre-requisites
 

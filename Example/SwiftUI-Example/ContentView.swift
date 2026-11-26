@@ -32,6 +32,7 @@ class HCaptchaViewModel: ObservableObject {
     func configure(_ hostView: UIViewWrapperView) {
         hcaptcha.configureWebView { webview in
             webview.frame = hostView.uiView.bounds
+            webview.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
         hcaptcha.onEvent { (event, _) in
             print("HCaptcha onEvent \(event.rawValue)")
@@ -52,7 +53,7 @@ struct HCaptchaView: View {
 
     var body: some View {
         VStack{
-            placeholder.frame(width: 640, height: 640, alignment: .center)
+            placeholder.frame(maxWidth: 640, maxHeight: 640)
             Button(
                 "validate",
                 action: { model.validate(placeholder) }

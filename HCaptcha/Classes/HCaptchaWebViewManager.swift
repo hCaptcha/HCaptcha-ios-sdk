@@ -62,8 +62,14 @@ internal class HCaptchaWebViewManager: NSObject {
 
     var loadingTimer: Timer?
 
-    /// The observer for `.UIWindowDidBecomeVisible`
-    var observer: NSObjectProtocol?
+    /// Waits for a host window when the SDK is initialized before the UI is visible.
+    var windowObserver: NSObjectProtocol? {
+        didSet {
+            if let oldValue = oldValue {
+                NotificationCenter.default.removeObserver(oldValue)
+            }
+        }
+    }
 
     /// Base URL for WebView
     var baseURL: URL!
@@ -151,6 +157,12 @@ internal class HCaptchaWebViewManager: NSObject {
         }
     }
 
+    deinit {
+        if let windowObserver = windowObserver {
+            NotificationCenter.default.removeObserver(windowObserver)
+        }
+    }
+
     /**
      - parameter view: The view that should present the webview.
 
@@ -179,6 +191,7 @@ internal class HCaptchaWebViewManager: NSObject {
     func stop() {
         Log.debug("WebViewManager.stop")
         stopInitWebViewConfiguration = true
+        windowObserver = nil
         completion = nil
         webView.stopLoading()
         resultHandled = true

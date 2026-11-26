@@ -86,32 +86,25 @@ platform :ios do
 
   desc "Build Carthage lib"
   lane :carthage_build do
-    carthage(
-      executable: "./carthage.sh",
-      platform: "iOS",
-      cache_builds: true,
-      use_binaries: false,
-      no_skip_current: false,
-      use_xcframeworks: true,
-      verbose: Helper.is_ci?
-    )
-
-    carthage(
-      executable: "./carthage.sh",
-      command: "build",
-      # archive: true, use_xcframeworks not supported https://github.com/Carthage/Carthage/releases/tag/0.38.0
-      platform: "iOS",
-      cache_builds: true,
-      no_skip_current: true,
-      use_xcframeworks: true,
-      verbose: Helper.is_ci?
-    )
+    project_dir = File.expand_path("..", __dir__)
+    executable = File.join(project_dir, "carthage.sh")
+    options = ["--project-directory", project_dir, "--platform", "iOS,visionOS", "--cache-builds",
+               "--use-xcframeworks", "--no-use-binaries"]
+    options << "--verbose" if Helper.is_ci?
+    sh(executable, "bootstrap", *options)
+    sh(executable, "build", *options, "--no-skip-current")
   end
 
   desc "Build Swift Package"
   lane :spm_build do
-    sdk = `xcrun --sdk iphoneos --show-sdk-path`.strip
+    sdk = sh("xcrun", "--sdk", "iphoneos", "--show-sdk-path", log: false).strip
     sh("xcrun", "swift", "build", "--sdk", sdk, "--triple", "arm64-apple-ios15.0")
+
+    # Older SwiftPM versions cannot cross-build directly for xros.
+    ["visionOS", "visionOS Simulator"].each do |platform|
+      sh("xcrun", "xcodebuild", "-workspace", "..", "-scheme", "HCaptcha-Package",
+         "-destination", "generic/platform=#{platform}", "CODE_SIGNING_ALLOWED=NO", "build")
+    end
   end
 
   desc "Validate html template"
@@ -186,6 +179,9 @@ platform :ios do
         destination: "generic/platform=iOS"
       )
     end
+    sh("xcrun", "xcodebuild", "-project", "../Example/HCaptcha.xcodeproj",
+       "-scheme", "HCaptcha-SwiftUI-Example", "-destination", "generic/platform=visionOS",
+       "CODE_SIGNING_ALLOWED=NO", "build")
   end
 
   desc "Update the GitHub release"

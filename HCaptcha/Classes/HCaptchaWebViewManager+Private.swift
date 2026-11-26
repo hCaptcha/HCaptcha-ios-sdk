@@ -121,18 +121,34 @@ extension HCaptchaWebViewManager {
      Adds the webview to a valid UIView and loads the initial HTML file
      */
     func setupWebview(html: String, url: URL) {
-        if let window = UIApplication.shared.keyWindow {
+        if let window = webView.window {
             setupWebview(on: window, html: html, url: url)
-        } else {
-            observer = NotificationCenter.default.addObserver(
-                forName: UIWindow.didBecomeVisibleNotification,
-                object: nil,
-                queue: nil
-            ) { [weak self] notification in
-                guard let window = notification.object as? UIWindow else { return }
-                guard let slf = self else { return }
-                slf.setupWebview(on: window, html: html, url: url)
+            return
+        }
+        let scenes = UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }
+        let keyWindow = scenes.first { $0.activationState == .foregroundActive && $0.keyWindow != nil }?.keyWindow
+            ?? scenes.first { $0.activationState == .foregroundInactive && $0.keyWindow != nil }?.keyWindow
+            ?? scenes.first { $0.keyWindow != nil }?.keyWindow
+        if let window = keyWindow {
+            setupWebview(on: window, html: html, url: url)
+            return
+        }
+#if os(iOS)
+        if scenes.isEmpty, let window = UIApplication.shared.keyWindow {
+            setupWebview(on: window, html: html, url: url)
+            return
+        }
+#endif
+        guard windowObserver == nil else { return }
+        windowObserver = NotificationCenter.default.addObserver(
+            forName: UIWindow.didBecomeVisibleNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] notification in
+            guard let self = self, self.windowObserver != nil, let window = notification.object as? UIWindow else {
+                return
             }
+            self.setupWebview(on: self.webView.window ?? window, html: html, url: url)
         }
     }
 
@@ -146,6 +162,7 @@ extension HCaptchaWebViewManager {
      */
     func setupWebview(on window: UIWindow, html: String, url: URL) {
         Log.debug("WebViewManager.setupWebview")
+        windowObserver = nil
         if webView.superview == nil {
             window.addSubview(webView)
         }
@@ -159,10 +176,6 @@ extension HCaptchaWebViewManager {
             self.handle(error: .htmlLoadError)
             self.loadingTimer = nil
         })
-
-        if let observer = observer {
-            NotificationCenter.default.removeObserver(observer)
-        }
     }
 
     /**
